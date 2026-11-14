@@ -1300,71 +1300,67 @@ export const pages: PagesCopy = {
     },
     "p02": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "منتج مؤكد عند غمدان.",
         "en": "Product confirmed by Ghamdan."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -1372,71 +1368,67 @@ export const pages: PagesCopy = {
     },
     "p03": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "منتج مؤكد عند غمدان.",
         "en": "Product confirmed by Ghamdan."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -1444,71 +1436,67 @@ export const pages: PagesCopy = {
     },
     "p04": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
         "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -1516,71 +1504,67 @@ export const pages: PagesCopy = {
     },
     "p05": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "منتج مؤكد عند غمدان.",
         "en": "Product confirmed by Ghamdan."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -1656,71 +1640,67 @@ export const pages: PagesCopy = {
     },
     "p07": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
         "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -1728,71 +1708,67 @@ export const pages: PagesCopy = {
     },
     "p08": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
         "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -1800,71 +1776,67 @@ export const pages: PagesCopy = {
     },
     "p09": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
         "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -1872,71 +1844,67 @@ export const pages: PagesCopy = {
     },
     "p10": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
         "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -1944,12 +1912,12 @@ export const pages: PagesCopy = {
     },
     "p11": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
         "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
+      },
+      "k2": {
+        "ar": "المميزات الرئيسية",
+        "en": "Key Benefits"
       },
       "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
@@ -2012,71 +1980,67 @@ export const pages: PagesCopy = {
     },
     "p12": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
         "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -2084,71 +2048,67 @@ export const pages: PagesCopy = {
     },
     "p13": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
         "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -2224,71 +2184,67 @@ export const pages: PagesCopy = {
     },
     "p15": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
         "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -2296,71 +2252,67 @@ export const pages: PagesCopy = {
     },
     "p16": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
         "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -2368,71 +2320,67 @@ export const pages: PagesCopy = {
     },
     "p17": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
         "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -2440,71 +2388,67 @@ export const pages: PagesCopy = {
     },
     "p18": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
         "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -2512,71 +2456,67 @@ export const pages: PagesCopy = {
     },
     "p19": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
         "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -2584,71 +2524,67 @@ export const pages: PagesCopy = {
     },
     "p20": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
         "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -2656,71 +2592,67 @@ export const pages: PagesCopy = {
     },
     "p21": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
         "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -2728,71 +2660,67 @@ export const pages: PagesCopy = {
     },
     "p22": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
         "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -2800,71 +2728,67 @@ export const pages: PagesCopy = {
     },
     "p23": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
         "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -2872,71 +2796,67 @@ export const pages: PagesCopy = {
     },
     "p24": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "منتج مؤكد عند غمدان.",
         "en": "Product confirmed by Ghamdan."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -2944,71 +2864,67 @@ export const pages: PagesCopy = {
     },
     "p25": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "منتج مؤكد عند غمدان.",
         "en": "Product confirmed by Ghamdan."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -3016,71 +2932,67 @@ export const pages: PagesCopy = {
     },
     "p26": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
         "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -3088,71 +3000,67 @@ export const pages: PagesCopy = {
     },
     "p27": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
         "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -3228,71 +3136,67 @@ export const pages: PagesCopy = {
     },
     "p29": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
         "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -3300,71 +3204,67 @@ export const pages: PagesCopy = {
     },
     "p31": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
         "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -3372,71 +3272,67 @@ export const pages: PagesCopy = {
     },
     "p32": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
         "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -3444,71 +3340,67 @@ export const pages: PagesCopy = {
     },
     "p33": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
         "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -3516,71 +3408,67 @@ export const pages: PagesCopy = {
     },
     "p34": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
         "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -3588,71 +3476,67 @@ export const pages: PagesCopy = {
     },
     "p35": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
         "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -3660,71 +3544,67 @@ export const pages: PagesCopy = {
     },
     "p36": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
         "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -3732,71 +3612,67 @@ export const pages: PagesCopy = {
     },
     "p37": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
         "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
@@ -3804,71 +3680,67 @@ export const pages: PagesCopy = {
     },
     "p38": {
       "k1": {
-        "ar": "المواصفات الكاملة من كتالوج المصنّع قيد الاستلام من العميل (CI-02) — تُرفق عند الطلب عبر واتساب.",
-        "en": "The full specifications from the manufacturer's catalog are pending receipt from the client (CI-02) — attached on request via WhatsApp."
-      },
-      "k2": {
         "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
         "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
       },
-      "k3": {
+      "k2": {
         "ar": "المميزات الرئيسية",
         "en": "Key Benefits"
       },
-      "k4": {
+      "k3": {
         "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
         "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
       },
-      "k5": {
+      "k4": {
         "ar": "مواصفات المنتج",
         "en": "Product Specifications"
       },
-      "k6": {
+      "k5": {
         "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
         "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
       },
-      "k7": {
+      "k6": {
         "ar": "جودة موثقة",
         "en": "Verified quality"
       },
-      "k8": {
+      "k7": {
         "ar": "من كتالوج المصنّع",
         "en": "From the manufacturer's catalog"
       },
-      "k9": {
+      "k8": {
         "ar": "تسليم منسق",
         "en": "Coordinated delivery"
       },
-      "k10": {
+      "k9": {
         "ar": "حسب الطلب والمنطقة",
         "en": "Per order and area"
       },
-      "k11": {
+      "k10": {
         "ar": "دعم واتساب",
         "en": "WhatsApp support"
       },
-      "k12": {
+      "k11": {
         "ar": "السبت – الجمعة",
         "en": "Sat – Fri"
       },
-      "k13": {
+      "k12": {
         "ar": "نظرة عامة",
         "en": "Overview"
       },
-      "k14": {
+      "k13": {
         "ar": "المواصفات الفنية",
         "en": "Technical Specifications"
       },
-      "k15": {
+      "k14": {
         "ar": "منتجات ذات صلة",
         "en": "Related Products"
       },
-      "k16": {
+      "k15": {
         "ar": "لنبدأ مشروعك اليوم",
         "en": "Let's Start Your Project Today",
         "zh": "今天就开始您的项目"
       },
-      "k17": {
+      "k16": {
         "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
         "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
         "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
