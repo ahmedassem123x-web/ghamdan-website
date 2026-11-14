@@ -1,0 +1,139 @@
+{
+  "probedAt": "2026-11-14T06:15:11.672Z",
+  "base": "http://127.0.0.1:8321",
+  "totalRoutes": 229,
+  "non200": [],
+  "consoleErrors": [],
+  "failedRequests": [],
+  "desktopOverflow": [],
+  "brokenImages": [
+    [
+      "/ar/solutions/pumping",
+      [
+        "/images/photos/pump-flow.webp",
+        "/images/photos/pump-flow.webp"
+      ]
+    ],
+    [
+      "/en/solutions/pumping",
+      [
+        "/images/photos/pump-flow.webp",
+        "/images/photos/pump-flow.webp"
+      ]
+    ],
+    [
+      "/zh/solutions/pumping",
+      [
+        "/images/photos/pump-flow.webp"
+      ]
+    ]
+  ],
+  "badWaLinks": [],
+  "mobileOverflow": [
+    [
+      "home",
+      3
+    ],
+    [
+      "home-en",
+      3
+    ],
+    [
+      "home-zh",
+      3
+    ]
+  ],
+  "mobileBrokenImages": [
+    [
+      "home",
+      [
+        "/images/photos/solar-farm.webp",
+        "/images/photos/pivot.webp",
+        "/images/photos/panels-rows.webp",
+        "/images/photos/pump-flow.webp",
+        "/images/photos/greenhouse.webp"
+      ]
+    ],
+    [
+      "about",
+      [
+        "/images/photos/greenhouse.webp",
+        "/images/photos/solar-farm.webp"
+      ]
+    ],
+    [
+      "solutions",
+      [
+        "/images/photos/pivot.webp"
+      ]
+    ],
+    [
+      "products",
+      [
+        "/images/photos/pump-flow.webp",
+        "/images/photos/pump-flow.webp",
+        "/images/photos/pump-flow.webp",
+        "/images/photos/controller-unit.webp",
+        "/images/photos/pivot.webp"
+      ]
+    ],
+    [
+      "product-detail",
+      [
+        "/images/photos/panels-rows.webp"
+      ]
+    ],
+    [
+      "category",
+      [
+        "/images/photos/inverter-unit.webp",
+        "/images/photos/inverter-unit.webp",
+        "/images/photos/inverter-unit.webp",
+        "/images/photos/inverter-unit.webp",
+        "/images/photos/inverter-unit.webp",
+        "/images/photos/inverter-unit.webp",
+        "/images/photos/inverter-unit.webp",
+        "/images/photos/villa-roof.webp",
+        "/images/photos/solar-farm.webp",
+        "/images/photos/solar-farm.webp",
+        "/images/photos/battery-storage.webp",
+        "/images/photos/panels-rows.webp"
+      ]
+    ],
+    [
+      "pumping",
+      [
+        "/images/photos/greenhouse.webp",
+        "/images/photos/crops.webp",
+        "/images/photos/pivot.webp",
+        "/images/photos/pump-flow.webp",
+        "/images/photos/pump-flow.webp",
+        "/images/photos/pump-flow.webp",
+        "/images/photos/solar-farm.webp",
+        "/images/photos/pump-flow.webp"
+      ]
+    ],
+    [
+      "home-en",
+      [
+        "/images/photos/solar-farm.webp",
+        "/images/photos/pivot.webp",
+        "/images/photos/panels-rows.webp",
+        "/images/photos/pump-flow.webp",
+        "/images/photos/greenhouse.webp"
+      ]
+    ],
+    [
+      "home-zh",
+      [
+        "/images/photos/pivot.webp",
+        "/images/photos/panels-rows.webp",
+        "/images/photos/pump-flow.webp",
+        "/images/photos/greenhouse.webp"
+      ]
+    ]
+  ],
+  "mobileConsoleErrors": [],
+  "totalWaLinks": 1794,
+  "totalImages": 1334
+}
