@@ -1,0 +1,305 @@
+# Page copy — Arabic primary, English complete, Chinese for chrome + main
+# headings (body ZH falls back to AR with a review notice, §13.2 / CI-09).
+# Every claim here comes from approved sources (catalogue xlsx, client data,
+# reference structure). No invented results, testimonials, stats or prices.
+# Strings are dicts: {"ar": ..., "en": ..., "zh": ...} — zh optional.
+
+def S(ar, en, zh=None):
+    d = {"ar": ar, "en": en}
+    if zh:
+        d["zh"] = zh
+    return d
+
+# ---------------------------------------------------------------- home (ref 01)
+HOME = {
+    "hero_badge": S("طاقة ومياه من أجل مستقبل أفضل", "Energy and water for a better future", "为更美好的未来提供能源与水"),
+    "hero_title": S("حلول طاقة ومياه مصممة لتناسب احتياجاتك",
+                    "Energy and water solutions designed around your needs",
+                    "为您量身定制的能源与水解决方案"),
+    "hero_copy": S("غمدان للتجارة والتوكيلات — وكيل Deye الرسمي في اليمن — توريد أنظمة الطاقة الشمسية والتخزين والمضخات، من التصميم إلى التركيب والمتابعة.",
+                    "Ghamdan for Trade and Agencies — the official Deye agent in Yemen — supplying solar energy, storage and pumping systems, from design to installation and follow-up.",
+                    "Ghamdan 贸易与代理公司 — Deye 在也门的官方代理 — 提供太阳能、储能与水泵系统，从设计到安装与跟进。"),
+    "intro_title": S("نؤمن بعالم تزدهر فيه الحياة", "We believe in a world where life thrives", "我们相信生命繁荣的世界"),
+    "intro_copy": S("طاقة شمسية موثوقة، ومياه تصل حيث تحتاجها، وأنظمة زراعية ذكية — نبنيها معك منظومة متكاملة، لا قطعاً متفرقة.",
+                    "Reliable solar power, water where you need it, and smart agricultural systems — built with you as one integrated system, not scattered parts.",
+                    "可靠的太阳能、按需供水与智能农业系统 — 与您共建一体化系统，而非零散部件。"),
+    "pillars": [
+        {"icon": "sun", "title": S("أنظمة الطاقة الشمسية", "Solar Energy Systems", "太阳能系统"),
+         "text": S("محولات وبطاريات وألواح من علامات موثوقة.", "Inverters, batteries and panels from trusted brands.", "来自可信品牌的逆变器、电池与电池板。")},
+        {"icon": "droplet", "title": S("هندسة المياه", "Water Engineering", "水工程"),
+         "text": S("ضخ وري بالطاقة الشمسية للآبار والمزارع.", "Solar pumping and irrigation for wells and farms.", "为水井与农场提供太阳能抽水与灌溉。")},
+        {"icon": "leaf", "title": S("التقنيات الزراعية", "Agricultural Technology", "农业技术"),
+         "text": S("حلول ري ذكية ترفع كفاءة المياه والطاقة.", "Smart irrigation solutions that raise water and energy efficiency.", "提高水与能源效率的智能灌溉方案。")},
+    ],
+    "marquee": ["خبراتنا", "حلولنا", "تأثيرنا"],
+    "solutions_title": S("حلولنا", "Our Solutions", "我们的解决方案"),
+    "solutions_copy": S("أربع عائلات من الحلول المتكاملة — اختر ما يناسب منزلك أو مزرعتك أو منشأتك.",
+                        "Four families of integrated solutions — choose what fits your home, farm or facility.",
+                        "四大类综合解决方案 — 选择适合您家庭、农场或设施的方案。"),
+    "why_title": S("لماذا تختار حلولنا؟", "Why Choose Our Solutions?", "为什么选择我们？"),
+    "why_badge": S("لمستقبل أكثر استدامة", "For a more sustainable future", "共创更可持续的未来"),
+    "why": [
+        {"icon": "users", "title": S("شراكة طويلة الأمد", "A Long-Term Partnership", "长期合作伙伴"),
+         "text": S("نتابع معك بعد التركيب — دعم وصيانة وقطع.", "We stay with you after installation — support, maintenance and parts.", "安装后我们依然陪伴您 — 支持、维护与配件。")},
+        {"icon": "layers", "title": S("خبرة متكاملة", "Integrated Expertise", "综合专业经验"),
+         "text": S("طاقة ومياه وزراعة في منظومة واحدة متناسقة.", "Energy, water and agriculture in one coherent system.", "能源、水与农业融为一个协调的系统。")},
+        {"icon": "target", "title": S("حلول مخصصة", "Tailored Solutions", "定制解决方案"),
+         "text": S("نصمم المنظومة على احتياجك الفعلي، لا على قالب جاهز.", "We design the system around your actual need, not a ready-made template.", "根据您的实际需求设计系统，而非套用现成模板。")},
+    ],
+    "projects_title": S("مشاريعنا", "Our Projects", "我们的项目"),
+    "products_title": S("منتجات مختارة", "Featured Products", "精选产品"),
+    "cta_title": S("لنبدأ مشروعك اليوم", "Let's Start Your Project Today", "今天就开始您的项目"),
+    "cta_copy": S("تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
+                  "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
+                  "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"),
+    "cta_other": S("طرق التواصل الأخرى", "Other Ways to Reach Us", "其他联系方式"),
+}
+
+# ---------------------------------------------------------------- about (ref 02)
+ABOUT = {
+    "hero_title": S("خبرة هندسية متكاملة لطاقة أذكى وحياة أفضل",
+                    "Integrated engineering expertise for smarter energy and a better life",
+                    "综合工程经验，带来更智能的能源与更美好的生活"),
+    "hero_copy": S("غمدان للتجارة والتوكيلات — شركة يمنية في صنعاء، وكيل Deye الرسمي في اليمن، تعمل في توريد أنظمة الطاقة الشمسية والتخزين والضخ والري.",
+                    "Ghamdan for Trade and Agencies — a Yemeni company in Sana'a, the official Deye agent in Yemen, supplying solar energy, storage, pumping and irrigation systems.",
+                    "Ghamdan 贸易与代理公司 — 位于萨那的也门公司，Deye 在也门的官方代理，提供太阳能、储能、抽水与灌溉系统。"),
+    "intro_title": S("نؤمن بأن الطاقة المستدامة والمياه والزراعة الذكية ليست بدائل، بل أسس لمستقبل أفضل للجميع.",
+                     "We believe sustainable energy, water and smart agriculture are not alternatives — they are the foundations of a better future for everyone.",
+                     "我们相信，可持续能源、水与智慧农业不是替代品，而是人人享有更美好未来的基础。"),
+    "story_title": S("قصتنا", "Our Story", "我们的故事"),
+    "story_head": S("انطلقت رحلتنا من إيمان بإمكانات عالم أكثر استدامة",
+                    "Our journey began with a belief in the potential of a more sustainable world",
+                    "我们的旅程始于对更可持续世界可能性的信念"),
+    "story_copy": S("من صنعاء نخدم المنازل والمزارع والمنشآت في اليمن بمنظومات طاقة شمسية وتخزين وضخ — نختار علامات موثوقة، ونركّب بعناية، ونتابع بعد التسليم.",
+                    "From Sana'a we serve homes, farms and facilities across Yemen with solar, storage and pumping systems — choosing trusted brands, installing with care, and following up after handover.",
+                    "我们从萨那出发，为也门各地的家庭、农场与设施提供太阳能、储能与抽水系统 — 选择可信品牌、精心安装、交付后持续跟进。"),
+    "mission": {"icon": "target", "title": S("رسالتنا", "Our Mission", "我们的使命"),
+                "text": S("أن تصل الطاقة النظيفة والمياه إلى كل منزل ومزرعة ومنشأة في اليمن، بمنظومات موثوقة وخدمة صادقة.",
+                         "Clean energy and water reaching every home, farm and facility in Yemen — through reliable systems and honest service.",
+                         "让清洁能源与水抵达也门的每一个家庭、农场与设施 — 以可靠的系统与真诚的服务。")},
+    "vision": {"icon": "eye", "title": S("رؤيتنا", "Our Vision", "我们的愿景"),
+              "text": S("يمنٌ يعتمد على طاقته الشمسية — منازل مضيئة، وآبار تعمل، ومزارع تنتج طوال العام.",
+                       "A Yemen that runs on its own sun — lit homes, working wells, and farms producing all year round.",
+                       "一个依靠自身阳光运转的也门 — 灯火通明的家庭、运转的水井与全年生产的农场。")},
+    "expertise_title": S("مجالات خبرتنا", "Our Areas of Expertise", "我们的专业领域"),
+    "expertise_head": S("حلول متكاملة لحياة أكثر استدامة", "Integrated solutions for a more sustainable life", "一体化解决方案，共创更可持续的生活"),
+    "cta_title": S("لنبحث معاً عن الحل الأنسب لمشروعك", "Let's find the right solution for your project together", "让我们一起为您的项目找到最合适的方案"),
+}
+
+# ---------------------------------------------------------------- solutions (ref 03)
+SOLUTIONS = [
+    {"id": "residential", "icon": "home", "pill": S("للمنازل", "For Homes", "住宅"),
+     "title": S("الطاقة الشمسية السكنية", "Residential Solar Energy", "住宅太阳能"),
+     "text": S("منظومات منزلية متكاملة: محول هجين وبطارية وألواح — كهرباء مستقرة ليلاً ونهاراً.",
+               "Complete home systems: hybrid inverter, battery and panels — stable power day and night.",
+               "完整的家庭系统：混合逆变器、电池与电池板 — 全天候稳定供电。")},
+    {"id": "commercial", "icon": "zap", "pill": S("للمنشآت", "For Facilities", "工商业"),
+     "title": S("حلول الطاقة التجارية والصناعية", "Commercial & Industrial Energy Solutions", "工商业能源解决方案"),
+     "text": S("منظومات ثلاثية الطور وجهد عالٍ للمحلات والمكاتب والمصانع والمستشفيات.",
+               "Three-phase and high-voltage systems for shops, offices, factories and hospitals.",
+               "为商铺、办公室、工厂与医院提供三相与高压系统。")},
+    {"id": "pumping", "icon": "droplet", "pill": S("المياه", "Water", "水"),
+     "title": S("ضخ المياه بالطاقة الشمسية", "Solar Water Pumping", "太阳能抽水"),
+     "text": S("ضخ من الآبار بالطاقة الشمسية — بلا وقود، وبلا فواتير كهرباء للضخ.",
+               "Pumping from wells on solar power — no fuel, no electricity bills for pumping.",
+               "以太阳能从水井抽水 — 无需燃油，无抽水电费。")},
+    {"id": "irrigation", "icon": "leaf", "pill": S("الري الذكي", "Smart Irrigation", "智能灌溉"),
+     "title": S("أنظمة الري الذكية", "Smart Irrigation Systems", "智能灌溉系统"),
+     "text": S("ري بالتنقيط والرش يدار بالطاقة الشمسية — ماء أقل، ومحصول أفضل.",
+               "Drip and sprinkler irrigation run on solar power — less water, better yield.",
+               "以太阳能运行的滴灌与喷灌 — 更少用水，更好收成。")},
+    {"id": "agriculture", "icon": "sun", "pill": S("الزراعة", "Agriculture", "农业"),
+     "title": S("حلول الطاقة والمياه للقطاع الزراعي", "Energy & Water Solutions for Agriculture", "农业能源与水解决方案"),
+     "text": S("منظومات متكاملة للمزارع: طاقة للضخ والري والتبريد والتخزين.",
+               "Integrated systems for farms: power for pumping, irrigation, cooling and storage.",
+               "为农场提供一体化系统：抽水、灌溉、制冷与储能供电。")},
+]
+SOLUTIONS_PAGE = {
+    "hero_title": S("حلول متكاملة للطاقة والمياه", "Integrated Solutions for Energy and Water", "能源与水一体化解决方案"),
+    "hero_copy": S("خمس عائلات من الحلول — كل واحدة منظومة هندسية متكاملة، لا منتج منفرد.",
+                   "Five families of solutions — each one an integrated engineering system, not a single product.",
+                   "五大类解决方案 — 每一类都是完整的工程系统，而非单一产品。"),
+    "intro_title": S("معاً نحو مستقبل أكثر استدامة", "Together Towards a More Sustainable Future", "携手共创更可持续的未来"),
+    "process_title": S("كيف نعمل؟", "How We Work", "我们如何工作"),
+    "process": [
+        {"icon": "users", "title": S("فهم احتياجاتك", "Understanding Your Needs", "了解您的需求"),
+         "text": S("نستمع أولاً: ما الذي تريد تشغيله، وكم استهلاكك، وما ظروف موقعك.", "We listen first: what you need to run, your consumption, and your site conditions.", "我们首先倾听：您需要驱动什么设备、耗电量以及现场条件。")},
+        {"icon": "settings", "title": S("تصميم الحلول", "Designing the Solution", "设计方案"),
+         "text": S("نختار المكونات والقدرات المناسبة لمنظومتك.", "We select the right components and capacities for your system.", "为您的系统选择合适的组件与容量。")},
+        {"icon": "wrench", "title": S("التنفيذ والمتابعة", "Implementation & Follow-up", "实施与跟进"),
+         "text": S("توريد وتركيب وتشغيل، مع متابعة بعد التسليم.", "Supply, installation and commissioning, with follow-up after handover.", "供货、安装与调试，交付后持续跟进。")},
+        {"icon": "headset", "title": S("دعم مستمر", "Ongoing Support", "持续支持"),
+         "text": S("قناة تواصل مباشرة للدعم والصيانة وقطع الغيار.", "A direct channel for support, maintenance and spare parts.", "提供支持、维护与备件的直接沟通渠道。")},
+    ],
+    "cta_title": S("لنبدأ مشروعك الآن", "Let's Start Your Project Now", "现在就开始您的项目"),
+}
+
+# ---------------------------------------------------------------- pumping solution detail (ref 09)
+PUMPING = {
+    "hero_title": S("حلول ضخ المياه بالطاقة الشمسية", "Solar Water Pumping Solutions", "太阳能抽水解决方案"),
+    "hero_copy": S("مياه أكثر. فرص أكبر. لمستقبل أكثر استدامة.",
+                   "More water. More opportunity. For a more sustainable future.",
+                   "更多水，更多机遇，共创更可持续的未来。"),
+    "overview_title": S("نظرة عامة", "Overview", "概述"),
+    "overview_head": S("مياه أكثر. فرص أكبر. لمستقبل أكثر استدامة.", "More water. More opportunity. For a more sustainable future.", "更多水，更多机遇，共创更可持续的未来。"),
+    "overview_copy": S("منظومة ضخ شمسية متكاملة: ألواح شمسية تغذي محول مضخة، ومضخة ترفع الماء من البئر إلى خزان، وشبكة توزيع تصل الماء إلى المزرعة أو المنزل أو المجتمع — بلا وقود وبلا فواتير.",
+                       "A complete solar pumping system: panels feed a pump inverter, a pump lifts water from the well to a tank, and a distribution network carries it to the farm, home or community — no fuel, no bills.",
+                       "完整的太阳能抽水系统：电池板为水泵逆变器供电，水泵将水从井中提升至水箱，配水网络将水输送至农场、家庭或社区 — 无需燃油，没有账单。"),
+    "overview_features": [
+        {"icon": "leaf", "title": S("زراعة أكثر إنتاجية", "More Productive Farming", "更高产的农业")},
+        {"icon": "users", "title": S("مجتمعات أقوى", "Stronger Communities", "更强大的社区")},
+        {"icon": "sun", "title": S("بيئة أنظف", "A Cleaner Environment", "更清洁的环境")},
+    ],
+    "challenges_title": S("معالجة التحديات الحقيقية في توفير المياه", "Addressing the Real Challenges of Water Supply", "应对供水的真正挑战"),
+    "challenges": [
+        {"icon": "zap", "title": S("الاعتماد على الوقود الأحفوري", "Dependence on Fossil Fuel", "依赖化石燃料"),
+         "text": S("الضخ بالديزل مكلف ومتقلب — الشمس بديل ثابت.", "Diesel pumping is costly and volatile — the sun is a steady alternative.", "柴油抽水成本高且不稳定 — 阳光是稳定的替代方案。")},
+        {"icon": "alert", "title": S("صعوبة الوصول لشبكات الكهرباء", "Hard Access to Power Grids", "难以接入电网"),
+         "text": S("مواقع كثيرة خارج الشبكة — المنظومة الشمسية تعمل حيثما كانت الشمس.", "Many sites are off-grid — a solar system works wherever the sun shines.", "许多地点远离电网 — 太阳能系统有阳光的地方就能工作。")},
+        {"icon": "gauge", "title": S("ارتفاع تكاليف التشغيل", "High Running Costs", "运行成本高"),
+         "text": S("كل لتر ديزل يُدفع يومياً — الشمس بلا فاتورة تشغيل.", "Every litre of diesel is paid daily — the sun has no running bill.", "每升柴油都要天天付费 — 阳光没有运行账单。")},
+        {"icon": "droplet", "title": S("نقص إمدادات المياه الموثوقة", "Unreliable Water Supply", "供水不可靠"),
+         "text": S("ضخ منتظم يعني ماءً منتظماً للشرب والري.", "Regular pumping means regular water for drinking and irrigation.", "定期抽水意味着饮用与灌溉用水都有保障。")},
+    ],
+    "steps_title": S("أربع خطوات لحل متكامل", "Four Steps to a Complete Solution", "四步实现完整方案"),
+    "steps": [
+        {"n": "01", "title": S("الطاقة الشمسية", "Solar Energy", "太阳能"), "text": S("ألواح شمسية تولّد الكهرباء نهاراً.", "Solar panels generate electricity during the day.", "太阳能电池板在白天发电。")},
+        {"n": "02", "title": S("جهاز التحكم", "Controller", "控制器"), "text": S("محول مضخة يدير التشغيل ويحمي المنظومة.", "A pump inverter manages operation and protects the system.", "水泵逆变器管理运行并保护系统。")},
+        {"n": "03", "title": S("مضخة المياه", "Water Pump", "水泵"), "text": S("مضخة غاطسة أو سطحية ترفع الماء من البئر.", "A submersible or surface pump lifts water from the well.", "潜水泵或地面泵将水从井中提升。")},
+        {"n": "04", "title": S("توزيع المياه", "Water Distribution", "配水"), "text": S("خزان وشبكة توزيع تصل الماء حيث يُحتاج.", "A tank and network carry water where it is needed.", "水箱与管网将水输送到需要的地方。")},
+    ],
+    "diagram_title": S("نظام متكامل وموثوق", "An Integrated, Reliable System", "一体化可靠系统"),
+    "diagram_pill": S("المكونات الرئيسية", "Main Components", "主要组件"),
+    "apps_title": S("مناطق التطبيق", "Areas of Application", "应用领域"),
+    "apps": [
+        {"img": "greenhouse.jpg", "title": S("الزراعة والري", "Agriculture & Irrigation", "农业与灌溉")},
+        {"img": "crops.jpg", "title": S("إمدادات المياه للمجتمعات", "Community Water Supply", "社区供水")},
+        {"img": "pivot.jpg", "title": S("مشاريع البنية التحتية للمياه", "Water Infrastructure Projects", "水利基础设施项目")},
+    ],
+    "cta_title": S("استفسر عن مشروعك", "Enquire About Your Project", "咨询您的项目"),
+}
+
+# ---------------------------------------------------------------- catalog (ref 04)
+CATALOG = {
+    "hero_title": S("دليل منتجات الطاقة الشمسية والمضخات والمعدات الزراعية",
+                    "Guide to Solar Energy Products, Pumps and Agricultural Equipment",
+                    "太阳能产品、水泵与农业设备指南"),
+    "hero_kicker": S("طاقة اليوم لمستقبل أفضل", "Today's energy for a better future", "今日能源，共创更美好的未来"),
+    "hero_copy": S("محولات وبطاريات وألواح ومضخات من علامات موثوقة — تصفح الكتالوج، ثم استفسر عبر واتساب عن الموديل المناسب لك.",
+                   "Inverters, batteries, panels and pumps from trusted brands — browse the catalogue, then enquire on WhatsApp about the right model for you.",
+                   "来自可信品牌的逆变器、电池、电池板与水泵 — 浏览目录，然后通过 WhatsApp 咨询适合您的型号。"),
+    "trust": [
+        {"icon": "leaf", "title": S("مستقبل أكثر استدامة", "A More Sustainable Future", "更可持续的未来")},
+        {"icon": "headset", "title": S("دعم فني متخصص", "Specialised Technical Support", "专业技术支持")},
+        {"icon": "shield", "title": S("منتجات عالية الجودة", "High-Quality Products", "高品质产品")},
+    ],
+    "explore_title": S("استكشف المنتجات", "Explore Products", "探索产品"),
+    "featured_title": S("المنتجات المميزة", "Featured Products", "精选产品"),
+    "help_title": S("تحتاج إلى مساعدة في اختيار الحل الأنسب؟", "Need help choosing the right solution?", "需要帮助选择最合适的方案吗？"),
+    "help_copy": S("أخبرنا باحتياجك وسنرشدك إلى الموديل والمنظومة المناسبة — بلا أي التزام.",
+                   "Tell us what you need and we will guide you to the right model and system — with no obligation.",
+                   "告诉我们您的需求，我们将为您推荐合适的型号与系统 — 无需任何承诺。"),
+    "why_title": S("لماذا تختار حلولنا؟", "Why Choose Our Solutions?", "为什么选择我们？"),
+    "why": [
+        {"icon": "layers", "title": S("حلول متكاملة", "Integrated Solutions", "一体化解决方案"), "text": S("منظومة كاملة من مصدر واحد.", "A complete system from one source.", "一站式完整系统。")},
+        {"icon": "shield", "title": S("خبرة موثوقة", "Trusted Expertise", "值得信赖的经验"), "text": S("وكيل رسمي لعلامات عالمية.", "Official agent of global brands.", "全球品牌的官方代理。")},
+        {"icon": "check", "title": S("منتجات عالية الجودة", "High-Quality Products", "高品质产品"), "text": S("علامات وموديلات مختارة بعناية.", "Carefully selected brands and models.", "精心挑选的品牌与型号。")},
+        {"icon": "headset", "title": S("دعم بعد البيع", "After-Sales Support", "售后支持"), "text": S("متابعة ودعم بعد التركيب.", "Follow-up and support after installation.", "安装后持续跟进与支持。")},
+    ],
+}
+
+# ---------------------------------------------------------------- contact (ref 07)
+CONTACT = {
+    "hero_title": S("تواصل معنا", "Contact Us", "联系我们"),
+    "hero_copy": S("فريقنا جاهز للإجابة عن استفساراتك — عبر واتساب، أو برسالة من النموذج أدناه.",
+                   "Our team is ready to answer your enquiries — on WhatsApp, or through the form below.",
+                   "我们的团队随时解答您的咨询 — 可通过 WhatsApp 或下方表单联系我们。"),
+    "methods": [
+        {"icon": "message", "title": S("استشارة عبر واتساب", "WhatsApp Consultation", "WhatsApp 咨询"),
+         "text": S("أسرع طريق إلينا — محادثة مباشرة مع الفريق.", "The fastest way to reach us — a direct chat with the team.", "联系我们最快的方式 — 与团队直接对话。"),
+         "link": S("ابدأ محادثة واتساب", "Start a WhatsApp chat", "开始 WhatsApp 对话")},
+        {"icon": "mail", "title": S("استفسار عام", "General Enquiry", "一般咨询"),
+         "text": S("أرسل استفسارك بالبريد وسنرد عليك.", "Send your enquiry by email and we will reply.", "通过邮件发送您的咨询，我们将尽快回复。"),
+         "link": S("أرسل استفسارك", "Send your enquiry", "发送咨询")},
+        {"icon": "headset", "title": S("الدعم الفني", "Technical Support", "技术支持"),
+         "text": S("مساعدة فنية لمنظومتك الحالية أو الجديدة.", "Technical help for your current or new system.", "为您的现有或新系统提供技术帮助。"),
+         "link": S("تواصل مع الدعم الفني", "Contact technical support", "联系技术支持")},
+    ],
+    "side_title": S("معاً نبني مستقبل أكثر استدامة", "Together We Build a More Sustainable Future", "携手共建更可持续的未来"),
+    "side_copy": S("منزل، مزرعة، منشأة — أخبرنا بمشروعك وسنبدأ معك من الخطوة الأولى.",
+                   "A home, a farm, a facility — tell us about your project and we will start with you from step one.",
+                   "家庭、农场或设施 — 告诉我们您的项目，我们将从第一步与您同行。"),
+    "form_title": S("أرسل لنا رسالة", "Send Us a Message", "给我们留言"),
+    "form_copy": S("املأ النموذج وسنرد عليك في أقرب وقت.", "Fill in the form and we will reply as soon as possible.", "请填写表单，我们将尽快回复。"),
+    "cta_title": S("لنناقش مشروعك ونحول رؤيتك إلى واقع", "Let's Discuss Your Project and Turn Your Vision into Reality", "让我们一起讨论您的项目，将愿景变为现实"),
+}
+
+# ---------------------------------------------------------------- services / support / agencies / systems
+SERVICES = [
+    {"icon": "settings", "title": S("تصميم المنظومات", "System Design", "系统设计"),
+     "text": S("دراسة احتياجك وموقعك، واختيار القدرات والمكونات المناسبة.", "We study your needs and site, then select the right capacities and components.", "研究您的需求与现场条件，选择合适的容量与组件。")},
+    {"icon": "package", "title": S("توريد المنتجات", "Product Supply", "产品供应"),
+     "text": S("توريد محولات وبطاريات وألواح ومضخات من علامات موثوقة.", "Supplying inverters, batteries, panels and pumps from trusted brands.", "供应来自可信品牌的逆变器、电池、电池板与水泵。")},
+    {"icon": "wrench", "title": S("التركيب والتشغيل", "Installation & Commissioning", "安装与调试"),
+     "text": S("تركيب وتشغيل المنظومة واختبارها قبل التسليم.", "Installing and commissioning the system, tested before handover.", "安装调试系统，交付前完成测试。")},
+    {"icon": "headset", "title": S("الصيانة والدعم", "Maintenance & Support", "维护与支持"),
+     "text": S("متابعة وصيانة وقطع غيار بعد التسليم.", "Follow-up, maintenance and spare parts after handover.", "交付后提供跟进、维护与备件。")},
+    {"icon": "droplet", "title": S("أنظمة الضخ والري", "Pumping & Irrigation Systems", "抽水与灌溉系统"),
+     "text": S("منظومات ضخ وري شمسية للآبار والمزارع.", "Solar pumping and irrigation systems for wells and farms.", "为水井与农场提供太阳能抽水与灌溉系统。")},
+    {"icon": "users", "title": S("استشارات فنية", "Technical Consultation", "技术咨询"),
+     "text": S("استشارة قبل الشراء: أي منظومة تناسب احتياجك وميزانيتك.", "Pre-purchase consultation: which system fits your needs and budget.", "购买前咨询：哪种系统最适合您的需求与预算。")},
+]
+
+AGENCIES = [
+    {"id": "deye", "name": "Deye", "status": S("وكيل رسمي في اليمن", "Official Agent in Yemen", "也门官方代理"),
+     "text": S("وكيل Deye الرسمي في اليمن — محولات هجينة وبطاريات وأنظمة تخزين.",
+               "The official Deye agent in Yemen — hybrid inverters, batteries and storage systems.",
+               "Deye 在也门的官方代理 — 混合逆变器、电池与储能系统。")},
+    {"id": "efore", "name": "EFORE", "status": S("علامة نوفرها", "Brand We Carry", "供应品牌"),
+     "text": S("بطاريات وأنظمة تخزين EFORE — منزلية وتجارية وصناعية.",
+               "EFORE batteries and storage systems — residential, commercial and industrial.",
+               "EFORE 电池与储能系统 — 住宅、商业与工业。")},
+    {"id": "must", "name": "MUST", "status": S("علامة نوفرها", "Brand We Carry", "供应品牌"),
+     "text": S("محولات اقتصادية ومنظمات شحن وبطاريات MUST.",
+               "MUST economy inverters, charge controllers and batteries.",
+               "MUST 经济型逆变器、充电控制器与电池。")},
+    {"id": "jntech", "name": "Jntech", "status": S("علامة نوفرها", "Brand We Carry", "供应品牌"),
+     "text": S("محولات مضخات ومضخات شمسية Jntech للآبار والري.",
+               "Jntech pump inverters and solar pumps for wells and irrigation.",
+               "Jntech 水泵逆变器与太阳能水泵，用于水井与灌溉。")},
+    {"id": "qcells", "name": "Hanwha Q-Cells", "status": S("علامة نوفرها", "Brand We Carry", "供应品牌"),
+     "text": S("ألواح شمسية Hanwha Q-Cells — الموديلات المتوفرة قيد التأكيد.",
+               "Hanwha Q-Cells solar panels — available models pending confirmation.",
+               "Hanwha Q-Cells 太阳能电池板 — 可供型号待确认。")},
+    {"id": "wisenet", "name": "Wisenet", "status": S("علامة نوفرها", "Brand We Carry", "供应品牌"),
+     "text": S("كاميرات وأنظمة مراقبة Wisenet — الموديلات قيد التأكيد.",
+               "Wisenet cameras and security systems — models pending confirmation.",
+               "Wisenet 摄像头与安防系统 — 型号待确认。")},
+]
+
+BUNDLE_USE = {
+    "bundle-1": S("منزل صغير", "Small Home", "小户型住宅"),
+    "bundle-2": S("منزل متوسط", "Medium Home", "中户型住宅"),
+    "bundle-3": S("منزل / تجاري كبير", "Large Home / Commercial", "大户型 / 商业"),
+    "bundle-4": S("باقة رمضان (سابقة)", "Ramadan Bundle (previous)", "斋月套餐（往期）"),
+}
+
+# ---------------------------------------------------------------- FAQ (honest, no invented facts)
+FAQ = [
+    {"q": S("كيف أستفسر عن منتج؟", "How do I enquire about a product?", "如何咨询产品？"),
+     "a": S("حدّد المنتج والكمية وراسلنا عبر واتساب، وسيؤكد فريق المبيعات التفاصيل معك.",
+            "Choose the product and quantity, message us on WhatsApp, and the sales team will confirm the details with you.",
+            "请确定产品与数量并通过 WhatsApp 联系我们，销售团队将与您确认详情。")},
+    {"q": S("ما مدة الضمان؟", "What is the warranty duration?", "保修期是多久？"),
+     "a": S("نص الضمان الموحد قيد الاعتماد من غمدان والمصنّع، وسيُنشر كاملاً هنا فور اعتماده (CI-08).",
+            "The unified warranty text is pending approval by Ghamdan and the manufacturer, and will be published here in full once approved (CI-08).",
+            "统一保修文本正待 Ghamdan 与制造商批准，批准后将完整发布于此（CI-08）。")},
+    {"q": S("هل توصلون إلى محافظتي؟", "Do you deliver to my governorate?", "你们送货到我的省份吗？"),
+     "a": S("التسليم يُنسَّق مع فريق المبيعات حسب الطلب والمنطقة — أرسل موقعك عبر واتساب وستصلك التفاصيل.",
+            "Delivery is coordinated with the sales team per order and area — send your location via WhatsApp and you will receive the details.",
+            "交付按订单与地区与销售团队协调 — 请通过 WhatsApp 发送您的位置以获取详情。")},
+    {"q": S("هل أداة دليل الضخ تحدد لي مضخة معينة؟", "Does the pumping guide pick a specific pump for me?", "抽水指南会为我指定某一款水泵吗？"),
+     "a": S("لا — الأداة إرشاد أولي فقط؛ التحديد النهائي للمضخة يتم بعد المعاينة والاتفاق مع فريق غمدان.",
+            "No — the tool is preliminary guidance only; the final pump selection is made after inspection and agreement with the Ghamdan team.",
+            "不会 — 该工具仅为初步指引；水泵的最终选型需在现场勘察并与 Ghamdan 团队确认后确定。")},
+]
