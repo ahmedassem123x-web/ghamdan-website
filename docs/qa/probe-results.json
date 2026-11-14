@@ -1,5 +1,5 @@
 {
-  "probedAt": "2026-11-14T06:15:11.672Z",
+  "probedAt": "2026-11-14T14:19:44.241Z",
   "base": "http://127.0.0.1:8321",
   "totalRoutes": 229,
   "non200": [],
@@ -29,20 +29,7 @@
     ]
   ],
   "badWaLinks": [],
-  "mobileOverflow": [
-    [
-      "home",
-      3
-    ],
-    [
-      "home-en",
-      3
-    ],
-    [
-      "home-zh",
-      3
-    ]
-  ],
+  "mobileOverflow": [],
   "mobileBrokenImages": [
     [
       "home",
@@ -64,6 +51,7 @@
     [
       "solutions",
       [
+        "/images/photos/crops.webp",
         "/images/photos/pivot.webp"
       ]
     ],
@@ -80,6 +68,7 @@
     [
       "product-detail",
       [
+        "/images/photos/inverter-unit.webp",
         "/images/photos/panels-rows.webp"
       ]
     ],
