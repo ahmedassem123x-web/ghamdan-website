@@ -37,7 +37,9 @@ export interface HeroProps {
  * Hero (BUILD_SPEC §2.12 + §3). Variants per reference page:
  * center (01 home) · side-left (02 about) · side-right (03 solutions) ·
  * split (04 catalogue) · photo-bg (detail pages 06/09/10) · plain.
- * Photo heroes carry data-photo-hero so the header goes transparent.
+ * Photo heroes carry data-photo-hero (hook for future use; the header is
+ * solid white from first paint since C-1 fix 2026-11-14 — it no longer goes
+ * transparent over photos).
  */
 export default function Hero({
   locale,
@@ -131,7 +133,11 @@ export default function Hero({
     return (
       <section data-photo-hero className="relative flex min-h-[72vh] items-center overflow-hidden md:min-h-[90vh]">
         <img src={webp(image)} alt={imageAlt} className="absolute inset-0 h-full w-full object-cover" fetchPriority="high" />
-        <div className="absolute inset-0 bg-primary-deep/55" />
+        {/* M-2 fix 2026-11-14: overlay was bg-primary-deep/55 (55% navy) — the
+            home hero rendered dark/moody vs bright ref 01 (pale-blue sky,
+            dark text). Lightened to /25 so the daylight photo reads bright
+            while the white hero copy keeps enough contrast. */}
+        <div className="absolute inset-0 bg-primary-deep/25" />
         <div className="wrap relative w-full py-20 text-center text-white">
           {eyebrowText && (
             <p className={`hero__anim mb-4 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-bold ${

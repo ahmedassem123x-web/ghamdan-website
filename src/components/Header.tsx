@@ -29,21 +29,17 @@ const DRAWER_LINKS = [
   { key: "nav.news", href: "/news" },
 ] as const;
 
-/** Header (BUILD_SPEC §2.3): transparent over photo heroes → solid white after 24px scroll. */
+/** Header (BUILD_SPEC §2.3): always solid white.
+ * C-1 fix 2026-11-14: the header used to go transparent over photo heroes
+ * (transparent = overPhoto && !scrolled), but the hero sits BELOW the header
+ * in flow, so at scroll 0 the transparent header showed the white page
+ * background and the white wordmark/nav were invisible. Solid from first
+ * paint preserves the scrolled look exactly. Reintroduce transparency only
+ * if a hero is ever pulled under the header. */
 export default function Header({ locale }: { locale: Locale }) {
   const pathname = usePathname();
-  const [scrolled, setScrolled] = useState(false);
-  const [overPhoto, setOverPhoto] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setOverPhoto(Boolean(document.querySelector("[data-photo-hero]")));
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [pathname]);
 
   // Drawer: Escape to close + body scroll lock + focus trap
   useEffect(() => {
@@ -76,7 +72,6 @@ export default function Header({ locale }: { locale: Locale }) {
     };
   }, [drawerOpen]);
 
-  const transparent = overPhoto && !scrolled;
   const onSolutions = pathname.includes("/solutions");
   const dir = localeDir(locale);
   const drawerHidden = dir === "rtl" ? "translate-x-full" : "-translate-x-full";
@@ -90,12 +85,10 @@ export default function Header({ locale }: { locale: Locale }) {
   return (
     <>
       <header
-        className={`site-header sticky top-0 z-50 ${
-          transparent ? "bg-transparent" : "site-header--scrolled bg-white"
-        }`}
+        className="site-header site-header--scrolled sticky top-0 z-50 bg-white"
       >
         <div className="wrap flex h-16 items-center justify-between gap-2 lg:h-[76px] lg:gap-4">
-          <Wordmark locale={locale} variant={transparent ? "overlay" : "light"} />
+          <Wordmark locale={locale} variant="light" />
           {/* Desktop nav */}
           <nav aria-label="Primary" className="hidden items-center gap-7 lg:flex">
             {NAV_ITEMS.map((item) => (
@@ -106,9 +99,7 @@ export default function Header({ locale }: { locale: Locale }) {
                 className={`text-nav font-bold transition-colors ${
                   isActive(item.href)
                     ? "text-accent"
-                    : transparent
-                      ? "text-white hover:text-sky-light"
-                      : "text-text hover:text-accent"
+                    : "text-text hover:text-accent"
                 }`}
               >
                 {ui(item.key, locale)}
@@ -117,7 +108,7 @@ export default function Header({ locale }: { locale: Locale }) {
           </nav>
           <div className="flex items-center gap-3">
             {/* Language switch lives in the drawer below sm (header row cannot fit wordmark + selector + burger at 360px) */}
-            <div className={`hidden sm:block ${transparent ? "[&_a]:!text-white [&_span]:!text-white/70" : ""}`}>
+            <div className="hidden sm:block">
               <LanguageSelector locale={locale} />
             </div>
             <div className="hidden md:block">
@@ -131,9 +122,7 @@ export default function Header({ locale }: { locale: Locale }) {
             </div>
             <button
               type="button"
-              className={`inline-flex size-11 items-center justify-center rounded-[0.625rem] lg:hidden ${
-                transparent ? "text-white" : "text-primary"
-              }`}
+              className="inline-flex size-11 items-center justify-center rounded-[0.625rem] text-primary lg:hidden"
               aria-label={ui("nav.menu", locale)}
               aria-expanded={drawerOpen}
               onClick={() => setDrawerOpen(true)}
