@@ -134,6 +134,11 @@ export default function Header({ locale }: { locale: Locale }) {
                     className="relative"
                     onMouseEnter={() => setMegaOpen(true)}
                   >
+                    {/* Click always OPENS: hover (onMouseEnter above) already
+                        opens the menu, so a toggling click would close what
+                        hover just opened — the first click looked dead and a
+                        second click was needed to reopen it. Closing stays
+                        via mouse-leave, Escape, link click, route change. */}
                     <button
                       ref={productsBtnRef}
                       type="button"
@@ -141,7 +146,7 @@ export default function Header({ locale }: { locale: Locale }) {
                       aria-haspopup="true"
                       aria-controls="mega-menu"
                       aria-current={isActive(item.href) ? "page" : undefined}
-                      onClick={() => setMegaOpen((v) => !v)}
+                      onClick={() => setMegaOpen(true)}
                       onKeyDown={(e) => {
                         if (e.key === "ArrowDown") {
                           e.preventDefault();
