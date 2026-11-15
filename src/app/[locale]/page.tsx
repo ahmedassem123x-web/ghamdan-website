@@ -111,9 +111,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           Kept as-is here; do not change unilaterally. */}
       <div className="overflow-hidden bg-navy py-4 text-white" aria-hidden="true">
         <div className="marquee__track">
+          {/* Each half renders the words twice: one half must be wider than
+              the viewport, otherwise the -50% shift exposes empty navy at
+              1920px. Duration doubled in globals.css to keep the same speed. */}
           {[0, 1].map((dup) => (
             <span key={dup} className="flex shrink-0 items-center">
-              {marqueeWords.map((w, i) => (
+              {[...marqueeWords, ...marqueeWords].map((w, i) => (
                 <span key={i} className="flex items-center">
                   <span className="px-6 text-lg font-extrabold">{t(w, l)}</span>
                   <span className="text-primary-hover">—</span>
