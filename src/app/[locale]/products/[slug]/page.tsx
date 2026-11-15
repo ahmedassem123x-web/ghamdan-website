@@ -10,7 +10,6 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import { Breadcrumbs, EditorialBlock, SpecTable } from "@/components/ui";
 import { pages, products, categories, siteSettings } from "@/data";
 import { localizedHref, t } from "@/lib/i18n";
-import { detailMetadata } from "@/lib/metadata";
 import { ui } from "@/lib/ui-copy";
 import { WA_MESSAGES } from "@/lib/whatsapp";
 import type { Locale } from "@/data";
@@ -27,12 +26,8 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
   const { locale, slug } = await params;
-  const l = locale as Locale;
   const p = products.find((x) => x.slug === slug);
-  if (!p) return {};
-  const name = t(p.name, l);
-  const description = p.overview ? t(p.overview, l) : name;
-  return detailMetadata({ locale: l, path: `/products/${p.slug}`, title: name, description });
+  return { title: p ? t(p.name, locale as Locale) : "" };
 }
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
@@ -43,12 +38,13 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   const copy = pages.productDetail[product.id];
   const cat = categories.find((c) => c.id === product.categoryId);
   const name = t(product.name, l);
+  const model = typeof product.model === "string" ? product.model : t(product.model, l);
   const siteUrl = `https://ghamdan-website.vercel.app/${l}/products/${product.slug}`;
-  const waMsg = WA_MESSAGES.product(name, product.model, siteUrl)[l];
+  const waMsg = WA_MESSAGES.product(name, model, siteUrl)[l];
   const related = products
     .filter((p) => p.categoryId === product.categoryId && p.id !== product.id && p.status === "published")
     .slice(0, 3);
-  const specRows = product.specs.map((s) => ({ label: t(s.label, l), value: s.value }));
+  const specRows = product.specs.map((s) => ({ label: t(s.label, l), value: typeof s.value === "string" ? s.value : t(s.value, l) }));
   const galleryItems = product.image
     ? [{ src: product.image, alt: name, caption: copy ? t(copy.k3, l) : undefined }]
     : [];
@@ -70,7 +66,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               Gallery renders a single image large at 4:3. */}
           <div>
             {galleryItems.length > 0 ? (
-              <Gallery items={galleryItems} label={name} locale={l} />
+              <Gallery items={galleryItems} label={name} />
             ) : (
               <div className="flex aspect-[4/3] items-center justify-center rounded-image bg-sky">
                 <span className="font-latin text-6xl font-extrabold text-primary" dir="ltr">
@@ -90,10 +86,10 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                 </Link>
               </p>
             )}
-            <h1 className="mt-2 break-words text-h1 font-bold leading-[1.2] text-navy">{name}</h1>
-            {product.model && (
+            <h1 className="mt-2 text-h1 font-bold leading-[1.2] text-navy">{name}</h1>
+            {model && (
               <p className="mt-2 font-latin text-lg font-bold text-text-muted" dir="ltr">
-                {product.model}
+                {model}
               </p>
             )}
             {product.overview && <p className="mt-4 text-body text-text-muted">{t(product.overview, l)}</p>}
@@ -102,7 +98,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <WhatsAppButton locale={l} message={waMsg} label={ui("cta.enquire", l)} source="product" sourceId={product.id} variant="green-pill" />
-              <Link href={localizedHref(l, "/contact")} className="inline-flex items-center justify-center gap-2 rounded-[0.625rem] border-2 border-primary px-5 py-2.5 font-bold text-button text-navy transition-[transform,background-color] hover:-translate-y-0.5 hover:bg-surface-muted">
+              <Link href={localizedHref(l, "/contact")} className="inline-flex items-center justify-center gap-2 rounded-[0.625rem] border-2 border-primary px-5 py-2.5 font-bold text-button text-navy transition-all hover:-translate-y-0.5 hover:bg-surface-muted">
                 {ui("cta.contactUs", l)}
               </Link>
             </div>
@@ -127,7 +123,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       </div>
 
       {/* Overview — EditorialBlock, image left, on surface-muted panel (§3.6) */}
-      <section data-reveal className="section">
+      <section className="section">
         <div className="wrap rounded-card bg-surface-muted p-6 md:p-10">
           <EditorialBlock
             image="/images/photos/villa-roof.jpg"
@@ -146,7 +142,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
       {/* Benefits — 4-col feature grid when present (§3.6) */}
       {product.benefits && product.benefits.length > 0 && (
-        <section data-reveal className="section-sm">
+        <section className="section-sm">
           <div className="wrap">
             <h2 className="text-h2 font-semibold text-navy">{copy ? t(copy.k2, l) : ui("product.features", l)}</h2>
             <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -165,11 +161,11 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
       {/* Specs — product image beside the table (§3.6). C-2 preserved: the
           table renders the data's real spec labels/values, never "—". */}
-      <section data-reveal className="section">
+      <section className="section">
         <div className="wrap grid gap-10 lg:grid-cols-2">
           <div>
             {galleryItems.length > 0 ? (
-              <Gallery items={galleryItems} label={name} locale={l} />
+              <Gallery items={galleryItems} label={name} />
             ) : (
               <div className="flex aspect-[4/3] items-center justify-center rounded-image bg-sky">
                 <span className="font-latin text-6xl font-extrabold text-primary" dir="ltr">
@@ -197,7 +193,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
       {/* Related */}
       {related.length > 0 && (
-        <section data-reveal className="section bg-surface">
+        <section className="section bg-surface">
           <div className="wrap">
             <h2 className="text-h2 font-semibold text-navy">{copy ? t(copy.k14, l) : ui("product.related", l)}</h2>
             <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
