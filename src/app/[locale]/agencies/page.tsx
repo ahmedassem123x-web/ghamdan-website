@@ -23,7 +23,7 @@ export default async function AgenciesPage({ params }: { params: Promise<{ local
       <Hero locale={l} variant="plain" title={a.k1} text={a.k2} primaryHref="/contact" primaryLabelKey="cta.contactUs" />
       <section className="section">
         <div className="wrap">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" data-stagger>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {agencies.map((ag) => (
               <Link
                 key={ag.id}
@@ -31,23 +31,23 @@ export default async function AgenciesPage({ params }: { params: Promise<{ local
                 className="group flex flex-col rounded-card bg-surface p-6 shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover"
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-latin text-3xl font-extrabold tracking-tight text-primary" dir="ltr">
+                  <span className="font-latin text-3xl font-extrabold tracking-tight text-navy" dir="ltr">
                     {ag.name}
                   </span>
                   {ag.officialAgent && (
-                    <span className="inline-flex items-center gap-1 rounded-full bg-accent-soft px-3 py-1 text-xs font-bold text-accent">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-sky px-3 py-1 text-xs font-bold text-primary-hover">
                       <BadgeCheck className="size-3.5" aria-hidden="true" />
                       {t(ag.status, l)}
                     </span>
                   )}
                 </div>
                 {!ag.officialAgent && (
-                  <span className="mt-3 inline-flex w-fit rounded-full bg-surface-blue px-3 py-1 text-xs font-bold text-primary">
+                  <span className="mt-3 inline-flex w-fit rounded-full bg-sky px-3 py-1 text-xs font-bold text-navy">
                     {t(ag.status, l)}
                   </span>
                 )}
                 <p className="mt-3 flex-1 text-body-sm text-text-muted">{t(ag.text, l)}</p>
-                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-accent">
+                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-primary-hover">
                   {ui("cta.details", l)}
                   <ArrowLeft className="size-4 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
                 </span>
