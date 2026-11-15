@@ -29,7 +29,7 @@ export default function SearchClient({ locale }: { locale: Locale }) {
       products: products.filter(
         (p) =>
           p.status === "published" &&
-          match(`${p.name.ar} ${p.name.en ?? ""} ${p.brand} ${p.model} ${p.subcategory.ar}`),
+          match(`${p.name.ar} ${p.name.en ?? ""} ${p.brand} ${typeof p.model === "string" ? p.model : `${p.model.ar} ${p.model.en ?? ""}`} ${p.subcategory.ar}`),
       ),
       categories: categories.filter((c) => match(`${t(c.name, locale)} ${t(c.note ?? { ar: "" }, locale)}`)),
       solutions: solutionAreas.filter((a) => match(`${t(a.title, locale)} ${t(a.text, locale)}`)),
@@ -66,7 +66,7 @@ export default function SearchClient({ locale }: { locale: Locale }) {
                         <Link href={localizedHref(locale, `/products/${p.slug}`)} className="flex items-center justify-between gap-3 px-5 py-4 transition-colors hover:bg-surface-muted">
                           <span>
                             <span className="block font-bold text-navy">{t(p.name, locale)}</span>
-                            <span className="text-body-sm text-text-muted" dir="ltr">{p.brand} — {p.model}</span>
+                            <span className="text-body-sm text-text-muted" dir="ltr">{p.brand} — {typeof p.model === "string" ? p.model : t(p.model, locale)}</span>
                           </span>
                           <ArrowLeft className="size-4 shrink-0 text-primary-hover rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
                         </Link>

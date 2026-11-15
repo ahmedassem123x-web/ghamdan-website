@@ -19,7 +19,7 @@ const IDENTITY_LABELS = new Set(["العلامة التجارية", "المود�
  */
 export default function ProductCard({ locale, product }: { locale: Locale; product: Product }) {
   const name = t(product.name, locale);
-  const model = product.model ?? "";
+  const model = typeof product.model === "string" ? (product.model ?? "") : t(product.model, locale);
   const img = product.image ?? "";
   const illustrative = !product.image;
   const benefit = product.benefits?.[0] ? t(product.benefits[0], locale) : "";
@@ -30,7 +30,7 @@ export default function ProductCard({ locale, product }: { locale: Locale; produ
   const waMsg = WA_MESSAGES.product(name, model, siteUrl)[locale];
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-card border border-border bg-surface shadow-card transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-card-hover">
+    <article className="group flex flex-col overflow-hidden rounded-card border border-border bg-surface shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover">
       <Link href={localizedHref(locale, `/products/${product.slug}`)} className="block" aria-label={name}>
         <div className="relative aspect-[4/3] overflow-hidden bg-surface-muted">
           {img ? (
@@ -75,14 +75,11 @@ export default function ProductCard({ locale, product }: { locale: Locale; produ
             {cardSpecs.map((s, i) => (
               <li key={i} className="flex items-baseline justify-between gap-3 text-caption">
                 <span className="font-bold text-navy">{t(s.label, locale)}</span>
-                <span className="text-text-muted">{s.value}</span>
+                <span className="text-text-muted">{typeof s.value === "string" ? s.value : t(s.value, locale)}</span>
               </li>
             ))}
           </ul>
         )}
-        {/* Actions pinned to the card bottom (flex-1 spacer) so the
-            details/WhatsApp row sits on one line across a grid row. */}
-        <div className="flex-1" aria-hidden="true" />
         <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-border pt-4">
           <Link
             href={localizedHref(locale, `/products/${product.slug}`)}

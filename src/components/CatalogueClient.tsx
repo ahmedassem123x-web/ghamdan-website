@@ -59,7 +59,7 @@ export default function CatalogueClient({ locale }: { locale: Locale }) {
     let list = activeTab === "all" ? published : published.filter((p) => p.categoryId === activeTab);
     if (!q) return list;
     return list.filter((p) =>
-      `${p.name.ar} ${p.name.en ?? ""} ${p.brand} ${p.model} ${p.subcategory.ar}`.toLowerCase().includes(q),
+      `${p.name.ar} ${p.name.en ?? ""} ${p.brand} ${typeof p.model === "string" ? p.model : `${p.model.ar} ${p.model.en ?? ""}`} ${p.subcategory.ar}`.toLowerCase().includes(q),
     );
   }, [published, query, activeTab]);
 
@@ -119,7 +119,7 @@ export default function CatalogueClient({ locale }: { locale: Locale }) {
           </p>
           <Link
             href={localizedHref(locale, "/guidance")}
-            className="inline-flex shrink-0 items-center justify-center gap-2 rounded-[0.625rem] bg-navy px-5 py-2.5 font-bold text-button text-white transition-[transform,background-color] duration-200 hover:-translate-y-0.5 hover:bg-navy"
+            className="inline-flex shrink-0 items-center justify-center gap-2 rounded-[0.625rem] bg-navy px-5 py-2.5 font-bold text-button text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-navy"
           >
             {locale === "ar" ? "دليل الضخ" : locale === "en" ? "Pumping guide" : "抽水指南"}
           </Link>
@@ -169,19 +169,13 @@ export default function CatalogueClient({ locale }: { locale: Locale }) {
               <span dir="ltr" className={`text-xs font-bold ${activeTab === cat.id ? "text-white/80" : "text-text-muted"}`}>
                 ({cat.publishedCount})
               </span>
-              {cat.publishedCount === 0 && (
-                <span className={`rounded-full px-2 py-0.5 text-[0.6875rem] font-bold ${activeTab === cat.id ? "bg-white/20 text-white" : "bg-sky text-primary-hover"}`}>
-                  {ui("catalog.comingSoon", locale)}
-                </span>
-              )}
             </button>
           ))}
         </div>
       </div>
 
       {/* 4.4 Product grid — all 37 by default (All tab), filtered by tab/search */}
-      {/* 4.4 Product grid — reveals on scroll (MotionProvider). */}
-      <section data-reveal className="section-sm" id="grid">
+      <section className="section-sm" id="grid">
         <div className="wrap">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <h2 className="text-h2 font-semibold text-navy"
@@ -199,7 +193,7 @@ export default function CatalogueClient({ locale }: { locale: Locale }) {
               <p className="mt-2 text-body text-text-muted">{t(c.k18, locale)}</p>
             </div>
           ) : (
-            <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-5">
+            <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6 lg:gap-5">
               {results.map((p) => (
                 <ProductCard key={p.id} locale={locale} product={p} />
               ))}
@@ -221,13 +215,13 @@ export default function CatalogueClient({ locale }: { locale: Locale }) {
                   href={waLink(WA_MESSAGES.general[locale])}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-[0.625rem] bg-navy px-5 py-2.5 font-bold text-button text-white transition-[transform,background-color] duration-200 hover:-translate-y-0.5 hover:bg-navy"
+                  className="inline-flex items-center justify-center gap-2 rounded-[0.625rem] bg-navy px-5 py-2.5 font-bold text-button text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-navy"
                 >
                   {ui("cta.whatsapp", locale)}
                 </a>
                 <Link
                   href={localizedHref(locale, "/contact")}
-                  className="inline-flex items-center justify-center gap-2 rounded-[0.625rem] border-2 border-primary bg-white px-5 py-2.5 font-bold text-button text-navy transition-transform duration-200 hover:-translate-y-0.5"
+                  className="inline-flex items-center justify-center gap-2 rounded-[0.625rem] border-2 border-primary bg-white px-5 py-2.5 font-bold text-button text-navy transition-all duration-200 hover:-translate-y-0.5"
                 >
                   {locale === "ar" ? "أو أرسل لنا رسالة" : locale === "en" ? "Or send us a message" : "或给我们留言"}
                 </Link>

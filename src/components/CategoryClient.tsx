@@ -60,7 +60,7 @@ export default function CategoryClient({
       if (type !== "all" && t(p.subcategory, locale) !== type) return false;
       if (brand !== "all" && p.brand !== brand) return false;
       if (!q) return true;
-      return `${p.name.ar} ${p.name.en ?? ""} ${p.brand} ${p.model}`.toLowerCase().includes(q);
+      return `${p.name.ar} ${p.name.en ?? ""} ${p.brand} ${typeof p.model === "string" ? p.model : `${p.model.ar} ${p.model.en ?? ""}`}`.toLowerCase().includes(q);
     });
     if (sort === "name") list = [...list].sort((a, b) => t(a.name, locale).localeCompare(t(b.name, locale)));
     return list;
