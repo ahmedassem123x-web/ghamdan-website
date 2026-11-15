@@ -3,7 +3,6 @@ import { ShieldAlert, MessageCircle, ChevronDown } from "lucide-react";
 import Hero from "@/components/Hero";
 import CTABand from "@/components/CTABand";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import { SectionHeadingL } from "@/components/ui";
 import { pages, siteSettings } from "@/data";
 import { t } from "@/lib/i18n";
 import { ui } from "@/lib/ui-copy";
@@ -41,7 +40,10 @@ export default async function SupportPage({ params }: { params: Promise<{ locale
       <section className="section">
         <div className="wrap grid gap-10 lg:grid-cols-2">
           <div>
-            <SectionHeadingL locale={l} title={t(s.k3, l)} lead={t(s.k4, l)} />
+            {/* Heading inlined (visible by default) — SectionHeadingL's shared
+                wrapper no longer hides content (Phase 6 removed .reveal). */}
+            <h2 className="text-h2 font-semibold text-navy">{t(s.k3, l)}</h2>
+            <p className="mt-3 max-w-2xl text-body text-text-muted">{t(s.k4, l)}</p>
             <p className="mt-4 text-body text-text-muted">{t(s.k5, l)}</p>
             <div className="mt-6">
               <WhatsAppButton
@@ -57,15 +59,15 @@ export default async function SupportPage({ params }: { params: Promise<{ locale
           {/* Warranty — pending approval only */}
           <div className="rounded-card border border-border bg-surface p-8 shadow-card">
             <div className="flex items-center gap-3">
-              <div className="flex size-12 items-center justify-center rounded-full bg-accent-soft text-accent">
+              <div className="flex size-12 items-center justify-center rounded-full bg-sky text-primary-hover">
                 <ShieldAlert className="size-6" aria-hidden="true" />
               </div>
-              <h2 className="text-h2 font-extrabold text-primary">{t(s.k6, l)}</h2>
+              <h2 className="text-h2 font-semibold text-navy">{t(s.k6, l)}</h2>
             </div>
-            <p className="mt-4 text-body font-bold text-primary">{t(s.k7, l)}</p>
+            <p className="mt-4 text-body font-bold text-navy">{t(s.k7, l)}</p>
             <p className="mt-2 text-body text-text-muted">{t(s.k8, l)}</p>
             <p className="mt-4 text-body-sm text-text-muted">{t(siteSettings.warranty.text, l)}</p>
-            <p className="mt-2 text-caption text-text-faint">{t(s.k9, l)}</p>
+            <p className="mt-2 text-caption text-text-muted">{t(s.k9, l)}</p>
           </div>
         </div>
       </section>
@@ -73,13 +75,13 @@ export default async function SupportPage({ params }: { params: Promise<{ locale
       {/* FAQ */}
       <section className="section bg-surface">
         <div className="wrap max-w-4xl">
-          <SectionHeadingL locale={l} title={t(s.k10, l)} />
+          <h2 className="text-h2 font-semibold text-navy">{t(s.k10, l)}</h2>
           <div className="mt-8 space-y-4">
             {faqs.map((f, i) => (
-              <details key={i} className="group rounded-card border border-border bg-bg p-5">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-primary">
+              <details key={i} className="group rounded-card border border-border bg-background p-5">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-navy">
                   {t(f.q, l)}
-                  <ChevronDown className="size-5 shrink-0 text-accent transition-transform group-open:rotate-180" aria-hidden="true" />
+                  <ChevronDown className="size-5 shrink-0 text-primary-hover transition-transform group-open:rotate-180" aria-hidden="true" />
                 </summary>
                 <p className="mt-3 text-body text-text-muted">{t(f.a, l)}</p>
               </details>
