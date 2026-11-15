@@ -37,7 +37,7 @@ export interface CtaBandProps {
  * - features: optional image left + title + text + mini-features row +
  *   WhatsApp button (spec CTA[features]).
  * - whatsapp: navy band + WhatsApp button; optional image on the side.
- * - flat: surface-blue band with a white card inside.
+ * - flat: sky band with a white card inside.
  */
 export default function CTABand({
   locale,
@@ -67,7 +67,7 @@ export default function CTABand({
   const primary = primaryHref ? (
     <Link
       href={localizedHref(locale, primaryHref)}
-      className="inline-flex items-center justify-center gap-2 rounded-[0.625rem] bg-primary px-5 py-2.5 font-bold text-button text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary-deep"
+      className="inline-flex items-center justify-center gap-2 rounded-[0.625rem] bg-navy px-5 py-2.5 font-bold text-button text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-navy"
     >
       {ui(primaryLabelKey, locale)}
     </Link>
@@ -76,7 +76,7 @@ export default function CTABand({
     <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3">
       {features.map((f, i) => (
         <span key={i} className="inline-flex items-center gap-2 text-sm font-bold">
-          <span className="flex size-8 items-center justify-center rounded-full bg-accent-soft text-accent">{f.icon}</span>
+          <span className="flex size-8 items-center justify-center rounded-full bg-sky text-primary-hover">{f.icon}</span>
           {t(f.title, locale)}
         </span>
       ))}
@@ -87,9 +87,9 @@ export default function CTABand({
     return (
       <section className="relative overflow-hidden">
         <img src={webp(image)} alt={imageAlt} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
-        <div className="absolute inset-0 bg-primary-deep/70" />
+        <div className="absolute inset-0 bg-navy/70" />
         <div className="wrap relative py-20 text-center text-white md:py-24">
-          <h2 className="text-h2 mx-auto max-w-3xl font-extrabold">{titleText}</h2>
+          <h2 className="text-h2 mx-auto max-w-3xl font-semibold">{titleText}</h2>
           {textText && <p className="mx-auto mt-4 max-w-2xl text-body-lg text-text-inverse-muted">{textText}</p>}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             {wa}
@@ -102,14 +102,14 @@ export default function CTABand({
 
   if (variant === "whatsapp") {
     return (
-      <section className="bg-primary text-white">
+      <section className="bg-navy text-white">
         <div className="wrap flex flex-col items-center gap-8 py-14 md:flex-row md:justify-between">
           <div className="flex flex-col items-start gap-6 md:flex-row md:items-center">
             {image && (
               <img src={webp(image)} alt={imageAlt} className="h-32 w-48 rounded-image object-cover" loading="lazy" />
             )}
             <div>
-              <h2 className="text-h2 font-extrabold">{titleText}</h2>
+              <h2 className="text-h2 font-semibold">{titleText}</h2>
               {textText && <p className="mt-3 max-w-2xl text-body-lg text-text-inverse-muted">{textText}</p>}
               {miniFeatures}
             </div>
@@ -127,7 +127,7 @@ export default function CTABand({
           <div className="grid items-center gap-8 overflow-hidden rounded-card bg-surface shadow-card md:grid-cols-2">
             <img src={webp(image)} alt={imageAlt} className="h-full min-h-64 w-full object-cover" loading="lazy" />
             <div className="p-8 md:p-10">
-              <h2 className="text-h2 font-extrabold text-primary">{titleText}</h2>
+              <h2 className="text-h2 font-semibold text-navy">{titleText}</h2>
               {textText && <p className="mt-4 text-body text-text-muted">{textText}</p>}
               {miniFeatures}
               <div className="mt-6 flex flex-wrap gap-3">
@@ -150,7 +150,7 @@ export default function CTABand({
               <img src={webp(image)} alt={imageAlt} className="h-full min-h-64 w-full object-cover" loading="lazy" />
             )}
             <div className={`p-8 md:p-10 ${image ? "" : "md:col-span-2"}`}>
-              <h2 className="text-h2 font-extrabold text-primary">{titleText}</h2>
+              <h2 className="text-h2 font-semibold text-navy">{titleText}</h2>
               {textText && <p className="mt-4 text-body text-text-muted">{textText}</p>}
               {miniFeatures}
               <div className="mt-6 flex flex-wrap gap-3">
@@ -166,11 +166,11 @@ export default function CTABand({
 
   // "split" (default) and "flat"
   return (
-    <section className={`section-sm ${variant === "flat" ? "bg-surface-blue" : ""}`}>
+    <section className={`section-sm ${variant === "flat" ? "bg-sky" : ""}`}>
       <div className="wrap">
-        <div className={`flex flex-col items-start justify-between gap-6 rounded-card p-8 md:flex-row md:items-center md:p-10 ${variant === "flat" ? "bg-surface shadow-card" : "bg-primary text-white"}`}>
+        <div className={`flex flex-col items-start justify-between gap-6 rounded-card p-8 md:flex-row md:items-center md:p-10 ${variant === "flat" ? "bg-surface shadow-card" : "bg-navy text-white"}`}>
           <div>
-            <h2 className={`text-h2 font-extrabold ${variant === "flat" ? "text-primary" : "text-white"}`}>{titleText}</h2>
+            <h2 className={`text-h2 font-semibold ${variant === "flat" ? "text-navy" : "text-white"}`}>{titleText}</h2>
             {textText && <p className={`mt-3 max-w-2xl text-body-lg ${variant === "flat" ? "text-text-muted" : "text-text-inverse-muted"}`}>{textText}</p>}
             <div className="mt-6 flex flex-wrap gap-3">
               {variant === "flat" ? (
@@ -188,7 +188,7 @@ export default function CTABand({
           </div>
           {contactRows && contactRows.length > 0 && (
             <div className="w-full shrink-0 border-t border-white/20 pt-6 md:w-auto md:border-s md:border-t-0 md:ps-8 md:pt-0">
-              <h3 className="text-h4 font-extrabold text-white">{ui("footer.otherWays", locale)}</h3>
+              <h3 className="text-h4 font-semibold text-white">{ui("footer.otherWays", locale)}</h3>
               <ul className="mt-4 space-y-3">
                 {contactRows.map((r, i) => (
                   <li key={i} className="flex items-center gap-3 text-body-sm text-text-inverse-muted">

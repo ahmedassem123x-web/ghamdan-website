@@ -76,8 +76,8 @@ export default function ContactForm({ locale }: { locale: Locale }) {
   if (ready) {
     const text = WA_MESSAGES.contact(name.trim(), email.trim(), t(TYPE_OPTIONS[type], locale), message.trim())[locale];
     return (
-      <div className="rounded-card border border-accent bg-accent-soft p-6">
-        <p className="font-bold text-primary">{t(c.k24, locale)}</p>
+      <div className="rounded-card border border-primary-hover bg-sky p-6">
+        <p className="font-bold text-navy">{t(c.k24, locale)}</p>
         <p className="mt-2 text-body-sm text-text-muted">{t(c.k25, locale)}</p>
         <a
           href={waLink(text)}
@@ -96,12 +96,12 @@ export default function ContactForm({ locale }: { locale: Locale }) {
   }
 
   const inputCls =
-    "w-full rounded-[0.625rem] border border-border bg-surface px-4 py-3 text-body text-text placeholder:text-text-faint focus:border-accent focus:outline-none";
+    "w-full rounded-[0.625rem] border border-border bg-surface px-4 py-3 text-body text-text placeholder:text-text-muted focus:border-primary-hover focus:outline-none";
   return (
     <form onSubmit={submit} noValidate className="rounded-card bg-surface p-6 shadow-card md:p-8">
-      <h2 className="text-h3 font-extrabold text-primary">{t(c.k27, locale)}</h2>
+      <h2 className="text-h3 font-semibold text-navy">{t(c.k27, locale)}</h2>
       {errors.length > 0 && (
-        <div role="alert" className="mt-4 rounded-[0.625rem] border border-danger/40 bg-danger/5 px-4 py-3 text-sm font-bold text-danger">
+        <div role="alert" className="mt-4 rounded-[0.625rem] border border-error/40 bg-error/5 px-4 py-3 text-sm font-bold text-error">
           <ul className="list-disc ps-5">
             {errors.map((e, i) => (
               <li key={i}>{e}</li>
@@ -111,21 +111,21 @@ export default function ContactForm({ locale }: { locale: Locale }) {
       )}
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
         <label className="block">
-          <span className="mb-1.5 block text-sm font-bold text-primary">
-            {t(c.k12, locale)} <span className="text-danger">*</span>
+          <span className="mb-1.5 block text-sm font-bold text-navy">
+            {t(c.k12, locale)} <span className="text-error">*</span>
           </span>
           <input type="text" value={name} onChange={(e) => setName(e.target.value)} className={inputCls} autoComplete="name" required />
         </label>
         <label className="block">
-          <span className="mb-1.5 block text-sm font-bold text-primary">
-            {locale === "ar" ? "البريد الإلكتروني" : locale === "en" ? "Email" : "电子邮箱"} <span className="text-danger">*</span>
+          <span className="mb-1.5 block text-sm font-bold text-navy">
+            {locale === "ar" ? "البريد الإلكتروني" : locale === "en" ? "Email" : "电子邮箱"} <span className="text-error">*</span>
           </span>
           <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className={inputCls} dir="ltr" autoComplete="email" required />
         </label>
       </div>
       <label className="mt-5 block">
-        <span className="mb-1.5 block text-sm font-bold text-primary">
-          {t(c.k15, locale)} <span className="text-danger">*</span>
+        <span className="mb-1.5 block text-sm font-bold text-navy">
+          {t(c.k15, locale)} <span className="text-error">*</span>
         </span>
         <select value={type} onChange={(e) => setType(Number(e.target.value))} className={inputCls}>
           {TYPE_OPTIONS.map((o, i) => (
@@ -136,8 +136,8 @@ export default function ContactForm({ locale }: { locale: Locale }) {
         </select>
       </label>
       <label className="mt-5 block">
-        <span className="mb-1.5 block text-sm font-bold text-primary">
-          {t(c.k21, locale)} <span className="text-danger">*</span>
+        <span className="mb-1.5 block text-sm font-bold text-navy">
+          {t(c.k21, locale)} <span className="text-error">*</span>
         </span>
         <textarea
           value={message}
@@ -150,7 +150,7 @@ export default function ContactForm({ locale }: { locale: Locale }) {
       </label>
       <button
         type="submit"
-        className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-[0.625rem] bg-primary px-6 py-3 font-bold text-button text-white transition-all hover:-translate-y-0.5 hover:bg-primary-deep"
+        className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-[0.625rem] bg-navy px-6 py-3 font-bold text-button text-white transition-all hover:-translate-y-0.5 hover:bg-navy"
       >
         {ui("cta.sendMessage", locale)}
         <ArrowLeft className="size-5 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />

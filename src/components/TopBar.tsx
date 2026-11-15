@@ -3,11 +3,19 @@ import { siteSettings } from "@/data";
 import { t } from "@/lib/i18n";
 import type { Locale } from "@/data";
 
-/** TopBar (BUILD_SPEC §2.2): desktop-only navy strip, scrolls away, header sticks. */
+/**
+ * TopBar: desktop-only navy strip (#102B46), scrolls away, header sticks.
+ * Design-system §5: "No utility bar unless approved" — this strip is the
+ * pre-existing approved contact strip (email / phone / hours + verified
+ * social links); it is retained, re-tokenised, not newly introduced.
+ * Social links are the verified ones from src/data/settings.ts
+ * (facebook.com/GTSYemen, instagram.com/gtsyemen1) — no other network
+ * is linked anywhere in the shell.
+ */
 export default function TopBar({ locale }: { locale: Locale }) {
   const { contact, social } = siteSettings;
   return (
-    <div className="hidden bg-primary text-white lg:block">
+    <div className="hidden bg-navy text-white lg:block">
       <div className="wrap flex h-10 items-center justify-between text-[0.8125rem]">
         <div className="flex items-center gap-5">
           <a href={`mailto:${contact.email}`} className="flex items-center gap-1.5 text-text-inverse-muted transition-colors hover:text-white">

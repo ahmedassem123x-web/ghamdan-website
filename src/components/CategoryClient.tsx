@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Filter } from "lucide-react";
+import { Filter, Info } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
-import { EmptyState, ResultMeta, SearchInput, SortSelect } from "@/components/ui";
+import { ResultMeta, SearchInput, SortSelect } from "@/components/ui";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { t } from "@/lib/i18n";
 import { ui } from "@/lib/ui-copy";
@@ -75,8 +75,8 @@ export default function CategoryClient({
     <div>
       {/* 8.3 Filter bar */}
       <div className="flex flex-col gap-4 rounded-card bg-surface-muted p-5 lg:flex-row lg:items-center">
-        <p className="flex shrink-0 items-center gap-2 font-bold text-primary">
-          <Filter className="size-5 text-accent" aria-hidden="true" />
+        <p className="flex shrink-0 items-center gap-2 font-bold text-navy">
+          <Filter className="size-5 text-primary-hover" aria-hidden="true" />
           {ui("catalog.filter", locale)}
         </p>
         <div className="flex-1">
@@ -99,7 +99,7 @@ export default function CategoryClient({
                 setType(e.target.value);
                 resetPage();
               }}
-              className="rounded-[0.625rem] border border-border bg-surface px-3 py-2.5 text-body-sm font-bold text-primary focus:border-accent focus:outline-none"
+              className="rounded-[0.625rem] border border-border bg-surface px-3 py-2.5 text-body-sm font-bold text-navy focus:border-primary-hover focus:outline-none"
             >
               <option value="all">{ui("catalog.allTypes", locale)}</option>
               {types.map((ty) => (
@@ -117,7 +117,7 @@ export default function CategoryClient({
                 setBrand(e.target.value);
                 resetPage();
               }}
-              className="rounded-[0.625rem] border border-border bg-surface px-3 py-2.5 text-body-sm font-bold text-primary focus:border-accent focus:outline-none"
+              className="rounded-[0.625rem] border border-border bg-surface px-3 py-2.5 text-body-sm font-bold text-navy focus:border-primary-hover focus:outline-none"
             >
               <option value="all">{ui("catalog.allBrands", locale)}</option>
               {brands.map((b) => (
@@ -150,12 +150,21 @@ export default function CategoryClient({
       {/* 8.5 Product grid (4-col, 12/page) */}
       {pageItems.length === 0 ? (
         <div className="mt-8">
-          <EmptyState title={ui("catalog.noProducts", locale)} copy="">
-            <WhatsAppButton locale={locale} message={WA_MESSAGES.general[locale]} label={ui("cta.whatsappStart", locale)} source="category" variant="green-pill" />
-          </EmptyState>
+          {/* Honest empty state — inlined (visible by default) instead of the
+              shared EmptyState (Phase 6 removed the .reveal hiding from the
+              shared primitives; this page keeps its inline state). */}
+          <div className="rounded-card border border-dashed border-border-strong bg-surface p-10 text-center">
+            <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-sky text-primary-hover">
+              <Info className="size-8" aria-hidden="true" />
+            </div>
+            <h3 className="mt-5 text-h3 font-semibold text-navy">{ui("catalog.noProducts", locale)}</h3>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+              <WhatsAppButton locale={locale} message={WA_MESSAGES.general[locale]} label={ui("cta.whatsappStart", locale)} source="category" variant="green-pill" />
+            </div>
+          </div>
         </div>
       ) : (
-        <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" data-stagger>
+        <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {pageItems.map((p) => (
             <ProductCard key={p.id} locale={locale} product={p} />
           ))}
@@ -165,7 +174,7 @@ export default function CategoryClient({
       {totalPages > 1 && (
         <div className="mt-8 flex justify-center gap-2" role="navigation" aria-label="Pagination">
           {page > 1 && (
-            <button type="button" onClick={() => setPage(page - 1)} className="rounded-[0.625rem] border border-border bg-surface px-4 py-2 text-sm font-bold text-primary transition-colors hover:border-accent hover:text-accent">
+            <button type="button" onClick={() => setPage(page - 1)} className="rounded-[0.625rem] border border-border bg-surface px-4 py-2 text-sm font-bold text-navy transition-colors hover:border-primary-hover hover:text-primary-hover">
               {locale === "ar" ? "→" : "←"}
             </button>
           )}
@@ -176,14 +185,14 @@ export default function CategoryClient({
               onClick={() => setPage(n)}
               aria-current={n === safePage ? "page" : undefined}
               className={`inline-flex size-10 items-center justify-center rounded-[0.625rem] text-sm font-bold transition-colors ${
-                n === safePage ? "bg-primary text-white" : "border border-border bg-surface text-primary hover:border-accent hover:text-accent"
+                n === safePage ? "bg-navy text-white" : "border border-border bg-surface text-navy hover:border-primary-hover hover:text-primary-hover"
               }`}
             >
               {n}
             </button>
           ))}
           {page < totalPages && (
-            <button type="button" onClick={() => setPage(page + 1)} className="rounded-[0.625rem] border border-border bg-surface px-4 py-2 text-sm font-bold text-primary transition-colors hover:border-accent hover:text-accent">
+            <button type="button" onClick={() => setPage(page + 1)} className="rounded-[0.625rem] border border-border bg-surface px-4 py-2 text-sm font-bold text-navy transition-colors hover:border-primary-hover hover:text-primary-hover">
               {locale === "ar" ? "←" : "→"}
             </button>
           )}

@@ -52,7 +52,7 @@ export default function ProjectsClient({ locale, items }: { locale: Locale; item
               setIndex(0);
             }}
             className={`rounded-full px-4 py-2 text-sm font-bold transition-colors ${
-              filter === f.id ? "bg-primary text-white" : "bg-surface text-text-muted hover:bg-surface-muted hover:text-primary"
+              filter === f.id ? "bg-navy text-white" : "bg-surface text-text-muted hover:bg-surface-muted hover:text-navy"
             }`}
           >
             {ui(f.labelKey, locale)}
@@ -65,7 +65,7 @@ export default function ProjectsClient({ locale, items }: { locale: Locale; item
         <button type="button" onClick={() => setLightbox(true)} className="block w-full" aria-label={current.alt}>
           <img src={webp(current.src)} alt={current.alt} loading="lazy" className="aspect-[16/9] w-full object-cover" />
         </button>
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary-deep/85 via-primary-deep/25 to-transparent px-5 pb-5 pt-16">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/85 via-navy/25 to-transparent px-5 pb-5 pt-16">
           <p className="text-lg font-extrabold text-white">{ui("projects.galleryCaption", locale)}</p>
           <p className="mt-1 text-body-sm text-text-inverse-muted">{ui("projects.galleryNote", locale)}</p>
         </div>
@@ -73,7 +73,7 @@ export default function ProjectsClient({ locale, items }: { locale: Locale; item
           type="button"
           onClick={() => go(-1)}
           aria-label={locale === "ar" ? "السابق" : locale === "en" ? "Previous" : "上一张"}
-          className="absolute start-4 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white text-primary shadow-card transition-transform hover:scale-105"
+          className="absolute start-4 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white text-navy shadow-card transition-transform hover:scale-105"
         >
           <ChevronLeft className="size-6 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
         </button>
@@ -81,7 +81,7 @@ export default function ProjectsClient({ locale, items }: { locale: Locale; item
           type="button"
           onClick={() => go(1)}
           aria-label={locale === "ar" ? "التالي" : locale === "en" ? "Next" : "下一张"}
-          className="absolute end-4 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white text-primary shadow-card transition-transform hover:scale-105"
+          className="absolute end-4 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white text-navy shadow-card transition-transform hover:scale-105"
         >
           <ChevronRight className="size-6 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
         </button>
@@ -97,14 +97,14 @@ export default function ProjectsClient({ locale, items }: { locale: Locale; item
             aria-selected={i === Math.min(index, visible.length - 1)}
             aria-label={`${i + 1}`}
             onClick={() => setIndex(i)}
-            className={`size-2.5 rounded-full transition-colors ${i === Math.min(index, visible.length - 1) ? "bg-accent" : "bg-border-strong hover:bg-sky"}`}
+            className={`size-2.5 rounded-full transition-colors ${i === Math.min(index, visible.length - 1) ? "bg-primary-hover" : "bg-border-strong hover:bg-primary"}`}
           />
         ))}
       </div>
 
       {/* Lightbox */}
       {lightbox && (
-        <div role="dialog" aria-modal="true" aria-label={current.alt} className="fixed inset-0 z-[80] flex items-center justify-center bg-primary-deep/90 p-4">
+        <div role="dialog" aria-modal="true" aria-label={current.alt} className="fixed inset-0 z-[80] flex items-center justify-center bg-navy/90 p-4">
           <button type="button" className="absolute top-4 end-4 inline-flex size-11 items-center justify-center rounded-full bg-white/15 text-white" aria-label="Close" onClick={() => setLightbox(false)}>
             <X className="size-6" aria-hidden="true" />
           </button>

@@ -24,7 +24,20 @@ export interface WaButtonProps {
   icon?: ReactNode;
 }
 
-/** WhatsApp button (BUILD_SPEC §2.6). Clicks recorded to localStorage — never delivery/read. */
+/**
+ * WhatsApp button (v15 design-system §1). Variants are the Button
+ * system's WhatsApp / navy / light / outline / text treatments, kept
+ * under this component's historic API because callers across the site
+ * use it. Tokens (docs/design-tokens.md):
+ *  - navy-pill: navy #102B46 fill, white text; hover #0B70C9.
+ *  - green-pill: WhatsApp #1D9E44 fill, white text (3.48:1 — flagged,
+ *    pre-existing live value, no board HEX; always paired with the glyph).
+ *  - white-on-dark: white fill, navy text (on navy panels).
+ *  - outlined-blue: 1.5px #0081FB border, #0B70C9 text (AA).
+ *  - text-link: #0B70C9 text (AA), underline on hover.
+ * Height 48px (md), radius 12px, semibold. Clicks recorded to
+ * localStorage — never delivery/read.
+ */
 export default function WhatsAppButton({
   locale,
   message,
@@ -36,13 +49,14 @@ export default function WhatsAppButton({
   icon,
 }: WaButtonProps) {
   const base =
-    "inline-flex items-center justify-center gap-2 rounded-[0.625rem] font-bold text-button transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus";
+    "inline-flex h-12 items-center justify-center gap-2 rounded-button px-5 font-semibold text-button transition-[color,background-color,border-color,transform,box-shadow] duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus";
   const variants: Record<WaButtonVariant, string> = {
-    "navy-pill": "bg-primary text-white px-5 py-2.5 hover:bg-primary-deep shadow-card",
-    "green-pill": "bg-whatsapp text-white px-5 py-2.5 hover:brightness-95 shadow-card",
-    "white-on-dark": "bg-white text-primary px-5 py-2.5 hover:bg-surface-muted shadow-card",
-    "outlined-blue": "bg-transparent text-accent border-2 border-accent px-5 py-2.5 hover:bg-accent-soft",
-    "text-link": "bg-transparent text-accent px-1 py-1 hover:underline",
+    "navy-pill": "bg-navy text-white hover:bg-primary-hover shadow-card",
+    "green-pill": "bg-whatsapp text-white hover:brightness-95 shadow-card",
+    "white-on-dark": "bg-white text-navy hover:bg-sky shadow-card",
+    "outlined-blue":
+      "bg-transparent text-primary-hover border-[1.5px] border-primary hover:bg-sky",
+    "text-link": "h-auto bg-transparent px-1 py-1 text-primary-hover hover:underline",
   };
   return (
     <a

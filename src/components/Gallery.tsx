@@ -45,36 +45,36 @@ export default function Gallery({ items, label }: { items: GalleryItem[]; label:
         <button
           type="button"
           onClick={() => setOpen(0)}
-          className="group relative block w-full overflow-hidden rounded-image text-start focus-visible:outline-2 focus-visible:outline-accent"
+          className="group relative block w-full overflow-hidden rounded-image text-start focus-visible:outline-2 focus-visible:outline-primary-hover"
           aria-label={`${label} — ${single.alt}`}
-          data-stagger
+         
         >
           <img src={webp(single.src)} alt={single.alt} loading="lazy" className="aspect-[4/3] w-full object-cover transition-transform duration-300 group-hover:scale-105" />
-          {single.caption && (
-            <span className="absolute inset-x-0 bottom-0 bg-primary-deep/70 px-3 py-2 text-[0.6875rem] font-bold text-white">{single.caption}</span>
-          )}
+          {/* D-7 fix 2026-11-15: caption was rendered twice — this overlay
+              AND the line below the image (product page renders copy.k3
+              under the Gallery). Ref 06 shows a single caption, so the
+              overlay is removed here; the line below is kept. The lightbox
+              caption (inside the dialog) is unchanged. */}
         </button>
       ) : (
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-4" data-stagger>
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
           {items.map((item, i) => (
             <button
               key={i}
               type="button"
               onClick={() => setOpen(i)}
-              className="group relative overflow-hidden rounded-image text-start focus-visible:outline-2 focus-visible:outline-accent"
+              className="group relative overflow-hidden rounded-image text-start focus-visible:outline-2 focus-visible:outline-primary-hover"
               aria-label={`${label} — ${item.alt}`}
             >
               <img src={webp(item.src)} alt={item.alt} loading="lazy" className="aspect-[4/3] w-full object-cover transition-transform duration-300 group-hover:scale-105" />
-              {item.caption && (
-                <span className="absolute inset-x-0 bottom-0 bg-primary-deep/70 px-3 py-2 text-[0.6875rem] font-bold text-white">{item.caption}</span>
-              )}
+              {/* D-7: overlay caption removed — same duplicate as above. */}
             </button>
           ))}
         </div>
       )}
 
       {open !== null && (
-        <div role="dialog" aria-modal="true" aria-label={items[open].alt} className="fixed inset-0 z-[80] flex items-center justify-center bg-primary-deep/90 p-4">
+        <div role="dialog" aria-modal="true" aria-label={items[open].alt} className="fixed inset-0 z-[80] flex items-center justify-center bg-navy/90 p-4">
           <button type="button" className="absolute top-4 end-4 inline-flex size-11 items-center justify-center rounded-full bg-white/15 text-white" aria-label="Close" onClick={() => setOpen(null)}>
             <X className="size-6" aria-hidden="true" />
           </button>

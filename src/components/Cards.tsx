@@ -35,12 +35,12 @@ export function CategoryCard({ locale, category }: { locale: Locale; category: C
       href={localizedHref(locale, `/products/category/${category.id}`)}
       className="group flex flex-col rounded-card bg-surface p-6 shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover"
     >
-      <div className="flex size-14 items-center justify-center rounded-full bg-accent-soft text-accent transition-colors group-hover:bg-accent group-hover:text-white">
+      <div className="flex size-14 items-center justify-center rounded-full bg-sky text-primary-hover transition-colors group-hover:bg-primary-hover group-hover:text-white">
         {categoryIcon(category.icon)}
       </div>
-      <h3 className="mt-4 text-h4 font-extrabold text-primary">{t(category.name, locale)}</h3>
+      <h3 className="mt-4 text-h4 font-semibold text-navy">{t(category.name, locale)}</h3>
       {category.note && <p className="mt-2 flex-1 text-body-sm text-text-muted">{t(category.note, locale)}</p>}
-      <p className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-accent">
+      <p className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-primary-hover">
         {ui("cta.viewCategory", locale)}
         <ArrowLeft className="size-4 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
       </p>
@@ -53,18 +53,18 @@ export function SolutionCard({ locale, solution }: { locale: Locale; solution: S
   return (
     <article className="group flex flex-col rounded-card bg-surface p-6 shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover">
       <div className="flex items-center justify-between">
-        <div className="flex size-14 items-center justify-center rounded-full bg-accent-soft text-accent transition-colors group-hover:bg-accent group-hover:text-white">
+        <div className="flex size-14 items-center justify-center rounded-full bg-sky text-primary-hover transition-colors group-hover:bg-primary-hover group-hover:text-white">
           {categoryIcon(solution.icon)}
         </div>
-        <span className="rounded-full bg-surface-blue px-3 py-1 text-xs font-bold text-primary">{t(solution.pill, locale)}</span>
+        <span className="rounded-full bg-sky px-3 py-1 text-xs font-bold text-navy">{t(solution.pill, locale)}</span>
       </div>
-      <h3 className="mt-4 text-h4 font-extrabold leading-snug text-primary">
-        <Link href={localizedHref(locale, `/solutions/${solution.id}`)} className="transition-colors hover:text-accent">
+      <h3 className="mt-4 text-h4 font-semibold leading-snug text-navy"
+        ><Link href={localizedHref(locale, `/solutions/${solution.id}`)} className="transition-colors hover:text-primary-hover">
           {t(solution.title, locale)}
         </Link>
       </h3>
       <p className="mt-2 flex-1 text-body-sm text-text-muted">{t(solution.text, locale)}</p>
-      <Link href={localizedHref(locale, `/solutions/${solution.id}`)} className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-accent transition-colors hover:text-accent-strong">
+      <Link href={localizedHref(locale, `/solutions/${solution.id}`)} className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-primary-hover transition-colors hover:text-primary-hover">
         {ui("cta.discoverMore", locale)}
         <ArrowLeft className="size-4 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
       </Link>
@@ -99,13 +99,13 @@ export function SolutionCardHorizontal({
         />
       </Link>
       <div className="flex flex-col p-5 md:p-6">
-        <h3 className="text-h4 font-extrabold leading-snug text-primary">
-          <Link href={href} className="transition-colors hover:text-accent">
+        <h3 className="text-h4 font-semibold leading-snug text-navy"
+          ><Link href={href} className="transition-colors hover:text-primary-hover">
             {title}
           </Link>
         </h3>
         <p className="mt-2 flex-1 text-body-sm text-text-muted">{text}</p>
-        <Link href={href} className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-accent transition-colors hover:text-accent-strong">
+        <Link href={href} className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-primary-hover transition-colors hover:text-primary-hover">
           {ui("cta.discoverMore", locale)}
           <ArrowLeft className="size-4 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
         </Link>
@@ -129,7 +129,7 @@ export function CategoryTile({ locale, category, image }: { locale: Locale; cate
           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
       </div>
-      <p className="p-3 text-center text-sm font-bold leading-snug text-primary">{t(category.name, locale)}</p>
+      <p className="p-3 text-center text-sm font-bold leading-snug text-navy">{t(category.name, locale)}</p>
     </Link>
   );
 }
@@ -147,13 +147,13 @@ export function ProjectCard({
           {project.image ? (
             <img src={webp(project.image)} alt={t(project.title, locale)} loading="lazy" className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
           ) : (
-            <div className="flex h-full w-full items-center justify-center bg-surface-blue">
-              <span className="font-latin text-4xl font-extrabold text-sky" dir="ltr">G</span>
+            <div className="flex h-full w-full items-center justify-center bg-sky">
+              <span className="font-latin text-4xl font-extrabold text-primary" dir="ltr">G</span>
             </div>
           )}
         </div>
         <div className="p-5">
-          <h3 className="text-h4 font-extrabold text-primary">{t(project.title, locale)}</h3>
+          <h3 className="text-h4 font-semibold text-navy">{t(project.title, locale)}</h3>
           {project.location && <p className="mt-1 text-body-sm text-text-muted">{project.location}</p>}
         </div>
       </Link>

@@ -41,22 +41,22 @@ export default function ProductCard({ locale, product }: { locale: Locale; produ
               className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
             />
           ) : (
-            <div className="flex h-full w-full items-center justify-center bg-surface-blue">
-              <span className="font-latin text-4xl font-extrabold text-sky" dir="ltr">
+            <div className="flex h-full w-full items-center justify-center bg-sky">
+              <span className="font-latin text-4xl font-extrabold text-primary" dir="ltr">
                 {product.brand?.slice(0, 2).toUpperCase() ?? "G"}
               </span>
             </div>
           )}
           {illustrative && (
-            <span className="absolute bottom-3 start-3 rounded-full bg-primary-deep/70 px-3 py-1 text-[0.6875rem] font-bold text-white">
+            <span className="absolute bottom-3 start-3 rounded-full bg-navy/70 px-3 py-1 text-[0.6875rem] font-bold text-white">
               {ui("catalog.illustrative", locale)}
             </span>
           )}
         </div>
       </Link>
       <div className="flex flex-1 flex-col p-5">
-        <h3 className="text-h4 font-extrabold leading-snug text-primary">
-          <Link href={localizedHref(locale, `/products/${product.slug}`)} className="transition-colors hover:text-accent">
+        <h3 className="text-h4 font-semibold leading-snug text-navy">
+          <Link href={localizedHref(locale, `/products/${product.slug}`)} className="transition-colors hover:text-primary-hover">
             {name}
           </Link>
         </h3>
@@ -74,7 +74,7 @@ export default function ProductCard({ locale, product }: { locale: Locale; produ
           <ul className="mt-3 space-y-1 border-t border-border pt-3">
             {cardSpecs.map((s, i) => (
               <li key={i} className="flex items-baseline justify-between gap-3 text-caption">
-                <span className="font-bold text-primary">{t(s.label, locale)}</span>
+                <span className="font-bold text-navy">{t(s.label, locale)}</span>
                 <span className="text-text-muted">{s.value}</span>
               </li>
             ))}
@@ -83,7 +83,7 @@ export default function ProductCard({ locale, product }: { locale: Locale; produ
         <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-border pt-4">
           <Link
             href={localizedHref(locale, `/products/${product.slug}`)}
-            className="inline-flex items-center gap-1.5 text-sm font-bold text-accent transition-colors hover:text-accent-strong"
+            className="inline-flex items-center gap-1.5 text-sm font-bold text-primary-hover transition-colors hover:text-primary-hover"
           >
             {ui("cta.details", locale)}
             <ArrowLeft className="size-4 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />

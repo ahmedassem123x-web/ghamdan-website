@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import Wordmark from "./Wordmark";
 import LanguageSelector from "./LanguageSelector";
 import WhatsAppButton from "./WhatsAppButton";
+import { MegaMenu, ProductsAccordion } from "./MegaMenu";
 import { localizedHref, localeDir } from "@/lib/i18n";
 import { ui } from "@/lib/ui-copy";
 import { WA_MESSAGES } from "@/lib/whatsapp";
@@ -23,23 +24,47 @@ export const NAV_ITEMS = [
 ] as const;
 
 const DRAWER_LINKS = [
-  ...NAV_ITEMS,
+  { key: "nav.home", href: "/" },
+  { key: "nav.about", href: "/about" },
+  // Products is rendered as the ProductsAccordion (All Products first +
+  // the 8 categories), not as a plain link — see drawer below.
+  { key: "nav.solutions", href: "/solutions" },
+  { key: "nav.systems", href: "/systems" },
+  { key: "nav.projects", href: "/projects" },
+  { key: "nav.contact", href: "/contact" },
   { key: "nav.services", href: "/services" },
   { key: "nav.agencies", href: "/agencies" },
   { key: "nav.news", href: "/news" },
 ] as const;
 
-/** Header (BUILD_SPEC §2.3): always solid white.
- * C-1 fix 2026-11-14: the header used to go transparent over photo heroes
- * (transparent = overPhoto && !scrolled), but the hero sits BELOW the header
- * in flow, so at scroll 0 the transparent header showed the white page
- * background and the white wordmark/nav were invisible. Solid from first
- * paint preserves the scrolled look exactly. Reintroduce transparency only
- * if a hero is ever pulled under the header. */
+/** Header (v15 design-system §4): always opaque white, sticky.
+ * C-1 fix 2026-11-14, kept: the header used to go transparent over photo
+ * heroes, but the hero sits BELOW the header in flow, so at scroll 0 the
+ * transparent header showed the white page background and the white
+ * wordmark/nav were invisible. Solid white from first paint; scrolling
+ * only adds the shadow and compacts the height (76px -> 64px desktop).
+ * Reintroduce transparency only if a hero is ever pulled under the header.
+ * Nav: 7 items, 15px semibold navy; active = #0B70C9 (AA) + aria-current.
+ * Products opens the MegaMenu (hover / click / ArrowDown / Escape). */
 export default function Header({ locale }: { locale: Locale }) {
   const pathname = usePathname();
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [megaOpen, setMegaOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
+  const productsBtnRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Close the mega menu on route change.
+  useEffect(() => {
+    setMegaOpen(false);
+  }, [pathname]);
 
   // Drawer: Escape to close + body scroll lock + focus trap
   useEffect(() => {
@@ -72,7 +97,6 @@ export default function Header({ locale }: { locale: Locale }) {
     };
   }, [drawerOpen]);
 
-  const onSolutions = pathname.includes("/solutions");
   const dir = localeDir(locale);
   const drawerHidden = dir === "rtl" ? "translate-x-full" : "-translate-x-full";
 
@@ -82,29 +106,82 @@ export default function Header({ locale }: { locale: Locale }) {
     return p === href || p.startsWith(`${href}/`);
   };
 
+  const closeMegaAndFocusTrigger = () => {
+    setMegaOpen(false);
+    productsBtnRef.current?.focus();
+  };
+
   return (
     <>
       <header
-        className="site-header site-header--scrolled sticky top-0 z-50 bg-white"
+        className={`site-header sticky top-0 z-50 bg-surface ${scrolled ? "site-header--scrolled" : ""}`}
+        onMouseLeave={() => setMegaOpen(false)}
       >
-        <div className="wrap flex h-16 items-center justify-between gap-2 lg:h-[76px] lg:gap-4">
+        <div
+          className={`wrap flex items-center justify-between gap-2 lg:gap-4 ${scrolled ? "h-16 lg:h-16" : "h-16 lg:h-[76px]"}`}
+        >
           <Wordmark locale={locale} variant="light" />
-          {/* Desktop nav */}
-          <nav aria-label="Primary" className="hidden items-center gap-7 lg:flex">
-            {NAV_ITEMS.map((item) => (
-              <Link
-                key={item.key}
-                href={localizedHref(locale, item.href)}
-                aria-current={isActive(item.href) ? "page" : undefined}
-                className={`text-nav font-bold transition-colors ${
-                  isActive(item.href)
-                    ? "text-accent"
-                    : "text-text hover:text-accent"
-                }`}
-              >
-                {ui(item.key, locale)}
-              </Link>
-            ))}
+          {/* Desktop nav — D-12 fix 2026-11-15: EN "Ready-made Systems"
+              wrapped to 2 lines at 1440px. The AR label "الأنظمة الجاهزة"
+              means exactly that, so the label is NOT shortened; instead each
+              item is whitespace-nowrap and the gap tightens below xl. */}
+          <nav aria-label="Primary" className="hidden items-center gap-5 lg:flex xl:gap-7">
+            {NAV_ITEMS.map((item) => {
+              if (item.key === "nav.products") {
+                return (
+                  <div
+                    key={item.key}
+                    className="relative"
+                    onMouseEnter={() => setMegaOpen(true)}
+                  >
+                    <button
+                      ref={productsBtnRef}
+                      type="button"
+                      aria-expanded={megaOpen}
+                      aria-haspopup="true"
+                      aria-controls="mega-menu"
+                      aria-current={isActive(item.href) ? "page" : undefined}
+                      onClick={() => setMegaOpen((v) => !v)}
+                      onKeyDown={(e) => {
+                        if (e.key === "ArrowDown") {
+                          e.preventDefault();
+                          setMegaOpen(true);
+                          document
+                            .querySelector<HTMLElement>("#mega-menu a[href]")
+                            ?.focus();
+                        }
+                        if (e.key === "Escape") setMegaOpen(false);
+                      }}
+                      className={`inline-flex min-h-11 items-center gap-1 whitespace-nowrap text-nav font-semibold transition-colors ${
+                        isActive(item.href) || megaOpen
+                          ? "text-primary-hover"
+                          : "text-navy hover:text-primary-hover"
+                      }`}
+                    >
+                      {ui(item.key, locale)}
+                      <ChevronDown
+                        className={`size-4 transition-transform duration-200 ${megaOpen ? "rotate-180" : ""}`}
+                        aria-hidden="true"
+                      />
+                    </button>
+                  </div>
+                );
+              }
+              return (
+                <Link
+                  key={item.key}
+                  href={localizedHref(locale, item.href)}
+                  aria-current={isActive(item.href) ? "page" : undefined}
+                  className={`inline-flex min-h-11 items-center whitespace-nowrap text-nav font-semibold transition-colors ${
+                    isActive(item.href)
+                      ? "text-primary-hover"
+                      : "text-navy hover:text-primary-hover"
+                  }`}
+                >
+                  {ui(item.key, locale)}
+                </Link>
+              );
+            })}
           </nav>
           <div className="flex items-center gap-3">
             {/* Language switch lives in the drawer below sm (header row cannot fit wordmark + selector + burger at 360px) */}
@@ -117,12 +194,12 @@ export default function Header({ locale }: { locale: Locale }) {
                 message={WA_MESSAGES.general[locale]}
                 label={ui("cta.whatsapp", locale)}
                 source="header"
-                variant={onSolutions ? "green-pill" : "navy-pill"}
+                variant="green-pill"
               />
             </div>
             <button
               type="button"
-              className="inline-flex size-11 items-center justify-center rounded-[0.625rem] text-primary lg:hidden"
+              className="inline-flex size-11 items-center justify-center rounded-button text-navy transition-colors hover:bg-sky"
               aria-label={ui("nav.menu", locale)}
               aria-expanded={drawerOpen}
               onClick={() => setDrawerOpen(true)}
@@ -131,15 +208,24 @@ export default function Header({ locale }: { locale: Locale }) {
             </button>
           </div>
         </div>
+        {/* Mega menu: full-width panel anchored to the header (not the nav
+            item), so it spans the container; hover intent is owned by the
+            header's onMouseLeave + the trigger's onMouseEnter above. */}
+        <MegaMenu
+          locale={locale}
+          open={megaOpen}
+          onNavigate={() => setMegaOpen(false)}
+          onClose={closeMegaAndFocusTrigger}
+        />
       </header>
 
-      {/* Mobile drawer (BUILD_SPEC §2.9): slides from RTL-start, backdrop, Escape, focus trap, scroll lock */}
+      {/* Mobile drawer: slides from RTL-start, backdrop, Escape, focus trap, scroll lock */}
       <div
         className={`drawer fixed inset-0 z-[70] lg:hidden ${drawerOpen ? "drawer--open" : "pointer-events-none"}`}
         aria-hidden={!drawerOpen}
       >
         <div
-          className="drawer__backdrop absolute inset-0 bg-primary-deep/60"
+          className="drawer__backdrop absolute inset-0 bg-navy/60"
           onClick={() => setDrawerOpen(false)}
         />
         <div
@@ -147,7 +233,7 @@ export default function Header({ locale }: { locale: Locale }) {
           role="dialog"
           aria-modal="true"
           aria-label={ui("nav.menu", locale)}
-          className={`drawer__panel absolute top-0 bottom-0 start-0 flex w-[85vw] max-w-sm flex-col bg-white shadow-float ${
+          className={`drawer__panel absolute top-0 bottom-0 start-0 flex w-[85vw] max-w-sm flex-col bg-surface shadow-float ${
             drawerOpen ? "translate-x-0" : drawerHidden
           }`}
         >
@@ -155,7 +241,7 @@ export default function Header({ locale }: { locale: Locale }) {
             <Wordmark locale={locale} size="sm" />
             <button
               type="button"
-              className="inline-flex size-10 items-center justify-center rounded-[0.625rem] text-primary"
+              className="inline-flex size-10 items-center justify-center rounded-button text-navy transition-colors hover:bg-sky"
               aria-label={ui("nav.close", locale)}
               onClick={() => setDrawerOpen(false)}
             >
@@ -164,19 +250,44 @@ export default function Header({ locale }: { locale: Locale }) {
           </div>
           <nav aria-label="Mobile" className="flex-1 overflow-y-auto px-5 py-4">
             <ul className="flex flex-col">
-              {DRAWER_LINKS.map((item) => (
-                <li key={item.key}>
-                  <Link
-                    href={localizedHref(locale, item.href)}
-                    onClick={() => setDrawerOpen(false)}
-                    className={`block border-b border-border py-3.5 text-base font-bold ${
-                      isActive(item.href) ? "text-accent" : "text-text"
-                    }`}
-                  >
-                    {ui(item.key, locale)}
-                  </Link>
-                </li>
-              ))}
+              {DRAWER_LINKS.map((item) => {
+                if (item.key === "nav.solutions") {
+                  // Products accordion sits between About and Solutions,
+                  // preserving the desktop nav order.
+                  return (
+                    <Fragment key="products-accordion">
+                      <ProductsAccordion
+                        locale={locale}
+                        onNavigate={() => setDrawerOpen(false)}
+                      />
+                      <li key={item.key}>
+                        <Link
+                          href={localizedHref(locale, item.href)}
+                          onClick={() => setDrawerOpen(false)}
+                          className={`block border-b border-border py-3.5 text-base font-semibold ${
+                            isActive(item.href) ? "text-primary-hover" : "text-navy"
+                          }`}
+                        >
+                          {ui(item.key, locale)}
+                        </Link>
+                      </li>
+                    </Fragment>
+                  );
+                }
+                return (
+                  <li key={item.key}>
+                    <Link
+                      href={localizedHref(locale, item.href)}
+                      onClick={() => setDrawerOpen(false)}
+                      className={`block border-b border-border py-3.5 text-base font-semibold ${
+                        isActive(item.href) ? "text-primary-hover" : "text-navy"
+                      }`}
+                    >
+                      {ui(item.key, locale)}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
             <div className="flex items-center justify-between py-4">
               <LanguageSelector locale={locale} />

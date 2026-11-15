@@ -33,42 +33,42 @@ export default function GuidanceClient({ locale }: { locale: Locale }) {
       <section className="section">
         <div className="wrap max-w-3xl">
           {/* Mandatory safety copy */}
-          <div className="flex items-start gap-3 rounded-card border border-sky bg-sky-light p-5">
-            <AlertTriangle className="mt-0.5 size-6 shrink-0 text-accent" aria-hidden="true" />
-            <p className="font-bold text-primary">{ui("guidance.safety", locale)}</p>
+          <div className="flex items-start gap-3 rounded-card border border-sky bg-sky p-5">
+            <AlertTriangle className="mt-0.5 size-6 shrink-0 text-primary-hover" aria-hidden="true" />
+            <p className="font-bold text-navy">{ui("guidance.safety", locale)}</p>
           </div>
 
           <div className="mt-8 rounded-card bg-surface p-6 shadow-card md:p-8">
             <div className="grid gap-5 sm:grid-cols-2">
               <label className="block">
-                <span className="mb-1.5 block text-sm font-bold text-primary">{ui("guidance.depth", locale)}</span>
+                <span className="mb-1.5 block text-sm font-bold text-navy">{ui("guidance.depth", locale)}</span>
                 <input
                   type="number"
                   min={1}
                   value={depth}
                   onChange={(e) => setDepth(e.target.value)}
-                  className="w-full rounded-[0.625rem] border border-border bg-surface px-4 py-3 text-body text-text focus:border-accent focus:outline-none"
+                  className="w-full rounded-[0.625rem] border border-border bg-surface px-4 py-3 text-body text-text focus:border-primary-hover focus:outline-none"
                   dir="ltr"
                 />
               </label>
               <label className="block">
-                <span className="mb-1.5 block text-sm font-bold text-primary">{ui("guidance.water", locale)}</span>
+                <span className="mb-1.5 block text-sm font-bold text-navy">{ui("guidance.water", locale)}</span>
                 <input
                   type="number"
                   min={1}
                   value={water}
                   onChange={(e) => setWater(e.target.value)}
-                  className="w-full rounded-[0.625rem] border border-border bg-surface px-4 py-3 text-body text-text focus:border-accent focus:outline-none"
+                  className="w-full rounded-[0.625rem] border border-border bg-surface px-4 py-3 text-body text-text focus:border-primary-hover focus:outline-none"
                   dir="ltr"
                 />
               </label>
             </div>
             <label className="mt-5 block">
-              <span className="mb-1.5 block text-sm font-bold text-primary">{ui("guidance.use", locale)}</span>
+              <span className="mb-1.5 block text-sm font-bold text-navy">{ui("guidance.use", locale)}</span>
               <select
                 value={use}
                 onChange={(e) => setUse(e.target.value as (typeof USES)[number])}
-                className="w-full rounded-[0.625rem] border border-border bg-surface px-4 py-3 text-body text-text focus:border-accent focus:outline-none"
+                className="w-full rounded-[0.625rem] border border-border bg-surface px-4 py-3 text-body text-text focus:border-primary-hover focus:outline-none"
               >
                 {USES.map((u) => (
                   <option key={u} value={u}>
@@ -79,7 +79,7 @@ export default function GuidanceClient({ locale }: { locale: Locale }) {
             </label>
 
             {error && (
-              <p role="alert" className="mt-4 rounded-[0.625rem] border border-danger/40 bg-danger/5 px-4 py-3 text-sm font-bold text-danger">
+              <p role="alert" className="mt-4 rounded-[0.625rem] border border-error/40 bg-error/5 px-4 py-3 text-sm font-bold text-error">
                 {error}
               </p>
             )}
@@ -93,7 +93,7 @@ export default function GuidanceClient({ locale }: { locale: Locale }) {
               rel="noopener noreferrer"
               aria-disabled={!ready}
               className={`mt-6 inline-flex items-center gap-2 rounded-[0.625rem] px-6 py-3 font-bold text-button text-white transition-all ${
-                ready ? "bg-whatsapp hover:-translate-y-0.5" : "cursor-not-allowed bg-text-faint opacity-60"
+                ready ? "bg-whatsapp hover:-translate-y-0.5" : "cursor-not-allowed bg-text-muted opacity-60"
               }`}
               onClick={(e) => {
                 if (!ready) {

@@ -59,16 +59,16 @@ export default function SearchClient({ locale }: { locale: Locale }) {
             <div className="mt-8 space-y-10">
               {results.products.length > 0 && (
                 <section>
-                  <h2 className="text-h3 font-extrabold text-primary">{ui("nav.products", locale)}</h2>
+                  <h2 className="text-h3 font-semibold text-navy">{ui("nav.products", locale)}</h2>
                   <ul className="mt-4 divide-y divide-border rounded-card border border-border bg-surface">
                     {results.products.map((p) => (
                       <li key={p.id}>
                         <Link href={localizedHref(locale, `/products/${p.slug}`)} className="flex items-center justify-between gap-3 px-5 py-4 transition-colors hover:bg-surface-muted">
                           <span>
-                            <span className="block font-bold text-primary">{t(p.name, locale)}</span>
+                            <span className="block font-bold text-navy">{t(p.name, locale)}</span>
                             <span className="text-body-sm text-text-muted" dir="ltr">{p.brand} — {p.model}</span>
                           </span>
-                          <ArrowLeft className="size-4 shrink-0 text-accent rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
+                          <ArrowLeft className="size-4 shrink-0 text-primary-hover rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
                         </Link>
                       </li>
                     ))}
@@ -77,13 +77,13 @@ export default function SearchClient({ locale }: { locale: Locale }) {
               )}
               {results.categories.length > 0 && (
                 <section>
-                  <h2 className="text-h3 font-extrabold text-primary">{ui("footer.categories", locale)}</h2>
+                  <h2 className="text-h3 font-semibold text-navy">{ui("footer.categories", locale)}</h2>
                   <ul className="mt-4 divide-y divide-border rounded-card border border-border bg-surface">
                     {results.categories.map((c) => (
                       <li key={c.id}>
                         <Link href={localizedHref(locale, `/products/category/${c.id}`)} className="flex items-center justify-between gap-3 px-5 py-4 transition-colors hover:bg-surface-muted">
-                          <span className="font-bold text-primary">{t(c.name, locale)}</span>
-                          <ArrowLeft className="size-4 shrink-0 text-accent rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
+                          <span className="font-bold text-navy">{t(c.name, locale)}</span>
+                          <ArrowLeft className="size-4 shrink-0 text-primary-hover rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
                         </Link>
                       </li>
                     ))}
@@ -92,13 +92,13 @@ export default function SearchClient({ locale }: { locale: Locale }) {
               )}
               {results.solutions.length > 0 && (
                 <section>
-                  <h2 className="text-h3 font-extrabold text-primary">{ui("nav.solutions", locale)}</h2>
+                  <h2 className="text-h3 font-semibold text-navy">{ui("nav.solutions", locale)}</h2>
                   <ul className="mt-4 divide-y divide-border rounded-card border border-border bg-surface">
                     {results.solutions.map((a) => (
                       <li key={a.id}>
                         <Link href={localizedHref(locale, `/solutions/${a.id}`)} className="flex items-center justify-between gap-3 px-5 py-4 transition-colors hover:bg-surface-muted">
-                          <span className="font-bold text-primary">{t(a.title, locale)}</span>
-                          <ArrowLeft className="size-4 shrink-0 text-accent rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
+                          <span className="font-bold text-navy">{t(a.title, locale)}</span>
+                          <ArrowLeft className="size-4 shrink-0 text-primary-hover rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
                         </Link>
                       </li>
                     ))}
@@ -107,13 +107,13 @@ export default function SearchClient({ locale }: { locale: Locale }) {
               )}
               {results.systems.length > 0 && (
                 <section>
-                  <h2 className="text-h3 font-extrabold text-primary">{ui("nav.systems", locale)}</h2>
+                  <h2 className="text-h3 font-semibold text-navy">{ui("nav.systems", locale)}</h2>
                   <ul className="mt-4 divide-y divide-border rounded-card border border-border bg-surface">
                     {results.systems.map((b) => (
                       <li key={b.id}>
                         <Link href={localizedHref(locale, `/systems/${b.slug}`)} className="flex items-center justify-between gap-3 px-5 py-4 transition-colors hover:bg-surface-muted">
-                          <span className="font-bold text-primary">{t(b.name, locale)}</span>
-                          <ArrowLeft className="size-4 shrink-0 text-accent rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
+                          <span className="font-bold text-navy">{t(b.name, locale)}</span>
+                          <ArrowLeft className="size-4 shrink-0 text-primary-hover rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
                         </Link>
                       </li>
                     ))}
