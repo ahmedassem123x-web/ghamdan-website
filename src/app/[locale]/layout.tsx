@@ -3,6 +3,7 @@ import TopBar from "@/components/TopBar";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import LocaleHtmlAttrs from "@/components/LocaleHtmlAttrs";
 import MotionProvider from "@/lib/motion";
 import { LOCALES } from "@/lib/i18n";
 import { t } from "@/lib/i18n";
@@ -44,6 +45,7 @@ export default async function LocaleLayout({
   const l = (LOCALES as string[]).includes(locale) ? (locale as Locale) : "ar";
   return (
     <>
+      <LocaleHtmlAttrs locale={l} />
       <MotionProvider />
       <TopBar locale={l} />
       <Header locale={l} />
