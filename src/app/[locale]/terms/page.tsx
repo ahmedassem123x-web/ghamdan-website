@@ -21,17 +21,17 @@ export default async function TermsPage({ params }: { params: Promise<{ locale: 
       <Hero locale={l} variant="plain" title={p.k1} text={p.k2} whatsapp={false} />
       <section className="section">
         <div className="wrap max-w-3xl">
-          <div className="rounded-card border border-sky bg-sky-light p-5">
-            <p className="font-bold text-primary">{ui("notice.legal", l)}</p>
+          <div className="rounded-card border border-sky bg-sky p-5">
+            <p className="font-bold text-navy">{ui("notice.legal", l)}</p>
           </div>
           <ul className="mt-8 space-y-4">
             {items.map((item, i) => (
               <li key={i} className="rounded-card bg-surface p-5 shadow-card">
-                <p className="font-bold text-primary">{t(item, l)}</p>
+                <p className="font-bold text-navy">{t(item, l)}</p>
               </li>
             ))}
           </ul>
-          <p className="mt-6 text-caption text-text-faint">{t(p.k7, l)}</p>
+          <p className="mt-6 text-caption text-text-muted">{t(p.k7, l)}</p>
         </div>
       </section>
     </>
