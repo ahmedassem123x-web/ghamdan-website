@@ -39,62 +39,72 @@ export const products: Product[] = [
     "model": "SUN-SG04LP1 — 5kW",
     "categoryId": "inverters",
     "subcategory": {
-      "ar": "أحادي الطور — جهد منخفض"
+      "ar": "أحادي الطور — جهد منخفض",
+      "en": "Single-phase — low voltage"
     },
     "name": {
       "ar": "Deye SUN-SG04LP1 — 5kW",
       "en": "Deye SUN-SG04LP1 — 5kW"
     },
     "overview": {
-      "ar": "هجين، بطارية 48V، مناسب للمنازل"
+      "ar": "هجين، بطارية 48V، مناسب للمنازل",
+      "en": "Hybrid, 48V battery, suitable for homes"
     },
     "benefits": [
       {
-        "ar": "مناسب للمنازل"
+        "ar": "مناسب للمنازل",
+        "en": "Suitable for homes"
       }
     ],
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "Deye"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
         "value": "SUN-SG04LP1 — 5kW"
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "المحولات"
+        "value": {"ar": "المحولات", "en": "Inverters"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "أحادي الطور — جهد منخفض"
+        "value": {"ar": "أحادي الطور — جهد منخفض", "en": "Single-phase — low voltage"}
       },
       {
         "label": {
-          "ar": "النوع"
+          "ar": "النوع",
+          "en": "Type"
         },
-        "value": "هجين"
+        "value": {"ar": "هجين", "en": "Hybrid"}
       },
       {
         "label": {
-          "ar": "البطارية"
+          "ar": "البطارية",
+          "en": "Battery"
         },
-        "value": "بطارية 48V"
+        "value": {"ar": "بطارية 48V", "en": "48V battery"}
       },
       {
         "label": {
-          "ar": "الاستخدام"
+          "ar": "الاستخدام",
+          "en": "Use"
         },
-        "value": "مناسب للمنازل"
+        "value": {"ar": "مناسب للمنازل", "en": "Suitable for homes"}
       }
     ],
     "image": "/images/photos/inverter-unit.jpg",
@@ -112,51 +122,59 @@ export const products: Product[] = [
     "model": "SUN-SG04LP1 — 6kW",
     "categoryId": "inverters",
     "subcategory": {
-      "ar": "أحادي الطور — جهد منخفض"
+      "ar": "أحادي الطور — جهد منخفض",
+      "en": "Single-phase — low voltage"
     },
     "name": {
       "ar": "Deye SUN-SG04LP1 — 6kW",
       "en": "Deye SUN-SG04LP1 — 6kW"
     },
     "overview": {
-      "ar": "هجين، بطارية 48V"
+      "ar": "هجين، بطارية 48V",
+      "en": "Hybrid, 48V battery"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "Deye"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
         "value": "SUN-SG04LP1 — 6kW"
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "المحولات"
+        "value": {"ar": "المحولات", "en": "Inverters"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "أحادي الطور — جهد منخفض"
+        "value": {"ar": "أحادي الطور — جهد منخفض", "en": "Single-phase — low voltage"}
       },
       {
         "label": {
-          "ar": "النوع"
+          "ar": "النوع",
+          "en": "Type"
         },
-        "value": "هجين"
+        "value": {"ar": "هجين", "en": "Hybrid"}
       },
       {
         "label": {
-          "ar": "البطارية"
+          "ar": "البطارية",
+          "en": "Battery"
         },
-        "value": "بطارية 48V"
+        "value": {"ar": "بطارية 48V", "en": "48V battery"}
       }
     ],
     "image": "/images/photos/inverter-unit.jpg",
@@ -171,51 +189,59 @@ export const products: Product[] = [
     "model": "SUN-SG04LP1 — 8kW",
     "categoryId": "inverters",
     "subcategory": {
-      "ar": "أحادي الطور — جهد منخفض"
+      "ar": "أحادي الطور — جهد منخفض",
+      "en": "Single-phase — low voltage"
     },
     "name": {
       "ar": "Deye SUN-SG04LP1 — 8kW",
       "en": "Deye SUN-SG04LP1 — 8kW"
     },
     "overview": {
-      "ar": "هجين، بطارية 48V"
+      "ar": "هجين، بطارية 48V",
+      "en": "Hybrid, 48V battery"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "Deye"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
         "value": "SUN-SG04LP1 — 8kW"
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "المحولات"
+        "value": {"ar": "المحولات", "en": "Inverters"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "أحادي الطور — جهد منخفض"
+        "value": {"ar": "أحادي الطور — جهد منخفض", "en": "Single-phase — low voltage"}
       },
       {
         "label": {
-          "ar": "النوع"
+          "ar": "النوع",
+          "en": "Type"
         },
-        "value": "هجين"
+        "value": {"ar": "هجين", "en": "Hybrid"}
       },
       {
         "label": {
-          "ar": "البطارية"
+          "ar": "البطارية",
+          "en": "Battery"
         },
-        "value": "بطارية 48V"
+        "value": {"ar": "بطارية 48V", "en": "48V battery"}
       }
     ],
     "image": "/images/photos/inverter-unit.jpg",
@@ -230,51 +256,59 @@ export const products: Product[] = [
     "model": "SUN-SG04LP1 — 10kW",
     "categoryId": "inverters",
     "subcategory": {
-      "ar": "أحادي الطور — جهد منخفض"
+      "ar": "أحادي الطور — جهد منخفض",
+      "en": "Single-phase — low voltage"
     },
     "name": {
       "ar": "Deye SUN-SG04LP1 — 10kW",
       "en": "Deye SUN-SG04LP1 — 10kW"
     },
     "overview": {
-      "ar": "هجين، بطارية 48V"
+      "ar": "هجين، بطارية 48V",
+      "en": "Hybrid, 48V battery"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "Deye"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
         "value": "SUN-SG04LP1 — 10kW"
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "المحولات"
+        "value": {"ar": "المحولات", "en": "Inverters"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "أحادي الطور — جهد منخفض"
+        "value": {"ar": "أحادي الطور — جهد منخفض", "en": "Single-phase — low voltage"}
       },
       {
         "label": {
-          "ar": "النوع"
+          "ar": "النوع",
+          "en": "Type"
         },
-        "value": "هجين"
+        "value": {"ar": "هجين", "en": "Hybrid"}
       },
       {
         "label": {
-          "ar": "البطارية"
+          "ar": "البطارية",
+          "en": "Battery"
         },
-        "value": "بطارية 48V"
+        "value": {"ar": "بطارية 48V", "en": "48V battery"}
       }
     ],
     "image": "/images/photos/inverter-unit.jpg",
@@ -289,51 +323,59 @@ export const products: Product[] = [
     "model": "SUN-SG04LP1 — 12kW",
     "categoryId": "inverters",
     "subcategory": {
-      "ar": "أحادي الطور — جهد منخفض"
+      "ar": "أحادي الطور — جهد منخفض",
+      "en": "Single-phase — low voltage"
     },
     "name": {
       "ar": "Deye SUN-SG04LP1 — 12kW",
       "en": "Deye SUN-SG04LP1 — 12kW"
     },
     "overview": {
-      "ar": "هجين، بطارية 48V"
+      "ar": "هجين، بطارية 48V",
+      "en": "Hybrid, 48V battery"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "Deye"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
         "value": "SUN-SG04LP1 — 12kW"
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "المحولات"
+        "value": {"ar": "المحولات", "en": "Inverters"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "أحادي الطور — جهد منخفض"
+        "value": {"ar": "أحادي الطور — جهد منخفض", "en": "Single-phase — low voltage"}
       },
       {
         "label": {
-          "ar": "النوع"
+          "ar": "النوع",
+          "en": "Type"
         },
-        "value": "هجين"
+        "value": {"ar": "هجين", "en": "Hybrid"}
       },
       {
         "label": {
-          "ar": "البطارية"
+          "ar": "البطارية",
+          "en": "Battery"
         },
-        "value": "بطارية 48V"
+        "value": {"ar": "بطارية 48V", "en": "48V battery"}
       }
     ],
     "image": "/images/photos/inverter-unit.jpg",
@@ -345,68 +387,79 @@ export const products: Product[] = [
     "id": "p06",
     "slug": "deye-off-grid-inverter-6-6kw",
     "brand": "Deye",
-    "model": "انفرتر أوف-جريد 6.6kW",
+    "model": {"ar": "انفرتر أوف-جريد 6.6kW", "en": "Off-grid inverter 6.6kW"},
     "categoryId": "inverters",
     "subcategory": {
-      "ar": "أوف-جريد"
+      "ar": "أوف-جريد",
+      "en": "Off-grid"
     },
     "name": {
       "ar": "Deye انفرتر أوف-جريد 6.6kW",
       "en": "Deye Off-Grid Inverter 6.6kW"
     },
     "overview": {
-      "ar": "IP65، يدعم كل أنواع البطاريات، واي فاي مدمج"
+      "ar": "IP65، يدعم كل أنواع البطاريات، واي فاي مدمج",
+      "en": "IP65, supports all battery types, built-in Wi-Fi"
     },
     "benefits": [
       {
-        "ar": "يدعم كل أنواع البطاريات"
+        "ar": "يدعم كل أنواع البطاريات",
+        "en": "Supports all battery types"
       },
       {
-        "ar": "واي فاي مدمج"
+        "ar": "واي فاي مدمج",
+        "en": "Built-in Wi-Fi"
       }
     ],
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "Deye"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
-        "value": "انفرتر أوف-جريد 6.6kW"
+        "value": {"ar": "انفرتر أوف-جريد 6.6kW", "en": "Off-grid inverter 6.6kW"}
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "المحولات"
+        "value": {"ar": "المحولات", "en": "Inverters"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "أوف-جريد"
+        "value": {"ar": "أوف-جريد", "en": "Off-grid"}
       },
       {
         "label": {
-          "ar": "الحماية"
+          "ar": "الحماية",
+          "en": "Protection"
         },
         "value": "IP65"
       },
       {
         "label": {
-          "ar": "مواصفات"
+          "ar": "مواصفات",
+          "en": "Specifications"
         },
-        "value": "يدعم كل أنواع البطاريات"
+        "value": {"ar": "يدعم كل أنواع البطاريات", "en": "Supports all battery types"}
       },
       {
         "label": {
-          "ar": "الاتصال"
+          "ar": "الاتصال",
+          "en": "Connectivity"
         },
-        "value": "واي فاي مدمج"
+        "value": {"ar": "واي فاي مدمج", "en": "Built-in Wi-Fi"}
       }
     ],
     "image": "/images/photos/inverter-unit.jpg",
@@ -424,51 +477,59 @@ export const products: Product[] = [
     "model": "SUN-SG04LP3 / SG05LP3 — 5 –20kW",
     "categoryId": "inverters",
     "subcategory": {
-      "ar": "ثلاثي الطور — جهد منخفض"
+      "ar": "ثلاثي الطور — جهد منخفض",
+      "en": "Three-phase — low voltage"
     },
     "name": {
       "ar": "Deye SUN-SG04LP3 / SG05LP3 — 5 –20kW",
       "en": "Deye SUN-SG04LP3 / SG05LP3 — 5 –20kW"
     },
     "overview": {
-      "ar": "5/6/8/10/12 و14/16/18/20kW، بطارية 48V"
+      "ar": "5/6/8/10/12 و14/16/18/20kW، بطارية 48V",
+      "en": "5/6/8/10/12 and 14/16/18/20kW, 48V battery"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "Deye"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
         "value": "SUN-SG04LP3 / SG05LP3 — 5 –20kW"
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "المحولات"
+        "value": {"ar": "المحولات", "en": "Inverters"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "ثلاثي الطور — جهد منخفض"
+        "value": {"ar": "ثلاثي الطور — جهد منخفض", "en": "Three-phase — low voltage"}
       },
       {
         "label": {
-          "ar": "القدرة"
+          "ar": "القدرة",
+          "en": "Power"
         },
-        "value": "5/6/8/10/12 و14/16/18/20kW"
+        "value": {"ar": "5/6/8/10/12 و14/16/18/20kW", "en": "5/6/8/10/12 and 14/16/18/20kW"}
       },
       {
         "label": {
-          "ar": "البطارية"
+          "ar": "البطارية",
+          "en": "Battery"
         },
-        "value": "بطارية 48V"
+        "value": {"ar": "بطارية 48V", "en": "48V battery"}
       }
     ],
     "image": "/images/photos/inverter-unit.jpg",
@@ -486,51 +547,59 @@ export const products: Product[] = [
     "model": "SUN-SG01HP3 — 10 –50kW",
     "categoryId": "inverters",
     "subcategory": {
-      "ar": "ثلاثي الطور — جهد عالٍ"
+      "ar": "ثلاثي الطور — جهد عالٍ",
+      "en": "Three-phase — high voltage"
     },
     "name": {
       "ar": "Deye SUN-SG01HP3 — 10 –50kW",
       "en": "Deye SUN-SG01HP3 — 10 –50kW"
     },
     "overview": {
-      "ar": "10/12/25/30/40/50kW، بطاريات جهد عالٍ"
+      "ar": "10/12/25/30/40/50kW، بطاريات جهد عالٍ",
+      "en": "10/12/25/30/40/50kW, high-voltage batteries"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "Deye"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
         "value": "SUN-SG01HP3 — 10 –50kW"
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "المحولات"
+        "value": {"ar": "المحولات", "en": "Inverters"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "ثلاثي الطور — جهد عالٍ"
+        "value": {"ar": "ثلاثي الطور — جهد عالٍ", "en": "Three-phase — high voltage"}
       },
       {
         "label": {
-          "ar": "القدرة"
+          "ar": "القدرة",
+          "en": "Power"
         },
         "value": "10/12/25/30/40/50kW"
       },
       {
         "label": {
-          "ar": "مواصفات"
+          "ar": "مواصفات",
+          "en": "Specifications"
         },
-        "value": "بطاريات جهد عالٍ"
+        "value": {"ar": "بطاريات جهد عالٍ", "en": "High-voltage batteries"}
       }
     ],
     "image": "/images/photos/inverter-unit.jpg",
@@ -542,46 +611,53 @@ export const products: Product[] = [
     "id": "p09",
     "slug": "must-pv19-pv18-1kw",
     "brand": "MUST",
-    "model": "سلسلة PV19 / PV18 — 1kW",
+    "model": {"ar": "سلسلة PV19 / PV18 — 1kW", "en": "PV19 / PV18 series — 1kW"},
     "categoryId": "inverters",
     "subcategory": {
-      "ar": "أوف-جريد / هجين اقتصادي"
+      "ar": "أوف-جريد / هجين اقتصادي",
+      "en": "Off-grid / economical hybrid"
     },
     "name": {
       "ar": "MUST سلسلة PV19 / PV18 — 1kW",
-      "en": "MUST PV19 / PV18 Series — 1kW"
+      "en": "MUST PV19 / PV18 series — 1kW"
     },
     "overview": {
-      "ar": "12V"
+      "ar": "12V",
+      "en": "12V"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "MUST"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
-        "value": "سلسلة PV19 / PV18 — 1kW"
+        "value": {"ar": "سلسلة PV19 / PV18 — 1kW", "en": "PV19 / PV18 series — 1kW"}
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "المحولات"
+        "value": {"ar": "المحولات", "en": "Inverters"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "أوف-جريد / هجين اقتصادي"
+        "value": {"ar": "أوف-جريد / هجين اقتصادي", "en": "Off-grid / economical hybrid"}
       },
       {
         "label": {
-          "ar": "الجهد"
+          "ar": "الجهد",
+          "en": "Voltage"
         },
         "value": "12V"
       }
@@ -598,46 +674,53 @@ export const products: Product[] = [
     "id": "p10",
     "slug": "must-pv19-pv18-3kw",
     "brand": "MUST",
-    "model": "سلسلة PV19 / PV18 — 3kW",
+    "model": {"ar": "سلسلة PV19 / PV18 — 3kW", "en": "PV19 / PV18 series — 3kW"},
     "categoryId": "inverters",
     "subcategory": {
-      "ar": "أوف-جريد / هجين اقتصادي"
+      "ar": "أوف-جريد / هجين اقتصادي",
+      "en": "Off-grid / economical hybrid"
     },
     "name": {
       "ar": "MUST سلسلة PV19 / PV18 — 3kW",
-      "en": "MUST PV19 / PV18 Series — 3kW"
+      "en": "MUST PV19 / PV18 series — 3kW"
     },
     "overview": {
-      "ar": "24V"
+      "ar": "24V",
+      "en": "24V"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "MUST"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
-        "value": "سلسلة PV19 / PV18 — 3kW"
+        "value": {"ar": "سلسلة PV19 / PV18 — 3kW", "en": "PV19 / PV18 series — 3kW"}
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "المحولات"
+        "value": {"ar": "المحولات", "en": "Inverters"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "أوف-جريد / هجين اقتصادي"
+        "value": {"ar": "أوف-جريد / هجين اقتصادي", "en": "Off-grid / economical hybrid"}
       },
       {
         "label": {
-          "ar": "الجهد"
+          "ar": "الجهد",
+          "en": "Voltage"
         },
         "value": "24V"
       }
@@ -651,39 +734,44 @@ export const products: Product[] = [
     "id": "p11",
     "slug": "must-pv19-pv18-4kw",
     "brand": "MUST",
-    "model": "سلسلة PV19 / PV18 — 4kW",
+    "model": {"ar": "سلسلة PV19 / PV18 — 4kW", "en": "PV19 / PV18 series — 4kW"},
     "categoryId": "inverters",
     "subcategory": {
-      "ar": "أوف-جريد / هجين اقتصادي"
+      "ar": "أوف-جريد / هجين اقتصادي",
+      "en": "Off-grid / economical hybrid"
     },
     "name": {
       "ar": "MUST سلسلة PV19 / PV18 — 4kW",
-      "en": "MUST PV19 / PV18 Series — 4kW"
+      "en": "MUST PV19 / PV18 series — 4kW"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "MUST"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
-        "value": "سلسلة PV19 / PV18 — 4kW"
+        "value": {"ar": "سلسلة PV19 / PV18 — 4kW", "en": "PV19 / PV18 series — 4kW"}
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "المحولات"
+        "value": {"ar": "المحولات", "en": "Inverters"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "أوف-جريد / هجين اقتصادي"
+        "value": {"ar": "أوف-جريد / هجين اقتصادي", "en": "Off-grid / economical hybrid"}
       }
     ],
     "image": "/images/photos/inverter-unit.jpg",
@@ -695,46 +783,53 @@ export const products: Product[] = [
     "id": "p12",
     "slug": "must-pv19-pv18-5kw",
     "brand": "MUST",
-    "model": "سلسلة PV19 / PV18 — 5kW",
+    "model": {"ar": "سلسلة PV19 / PV18 — 5kW", "en": "PV19 / PV18 series — 5kW"},
     "categoryId": "inverters",
     "subcategory": {
-      "ar": "أوف-جريد / هجين اقتصادي"
+      "ar": "أوف-جريد / هجين اقتصادي",
+      "en": "Off-grid / economical hybrid"
     },
     "name": {
       "ar": "MUST سلسلة PV19 / PV18 — 5kW",
-      "en": "MUST PV19 / PV18 Series — 5kW"
+      "en": "MUST PV19 / PV18 series — 5kW"
     },
     "overview": {
-      "ar": "48V"
+      "ar": "48V",
+      "en": "48V"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "MUST"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
-        "value": "سلسلة PV19 / PV18 — 5kW"
+        "value": {"ar": "سلسلة PV19 / PV18 — 5kW", "en": "PV19 / PV18 series — 5kW"}
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "المحولات"
+        "value": {"ar": "المحولات", "en": "Inverters"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "أوف-جريد / هجين اقتصادي"
+        "value": {"ar": "أوف-جريد / هجين اقتصادي", "en": "Off-grid / economical hybrid"}
       },
       {
         "label": {
-          "ar": "الجهد"
+          "ar": "الجهد",
+          "en": "Voltage"
         },
         "value": "48V"
       }
@@ -751,46 +846,53 @@ export const products: Product[] = [
     "id": "p13",
     "slug": "must-pv19-pv18-6kw",
     "brand": "MUST",
-    "model": "سلسلة PV19 / PV18 — 6kW",
+    "model": {"ar": "سلسلة PV19 / PV18 — 6kW", "en": "PV19 / PV18 series — 6kW"},
     "categoryId": "inverters",
     "subcategory": {
-      "ar": "أوف-جريد / هجين اقتصادي"
+      "ar": "أوف-جريد / هجين اقتصادي",
+      "en": "Off-grid / economical hybrid"
     },
     "name": {
       "ar": "MUST سلسلة PV19 / PV18 — 6kW",
-      "en": "MUST PV19 / PV18 Series — 6kW"
+      "en": "MUST PV19 / PV18 series — 6kW"
     },
     "overview": {
-      "ar": "48V"
+      "ar": "48V",
+      "en": "48V"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "MUST"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
-        "value": "سلسلة PV19 / PV18 — 6kW"
+        "value": {"ar": "سلسلة PV19 / PV18 — 6kW", "en": "PV19 / PV18 series — 6kW"}
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "المحولات"
+        "value": {"ar": "المحولات", "en": "Inverters"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "أوف-جريد / هجين اقتصادي"
+        "value": {"ar": "أوف-جريد / هجين اقتصادي", "en": "Off-grid / economical hybrid"}
       },
       {
         "label": {
-          "ar": "الجهد"
+          "ar": "الجهد",
+          "en": "Voltage"
         },
         "value": "48V"
       }
@@ -807,62 +909,72 @@ export const products: Product[] = [
     "model": "SE-F5 Pro-C — 5.12kWh",
     "categoryId": "batteries",
     "subcategory": {
-      "ar": "منزلي — جهد منخفض"
+      "ar": "منزلي — جهد منخفض",
+      "en": "Residential — low voltage"
     },
     "name": {
       "ar": "Deye SE-F5 Pro-C — 5.12kWh",
       "en": "Deye SE-F5 Pro-C — 5.12kWh"
     },
     "overview": {
-      "ar": "6000 دورة عند تفريغ 90%، تيار ذروة 150A، بلوتووث وواي فاي"
+      "ar": "6000 دورة عند تفريغ 90%، تيار ذروة 150A، بلوتووث وواي فاي",
+      "en": "6000 cycles at 90% discharge, 150A peak current, Bluetooth and Wi-Fi"
     },
     "benefits": [
       {
-        "ar": "بلوتووث وواي فاي"
+        "ar": "بلوتووث وواي فاي",
+        "en": "Bluetooth and Wi-Fi"
       }
     ],
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "Deye"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
         "value": "SE-F5 Pro-C — 5.12kWh"
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "بطاريات الليثيوم"
+        "value": {"ar": "بطاريات الليثيوم", "en": "Lithium batteries"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "منزلي — جهد منخفض"
+        "value": {"ar": "منزلي — جهد منخفض", "en": "Residential — low voltage"}
       },
       {
         "label": {
-          "ar": "دورات الشحن"
+          "ar": "دورات الشحن",
+          "en": "Charge cycles"
         },
-        "value": "6000 دورة عند تفريغ 90%"
+        "value": {"ar": "6000 دورة عند تفريغ 90%", "en": "6,000 cycles at 90% discharge"}
       },
       {
         "label": {
-          "ar": "التيار"
+          "ar": "التيار",
+          "en": "Current"
         },
-        "value": "تيار ذروة 150A"
+        "value": {"ar": "تيار ذروة 150A", "en": "150A peak current"}
       },
       {
         "label": {
-          "ar": "الاتصال"
+          "ar": "الاتصال",
+          "en": "Connectivity"
         },
-        "value": "بلوتووث وواي فاي"
+        "value": {"ar": "بلوتووث وواي فاي", "en": "Bluetooth and Wi-Fi"}
       }
     ],
     "image": "/images/photos/battery-storage.jpg",
@@ -877,50 +989,58 @@ export const products: Product[] = [
     "model": "SE-G5.1 Pro-B — 5.12kWh",
     "categoryId": "batteries",
     "subcategory": {
-      "ar": "منزلي — جهد منخفض"
+      "ar": "منزلي — جهد منخفض",
+      "en": "Residential — low voltage"
     },
     "name": {
       "ar": "Deye SE-G5.1 Pro-B — 5.12kWh",
       "en": "Deye SE-G5.1 Pro-B — 5.12kWh"
     },
     "overview": {
-      "ar": "ليثيوم منزلي قابل للتوسعة"
+      "ar": "ليثيوم منزلي قابل للتوسعة",
+      "en": "Expandable residential lithium"
     },
     "benefits": [
       {
-        "ar": "ليثيوم منزلي قابل للتوسعة"
+        "ar": "ليثيوم منزلي قابل للتوسعة",
+        "en": "Expandable residential lithium"
       }
     ],
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "Deye"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
         "value": "SE-G5.1 Pro-B — 5.12kWh"
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "بطاريات الليثيوم"
+        "value": {"ar": "بطاريات الليثيوم", "en": "Lithium batteries"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "منزلي — جهد منخفض"
+        "value": {"ar": "منزلي — جهد منخفض", "en": "Residential — low voltage"}
       },
       {
         "label": {
-          "ar": "الاستخدام"
+          "ar": "الاستخدام",
+          "en": "Use"
         },
-        "value": "ليثيوم منزلي قابل للتوسعة"
+        "value": {"ar": "ليثيوم منزلي قابل للتوسعة", "en": "Expandable home lithium"}
       }
     ],
     "image": "/images/photos/battery-storage.jpg",
@@ -935,45 +1055,52 @@ export const products: Product[] = [
     "model": "RW-F10.2 — 10.24kWh",
     "categoryId": "batteries",
     "subcategory": {
-      "ar": "منزلي — جهد منخفض"
+      "ar": "منزلي — جهد منخفض",
+      "en": "Residential — low voltage"
     },
     "name": {
       "ar": "Deye RW-F10.2 — 10.24kWh",
       "en": "Deye RW-F10.2 — 10.24kWh"
     },
     "overview": {
-      "ar": "ليثيوم منزلي"
+      "ar": "ليثيوم منزلي",
+      "en": "Residential lithium"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "Deye"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
         "value": "RW-F10.2 — 10.24kWh"
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "بطاريات الليثيوم"
+        "value": {"ar": "بطاريات الليثيوم", "en": "Lithium batteries"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "منزلي — جهد منخفض"
+        "value": {"ar": "منزلي — جهد منخفض", "en": "Residential — low voltage"}
       },
       {
         "label": {
-          "ar": "الاستخدام"
+          "ar": "الاستخدام",
+          "en": "Use"
         },
-        "value": "ليثيوم منزلي"
+        "value": {"ar": "ليثيوم منزلي", "en": "Home lithium"}
       }
     ],
     "image": "/images/photos/battery-storage.jpg",
@@ -988,45 +1115,52 @@ export const products: Product[] = [
     "model": "RW-G10.6 — 10.6kWh",
     "categoryId": "batteries",
     "subcategory": {
-      "ar": "منزلي — جهد منخفض"
+      "ar": "منزلي — جهد منخفض",
+      "en": "Residential — low voltage"
     },
     "name": {
       "ar": "Deye RW-G10.6 — 10.6kWh",
       "en": "Deye RW-G10.6 — 10.6kWh"
     },
     "overview": {
-      "ar": "ليثيوم منزلي"
+      "ar": "ليثيوم منزلي",
+      "en": "Residential lithium"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "Deye"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
         "value": "RW-G10.6 — 10.6kWh"
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "بطاريات الليثيوم"
+        "value": {"ar": "بطاريات الليثيوم", "en": "Lithium batteries"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "منزلي — جهد منخفض"
+        "value": {"ar": "منزلي — جهد منخفض", "en": "Residential — low voltage"}
       },
       {
         "label": {
-          "ar": "الاستخدام"
+          "ar": "الاستخدام",
+          "en": "Use"
         },
-        "value": "ليثيوم منزلي"
+        "value": {"ar": "ليثيوم منزلي", "en": "Home lithium"}
       }
     ],
     "image": "/images/photos/battery-storage.jpg",
@@ -1041,45 +1175,52 @@ export const products: Product[] = [
     "model": "SE-F12 / SE-F16",
     "categoryId": "batteries",
     "subcategory": {
-      "ar": "منزلي — جهد منخفض"
+      "ar": "منزلي — جهد منخفض",
+      "en": "Residential — low voltage"
     },
     "name": {
       "ar": "Deye SE-F12 / SE-F16",
       "en": "Deye SE-F12 / SE-F16"
     },
     "overview": {
-      "ar": "سعات أكبر للمنازل الكبيرة"
+      "ar": "سعات أكبر للمنازل الكبيرة",
+      "en": "Larger capacities for big homes"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "Deye"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
         "value": "SE-F12 / SE-F16"
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "بطاريات الليثيوم"
+        "value": {"ar": "بطاريات الليثيوم", "en": "Lithium batteries"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "منزلي — جهد منخفض"
+        "value": {"ar": "منزلي — جهد منخفض", "en": "Residential — low voltage"}
       },
       {
         "label": {
-          "ar": "الاستخدام"
+          "ar": "الاستخدام",
+          "en": "Use"
         },
-        "value": "سعات أكبر للمنازل الكبيرة"
+        "value": {"ar": "سعات أكبر للمنازل الكبيرة", "en": "Larger capacities for big homes"}
       }
     ],
     "image": "/images/photos/battery-storage.jpg",
@@ -1097,45 +1238,52 @@ export const products: Product[] = [
     "model": "BOS-G — 15.36 –61.44kWh",
     "categoryId": "batteries",
     "subcategory": {
-      "ar": "تجاري — جهد عالٍ"
+      "ar": "تجاري — جهد عالٍ",
+      "en": "Commercial — high voltage"
     },
     "name": {
       "ar": "Deye BOS-G — 15.36 –61.44kWh",
       "en": "Deye BOS-G — 15.36 –61.44kWh"
     },
     "overview": {
-      "ar": "رفوف بطاريات جهد عالٍ للمنشآت"
+      "ar": "رفوف بطاريات جهد عالٍ للمنشآت",
+      "en": "High-voltage battery racks for facilities"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "Deye"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
         "value": "BOS-G — 15.36 –61.44kWh"
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "بطاريات الليثيوم"
+        "value": {"ar": "بطاريات الليثيوم", "en": "Lithium batteries"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "تجاري — جهد عالٍ"
+        "value": {"ar": "تجاري — جهد عالٍ", "en": "Commercial — high voltage"}
       },
       {
         "label": {
-          "ar": "مواصفات"
+          "ar": "مواصفات",
+          "en": "Specifications"
         },
-        "value": "رفوف بطاريات جهد عالٍ للمنشآت"
+        "value": {"ar": "رفوف بطاريات جهد عالٍ للمنشآت", "en": "High-voltage battery racks for facilities"}
       }
     ],
     "image": "/images/photos/battery-storage.jpg",
@@ -1150,45 +1298,52 @@ export const products: Product[] = [
     "model": "BOS-G Pro / BOS-A / BOS-W",
     "categoryId": "batteries",
     "subcategory": {
-      "ar": "تجاري — جهد عالٍ"
+      "ar": "تجاري — جهد عالٍ",
+      "en": "Commercial — high voltage"
     },
     "name": {
       "ar": "Deye BOS-G Pro / BOS-A / BOS-W",
       "en": "Deye BOS-G Pro / BOS-A / BOS-W"
     },
     "overview": {
-      "ar": "أنظمة تخزين تجارية"
+      "ar": "أنظمة تخزين تجارية",
+      "en": "Commercial storage systems"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "Deye"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
         "value": "BOS-G Pro / BOS-A / BOS-W"
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "بطاريات الليثيوم"
+        "value": {"ar": "بطاريات الليثيوم", "en": "Lithium batteries"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "تجاري — جهد عالٍ"
+        "value": {"ar": "تجاري — جهد عالٍ", "en": "Commercial — high voltage"}
       },
       {
         "label": {
-          "ar": "مواصفات"
+          "ar": "مواصفات",
+          "en": "Specifications"
         },
-        "value": "أنظمة تخزين تجارية"
+        "value": {"ar": "أنظمة تخزين تجارية", "en": "Commercial storage systems"}
       }
     ],
     "image": "/images/photos/battery-storage.jpg",
@@ -1203,45 +1358,52 @@ export const products: Product[] = [
     "model": "GE-F60 — 61.44kWh",
     "categoryId": "batteries",
     "subcategory": {
-      "ar": "تجاري — جهد عالٍ"
+      "ar": "تجاري — جهد عالٍ",
+      "en": "Commercial — high voltage"
     },
     "name": {
       "ar": "Deye GE-F60 — 61.44kWh",
       "en": "Deye GE-F60 — 61.44kWh"
     },
     "overview": {
-      "ar": "خزانة تخزين تجارية"
+      "ar": "خزانة تخزين تجارية",
+      "en": "Commercial storage cabinet"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "Deye"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
         "value": "GE-F60 — 61.44kWh"
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "بطاريات الليثيوم"
+        "value": {"ar": "بطاريات الليثيوم", "en": "Lithium batteries"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "تجاري — جهد عالٍ"
+        "value": {"ar": "تجاري — جهد عالٍ", "en": "Commercial — high voltage"}
       },
       {
         "label": {
-          "ar": "مواصفات"
+          "ar": "مواصفات",
+          "en": "Specifications"
         },
-        "value": "خزانة تخزين تجارية"
+        "value": {"ar": "خزانة تخزين تجارية", "en": "Commercial storage cabinet"}
       }
     ],
     "image": "/images/photos/battery-storage.jpg",
@@ -1256,45 +1418,52 @@ export const products: Product[] = [
     "model": "LM PACK-2.5 / 5 / 10",
     "categoryId": "batteries",
     "subcategory": {
-      "ar": "منزلي"
+      "ar": "منزلي",
+      "en": "Residential"
     },
     "name": {
       "ar": "Shenzhen Kexin LM PACK-2.5 / 5 / 10",
       "en": "Shenzhen Kexin LM PACK-2.5 / 5 / 10"
     },
     "overview": {
-      "ar": "حزم ليثيوم منزلية"
+      "ar": "حزم ليثيوم منزلية",
+      "en": "Residential lithium packs"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "Shenzhen Kexin"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
         "value": "LM PACK-2.5 / 5 / 10"
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "بطاريات الليثيوم"
+        "value": {"ar": "بطاريات الليثيوم", "en": "Lithium batteries"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "منزلي"
+        "value": {"ar": "منزلي", "en": "Residential"}
       },
       {
         "label": {
-          "ar": "الاستخدام"
+          "ar": "الاستخدام",
+          "en": "Use"
         },
-        "value": "حزم ليثيوم منزلية"
+        "value": {"ar": "حزم ليثيوم منزلية", "en": "Home lithium packs"}
       }
     ],
     "image": "/images/photos/battery-storage.jpg",
@@ -1309,45 +1478,52 @@ export const products: Product[] = [
     "model": "LM BAT-10 / 15 / 20",
     "categoryId": "batteries",
     "subcategory": {
-      "ar": "منزلي"
+      "ar": "منزلي",
+      "en": "Residential"
     },
     "name": {
       "ar": "Shenzhen Kexin LM BAT-10 / 15 / 20",
       "en": "Shenzhen Kexin LM BAT-10 / 15 / 20"
     },
     "overview": {
-      "ar": "بطاريات منزلية"
+      "ar": "بطاريات منزلية",
+      "en": "Residential batteries"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "Shenzhen Kexin"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
         "value": "LM BAT-10 / 15 / 20"
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "بطاريات الليثيوم"
+        "value": {"ar": "بطاريات الليثيوم", "en": "Lithium batteries"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "منزلي"
+        "value": {"ar": "منزلي", "en": "Residential"}
       },
       {
         "label": {
-          "ar": "الاستخدام"
+          "ar": "الاستخدام",
+          "en": "Use"
         },
-        "value": "بطاريات منزلية"
+        "value": {"ar": "بطاريات منزلية", "en": "Home batteries"}
       }
     ],
     "image": "/images/photos/battery-storage.jpg",
@@ -1359,48 +1535,55 @@ export const products: Product[] = [
     "id": "p24",
     "slug": "efore-battery-10kwh",
     "brand": "EFORE",
-    "model": "بطارية EFORE — 10kWh",
+    "model": {"ar": "بطارية EFORE — 10kWh", "en": "EFORE battery — 10kWh"},
     "categoryId": "batteries",
     "subcategory": {
-      "ar": "منزلي"
+      "ar": "منزلي",
+      "en": "Residential"
     },
     "name": {
       "ar": "EFORE بطارية EFORE — 10kWh",
       "en": "EFORE Battery 10kWh"
     },
     "overview": {
-      "ar": "ليثيوم منزلي"
+      "ar": "ليثيوم منزلي",
+      "en": "Residential lithium"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "EFORE"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
-        "value": "بطارية EFORE — 10kWh"
+        "value": {"ar": "بطارية EFORE — 10kWh", "en": "EFORE battery — 10kWh"}
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "بطاريات الليثيوم"
+        "value": {"ar": "بطاريات الليثيوم", "en": "Lithium batteries"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "منزلي"
+        "value": {"ar": "منزلي", "en": "Residential"}
       },
       {
         "label": {
-          "ar": "الاستخدام"
+          "ar": "الاستخدام",
+          "en": "Use"
         },
-        "value": "ليثيوم منزلي"
+        "value": {"ar": "ليثيوم منزلي", "en": "Home lithium"}
       }
     ],
     "image": "/images/photos/battery-storage.jpg",
@@ -1415,45 +1598,52 @@ export const products: Product[] = [
     "model": "RESS — 16kWh",
     "categoryId": "batteries",
     "subcategory": {
-      "ar": "منزلي"
+      "ar": "منزلي",
+      "en": "Residential"
     },
     "name": {
       "ar": "EFORE RESS — 16kWh",
       "en": "EFORE RESS — 16kWh"
     },
     "overview": {
-      "ar": "نظام تخزين منزلي/تجاري خفيف"
+      "ar": "نظام تخزين منزلي/تجاري خفيف",
+      "en": "Light residential/commercial storage system"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "EFORE"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
         "value": "RESS — 16kWh"
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "بطاريات الليثيوم"
+        "value": {"ar": "بطاريات الليثيوم", "en": "Lithium batteries"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "منزلي"
+        "value": {"ar": "منزلي", "en": "Residential"}
       },
       {
         "label": {
-          "ar": "الاستخدام"
+          "ar": "الاستخدام",
+          "en": "Use"
         },
-        "value": "نظام تخزين منزلي/تجاري خفيف"
+        "value": {"ar": "نظام تخزين منزلي/تجاري خفيف", "en": "Light home/commercial storage system"}
       }
     ],
     "image": "/images/photos/battery-storage.jpg",
@@ -1468,56 +1658,65 @@ export const products: Product[] = [
     "model": "LM-AIO — 10 –30kWh",
     "categoryId": "batteries",
     "subcategory": {
-      "ar": "الكل في واحد"
+      "ar": "الكل في واحد",
+      "en": "All-in-one"
     },
     "name": {
       "ar": "Shenzhen Kexin LM-AIO — 10 –30kWh",
       "en": "Shenzhen Kexin LM-AIO — 10 –30kWh"
     },
     "overview": {
-      "ar": "انفرتر وبطارية في وحدة واحدة، تصميم قابل للتكديس"
+      "ar": "انفرتر وبطارية في وحدة واحدة، تصميم قابل للتكديس",
+      "en": "Inverter and battery in one unit, stackable design"
     },
     "benefits": [
       {
-        "ar": "تصميم قابل للتكديس"
+        "ar": "تصميم قابل للتكديس",
+        "en": "Stackable design"
       }
     ],
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "Shenzhen Kexin"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
         "value": "LM-AIO — 10 –30kWh"
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "بطاريات الليثيوم"
+        "value": {"ar": "بطاريات الليثيوم", "en": "Lithium batteries"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "الكل في واحد"
+        "value": {"ar": "الكل في واحد", "en": "All in one"}
       },
       {
         "label": {
-          "ar": "البطارية"
+          "ar": "البطارية",
+          "en": "Battery"
         },
-        "value": "انفرتر وبطارية في وحدة واحدة"
+        "value": {"ar": "انفرتر وبطارية في وحدة واحدة", "en": "Inverter and battery in one unit"}
       },
       {
         "label": {
-          "ar": "مواصفات"
+          "ar": "مواصفات",
+          "en": "Specifications"
         },
-        "value": "تصميم قابل للتكديس"
+        "value": {"ar": "تصميم قابل للتكديس", "en": "Stackable design"}
       }
     ],
     "image": "/images/photos/battery-storage.jpg",
@@ -1529,48 +1728,55 @@ export const products: Product[] = [
     "id": "p27",
     "slug": "efore-eh-60-130-f-eh-96-209-f",
     "brand": "EFORE",
-    "model": "خزائن EH 60~130-F / EH 96~209-F",
+    "model": {"ar": "خزائن EH 60~130-F / EH 96~209-F", "en": "EH 60~130-F / EH 96~209-F cabinets"},
     "categoryId": "batteries",
     "subcategory": {
-      "ar": "تجاري وصناعي"
+      "ar": "تجاري وصناعي",
+      "en": "Commercial and industrial"
     },
     "name": {
       "ar": "EFORE خزائن EH 60~130-F / EH 96~209-F",
-      "en": "EFORE EH 60~130-F / EH 96~209-F Cabinets"
+      "en": "EFORE EH 60~130-F / EH 96~209-F cabinets"
     },
     "overview": {
-      "ar": "تخزين تجاري وصناعي"
+      "ar": "تخزين تجاري وصناعي",
+      "en": "Commercial and industrial storage"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "EFORE"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
-        "value": "خزائن EH 60~130-F / EH 96~209-F"
+        "value": {"ar": "خزائن EH 60~130-F / EH 96~209-F", "en": "EH 60~130-F / EH 96~209-F cabinets"}
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "بطاريات الليثيوم"
+        "value": {"ar": "بطاريات الليثيوم", "en": "Lithium batteries"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "تجاري وصناعي"
+        "value": {"ar": "تجاري وصناعي", "en": "Commercial and industrial"}
       },
       {
         "label": {
-          "ar": "مواصفات"
+          "ar": "مواصفات",
+          "en": "Specifications"
         },
-        "value": "تخزين تجاري وصناعي"
+        "value": {"ar": "تخزين تجاري وصناعي", "en": "Commercial and industrial storage"}
       }
     ],
     "image": "/images/photos/battery-storage.jpg",
@@ -1582,68 +1788,79 @@ export const products: Product[] = [
     "id": "p28",
     "slug": "efore-outdoor-ess-system-145kwh-2-1mwh",
     "brand": "EFORE",
-    "model": "نظام خارجي ESS — 145kWh–2.1MWh",
+    "model": {"ar": "نظام خارجي ESS — 145kWh–2.1MWh", "en": "Outdoor ESS system — 145kWh–2.1MWh"},
     "categoryId": "batteries",
     "subcategory": {
-      "ar": "تجاري وصناعي"
+      "ar": "تجاري وصناعي",
+      "en": "Commercial and industrial"
     },
     "name": {
       "ar": "EFORE نظام خارجي ESS — 145kWh–2.1MWh",
       "en": "EFORE Outdoor ESS System 145kWh–2.1MWh"
     },
     "overview": {
-      "ar": "IP65، تبريد تلقائي، نظام إطفاء حريق"
+      "ar": "IP65، تبريد تلقائي، نظام إطفاء حريق",
+      "en": "IP65, automatic cooling, fire suppression system"
     },
     "benefits": [
       {
-        "ar": "تبريد تلقائي"
+        "ar": "تبريد تلقائي",
+        "en": "Automatic cooling"
       },
       {
-        "ar": "نظام إطفاء حريق"
+        "ar": "نظام إطفاء حريق",
+        "en": "Fire suppression system"
       }
     ],
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "EFORE"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
-        "value": "نظام خارجي ESS — 145kWh–2.1MWh"
+        "value": {"ar": "نظام خارجي ESS — 145kWh–2.1MWh", "en": "Outdoor ESS system — 145kWh–2.1MWh"}
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "بطاريات الليثيوم"
+        "value": {"ar": "بطاريات الليثيوم", "en": "Lithium batteries"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "تجاري وصناعي"
+        "value": {"ar": "تجاري وصناعي", "en": "Commercial and industrial"}
       },
       {
         "label": {
-          "ar": "الحماية"
+          "ar": "الحماية",
+          "en": "Protection"
         },
         "value": "IP65"
       },
       {
         "label": {
-          "ar": "السلامة"
+          "ar": "السلامة",
+          "en": "Safety"
         },
-        "value": "تبريد تلقائي"
+        "value": {"ar": "تبريد تلقائي", "en": "Automatic cooling"}
       },
       {
         "label": {
-          "ar": "السلامة"
+          "ar": "السلامة",
+          "en": "Safety"
         },
-        "value": "نظام إطفاء حريق"
+        "value": {"ar": "نظام إطفاء حريق", "en": "Fire suppression system"}
       }
     ],
     "image": "/images/photos/battery-storage.jpg",
@@ -1661,45 +1878,52 @@ export const products: Product[] = [
     "model": "MustPower — 200Ah / 12V",
     "categoryId": "batteries",
     "subcategory": {
-      "ar": "كربون-رصاص"
+      "ar": "كربون-رصاص",
+      "en": "Carbon-lead"
     },
     "name": {
       "ar": "MUST MustPower — 200Ah / 12V",
       "en": "MUST MustPower — 200Ah / 12V"
     },
     "overview": {
-      "ar": "3600 دورة عند تفريغ 50%"
+      "ar": "3600 دورة عند تفريغ 50%",
+      "en": "3600 cycles at 50% discharge"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "MUST"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
         "value": "MustPower — 200Ah / 12V"
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "بطاريات تقليدية"
+        "value": {"ar": "بطاريات تقليدية", "en": "Conventional batteries"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "كربون-رصاص"
+        "value": {"ar": "كربون-رصاص", "en": "Carbon-lead"}
       },
       {
         "label": {
-          "ar": "دورات الشحن"
+          "ar": "دورات الشحن",
+          "en": "Charge cycles"
         },
-        "value": "3600 دورة عند تفريغ 50%"
+        "value": {"ar": "3600 دورة عند تفريغ 50%", "en": "3,600 cycles at 50% discharge"}
       }
     ],
     "image": "/images/photos/battery-storage.jpg",
@@ -1717,45 +1941,52 @@ export const products: Product[] = [
     "model": "Q.PEAK / Q.PLUS / Q.POWER / Q.PRIME",
     "categoryId": "panels",
     "subcategory": {
-      "ar": "ألواح سكنية وتجارية"
+      "ar": "ألواح سكنية وتجارية",
+      "en": "Residential and commercial panels"
     },
     "name": {
       "ar": "Hanwha Q-Cells Q.PEAK / Q.PLUS / Q.POWER / Q.PRIME",
       "en": "Hanwha Q-Cells Q.PEAK / Q.PLUS / Q.POWER / Q.PRIME"
     },
     "overview": {
-      "ar": "مونو PERC وTOPCon ونوع N — 395 إلى 675Wp"
+      "ar": "مونو PERC وTOPCon ونوع N — 395 إلى 675Wp",
+      "en": "Mono PERC and TOPCon, N-type — 395 to 675Wp"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "Hanwha Q-Cells"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
         "value": "Q.PEAK / Q.PLUS / Q.POWER / Q.PRIME"
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "الألواح الشمسية"
+        "value": {"ar": "الألواح الشمسية", "en": "Solar panels"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "ألواح سكنية وتجارية"
+        "value": {"ar": "ألواح سكنية وتجارية", "en": "Residential and commercial panels"}
       },
       {
         "label": {
-          "ar": "القدرة"
+          "ar": "القدرة",
+          "en": "Power"
         },
-        "value": "مونو PERC وTOPCon ونوع N — 395 إلى 675Wp"
+        "value": {"ar": "مونو PERC وTOPCon ونوع N — 395 إلى 675Wp", "en": "Mono PERC, TOPCon and N-type — 395 to 675Wp"}
       }
     ],
     "featured": false,
@@ -1769,45 +2000,52 @@ export const products: Product[] = [
     "model": "JNP550L — 0.55 –4kW",
     "categoryId": "pumps",
     "subcategory": {
-      "ar": "محولات مضخات هجينة AC"
+      "ar": "محولات مضخات هجينة AC",
+      "en": "Hybrid AC pump inverters"
     },
     "name": {
       "ar": "Jntech JNP550L — 0.55 –4kW",
       "en": "Jntech JNP550L — 0.55 –4kW"
     },
     "overview": {
-      "ar": "محول مضخة هجين"
+      "ar": "محول مضخة هجين",
+      "en": "Hybrid pump inverter"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "Jntech"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
         "value": "JNP550L — 0.55 –4kW"
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "المضخات الشمسية"
+        "value": {"ar": "المضخات الشمسية", "en": "Solar pumps"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "محولات مضخات هجينة AC"
+        "value": {"ar": "محولات مضخات هجينة AC", "en": "AC hybrid pump inverters"}
       },
       {
         "label": {
-          "ar": "النوع"
+          "ar": "النوع",
+          "en": "Type"
         },
-        "value": "محول مضخة هجين"
+        "value": {"ar": "محول مضخة هجين", "en": "Hybrid pump inverter"}
       }
     ],
     "image": "/images/photos/pump-flow.jpg",
@@ -1822,45 +2060,52 @@ export const products: Product[] = [
     "model": "JNP2K2H — 2.2 –7.5kW",
     "categoryId": "pumps",
     "subcategory": {
-      "ar": "محولات مضخات هجينة AC"
+      "ar": "محولات مضخات هجينة AC",
+      "en": "Hybrid AC pump inverters"
     },
     "name": {
       "ar": "Jntech JNP2K2H — 2.2 –7.5kW",
       "en": "Jntech JNP2K2H — 2.2 –7.5kW"
     },
     "overview": {
-      "ar": "محول مضخة هجين"
+      "ar": "محول مضخة هجين",
+      "en": "Hybrid pump inverter"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "Jntech"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
         "value": "JNP2K2H — 2.2 –7.5kW"
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "المضخات الشمسية"
+        "value": {"ar": "المضخات الشمسية", "en": "Solar pumps"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "محولات مضخات هجينة AC"
+        "value": {"ar": "محولات مضخات هجينة AC", "en": "AC hybrid pump inverters"}
       },
       {
         "label": {
-          "ar": "النوع"
+          "ar": "النوع",
+          "en": "Type"
         },
-        "value": "محول مضخة هجين"
+        "value": {"ar": "محول مضخة هجين", "en": "Hybrid pump inverter"}
       }
     ],
     "image": "/images/photos/pump-flow.jpg",
@@ -1875,45 +2120,52 @@ export const products: Product[] = [
     "model": "JNP11KH — 11 –18.5kW",
     "categoryId": "pumps",
     "subcategory": {
-      "ar": "محولات مضخات هجينة AC"
+      "ar": "محولات مضخات هجينة AC",
+      "en": "Hybrid AC pump inverters"
     },
     "name": {
       "ar": "Jntech JNP11KH — 11 –18.5kW",
       "en": "Jntech JNP11KH — 11 –18.5kW"
     },
     "overview": {
-      "ar": "محول مضخة هجين"
+      "ar": "محول مضخة هجين",
+      "en": "Hybrid pump inverter"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "Jntech"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
         "value": "JNP11KH — 11 –18.5kW"
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "المضخات الشمسية"
+        "value": {"ar": "المضخات الشمسية", "en": "Solar pumps"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "محولات مضخات هجينة AC"
+        "value": {"ar": "محولات مضخات هجينة AC", "en": "AC hybrid pump inverters"}
       },
       {
         "label": {
-          "ar": "النوع"
+          "ar": "النوع",
+          "en": "Type"
         },
-        "value": "محول مضخة هجين"
+        "value": {"ar": "محول مضخة هجين", "en": "Hybrid pump inverter"}
       }
     ],
     "image": "/images/photos/pump-flow.jpg",
@@ -1928,45 +2180,52 @@ export const products: Product[] = [
     "model": "JNP22KH — 22 –55kW",
     "categoryId": "pumps",
     "subcategory": {
-      "ar": "محولات مضخات هجينة AC"
+      "ar": "محولات مضخات هجينة AC",
+      "en": "Hybrid AC pump inverters"
     },
     "name": {
       "ar": "Jntech JNP22KH — 22 –55kW",
       "en": "Jntech JNP22KH — 22 –55kW"
     },
     "overview": {
-      "ar": "محول مضخة هجين"
+      "ar": "محول مضخة هجين",
+      "en": "Hybrid pump inverter"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "Jntech"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
         "value": "JNP22KH — 22 –55kW"
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "المضخات الشمسية"
+        "value": {"ar": "المضخات الشمسية", "en": "Solar pumps"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "محولات مضخات هجينة AC"
+        "value": {"ar": "محولات مضخات هجينة AC", "en": "AC hybrid pump inverters"}
       },
       {
         "label": {
-          "ar": "النوع"
+          "ar": "النوع",
+          "en": "Type"
         },
-        "value": "محول مضخة هجين"
+        "value": {"ar": "محول مضخة هجين", "en": "Hybrid pump inverter"}
       }
     ],
     "image": "/images/photos/pump-flow.jpg",
@@ -1981,45 +2240,52 @@ export const products: Product[] = [
     "model": "JNP75KH — 75 –132kW",
     "categoryId": "pumps",
     "subcategory": {
-      "ar": "محولات مضخات هجينة AC"
+      "ar": "محولات مضخات هجينة AC",
+      "en": "Hybrid AC pump inverters"
     },
     "name": {
       "ar": "Jntech JNP75KH — 75 –132kW",
       "en": "Jntech JNP75KH — 75 –132kW"
     },
     "overview": {
-      "ar": "محول مضخة هجين"
+      "ar": "محول مضخة هجين",
+      "en": "Hybrid pump inverter"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "Jntech"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
         "value": "JNP75KH — 75 –132kW"
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "المضخات الشمسية"
+        "value": {"ar": "المضخات الشمسية", "en": "Solar pumps"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "محولات مضخات هجينة AC"
+        "value": {"ar": "محولات مضخات هجينة AC", "en": "AC hybrid pump inverters"}
       },
       {
         "label": {
-          "ar": "النوع"
+          "ar": "النوع",
+          "en": "Type"
         },
-        "value": "محول مضخة هجين"
+        "value": {"ar": "محول مضخة هجين", "en": "Hybrid pump inverter"}
       }
     ],
     "image": "/images/photos/pump-flow.jpg",
@@ -2034,45 +2300,52 @@ export const products: Product[] = [
     "model": "JNP160KH — 160 –350kW",
     "categoryId": "pumps",
     "subcategory": {
-      "ar": "محولات مضخات هجينة AC"
+      "ar": "محولات مضخات هجينة AC",
+      "en": "Hybrid AC pump inverters"
     },
     "name": {
       "ar": "Jntech JNP160KH — 160 –350kW",
       "en": "Jntech JNP160KH — 160 –350kW"
     },
     "overview": {
-      "ar": "محول مضخة هجين للمشاريع الكبيرة"
+      "ar": "محول مضخة هجين للمشاريع الكبيرة",
+      "en": "Hybrid pump inverter for large projects"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "Jntech"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
         "value": "JNP160KH — 160 –350kW"
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "المضخات الشمسية"
+        "value": {"ar": "المضخات الشمسية", "en": "Solar pumps"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "محولات مضخات هجينة AC"
+        "value": {"ar": "محولات مضخات هجينة AC", "en": "AC hybrid pump inverters"}
       },
       {
         "label": {
-          "ar": "النوع"
+          "ar": "النوع",
+          "en": "Type"
         },
-        "value": "محول مضخة هجين للمشاريع الكبيرة"
+        "value": {"ar": "محول مضخة هجين للمشاريع الكبيرة", "en": "Hybrid pump inverter for large projects"}
       }
     ],
     "image": "/images/photos/pump-flow.jpg",
@@ -2084,48 +2357,55 @@ export const products: Product[] = [
     "id": "p37",
     "slug": "jntech-submersible-surface-pumps-370w-22kw",
     "brand": "Jntech",
-    "model": "مضخات غاطسة وسطحية — 370W–22kW",
+    "model": {"ar": "مضخات غاطسة وسطحية — 370W–22kW", "en": "Submersible and surface pumps — 370W–22kW"},
     "categoryId": "pumps",
     "subcategory": {
-      "ar": "مضخات DC / BLDC"
+      "ar": "مضخات DC / BLDC",
+      "en": "DC / BLDC pumps"
     },
     "name": {
       "ar": "Jntech مضخات غاطسة وسطحية — 370W–22kW",
       "en": "Jntech Submersible and Surface Pumps 370W–22kW"
     },
     "overview": {
-      "ar": "أنظمة ضخ وري وآبار كاملة"
+      "ar": "أنظمة ضخ وري وآبار كاملة",
+      "en": "Complete pumping, irrigation, and well systems"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "Jntech"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
-        "value": "مضخات غاطسة وسطحية — 370W–22kW"
+        "value": {"ar": "مضخات غاطسة وسطحية — 370W–22kW", "en": "Submersible and surface pumps — 370W–22kW"}
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "المضخات الشمسية"
+        "value": {"ar": "المضخات الشمسية", "en": "Solar pumps"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "مضخات DC / BLDC"
+        "value": {"ar": "مضخات DC / BLDC", "en": "DC / BLDC pumps"}
       },
       {
         "label": {
-          "ar": "مواصفات"
+          "ar": "مواصفات",
+          "en": "Specifications"
         },
-        "value": "أنظمة ضخ وري وآبار كاملة"
+        "value": {"ar": "أنظمة ضخ وري وآبار كاملة", "en": "Complete pumping, irrigation and well systems"}
       }
     ],
     "image": "/images/photos/pump-flow.jpg",
@@ -2137,46 +2417,53 @@ export const products: Product[] = [
     "id": "p38",
     "slug": "must-pc18-30-40-60-80-100a",
     "brand": "MUST",
-    "model": "سلسلة PC18 — 30/40/60/80/100A",
+    "model": {"ar": "سلسلة PC18 — 30/40/60/80/100A", "en": "PC18 series — 30/40/60/80/100A"},
     "categoryId": "controllers",
     "subcategory": {
-      "ar": "MPPT"
+      "ar": "MPPT",
+      "en": "MPPT"
     },
     "name": {
       "ar": "MUST سلسلة PC18 — 30/40/60/80/100A",
-      "en": "MUST PC18 Series — 30/40/60/80/100A"
+      "en": "MUST PC18 series — 30/40/60/80/100A"
     },
     "overview": {
-      "ar": "12/24/36/48V"
+      "ar": "12/24/36/48V",
+      "en": "12/24/36/48V"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "MUST"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
-        "value": "سلسلة PC18 — 30/40/60/80/100A"
+        "value": {"ar": "سلسلة PC18 — 30/40/60/80/100A", "en": "PC18 series — 30/40/60/80/100A"}
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "منظمات الشحن"
+        "value": {"ar": "منظمات الشحن", "en": "Charge controllers"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
         "value": "MPPT"
       },
       {
         "label": {
-          "ar": "الجهد"
+          "ar": "الجهد",
+          "en": "Voltage"
         },
         "value": "12/24/36/48V"
       }
@@ -2193,45 +2480,52 @@ export const products: Product[] = [
     "model": "—",
     "categoryId": "cameras",
     "subcategory": {
-      "ar": "كاميرات وأنظمة أمن"
+      "ar": "كاميرات وأنظمة أمن",
+      "en": "Cameras and security systems"
     },
     "name": {
       "ar": "Wisenet —",
       "en": "Wisenet —"
     },
     "overview": {
-      "ar": "لا موديلات مؤكدة"
+      "ar": "لا موديلات مؤكدة",
+      "en": "No confirmed models"
     },
     "specs": [
       {
         "label": {
-          "ar": "العلامة التجارية"
+          "ar": "العلامة التجارية",
+          "en": "Brand"
         },
         "value": "Wisenet"
       },
       {
         "label": {
-          "ar": "الموديل"
+          "ar": "الموديل",
+          "en": "Model"
         },
         "value": "—"
       },
       {
         "label": {
-          "ar": "الفئة"
+          "ar": "الفئة",
+          "en": "Category"
         },
-        "value": "كاميرات المراقبة"
+        "value": {"ar": "كاميرات المراقبة", "en": "Surveillance cameras"}
       },
       {
         "label": {
-          "ar": "القسم الفرعي"
+          "ar": "القسم الفرعي",
+          "en": "Subcategory"
         },
-        "value": "كاميرات وأنظمة أمن"
+        "value": {"ar": "كاميرات وأنظمة أمن", "en": "Cameras and security systems"}
       },
       {
         "label": {
-          "ar": "مواصفات"
+          "ar": "مواصفات",
+          "en": "Specifications"
         },
-        "value": "لا موديلات مؤكدة"
+        "value": {"ar": "لا موديلات مؤكدة", "en": "No confirmed models"}
       }
     ],
     "featured": false,

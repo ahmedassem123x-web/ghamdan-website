@@ -37,7 +37,12 @@ export type SourceStatus =
 
 export interface SpecRow {
   label: LocalizedString;
-  value: string;
+  /**
+   * Plain strings are language-neutral values (brand names, model numbers,
+   * bare figures) rendered verbatim; LocalizedString values are translated
+   * via t() — en where provided, zh falls back to ar per CI-09.
+   */
+  value: string | LocalizedString;
 }
 
 export interface Product {
@@ -46,7 +51,8 @@ export interface Product {
   /** ASCII URL slug, derived from brand + model. */
   slug: string;
   brand: string;
-  model: string;
+  /** Model designation: plain string when language-neutral (e.g. "SUN-SG04LP1 — 6kW"), LocalizedString when it carries Arabic wording (e.g. series names). Render via t() when it is an object. */
+  model: string | LocalizedString;
   categoryId: CategoryId;
   subcategory: LocalizedString;
   name: LocalizedString;
@@ -97,8 +103,8 @@ export interface Category {
   note: LocalizedString;
   icon: string;
   priority: "high" | "medium" | "low";
-  /** Arabic subcategories, from xlsx sheet "ملخص الأقسام". */
-  subcategories: string[];
+  /** Localised subcategories, from xlsx sheet "ملخص الأقسام". */
+  subcategories: LocalizedString[];
   brands: string[];
   /** Computed from products.ts (published products in this category). */
   publishedCount: number;

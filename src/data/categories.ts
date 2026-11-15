@@ -12,9 +12,8 @@
  * has only the pending p39.
  */
 import type { Category } from "./types";
-import { products } from "./products";
 
-const rawCategories: Omit<Category, "publishedCount">[] = [
+export const categories: Category[] = [
   {
     "id": "inverters",
     "name": {
@@ -23,20 +22,34 @@ const rawCategories: Omit<Category, "publishedCount">[] = [
       "zh": "混合逆变器"
     },
     "note": {
-      "ar": "قلب منظومة الطاقة — أحادي وثلاثي الطور، جهد منخفض وعالٍ"
+      "ar": "قلب منظومة الطاقة — أحادي وثلاثي الطور، جهد منخفض وعالٍ",
+      "en": "The heart of the energy system — single- and three-phase, low and high voltage"
     },
     "icon": "zap",
     "priority": "high",
     "subcategories": [
-      "أحادي الطور جهد منخفض",
-      "ثلاثي الطور جهد منخفض",
-      "ثلاثي الطور جهد عالٍ",
-      "أوف-جريد"
+      {
+        "ar": "أحادي الطور جهد منخفض",
+        "en": "Single-phase, low voltage"
+      },
+      {
+        "ar": "ثلاثي الطور جهد منخفض",
+        "en": "Three-phase, low voltage"
+      },
+      {
+        "ar": "ثلاثي الطور جهد عالٍ",
+        "en": "Three-phase, high voltage"
+      },
+      {
+        "ar": "أوف-جريد",
+        "en": "Off-grid"
+      }
     ],
     "brands": [
       "Deye",
       "MUST"
-    ]
+    ],
+    "publishedCount": 13
   },
   {
     "id": "batteries",
@@ -46,22 +59,36 @@ const rawCategories: Omit<Category, "publishedCount">[] = [
       "zh": "锂电池与储能"
     },
     "note": {
-      "ar": "منزلي جهد منخفض وتجاري جهد عالٍ وأنظمة تخزين صناعية"
+      "ar": "منزلي جهد منخفض وتجاري جهد عالٍ وأنظمة تخزين صناعية",
+      "en": "Residential low voltage, commercial high voltage, and industrial storage systems"
     },
     "icon": "battery",
     "priority": "high",
     "subcategories": [
-      "منزلي جهد منخفض",
-      "تجاري جهد عالٍ",
-      "أنظمة تخزين صناعية ESS",
-      "بطاريات كربون-رصاص"
+      {
+        "ar": "منزلي جهد منخفض",
+        "en": "Residential, low voltage"
+      },
+      {
+        "ar": "تجاري جهد عالٍ",
+        "en": "Commercial, high voltage"
+      },
+      {
+        "ar": "أنظمة تخزين صناعية ESS",
+        "en": "Industrial ESS storage systems"
+      },
+      {
+        "ar": "بطاريات كربون-رصاص",
+        "en": "Carbon-lead batteries"
+      }
     ],
     "brands": [
       "Deye",
       "EFORE",
       "MUST",
       "Shenzhen Kexin"
-    ]
+    ],
+    "publishedCount": 16
   },
   {
     "id": "panels",
@@ -71,17 +98,25 @@ const rawCategories: Omit<Category, "publishedCount">[] = [
       "zh": "太阳能电池板"
     },
     "note": {
-      "ar": "ألواح منزلية وتجارية عالية القدرة"
+      "ar": "ألواح منزلية وتجارية عالية القدرة",
+      "en": "High-power residential and commercial panels"
     },
     "icon": "sun",
     "priority": "high",
     "subcategories": [
-      "ألواح منزلية",
-      "ألواح تجارية عالية القدرة"
+      {
+        "ar": "ألواح منزلية",
+        "en": "Residential panels"
+      },
+      {
+        "ar": "ألواح تجارية عالية القدرة",
+        "en": "High-power commercial panels"
+      }
     ],
     "brands": [
       "Hanwha Q-Cells"
-    ]
+    ],
+    "publishedCount": 0
   },
   {
     "id": "pumps",
@@ -91,18 +126,29 @@ const rawCategories: Omit<Category, "publishedCount">[] = [
       "zh": "太阳能水泵与灌溉"
     },
     "note": {
-      "ar": "محولات مضخات هجينة ومضخات DC وBLDC وأنظمة ري وآبار كاملة"
+      "ar": "محولات مضخات هجينة ومضخات DC وBLDC وأنظمة ري وآبار كاملة",
+      "en": "Hybrid pump inverters, DC and BLDC pumps, and complete irrigation and well systems"
     },
     "icon": "droplet",
     "priority": "medium",
     "subcategories": [
-      "محولات مضخات هجينة AC",
-      "مضخات DC وBLDC",
-      "أنظمة ري وآبار كاملة"
+      {
+        "ar": "محولات مضخات هجينة AC",
+        "en": "Hybrid AC pump inverters"
+      },
+      {
+        "ar": "مضخات DC وBLDC",
+        "en": "DC and BLDC pumps"
+      },
+      {
+        "ar": "أنظمة ري وآبار كاملة",
+        "en": "Complete irrigation and well systems"
+      }
     ],
     "brands": [
       "Jntech"
-    ]
+    ],
+    "publishedCount": 7
   },
   {
     "id": "controllers",
@@ -112,18 +158,29 @@ const rawCategories: Omit<Category, "publishedCount">[] = [
       "zh": "充电控制器与配件"
     },
     "note": {
-      "ar": "منظمات MPPT وكابلات وقواطع ولوحات توزيع وهياكل تثبيت"
+      "ar": "منظمات MPPT وكابلات وقواطع ولوحات توزيع وهياكل تثبيت",
+      "en": "MPPT controllers, cables, breakers, distribution boards, and mounting structures"
     },
     "icon": "sliders",
     "priority": "medium",
     "subcategories": [
-      "منظمات MPPT",
-      "كابلات وقواطع ولوحات توزيع",
-      "هياكل تثبيت"
+      {
+        "ar": "منظمات MPPT",
+        "en": "MPPT controllers"
+      },
+      {
+        "ar": "كابلات وقواطع ولوحات توزيع",
+        "en": "Cables, breakers, and distribution boards"
+      },
+      {
+        "ar": "هياكل تثبيت",
+        "en": "Mounting structures"
+      }
     ],
     "brands": [
       "MUST"
-    ]
+    ],
+    "publishedCount": 1
   },
   {
     "id": "systems",
@@ -133,22 +190,39 @@ const rawCategories: Omit<Category, "publishedCount">[] = [
       "zh": "成套系统"
     },
     "note": {
-      "ar": "منزل صغير / متوسط / كبير / مزرعة / مصنع — ما يُباع فعلياً"
+      "ar": "منزل صغير / متوسط / كبير / مزرعة / مصنع — ما يُباع فعلياً",
+      "en": "Small / medium / large home, farm, factory — what is actually sold"
     },
     "icon": "package",
     "priority": "high",
     "subcategories": [
-      "منزل صغير",
-      "منزل متوسط",
-      "منزل وتجاري كبير",
-      "مزرعة",
-      "مصنع"
+      {
+        "ar": "منزل صغير",
+        "en": "Small home"
+      },
+      {
+        "ar": "منزل متوسط",
+        "en": "Medium home"
+      },
+      {
+        "ar": "منزل وتجاري كبير",
+        "en": "Large home and commercial"
+      },
+      {
+        "ar": "مزرعة",
+        "en": "Farm"
+      },
+      {
+        "ar": "مصنع",
+        "en": "Factory"
+      }
     ],
     "brands": [
       "Deye",
       "EFORE",
       "MUST"
-    ]
+    ],
+    "publishedCount": 0
   },
   {
     "id": "storage-ci",
@@ -158,18 +232,26 @@ const rawCategories: Omit<Category, "publishedCount">[] = [
       "zh": "工商业储能"
     },
     "note": {
-      "ar": "خزائن تخزين وأنظمة خارجية كبيرة للمصانع والمستشفيات والمنشآت"
+      "ar": "خزائن تخزين وأنظمة خارجية كبيرة للمصانع والمستشفيات والمنشآت",
+      "en": "Storage cabinets and large outdoor systems for factories, hospitals, and facilities"
     },
     "icon": "database",
     "priority": "medium",
     "subcategories": [
-      "خزائن تخزين",
-      "أنظمة خارجية كبيرة"
+      {
+        "ar": "خزائن تخزين",
+        "en": "Storage cabinets"
+      },
+      {
+        "ar": "أنظمة خارجية كبيرة",
+        "en": "Large outdoor systems"
+      }
     ],
     "brands": [
       "EFORE",
       "Deye"
-    ]
+    ],
+    "publishedCount": 0
   },
   {
     "id": "cameras",
@@ -179,24 +261,25 @@ const rawCategories: Omit<Category, "publishedCount">[] = [
       "zh": "监控摄像头"
     },
     "note": {
-      "ar": "قسم ثانوي منفصل عن الطاقة"
+      "ar": "قسم ثانوي منفصل عن الطاقة",
+      "en": "A secondary section, separate from energy"
     },
     "icon": "camera",
     "priority": "low",
     "subcategories": [
-      "كاميرات",
-      "أجهزة تسجيل"
+      {
+        "ar": "كاميرات",
+        "en": "Cameras"
+      },
+      {
+        "ar": "أجهزة تسجيل",
+        "en": "Recording devices"
+      }
     ],
     "brands": [
       "Wisenet"
-    ]
+    ],
+    "publishedCount": 0
   }
 ];
-
-/** publishedCount is computed from products.ts — never hand-written. */
-export const categories: Category[] = rawCategories.map((c) => ({
-  ...c,
-  publishedCount: products.filter((p) => p.categoryId === c.id && p.status === "published").length,
-}));
-
 ;

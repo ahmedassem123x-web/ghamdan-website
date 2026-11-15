@@ -23,10 +23,12 @@ export const bundles: Bundle[] = [
       "zh": "小户型住宅"
     },
     "components": {
-      "ar": "انفرتر Deye 6kW + بطارية Deye SE-F5 Pro-C 5kWh"
+      "ar": "انفرتر Deye 6kW + بطارية Deye SE-F5 Pro-C 5kWh",
+      "en": "Deye 6kW inverter + Deye SE-F5 Pro-C 5kWh battery"
     },
     "use": {
-      "ar": "شقة/منزل صغير — إضاءة ومراوح وشاشة وثلاجة"
+      "ar": "شقة/منزل صغير — إضاءة ومراوح وشاشة وثلاجة",
+      "en": "Small apartment/home — lighting, fans, TV, and fridge"
     },
     "status": "confirmed",
     "componentProductIds": [
@@ -46,10 +48,12 @@ export const bundles: Bundle[] = [
       "zh": "中户型住宅"
     },
     "components": {
-      "ar": "انفرتر Deye 6kW + بطارية EFORE 10kWh"
+      "ar": "انفرتر Deye 6kW + بطارية EFORE 10kWh",
+      "en": "Deye 6kW inverter + EFORE 10kWh battery"
     },
     "use": {
-      "ar": "منزل متوسط — تخزين أكبر لليل"
+      "ar": "منزل متوسط — تخزين أكبر لليل",
+      "en": "Medium home — larger storage for the night"
     },
     "status": "confirmed",
     "componentProductIds": [
@@ -69,10 +73,12 @@ export const bundles: Bundle[] = [
       "zh": "大户型 / 商业"
     },
     "components": {
-      "ar": "انفرتر Deye 8kW + بطارية 16kWh"
+      "ar": "انفرتر Deye 8kW + بطارية 16kWh",
+      "en": "Deye 8kW inverter + 16kWh battery"
     },
     "use": {
-      "ar": "منزل كبير أو محل/مكتب"
+      "ar": "منزل كبير أو محل/مكتب",
+      "en": "Large home or shop/office"
     },
     "status": "confirmed",
     "componentProductIds": [
@@ -91,10 +97,12 @@ export const bundles: Bundle[] = [
       "zh": "斋月套餐（往期）"
     },
     "components": {
-      "ar": "انفرتر MUST 5kW + 4 بطاريات MustPower 200Ah + 8 ألواح 360W"
+      "ar": "انفرتر MUST 5kW + 4 بطاريات MustPower 200Ah + 8 ألواح 360W",
+      "en": "MUST 5kW inverter + 4 MustPower 200Ah batteries + 8 360W panels"
     },
     "use": {
-      "ar": "منزل — باقة موسمية سابقة"
+      "ar": "منزل — باقة موسمية سابقة",
+      "en": "Home — previous seasonal bundle"
     },
     "status": "archived",
     "componentProductIds": [
