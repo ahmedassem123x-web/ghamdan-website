@@ -49,14 +49,14 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
       />
 
       {/* 5.2 Intro */}
-      <section className="section-sm">
+      <section data-reveal className="section-sm">
         <div className="wrap text-center">
           <p className="text-sm font-bold text-primary-hover">{ui("projects.areasLabel", l)}</p>
           <h2 className="mt-3 text-h2 font-semibold text-navy">{ui("projects.areasTitle", l)}</h2>
         </div>
       </section>
 
-      <section className="section" id="projects">
+      <section data-reveal className="section" id="projects">
         <div className="wrap">
           {approvedProjects.length === 0 && (
             // Honest empty state — inlined (visible by default) instead of

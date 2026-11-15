@@ -204,7 +204,7 @@ export default function Header({ locale }: { locale: Locale }) {
             </div>
             <button
               type="button"
-              className="inline-flex size-11 items-center justify-center rounded-button text-navy transition-colors hover:bg-sky"
+              className="inline-flex size-11 items-center justify-center rounded-button text-navy transition-colors hover:bg-sky lg:hidden"
               aria-label={ui("nav.menu", locale)}
               aria-expanded={drawerOpen}
               onClick={() => setDrawerOpen(true)}

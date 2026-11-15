@@ -10,6 +10,7 @@ import { categoryIcon } from "@/components/Cards";
 import { Breadcrumbs, EditorialBlock } from "@/components/ui";
 import { pages, solutionAreas, pumping, workProcess, products } from "@/data";
 import { localizedHref, t } from "@/lib/i18n";
+import { detailMetadata } from "@/lib/metadata";
 import { ui } from "@/lib/ui-copy";
 import type { Locale } from "@/data";
 
@@ -22,9 +23,13 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  const l = locale as Locale;
   const a = solutionAreas.find((x) => x.id === slug);
-  return { title: a ? t(a.title, "ar") : "" };
+  if (!a) return {};
+  const title = t(a.title, l);
+  const description = a.text ? t(a.text, l) : title;
+  return detailMetadata({ locale: l, path: `/solutions/${a.id}`, title, description });
 }
 
 export default async function SolutionDetailPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
@@ -58,7 +63,7 @@ export default async function SolutionDetailPage({ params }: { params: Promise<{
         />
 
         {/* Overview — EditorialBlock, image left (§3.9) */}
-        <section className="section">
+        <section data-reveal className="section">
           <div className="wrap">
             <EditorialBlock
               image="/images/photos/pump-flow.jpg"
@@ -85,7 +90,7 @@ export default async function SolutionDetailPage({ params }: { params: Promise<{
         </section>
 
         {/* Challenges — sky band + pill + white icon circles */}
-        <section className="section bg-sky">
+        <section data-reveal className="section bg-sky">
           <div className="wrap">
             <div className="text-center">
               <p className="mb-3 inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-bold text-primary-hover">
@@ -108,7 +113,7 @@ export default async function SolutionDetailPage({ params }: { params: Promise<{
         </section>
 
         {/* Steps — product images + left-pointing arrows */}
-        <section className="section">
+        <section data-reveal className="section">
           <div className="wrap">
             <h2 className="text-h2 font-semibold text-navy">{t(pumping.stepsTitle, l)}</h2>
             <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -137,7 +142,7 @@ export default async function SolutionDetailPage({ params }: { params: Promise<{
         </section>
 
         {/* Diagram (code-built SVG, not a reference screenshot) */}
-        <section className="section bg-surface">
+        <section data-reveal className="section bg-surface">
           <div className="wrap">
             <div>
               <h2 className="text-h2 font-semibold text-navy">{t(pumping.diagramTitle, l)}</h2>
@@ -160,7 +165,7 @@ export default async function SolutionDetailPage({ params }: { params: Promise<{
         </section>
 
         {/* Applications — dark overlay captions */}
-        <section className="section">
+        <section data-reveal className="section">
           <div className="wrap">
             <h2 className="text-h2 font-semibold text-navy">{t(pumping.applicationsTitle, l)}</h2>
             <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -176,13 +181,13 @@ export default async function SolutionDetailPage({ params }: { params: Promise<{
         </section>
 
         {/* Related — two panels: complementary products + inspiring stories (no fabricated story) */}
-        <section className="section bg-surface">
+        <section data-reveal className="section bg-surface">
           <div className="wrap grid gap-10 lg:grid-cols-2">
             <div>
               <h2 className="text-h2 font-semibold text-navy">{ui("pumping.complementary", l)}</h2>
               <div className="mt-6 space-y-4">
                 {pumpProducts.map((p) => (
-                  <Link key={p.id} href={localizedHref(l, `/products/${p.slug}`)} className="group flex items-center gap-4 rounded-card border border-border bg-background p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card">
+                  <Link key={p.id} href={localizedHref(l, `/products/${p.slug}`)} className="group flex items-center gap-4 rounded-card border border-border bg-background p-4 transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-card">
                     {p.image ? (
                       <img src={webp(p.image)} alt={t(p.name, l)} loading="lazy" className="size-20 shrink-0 rounded-[0.625rem] object-cover" />
                     ) : (
@@ -206,7 +211,7 @@ export default async function SolutionDetailPage({ params }: { params: Promise<{
                 <p className="mt-3 text-body text-text-inverse-muted">{t(pages.projects.k2, l)}</p>
                 <Link
                   href={localizedHref(l, "/projects")}
-                  className="mt-6 inline-flex items-center gap-1.5 rounded-[0.625rem] bg-white px-5 py-2.5 font-bold text-button text-navy transition-all duration-200 hover:-translate-y-0.5"
+                  className="mt-6 inline-flex items-center gap-1.5 rounded-[0.625rem] bg-white px-5 py-2.5 font-bold text-button text-navy transition-transform duration-200 hover:-translate-y-0.5"
                 >
                   {ui("cta.viewProjects", l)}
                   <ArrowLeft className="size-4 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
@@ -248,14 +253,14 @@ export default async function SolutionDetailPage({ params }: { params: Promise<{
             <h1 className="mt-4 max-w-3xl text-h1 font-bold leading-[1.2] text-navy">{t(area.title, l)}</h1>
             <p className="mt-4 max-w-2xl text-body-lg text-text-muted">{t(area.text, l)}</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href={localizedHref(l, "/contact")} className="inline-flex items-center justify-center gap-2 rounded-[0.625rem] bg-navy px-5 py-2.5 font-bold text-button text-white transition-all hover:-translate-y-0.5 hover:bg-navy">
+              <Link href={localizedHref(l, "/contact")} className="inline-flex items-center justify-center gap-2 rounded-[0.625rem] bg-navy px-5 py-2.5 font-bold text-button text-white transition-[transform,background-color] hover:-translate-y-0.5 hover:bg-navy">
                 {ui("cta.requestConsultation", l)}
               </Link>
             </div>
           </div>
         </div>
       </div>
-      <section className="section">
+      <section data-reveal className="section">
         <div className="wrap">
           <h2 className="text-h2 font-semibold text-navy">{t(pages.solutions.k27, l)}</h2>
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

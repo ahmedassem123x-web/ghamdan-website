@@ -24,7 +24,8 @@ import { usePathname } from "next/navigation";
  * - Drawer / accordion / tabs / dialog state: CSS transitions owned by the
  *   component itself (no animation library touches them).
  * - Marquee: CSS keyframes only (`globals.css .marquee__track`) — GSAP
- *   never animates it.
+ *   never animates it. An IntersectionObserver here pauses it while it
+ *   is off-screen, so it never burns frames for nobody.
  *
  * Lifecycle: setup re-runs on every route change (`pathname` dep) and the
  * previous run is fully reverted — `gsap.context().revert()` kills all
@@ -49,6 +50,20 @@ export default function MotionProvider() {
     let destroyLenis: (() => void) | null = null;
     let removeTicker: (() => void) | null = null;
     let onLoad: (() => void) | null = null;
+
+    // Marquee: pause while off-screen (cheap transform-only animation,
+    // but no reason to run it for nobody). Runs even if GSAP fails.
+    let marqueeObserver: IntersectionObserver | null = null;
+    const marqueeTrack = document.querySelector<HTMLElement>(".marquee__track");
+    if (marqueeTrack && "IntersectionObserver" in window) {
+      marqueeObserver = new IntersectionObserver(
+        ([entry]) => {
+          marqueeTrack.style.animationPlayState = entry.isIntersecting ? "running" : "paused";
+        },
+        { rootMargin: "100px" },
+      );
+      marqueeObserver.observe(marqueeTrack);
+    }
 
     (async () => {
       try {
@@ -98,6 +113,9 @@ export default function MotionProvider() {
 
           // Section reveals — JS-applied only, after successful init.
           // Mobile (coarse pointer): shorter travel, slightly faster.
+          // immediateRender: false — nothing is hidden before its trigger
+          // fires, so full-page screenshots, print, crawlers and #anchor
+          // jumps see the content instead of blank sections.
           document.querySelectorAll<HTMLElement>("[data-reveal]").forEach((el) => {
             gsap.fromTo(
               el,
@@ -107,6 +125,7 @@ export default function MotionProvider() {
                 y: 0,
                 duration: coarse ? 0.6 : 0.7,
                 ease: "power3.out",
+                immediateRender: false,
                 scrollTrigger: { trigger: el, start: "top 88%", once: true },
               },
             );
@@ -126,23 +145,28 @@ export default function MotionProvider() {
                 duration: 0.6,
                 ease: "power3.out",
                 stagger: 0.08,
+                immediateRender: false,
                 scrollTrigger: { trigger: group, start: "top 88%", once: true },
               },
             );
           });
 
           // SVG path drawing — SolarLineArt (`[data-draw]`). Dash hiding
-          // is applied here in JS only, after init; without JS the paths
-          // render fully drawn. Draw once, no continuous motion.
+          // is applied by the tween itself with immediateRender: false,
+          // so without a scroll trigger the paths render fully drawn.
           document.querySelectorAll<SVGGeometryElement>("[data-draw]").forEach((path) => {
             const len = path.getTotalLength();
-            gsap.set(path, { strokeDasharray: len, strokeDashoffset: len });
-            gsap.to(path, {
-              strokeDashoffset: 0,
-              duration: 1.4,
-              ease: "power2.inOut",
-              scrollTrigger: { trigger: path, start: "top 92%", once: true },
-            });
+            gsap.fromTo(
+              path,
+              { strokeDasharray: len, strokeDashoffset: len },
+              {
+                strokeDashoffset: 0,
+                duration: 1.4,
+                ease: "power2.inOut",
+                immediateRender: false,
+                scrollTrigger: { trigger: path, start: "top 92%", once: true },
+              },
+            );
           });
 
           // Diagram flow paths — SystemDiagram (`[data-flow]`). Draw once
@@ -153,7 +177,6 @@ export default function MotionProvider() {
             const len = path.getTotalLength();
             let drawn = false;
             let flowActive = false;
-            gsap.set(path, { strokeDasharray: len, strokeDashoffset: len });
             const drift = gsap.to(path, {
               strokeDashoffset: "-=28",
               duration: 1.8,
@@ -161,20 +184,25 @@ export default function MotionProvider() {
               repeat: -1,
               paused: true,
             });
-            gsap.to(path, {
-              strokeDashoffset: 0,
-              duration: 1.1,
-              ease: "power2.inOut",
-              scrollTrigger: { trigger: path, start: "top 90%", once: true },
-              onComplete: () => {
-                drawn = true;
-                // Switch the drawn line to a dashed flow line (7+7 = 14
-                // period; the drift step of 28 is exactly 2 periods, so
-                // the loop is seamless).
-                path.style.strokeDasharray = "7 7";
-                if (flowActive) drift.play();
+            gsap.fromTo(
+              path,
+              { strokeDasharray: len, strokeDashoffset: len },
+              {
+                strokeDashoffset: 0,
+                duration: 1.1,
+                ease: "power2.inOut",
+                immediateRender: false,
+                scrollTrigger: { trigger: path, start: "top 90%", once: true },
+                onComplete: () => {
+                  drawn = true;
+                  // Switch the drawn line to a dashed flow line (7+7 = 14
+                  // period; the drift step of 28 is exactly 2 periods, so
+                  // the loop is seamless).
+                  path.style.strokeDasharray = "7 7";
+                  if (flowActive) drift.play();
+                },
               },
-            });
+            );
             ScrollTrigger.create({
               trigger: path.closest("figure") ?? path,
               start: "top bottom",
@@ -226,6 +254,11 @@ export default function MotionProvider() {
         /* ignore */
       }
       if (onLoad) window.removeEventListener("load", onLoad);
+      try {
+        marqueeObserver?.disconnect();
+      } catch {
+        /* ignore */
+      }
     };
   }, [pathname]);
 

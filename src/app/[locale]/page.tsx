@@ -58,7 +58,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         title={h.k2}
         text={h.k3}
         whatsapp
-        whatsappVariant="navy-pill"
+        whatsappVariant="green-pill"
       />
 
       {/* 1.9 Guidance bar (Home + /products only) */}
@@ -74,7 +74,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <div className="flex shrink-0 flex-wrap items-center justify-center gap-3">
             <Link
               href={localizedHref(l, "/guidance")}
-              className="inline-flex items-center justify-center gap-2 rounded-[0.625rem] bg-navy px-5 py-2.5 font-bold text-button text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-navy"
+              className="inline-flex items-center justify-center gap-2 rounded-[0.625rem] bg-navy px-5 py-2.5 font-bold text-button text-white transition-[transform,background-color] duration-200 hover:-translate-y-0.5 hover:bg-navy"
             >
               {l === "ar" ? "دليل الضخ" : l === "en" ? "Pumping guide" : "抽水指南"}
             </Link>
@@ -195,7 +195,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </div>
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
             {featuredProducts.map((p) => (
-              <Link key={p.id} href={localizedHref(l, `/products/${p.slug}`)} className="group block overflow-hidden rounded-card bg-surface shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover">
+              <Link key={p.id} href={localizedHref(l, `/products/${p.slug}`)} className="group block overflow-hidden rounded-card bg-surface shadow-card transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-card-hover">
                 <div className="aspect-square overflow-hidden bg-surface-muted">
                   {p.image ? (
                     <img src={webp(p.image)} alt={t(p.name, l)} loading="lazy" className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
@@ -230,7 +230,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </Link>
           </div>
           <div className="mt-8 grid gap-6 md:grid-cols-2">
-            <Link href={localizedHref(l, "/agencies/deye")} className="group flex flex-col rounded-card bg-sky p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover">
+            <Link href={localizedHref(l, "/agencies/deye")} className="group flex flex-col rounded-card bg-sky p-6 transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-card-hover">
               <div className="flex items-center justify-between gap-3">
                 <span className="font-latin text-3xl font-extrabold tracking-tight text-navy" dir="ltr">
                   {deye.name}

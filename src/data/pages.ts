@@ -1,8 +1,7 @@
 /**
  * Ghamdan (GTS) — per-page copy, extracted VERBATIM from the old build's
- * inline `window.GTS_PAGE_I18N` JSON blocks (all 75 HTML files carry the
- * block; admin/index.html's is empty `{}` and is not included — the admin
- * demo is out of scope here). 1,078 keys in total. Keys k1..kN are preserved
+ * inline `window.GTS_PAGE_I18N` JSON blocks (all 75 HTML files carried the
+ * block). 1,078 keys in total. Keys k1..kN are preserved
  * exactly as in the source, including quirks: some keys carry Arabic text in
  * their `en` slot (source fallback), and 32 product pages carry 17 keys
  * while 5 (p01, p06, p11, p14, p28) carry 16 — the extra k17 in the 17-key
@@ -36,6 +35,49 @@
  * TEMPLATE, not a real project — never present it as one.
  */
 import type { PagesCopy, Project } from "./types";
+
+/** Shared copy — used 54× (dedup, P2). */
+const SHARED_COPY_1 = { ar: "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.", en: "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.", zh: "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。" };
+/** Shared copy — used 51× (dedup, P2). */
+const SHARED_COPY_2 = { ar: "لنبدأ مشروعك اليوم", en: "Let's Start Your Project Today", zh: "今天就开始您的项目" };
+/** Shared copy — used 38× (dedup, P2). */
+const SHARED_COPY_3 = { ar: "نظرة عامة", en: "Overview" };
+/** Shared copy — used 37× (dedup, P2). */
+const SHARED_COPY_4 = { ar: "المميزات الرئيسية", en: "Key Benefits" };
+/** Shared copy — used 37× (dedup, P2). */
+const SHARED_COPY_5 = { ar: "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.", en: "Illustrative photo of the product type — the real product photo is pending receipt." };
+/** Shared copy — used 37× (dedup, P2). */
+const SHARED_COPY_6 = { ar: "مواصفات المنتج", en: "Product Specifications" };
+/** Shared copy — used 37× (dedup, P2). */
+const SHARED_COPY_7 = { ar: "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.", en: "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team." };
+/** Shared copy — used 37× (dedup, P2). */
+const SHARED_COPY_8 = { ar: "جودة موثقة", en: "Verified quality" };
+/** Shared copy — used 37× (dedup, P2). */
+const SHARED_COPY_9 = { ar: "من كتالوج المصنّع", en: "From the manufacturer's catalog" };
+/** Shared copy — used 37× (dedup, P2). */
+const SHARED_COPY_10 = { ar: "تسليم منسق", en: "Coordinated delivery" };
+/** Shared copy — used 37× (dedup, P2). */
+const SHARED_COPY_11 = { ar: "حسب الطلب والمنطقة", en: "Per order and area" };
+/** Shared copy — used 37× (dedup, P2). */
+const SHARED_COPY_12 = { ar: "دعم واتساب", en: "WhatsApp support" };
+/** Shared copy — used 37× (dedup, P2). */
+const SHARED_COPY_13 = { ar: "السبت – الجمعة", en: "Sat – Fri" };
+/** Shared copy — used 37× (dedup, P2). */
+const SHARED_COPY_14 = { ar: "المواصفات الفنية", en: "Technical Specifications" };
+/** Shared copy — used 37× (dedup, P2). */
+const SHARED_COPY_15 = { ar: "منتجات ذات صلة", en: "Related Products" };
+/** Shared copy — used 29× (dedup, P2). */
+const SHARED_COPY_16 = { ar: "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.", en: "From the manufacturer's catalog — availability at Ghamdan pending confirmation." };
+/** Shared copy — used 10× (dedup, P2). */
+const SHARED_COPY_17 = { ar: "لا توجد نتائج مطابقة", en: "No matching results" };
+/** Shared copy — used 9× (dedup, P2). */
+const SHARED_COPY_18 = { ar: "جرّب كلمة أخرى أو غيّر الفلاتر.", en: "Try another word or change the filters." };
+/** Shared copy — used 8× (dedup, P2). */
+const SHARED_COPY_19 = { ar: "المنتجات", en: "Products", zh: "产品" };
+/** Shared copy — used 8× (dedup, P2). */
+const SHARED_COPY_20 = { ar: "جميع المنتجات المعروضة مؤكدة من المصنّع أو من غمدان. للتفاصيل والتوفر تواصل معنا عبر واتساب.", en: "All listed products are confirmed by the manufacturer or by Ghamdan. For details and availability, contact us via WhatsApp." };
+/** Shared copy — used 8× (dedup, P2). */
+const SHARED_COPY_21 = { ar: "منتج مؤكد عند غمدان.", en: "Product confirmed by Ghamdan." };
 
 export const pages: PagesCopy = {
   "home": {
@@ -286,16 +328,8 @@ export const pages: PagesCopy = {
       "ar": "صنعاء، اليمن",
       "en": "Sana'a, Yemen"
     },
-    "k52": {
-      "ar": "لنبدأ مشروعك اليوم",
-      "en": "Let's Start Your Project Today",
-      "zh": "今天就开始您的项目"
-    },
-    "k53": {
-      "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-      "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-      "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-    }
+    "k52": SHARED_COPY_2,
+    "k53": SHARED_COPY_1
   },
   "about": {
     "k1": {
@@ -428,11 +462,7 @@ export const pages: PagesCopy = {
       "en": "Let's find the right solution for your project together",
       "zh": "让我们一起为您的项目找到最合适的方案"
     },
-    "k27": {
-      "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-      "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-      "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-    }
+    "k27": SHARED_COPY_1
   },
   "solutions": {
     "k1": {
@@ -575,11 +605,7 @@ export const pages: PagesCopy = {
       "en": "Let's Start Your Project Now",
       "zh": "现在就开始您的项目"
     },
-    "k29": {
-      "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-      "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-      "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-    }
+    "k29": SHARED_COPY_1
   },
   "catalog": {
     "k2": {
@@ -657,14 +683,8 @@ export const pages: PagesCopy = {
       "en": "Featured Products",
       "zh": "精选产品"
     },
-    "k17": {
-      "ar": "لا توجد نتائج مطابقة",
-      "en": "No matching results"
-    },
-    "k18": {
-      "ar": "جرّب كلمة أخرى أو غيّر الفلاتر.",
-      "en": "Try another word or change the filters."
-    },
+    "k17": SHARED_COPY_17,
+    "k18": SHARED_COPY_18,
     "k19": {
       "ar": "تحتاج إلى مساعدة في اختيار الحل الأنسب؟",
       "en": "Need help choosing the right solution?",
@@ -714,16 +734,8 @@ export const pages: PagesCopy = {
       "ar": "صور توضيحية لمنظومات شمسية — ليست مشاريع منشورة لغمدان. صور المشاريع الحقيقية تُنشر بعد اعتمادها.",
       "en": "Illustrative photos of solar systems — not published Ghamdan projects. Real project photos are published once approved."
     },
-    "k9": {
-      "ar": "لنبدأ مشروعك اليوم",
-      "en": "Let's Start Your Project Today",
-      "zh": "今天就开始您的项目"
-    },
-    "k10": {
-      "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-      "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-      "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-    }
+    "k9": SHARED_COPY_2,
+    "k10": SHARED_COPY_1
   },
   "contact": {
     "k1": {
@@ -914,33 +926,12 @@ export const pages: PagesCopy = {
         "ar": "قلب منظومة الطاقة — أحادي وثلاثي الطور، جهد منخفض وعالٍ",
         "en": "قلب منظومة الطاقة — أحادي وثلاثي الطور، جهد منخفض وعالٍ"
       },
-      "k3": {
-        "ar": "المنتجات",
-        "en": "Products",
-        "zh": "产品"
-      },
-      "k4": {
-        "ar": "لا توجد نتائج مطابقة",
-        "en": "No matching results"
-      },
-      "k5": {
-        "ar": "جرّب كلمة أخرى أو غيّر الفلاتر.",
-        "en": "Try another word or change the filters."
-      },
-      "k6": {
-        "ar": "جميع المنتجات المعروضة مؤكدة من المصنّع أو من غمدان. للتفاصيل والتوفر تواصل معنا عبر واتساب.",
-        "en": "All listed products are confirmed by the manufacturer or by Ghamdan. For details and availability, contact us via WhatsApp."
-      },
-      "k7": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k8": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k3": SHARED_COPY_19,
+      "k4": SHARED_COPY_17,
+      "k5": SHARED_COPY_18,
+      "k6": SHARED_COPY_20,
+      "k7": SHARED_COPY_2,
+      "k8": SHARED_COPY_1
     },
     "batteries": {
       "k1": {
@@ -951,33 +942,12 @@ export const pages: PagesCopy = {
         "ar": "منزلي جهد منخفض وتجاري جهد عالٍ وأنظمة تخزين صناعية",
         "en": "منزلي جهد منخفض وتجاري جهد عالٍ وأنظمة تخزين صناعية"
       },
-      "k3": {
-        "ar": "المنتجات",
-        "en": "Products",
-        "zh": "产品"
-      },
-      "k4": {
-        "ar": "لا توجد نتائج مطابقة",
-        "en": "No matching results"
-      },
-      "k5": {
-        "ar": "جرّب كلمة أخرى أو غيّر الفلاتر.",
-        "en": "Try another word or change the filters."
-      },
-      "k6": {
-        "ar": "جميع المنتجات المعروضة مؤكدة من المصنّع أو من غمدان. للتفاصيل والتوفر تواصل معنا عبر واتساب.",
-        "en": "All listed products are confirmed by the manufacturer or by Ghamdan. For details and availability, contact us via WhatsApp."
-      },
-      "k7": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k8": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k3": SHARED_COPY_19,
+      "k4": SHARED_COPY_17,
+      "k5": SHARED_COPY_18,
+      "k6": SHARED_COPY_20,
+      "k7": SHARED_COPY_2,
+      "k8": SHARED_COPY_1
     },
     "panels": {
       "k1": {
@@ -996,33 +966,12 @@ export const pages: PagesCopy = {
         "ar": "المنتجات المؤكدة في هذه الفئة قيد الاعتماد من غمدان قبل النشر.",
         "en": "Confirmed products in this category are awaiting Ghamdan's approval before publication."
       },
-      "k5": {
-        "ar": "المنتجات",
-        "en": "Products",
-        "zh": "产品"
-      },
-      "k6": {
-        "ar": "لا توجد نتائج مطابقة",
-        "en": "No matching results"
-      },
-      "k7": {
-        "ar": "جرّب كلمة أخرى أو غيّر الفلاتر.",
-        "en": "Try another word or change the filters."
-      },
-      "k8": {
-        "ar": "جميع المنتجات المعروضة مؤكدة من المصنّع أو من غمدان. للتفاصيل والتوفر تواصل معنا عبر واتساب.",
-        "en": "All listed products are confirmed by the manufacturer or by Ghamdan. For details and availability, contact us via WhatsApp."
-      },
-      "k9": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k10": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k5": SHARED_COPY_19,
+      "k6": SHARED_COPY_17,
+      "k7": SHARED_COPY_18,
+      "k8": SHARED_COPY_20,
+      "k9": SHARED_COPY_2,
+      "k10": SHARED_COPY_1
     },
     "pumps": {
       "k1": {
@@ -1033,33 +982,12 @@ export const pages: PagesCopy = {
         "ar": "محولات مضخات هجينة ومضخات DC وBLDC وأنظمة ري وآبار كاملة",
         "en": "محولات مضخات هجينة ومضخات DC وBLDC وأنظمة ري وآبار كاملة"
       },
-      "k3": {
-        "ar": "المنتجات",
-        "en": "Products",
-        "zh": "产品"
-      },
-      "k4": {
-        "ar": "لا توجد نتائج مطابقة",
-        "en": "No matching results"
-      },
-      "k5": {
-        "ar": "جرّب كلمة أخرى أو غيّر الفلاتر.",
-        "en": "Try another word or change the filters."
-      },
-      "k6": {
-        "ar": "جميع المنتجات المعروضة مؤكدة من المصنّع أو من غمدان. للتفاصيل والتوفر تواصل معنا عبر واتساب.",
-        "en": "All listed products are confirmed by the manufacturer or by Ghamdan. For details and availability, contact us via WhatsApp."
-      },
-      "k7": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k8": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k3": SHARED_COPY_19,
+      "k4": SHARED_COPY_17,
+      "k5": SHARED_COPY_18,
+      "k6": SHARED_COPY_20,
+      "k7": SHARED_COPY_2,
+      "k8": SHARED_COPY_1
     },
     "controllers": {
       "k1": {
@@ -1070,33 +998,12 @@ export const pages: PagesCopy = {
         "ar": "منظمات MPPT وكابلات وقواطع ولوحات توزيع وهياكل تثبيت",
         "en": "منظمات MPPT وكابلات وقواطع ولوحات توزيع وهياكل تثبيت"
       },
-      "k3": {
-        "ar": "المنتجات",
-        "en": "Products",
-        "zh": "产品"
-      },
-      "k4": {
-        "ar": "لا توجد نتائج مطابقة",
-        "en": "No matching results"
-      },
-      "k5": {
-        "ar": "جرّب كلمة أخرى أو غيّر الفلاتر.",
-        "en": "Try another word or change the filters."
-      },
-      "k6": {
-        "ar": "جميع المنتجات المعروضة مؤكدة من المصنّع أو من غمدان. للتفاصيل والتوفر تواصل معنا عبر واتساب.",
-        "en": "All listed products are confirmed by the manufacturer or by Ghamdan. For details and availability, contact us via WhatsApp."
-      },
-      "k7": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k8": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k3": SHARED_COPY_19,
+      "k4": SHARED_COPY_17,
+      "k5": SHARED_COPY_18,
+      "k6": SHARED_COPY_20,
+      "k7": SHARED_COPY_2,
+      "k8": SHARED_COPY_1
     },
     "systems": {
       "k1": {
@@ -1115,33 +1022,12 @@ export const pages: PagesCopy = {
         "ar": "المنتجات المؤكدة في هذه الفئة قيد الاعتماد من غمدان قبل النشر.",
         "en": "Confirmed products in this category are awaiting Ghamdan's approval before publication."
       },
-      "k5": {
-        "ar": "المنتجات",
-        "en": "Products",
-        "zh": "产品"
-      },
-      "k6": {
-        "ar": "لا توجد نتائج مطابقة",
-        "en": "No matching results"
-      },
-      "k7": {
-        "ar": "جرّب كلمة أخرى أو غيّر الفلاتر.",
-        "en": "Try another word or change the filters."
-      },
-      "k8": {
-        "ar": "جميع المنتجات المعروضة مؤكدة من المصنّع أو من غمدان. للتفاصيل والتوفر تواصل معنا عبر واتساب.",
-        "en": "All listed products are confirmed by the manufacturer or by Ghamdan. For details and availability, contact us via WhatsApp."
-      },
-      "k9": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k10": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k5": SHARED_COPY_19,
+      "k6": SHARED_COPY_17,
+      "k7": SHARED_COPY_18,
+      "k8": SHARED_COPY_20,
+      "k9": SHARED_COPY_2,
+      "k10": SHARED_COPY_1
     },
     "storage-ci": {
       "k1": {
@@ -1160,33 +1046,12 @@ export const pages: PagesCopy = {
         "ar": "المنتجات المؤكدة في هذه الفئة قيد الاعتماد من غمدان قبل النشر.",
         "en": "Confirmed products in this category are awaiting Ghamdan's approval before publication."
       },
-      "k5": {
-        "ar": "المنتجات",
-        "en": "Products",
-        "zh": "产品"
-      },
-      "k6": {
-        "ar": "لا توجد نتائج مطابقة",
-        "en": "No matching results"
-      },
-      "k7": {
-        "ar": "جرّب كلمة أخرى أو غيّر الفلاتر.",
-        "en": "Try another word or change the filters."
-      },
-      "k8": {
-        "ar": "جميع المنتجات المعروضة مؤكدة من المصنّع أو من غمدان. للتفاصيل والتوفر تواصل معنا عبر واتساب.",
-        "en": "All listed products are confirmed by the manufacturer or by Ghamdan. For details and availability, contact us via WhatsApp."
-      },
-      "k9": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k10": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k5": SHARED_COPY_19,
+      "k6": SHARED_COPY_17,
+      "k7": SHARED_COPY_18,
+      "k8": SHARED_COPY_20,
+      "k9": SHARED_COPY_2,
+      "k10": SHARED_COPY_1
     },
     "cameras": {
       "k1": {
@@ -1205,2551 +1070,680 @@ export const pages: PagesCopy = {
         "ar": "المنتجات المؤكدة في هذه الفئة قيد الاعتماد من غمدان قبل النشر.",
         "en": "Confirmed products in this category are awaiting Ghamdan's approval before publication."
       },
-      "k5": {
-        "ar": "المنتجات",
-        "en": "Products",
-        "zh": "产品"
-      },
-      "k6": {
-        "ar": "لا توجد نتائج مطابقة",
-        "en": "No matching results"
-      },
-      "k7": {
-        "ar": "جرّب كلمة أخرى أو غيّر الفلاتر.",
-        "en": "Try another word or change the filters."
-      },
-      "k8": {
-        "ar": "جميع المنتجات المعروضة مؤكدة من المصنّع أو من غمدان. للتفاصيل والتوفر تواصل معنا عبر واتساب.",
-        "en": "All listed products are confirmed by the manufacturer or by Ghamdan. For details and availability, contact us via WhatsApp."
-      },
-      "k9": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k10": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k5": SHARED_COPY_19,
+      "k6": SHARED_COPY_17,
+      "k7": SHARED_COPY_18,
+      "k8": SHARED_COPY_20,
+      "k9": SHARED_COPY_2,
+      "k10": SHARED_COPY_1
     }
   },
   "productDetail": {
     "p01": {
-      "k1": {
-        "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
-        "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_16,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p02": {
-      "k1": {
-        "ar": "منتج مؤكد عند غمدان.",
-        "en": "Product confirmed by Ghamdan."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_21,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p03": {
-      "k1": {
-        "ar": "منتج مؤكد عند غمدان.",
-        "en": "Product confirmed by Ghamdan."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_21,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p04": {
-      "k1": {
-        "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
-        "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_16,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p05": {
-      "k1": {
-        "ar": "منتج مؤكد عند غمدان.",
-        "en": "Product confirmed by Ghamdan."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_21,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p06": {
-      "k1": {
-        "ar": "منتج مؤكد عند غمدان.",
-        "en": "Product confirmed by Ghamdan."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_21,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p07": {
-      "k1": {
-        "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
-        "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_16,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p08": {
-      "k1": {
-        "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
-        "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_16,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p09": {
-      "k1": {
-        "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
-        "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_16,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p10": {
-      "k1": {
-        "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
-        "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_16,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p11": {
-      "k1": {
-        "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
-        "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_16,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p12": {
-      "k1": {
-        "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
-        "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_16,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p13": {
-      "k1": {
-        "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
-        "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_16,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p14": {
-      "k1": {
-        "ar": "منتج مؤكد عند غمدان.",
-        "en": "Product confirmed by Ghamdan."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_21,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p15": {
-      "k1": {
-        "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
-        "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_16,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p16": {
-      "k1": {
-        "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
-        "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_16,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p17": {
-      "k1": {
-        "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
-        "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_16,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p18": {
-      "k1": {
-        "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
-        "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_16,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p19": {
-      "k1": {
-        "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
-        "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_16,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p20": {
-      "k1": {
-        "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
-        "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_16,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p21": {
-      "k1": {
-        "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
-        "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_16,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p22": {
-      "k1": {
-        "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
-        "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_16,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p23": {
-      "k1": {
-        "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
-        "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_16,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p24": {
-      "k1": {
-        "ar": "منتج مؤكد عند غمدان.",
-        "en": "Product confirmed by Ghamdan."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_21,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p25": {
-      "k1": {
-        "ar": "منتج مؤكد عند غمدان.",
-        "en": "Product confirmed by Ghamdan."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_21,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p26": {
-      "k1": {
-        "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
-        "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_16,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p27": {
-      "k1": {
-        "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
-        "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_16,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p28": {
-      "k1": {
-        "ar": "منتج مؤكد عند غمدان.",
-        "en": "Product confirmed by Ghamdan."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_21,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p29": {
-      "k1": {
-        "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
-        "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_16,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p31": {
-      "k1": {
-        "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
-        "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_16,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p32": {
-      "k1": {
-        "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
-        "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_16,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p33": {
-      "k1": {
-        "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
-        "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_16,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p34": {
-      "k1": {
-        "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
-        "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_16,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p35": {
-      "k1": {
-        "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
-        "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_16,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p36": {
-      "k1": {
-        "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
-        "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_16,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p37": {
-      "k1": {
-        "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
-        "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_16,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     },
     "p38": {
-      "k1": {
-        "ar": "من كتالوج المصنّع — التوفر عند غمدان قيد التأكيد.",
-        "en": "From the manufacturer's catalog — availability at Ghamdan pending confirmation."
-      },
-      "k2": {
-        "ar": "المميزات الرئيسية",
-        "en": "Key Benefits"
-      },
-      "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
-      },
-      "k4": {
-        "ar": "مواصفات المنتج",
-        "en": "Product Specifications"
-      },
-      "k5": {
-        "ar": "استفسر عن هذا المنتج عبر واتساب — السعر والتوفر والتسليم يُحدَّدان مع فريق المبيعات.",
-        "en": "Ask about this product via WhatsApp — price, availability and delivery are confirmed with the sales team."
-      },
-      "k6": {
-        "ar": "جودة موثقة",
-        "en": "Verified quality"
-      },
-      "k7": {
-        "ar": "من كتالوج المصنّع",
-        "en": "From the manufacturer's catalog"
-      },
-      "k8": {
-        "ar": "تسليم منسق",
-        "en": "Coordinated delivery"
-      },
-      "k9": {
-        "ar": "حسب الطلب والمنطقة",
-        "en": "Per order and area"
-      },
-      "k10": {
-        "ar": "دعم واتساب",
-        "en": "WhatsApp support"
-      },
-      "k11": {
-        "ar": "السبت – الجمعة",
-        "en": "Sat – Fri"
-      },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
-      "k13": {
-        "ar": "المواصفات الفنية",
-        "en": "Technical Specifications"
-      },
-      "k14": {
-        "ar": "منتجات ذات صلة",
-        "en": "Related Products"
-      },
-      "k15": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k16": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k1": SHARED_COPY_16,
+      "k2": SHARED_COPY_4,
+      "k3": SHARED_COPY_5,
+      "k4": SHARED_COPY_6,
+      "k5": SHARED_COPY_7,
+      "k6": SHARED_COPY_8,
+      "k7": SHARED_COPY_9,
+      "k8": SHARED_COPY_10,
+      "k9": SHARED_COPY_11,
+      "k10": SHARED_COPY_12,
+      "k11": SHARED_COPY_13,
+      "k12": SHARED_COPY_3,
+      "k13": SHARED_COPY_14,
+      "k14": SHARED_COPY_15,
+      "k15": SHARED_COPY_2,
+      "k16": SHARED_COPY_1
     }
   },
   "solutionDetail": {
@@ -3928,11 +1922,7 @@ export const pages: PagesCopy = {
         "en": "Enquire About Your Project",
         "zh": "咨询您的项目"
       },
-      "k36": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k36": SHARED_COPY_1
     }
   },
   "projectDetail": {
@@ -3989,10 +1979,7 @@ export const pages: PagesCopy = {
         "ar": "قالب تطويري — ليس مشروعاً حقيقياً. البيانات والصورة المعروضة للتوضيح فقط.",
         "en": "Development template — not a real project. The data and photos shown are illustrative only."
       },
-      "k12": {
-        "ar": "نظرة عامة",
-        "en": "Overview"
-      },
+      "k12": SHARED_COPY_3,
       "k13": {
         "ar": "مثال توضيحي لترتيب أقسام صفحة تفاصيل مشروع: هنا تُكتب نبذة المشروع بعد اعتماده — نوع المنظومة، وموقعها العام، والغرض منها — بلا أرقام ولا أسماء قبل التوثيق.",
         "en": "Illustrative example of a project detail page layout: the project summary goes here once approved — system type, general location and purpose — with no figures or names before documentation."
@@ -4053,16 +2040,8 @@ export const pages: PagesCopy = {
         "ar": "مراحل التنفيذ",
         "en": "Execution Stages"
       },
-      "k28": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k29": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k28": SHARED_COPY_2,
+      "k29": SHARED_COPY_1
     }
   },
   "services": {
@@ -4134,16 +2113,8 @@ export const pages: PagesCopy = {
       "en": "Pre-purchase consultation: which system fits your needs and budget.",
       "zh": "购买前咨询：哪种系统最适合您的需求与预算。"
     },
-    "k15": {
-      "ar": "لنبدأ مشروعك اليوم",
-      "en": "Let's Start Your Project Today",
-      "zh": "今天就开始您的项目"
-    },
-    "k16": {
-      "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-      "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-      "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-    }
+    "k15": SHARED_COPY_2,
+    "k16": SHARED_COPY_1
   },
   "support": {
     "k1": {
@@ -4290,16 +2261,8 @@ export const pages: PagesCopy = {
         "ar": "وكالة Deye الرسمية في اليمن معتمدة من غمدان. صفة «وكيل» لغيرها من العلامات لم تُثبَت بعد — تُذكر كعلامات معروضة حتى الاعتماد.",
         "en": "Deye's official agency in Yemen is confirmed by Ghamdan. The «agent» status of the other brands is not yet established — they are listed as carried brands until approval."
       },
-      "k10": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k11": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k10": SHARED_COPY_2,
+      "k11": SHARED_COPY_1
     },
     "detail": {
       "deye": {
@@ -4436,16 +2399,8 @@ export const pages: PagesCopy = {
         "ar": "الباقات المعروضة معتمدة من غمدان. مكونات الباقات التفصيلية قيد الاعتماد النهائي — للتفاصيل والتوفر تواصل معنا عبر واتساب.",
         "en": "The bundles shown are approved by Ghamdan. Detailed bundle components are under final approval — for details and availability, contact us via WhatsApp."
       },
-      "k12": {
-        "ar": "لنبدأ مشروعك اليوم",
-        "en": "Let's Start Your Project Today",
-        "zh": "今天就开始您的项目"
-      },
-      "k13": {
-        "ar": "تحدث مع فريقنا عبر واتساب — أخبرنا باحتياجك وسنرشدك إلى المنظومة الأنسب.",
-        "en": "Talk to our team on WhatsApp — tell us what you need and we will guide you to the right system.",
-        "zh": "通过 WhatsApp 联系我们的团队 — 告诉我们您的需求，我们将为您推荐最合适的系统。"
-      }
+      "k12": SHARED_COPY_2,
+      "k13": SHARED_COPY_1
     },
     "bundles": {
       "bundle-1": {
@@ -4663,10 +2618,7 @@ export const pages: PagesCopy = {
       "ar": "ابحث بالاسم أو العلامة أو المواصفات — النتائج تُحدَّث مباشرة.",
       "en": "Search by name, brand or specification — results update live."
     },
-    "k3": {
-      "ar": "لا توجد نتائج مطابقة",
-      "en": "No matching results"
-    },
+    "k3": SHARED_COPY_17,
     "k4": {
       "ar": "جرّب كلمة أخرى.",
       "en": "Try another word."

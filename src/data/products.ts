@@ -549,7 +549,7 @@ export const products: Product[] = [
     },
     "name": {
       "ar": "MUST سلسلة PV19 / PV18 — 1kW",
-      "en": "MUST سلسلة PV19 / PV18 — 1kW"
+      "en": "MUST PV19 / PV18 Series — 1kW"
     },
     "overview": {
       "ar": "12V"
@@ -605,7 +605,7 @@ export const products: Product[] = [
     },
     "name": {
       "ar": "MUST سلسلة PV19 / PV18 — 3kW",
-      "en": "MUST سلسلة PV19 / PV18 — 3kW"
+      "en": "MUST PV19 / PV18 Series — 3kW"
     },
     "overview": {
       "ar": "24V"
@@ -658,7 +658,7 @@ export const products: Product[] = [
     },
     "name": {
       "ar": "MUST سلسلة PV19 / PV18 — 4kW",
-      "en": "MUST سلسلة PV19 / PV18 — 4kW"
+      "en": "MUST PV19 / PV18 Series — 4kW"
     },
     "specs": [
       {
@@ -702,7 +702,7 @@ export const products: Product[] = [
     },
     "name": {
       "ar": "MUST سلسلة PV19 / PV18 — 5kW",
-      "en": "MUST سلسلة PV19 / PV18 — 5kW"
+      "en": "MUST PV19 / PV18 Series — 5kW"
     },
     "overview": {
       "ar": "48V"
@@ -758,7 +758,7 @@ export const products: Product[] = [
     },
     "name": {
       "ar": "MUST سلسلة PV19 / PV18 — 6kW",
-      "en": "MUST سلسلة PV19 / PV18 — 6kW"
+      "en": "MUST PV19 / PV18 Series — 6kW"
     },
     "overview": {
       "ar": "48V"
@@ -1536,7 +1536,7 @@ export const products: Product[] = [
     },
     "name": {
       "ar": "EFORE خزائن EH 60~130-F / EH 96~209-F",
-      "en": "EFORE خزائن EH 60~130-F / EH 96~209-F"
+      "en": "EFORE EH 60~130-F / EH 96~209-F Cabinets"
     },
     "overview": {
       "ar": "تخزين تجاري وصناعي"
@@ -2144,7 +2144,7 @@ export const products: Product[] = [
     },
     "name": {
       "ar": "MUST سلسلة PC18 — 30/40/60/80/100A",
-      "en": "MUST سلسلة PC18 — 30/40/60/80/100A"
+      "en": "MUST PC18 Series — 30/40/60/80/100A"
     },
     "overview": {
       "ar": "12/24/36/48V"

@@ -41,7 +41,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       />
 
       {/* 2.2 Intro + pillar row */}
-      <section className="section">
+      <section data-reveal className="section">
         <div className="wrap">
           <div className="text-center">
             <p className="mb-3 inline-flex items-center gap-2 rounded-full bg-sky px-4 py-1.5 text-sm font-bold text-primary-hover">
@@ -65,7 +65,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       </section>
 
       {/* 2.3 Story */}
-      <section className="section bg-surface">
+      <section data-reveal className="section bg-surface">
         <div className="wrap">
           <EditorialBlock
             image="/images/photos/solar-farm.jpg"
@@ -81,7 +81,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           >
             <a
               href="#expertise"
-              className="mt-6 inline-flex items-center gap-1.5 rounded-[0.625rem] bg-navy px-5 py-2.5 font-bold text-button text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-navy"
+              className="mt-6 inline-flex items-center gap-1.5 rounded-[0.625rem] bg-navy px-5 py-2.5 font-bold text-button text-white transition-[transform,background-color] duration-200 hover:-translate-y-0.5 hover:bg-navy"
             >
               {ui("cta.discoverMore", l)}
               <ArrowLeft className="size-4 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
@@ -91,7 +91,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       </section>
 
       {/* 2.4 Mission / Vision */}
-      <section className="section">
+      <section data-reveal className="section">
         <div className="wrap grid gap-6 md:grid-cols-2">
           <div className="rounded-card border border-border bg-surface p-8 shadow-card">
             <div className="flex size-14 items-center justify-center rounded-full bg-sky text-primary-hover">
@@ -111,7 +111,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       </section>
 
       {/* 2.5 Expertise */}
-      <section id="expertise" className="section scroll-mt-24 bg-surface">
+      <section data-reveal id="expertise" className="section scroll-mt-24 bg-surface">
         <div className="wrap">
           <div className="text-center">
             <p className="mb-3 inline-flex items-center gap-2 rounded-full bg-sky px-4 py-1.5 text-sm font-bold text-primary-hover">
@@ -121,7 +121,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           </div>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {expertise.map((e) => (
-              <article key={e.pillar.title.ar} className="group overflow-hidden rounded-card bg-background shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover">
+              <article key={e.pillar.title.ar} className="group overflow-hidden rounded-card bg-background shadow-card transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-card-hover">
                 <Link href={localizedHref(l, e.href)} className="block overflow-hidden" aria-label={t(e.pillar.title, l)}>
                   <img src={webp(e.image)} alt={t(e.pillar.title, l)} loading="lazy" className="aspect-[16/10] w-full object-cover transition-transform duration-300 group-hover:scale-105" />
                 </Link>

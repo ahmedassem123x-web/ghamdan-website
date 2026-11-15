@@ -30,7 +30,7 @@ export default function ProductCard({ locale, product }: { locale: Locale; produ
   const waMsg = WA_MESSAGES.product(name, model, siteUrl)[locale];
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-card border border-border bg-surface shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover">
+    <article className="group flex flex-col overflow-hidden rounded-card border border-border bg-surface shadow-card transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-card-hover">
       <Link href={localizedHref(locale, `/products/${product.slug}`)} className="block" aria-label={name}>
         <div className="relative aspect-[4/3] overflow-hidden bg-surface-muted">
           {img ? (
@@ -80,6 +80,9 @@ export default function ProductCard({ locale, product }: { locale: Locale; produ
             ))}
           </ul>
         )}
+        {/* Actions pinned to the card bottom (flex-1 spacer) so the
+            details/WhatsApp row sits on one line across a grid row. */}
+        <div className="flex-1" aria-hidden="true" />
         <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-border pt-4">
           <Link
             href={localizedHref(locale, `/products/${product.slug}`)}

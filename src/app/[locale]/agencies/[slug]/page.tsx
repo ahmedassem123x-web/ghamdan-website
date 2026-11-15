@@ -49,16 +49,23 @@ export default async function AgencyDetailPage({ params }: { params: Promise<{ l
             <h1 className="font-latin text-5xl font-extrabold tracking-tight text-navy md:text-6xl" dir="ltr">
               {agency.name}
             </h1>
-            <div className="mt-4">
+            <div className="mt-4 flex flex-wrap items-center gap-2">
               {agency.officialAgent ? (
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-sky px-4 py-1.5 text-sm font-bold text-primary-hover">
                   <BadgeCheck className="size-4" aria-hidden="true" />
                   {t(agency.status, l)}
                 </span>
               ) : (
-                <span className="inline-flex rounded-full bg-sky px-4 py-1.5 text-sm font-bold text-navy">
-                  {t(agency.status, l)}
-                </span>
+                <>
+                  <span className="inline-flex rounded-full bg-sky px-4 py-1.5 text-sm font-bold text-navy">
+                    {t(agency.status, l)}
+                  </span>
+                  {agency.confirmationStatus === "pending" && (
+                    <span className="inline-flex rounded-full border border-warning/40 bg-warning/15 px-4 py-1.5 text-sm font-bold text-navy">
+                      {ui("agency.pendingConfirmation", l)}
+                    </span>
+                  )}
+                </>
               )}
             </div>
             <p className="mt-5 max-w-2xl text-body-lg text-text-muted">{t(agency.text, l)}</p>
@@ -66,7 +73,7 @@ export default async function AgencyDetailPage({ params }: { params: Promise<{ l
           </div>
         </div>
       </div>
-      <section className="section">
+      <section data-reveal className="section">
         <div className="wrap">
           <h2 className="text-h2 font-semibold text-navy"
             >{ui("nav.products", l)} — <span dir="ltr">{agency.name}</span>

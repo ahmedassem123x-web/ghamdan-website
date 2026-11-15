@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://ghamdan-website.vercel.app"),
   title: "غمدان للتجارة والتوكيلات | GHAMDAN",
   description: "Ghamdan for Trade and Agencies — official Deye agent in Yemen. Solar energy, storage and pumping systems, from design to installation and follow-up.",
 };

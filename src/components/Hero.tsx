@@ -111,7 +111,7 @@ export default function Hero({
         {primaryHref && (
           <Link
             href={localizedHref(locale, primaryHref)}
-            className="inline-flex items-center justify-center gap-2 rounded-[0.625rem] bg-navy px-5 py-2.5 font-bold text-button text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-navy"
+            className="inline-flex items-center justify-center gap-2 rounded-[0.625rem] bg-navy px-5 py-2.5 font-bold text-button text-white transition-[transform,background-color] duration-200 hover:-translate-y-0.5 hover:bg-navy"
           >
             {ui(primaryLabelKey, locale)}
           </Link>
@@ -179,7 +179,7 @@ export default function Hero({
           <div className="hero__anim mt-8 flex flex-wrap items-center justify-center gap-3">
             {whatsapp && waButton}
             {primaryHref && (
-              <Link href={localizedHref(locale, primaryHref)} className="inline-flex items-center justify-center gap-2 rounded-[0.625rem] bg-white px-5 py-2.5 font-bold text-button text-navy transition-all duration-200 hover:-translate-y-0.5">
+              <Link href={localizedHref(locale, primaryHref)} className="inline-flex items-center justify-center gap-2 rounded-[0.625rem] bg-white px-5 py-2.5 font-bold text-button text-navy transition-transform duration-200 hover:-translate-y-0.5">
                 {ui(primaryLabelKey, locale)}
               </Link>
             )}
@@ -221,7 +221,7 @@ export default function Hero({
             <div className="hero__anim mt-8 flex flex-wrap items-center gap-3">
               {whatsapp && waButton}
               {primaryHref && (
-                <Link href={localizedHref(locale, primaryHref)} className="inline-flex items-center justify-center gap-2 rounded-[0.625rem] bg-white px-5 py-2.5 font-bold text-button text-navy transition-all duration-200 hover:-translate-y-0.5">
+                <Link href={localizedHref(locale, primaryHref)} className="inline-flex items-center justify-center gap-2 rounded-[0.625rem] bg-white px-5 py-2.5 font-bold text-button text-navy transition-transform duration-200 hover:-translate-y-0.5">
                   {ui(primaryLabelKey, locale)}
                 </Link>
               )}
@@ -250,7 +250,7 @@ export default function Hero({
           <div className="hero__anim mt-8 flex flex-wrap items-center gap-3">
             {whatsapp && waButton}
             {primaryHref && (
-              <Link href={localizedHref(locale, primaryHref)} className="inline-flex items-center justify-center gap-2 rounded-[0.625rem] bg-white px-5 py-2.5 font-bold text-button text-navy transition-all duration-200 hover:-translate-y-0.5">
+              <Link href={localizedHref(locale, primaryHref)} className="inline-flex items-center justify-center gap-2 rounded-[0.625rem] bg-white px-5 py-2.5 font-bold text-button text-navy transition-transform duration-200 hover:-translate-y-0.5">
                 {ui(primaryLabelKey, locale)}
               </Link>
             )}

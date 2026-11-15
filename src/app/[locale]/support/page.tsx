@@ -37,7 +37,7 @@ export default async function SupportPage({ params }: { params: Promise<{ locale
       />
 
       {/* Technical support */}
-      <section className="section">
+      <section data-reveal className="section">
         <div className="wrap grid gap-10 lg:grid-cols-2">
           <div>
             {/* Heading inlined (visible by default) — SectionHeadingL's shared
@@ -73,7 +73,7 @@ export default async function SupportPage({ params }: { params: Promise<{ locale
       </section>
 
       {/* FAQ */}
-      <section className="section bg-surface">
+      <section data-reveal className="section bg-surface">
         <div className="wrap max-w-4xl">
           <h2 className="text-h2 font-semibold text-navy">{t(s.k10, l)}</h2>
           <div className="mt-8 space-y-4">

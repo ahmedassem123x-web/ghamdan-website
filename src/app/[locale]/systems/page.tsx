@@ -33,11 +33,11 @@ export default async function SystemsPage({ params }: { params: Promise<{ locale
         primaryHref="/contact"
         primaryLabelKey="cta.contactUs"
       />
-      <section className="section">
+      <section data-reveal className="section">
         <div className="wrap">
           <div className="grid gap-6 md:grid-cols-3">
             {confirmed.map((b) => (
-              <article key={b.id} className="flex flex-col rounded-card bg-surface p-6 shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover">
+              <article key={b.id} className="flex flex-col rounded-card bg-surface p-6 shadow-card transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-card-hover">
                 <div className="flex items-center gap-2">
                   <div className="flex size-12 items-center justify-center rounded-full bg-sky text-primary-hover">
                     <Package className="size-6" aria-hidden="true" />

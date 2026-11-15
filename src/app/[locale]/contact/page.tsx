@@ -72,11 +72,11 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
         title={c.k1}
         text={c.k2}
         whatsapp
-        whatsappVariant="navy-pill"
+        whatsappVariant="green-pill"
       />
 
       {/* 7.2 Method cards — 3 equal light-grey panels, text-links */}
-      <section className="section-sm">
+      <section data-reveal className="section-sm">
         <div className="wrap grid gap-6 md:grid-cols-3">
           {methods.map((m, i) => (
             <div key={i} className="rounded-card bg-surface-muted p-6">
@@ -103,7 +103,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
       </section>
 
       {/* 7.3 Form block — sky-blue side panel (40%) + form (60%) */}
-      <section className="section-sm">
+      <section data-reveal className="section-sm">
         <div className="wrap grid gap-6 lg:grid-cols-[40%_60%]">
           <aside className="flex flex-col overflow-hidden rounded-card bg-sky shadow-card">
             <div className="p-8">
@@ -118,7 +118,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
 
       {/* FAQ — heading inlined (visible by default); SectionHeadingL's shared
           wrapper no longer hides content (Phase 6 removed .reveal). */}
-      <section className="section bg-surface">
+      <section data-reveal className="section bg-surface">
         <div className="wrap max-w-4xl">
           <h2 className="text-h2 font-semibold text-navy">{t(c.k29, l)}</h2>
           <div className="mt-8 space-y-4">
@@ -146,7 +146,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
           zh: ui("contact.ctaTitle", "zh"),
         }}
         text={c.k2}
-        whatsappVariant="navy-pill"
+        whatsappVariant="green-pill"
         features={[
           { icon: <Settings className="size-4" aria-hidden="true" />, title: { ar: "خبرة متكاملة", en: "Integrated expertise", zh: "综合经验" } },
           { icon: <Wrench className="size-4" aria-hidden="true" />, title: { ar: "حلول مخصصة", en: "Tailored solutions", zh: "定制解决方案" } },

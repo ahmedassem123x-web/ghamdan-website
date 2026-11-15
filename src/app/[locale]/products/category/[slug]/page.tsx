@@ -65,7 +65,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ local
         }}
         text={cat.note}
         whatsapp
-        whatsappVariant="navy-pill"
+        whatsappVariant="green-pill"
         waMessage={WA_MESSAGES.category(t(cat.name, l), `https://ghamdan-website.vercel.app/${locale}/products/category/${cat.id}`)[l]}
         crumbs={[
           { label: ui("nav.home", l), href: localizedHref(l, "/") },
@@ -107,19 +107,19 @@ export default async function CategoryPage({ params }: { params: Promise<{ local
         </div>
       </div>
 
-      <section className="section">
+      <section data-reveal className="section">
         <div className="wrap">
           <CategoryClient locale={l} categoryId={cat.id} initial={items} />
         </div>
       </section>
 
       {/* 8.6 Related categories */}
-      <section className="section bg-surface">
+      <section data-reveal className="section bg-surface">
         <div className="wrap">
           <h2 className="text-h2 font-semibold text-navy">{ui("related.categories", l)}</h2>
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {related.map((r, i) => (
-              <Link key={i} href={localizedHref(l, r.href)} className="group overflow-hidden rounded-card bg-background shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover">
+              <Link key={i} href={localizedHref(l, r.href)} className="group overflow-hidden rounded-card bg-background shadow-card transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-card-hover">
                 <div className="overflow-hidden">
                   <img src={webp(r.image)} alt={t(r.title, l)} loading="lazy" className="aspect-[16/10] w-full object-cover transition-transform duration-300 group-hover:scale-105" />
                 </div>

@@ -21,14 +21,14 @@ export default async function AgenciesPage({ params }: { params: Promise<{ local
   return (
     <>
       <Hero locale={l} variant="plain" title={a.k1} text={a.k2} primaryHref="/contact" primaryLabelKey="cta.contactUs" />
-      <section className="section">
+      <section data-reveal className="section">
         <div className="wrap">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {agencies.map((ag) => (
               <Link
                 key={ag.id}
                 href={localizedHref(l, `/agencies/${ag.id}`)}
-                className="group flex flex-col rounded-card bg-surface p-6 shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover"
+                className="group flex flex-col rounded-card bg-surface p-6 shadow-card transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-card-hover"
               >
                 <div className="flex items-center justify-between">
                   <span className="font-latin text-3xl font-extrabold tracking-tight text-navy" dir="ltr">
@@ -42,8 +42,15 @@ export default async function AgenciesPage({ params }: { params: Promise<{ local
                   )}
                 </div>
                 {!ag.officialAgent && (
-                  <span className="mt-3 inline-flex w-fit rounded-full bg-sky px-3 py-1 text-xs font-bold text-navy">
-                    {t(ag.status, l)}
+                  <span className="mt-3 flex flex-wrap items-center gap-2">
+                    <span className="inline-flex w-fit rounded-full bg-sky px-3 py-1 text-xs font-bold text-navy">
+                      {t(ag.status, l)}
+                    </span>
+                    {ag.confirmationStatus === "pending" && (
+                      <span className="inline-flex w-fit rounded-full border border-warning/40 bg-warning/15 px-3 py-1 text-xs font-bold text-navy">
+                        {ui("agency.pendingConfirmation", l)}
+                      </span>
+                    )}
                   </span>
                 )}
                 <p className="mt-3 flex-1 text-body-sm text-text-muted">{t(ag.text, l)}</p>

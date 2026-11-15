@@ -43,7 +43,7 @@ export default async function SolutionsPage({ params }: { params: Promise<{ loca
       />
 
       {/* 3.2 Intro with blue underline accent */}
-      <section className="section">
+      <section data-reveal className="section">
         <div className="wrap text-center">
           <h2 className="text-h2 font-semibold text-navy">{t(s.k26, l)}</h2>
           <span className="mx-auto mt-4 block h-1 w-16 rounded-full bg-primary-hover" aria-hidden="true" />
@@ -52,7 +52,7 @@ export default async function SolutionsPage({ params }: { params: Promise<{ loca
       </section>
 
       {/* 3.3 Editorial rows ×5 */}
-      <section className="section-sm bg-surface">
+      <section data-reveal className="section-sm bg-surface">
         <div className="wrap space-y-16">
           {solutionAreas.map((area, i) => (
             <EditorialBlock
@@ -71,7 +71,7 @@ export default async function SolutionsPage({ params }: { params: Promise<{ loca
             >
               <Link
                 href={localizedHref(l, `/solutions/${area.id}`)}
-                className="mt-6 inline-flex items-center gap-1.5 rounded-[0.625rem] bg-navy px-5 py-2.5 font-bold text-button text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-navy"
+                className="mt-6 inline-flex items-center gap-1.5 rounded-[0.625rem] bg-navy px-5 py-2.5 font-bold text-button text-white transition-[transform,background-color] duration-200 hover:-translate-y-0.5 hover:bg-navy"
               >
                 {ui("cta.discoverMore", l)}
                 <ArrowLeft className="size-4 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
@@ -82,7 +82,7 @@ export default async function SolutionsPage({ params }: { params: Promise<{ loca
       </section>
 
       {/* 3.4 How we work — 4 steps, numbered RTL with arrows */}
-      <section className="section">
+      <section data-reveal className="section">
         <div className="wrap">
           {/* Heading inlined (visible by default) — SectionHeadingL's shared
               wrapper no longer hides content (Phase 6 removed .reveal). */}

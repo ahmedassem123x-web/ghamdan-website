@@ -10,8 +10,18 @@
  * and the correction is recorded in products.ts; do not list them under EFORE.
  */
 import type { Agency } from "./types";
+import { products } from "./products";
 
-export const agencies: Agency[] = [
+const AGENCY_BRANDS: Record<string, string> = {
+  deye: "Deye",
+  efore: "EFORE",
+  jntech: "Jntech",
+  must: "MUST",
+  qcells: "Hanwha Q-Cells",
+  wisenet: "Wisenet",
+};
+
+const rawAgencies: Omit<Agency, "productIds">[] = [
   {
     "id": "deye",
     "name": "Deye",
@@ -26,25 +36,7 @@ export const agencies: Agency[] = [
       "zh": "Deye 在也门的官方代理 — 混合逆变器、电池与储能系统。"
     },
     "officialAgent": true,
-    "confirmationStatus": "confirmed",
-    "productIds": [
-      "p01",
-      "p02",
-      "p03",
-      "p04",
-      "p05",
-      "p06",
-      "p07",
-      "p08",
-      "p14",
-      "p15",
-      "p16",
-      "p17",
-      "p18",
-      "p19",
-      "p20",
-      "p21"
-    ]
+    "confirmationStatus": "confirmed"
   },
   {
     "id": "efore",
@@ -60,13 +52,7 @@ export const agencies: Agency[] = [
       "zh": "EFORE 电池与储能系统 — 住宅、商业与工业。"
     },
     "officialAgent": false,
-    "confirmationStatus": "pending",
-    "productIds": [
-      "p24",
-      "p25",
-      "p27",
-      "p28"
-    ]
+    "confirmationStatus": "pending"
   },
   {
     "id": "must",
@@ -82,16 +68,7 @@ export const agencies: Agency[] = [
       "zh": "MUST 经济型逆变器、充电控制器与电池。"
     },
     "officialAgent": false,
-    "confirmationStatus": "pending",
-    "productIds": [
-      "p09",
-      "p10",
-      "p11",
-      "p12",
-      "p13",
-      "p29",
-      "p38"
-    ]
+    "confirmationStatus": "pending"
   },
   {
     "id": "jntech",
@@ -107,16 +84,7 @@ export const agencies: Agency[] = [
       "zh": "Jntech 水泵逆变器与太阳能水泵，用于水井与灌溉。"
     },
     "officialAgent": false,
-    "confirmationStatus": "pending",
-    "productIds": [
-      "p31",
-      "p32",
-      "p33",
-      "p34",
-      "p35",
-      "p36",
-      "p37"
-    ]
+    "confirmationStatus": "pending"
   },
   {
     "id": "qcells",
@@ -132,10 +100,7 @@ export const agencies: Agency[] = [
       "zh": "Hanwha Q-Cells 太阳能电池板 — 可供型号待确认。"
     },
     "officialAgent": false,
-    "confirmationStatus": "pending",
-    "productIds": [
-      "p30"
-    ]
+    "confirmationStatus": "pending"
   },
   {
     "id": "wisenet",
@@ -151,10 +116,14 @@ export const agencies: Agency[] = [
       "zh": "Wisenet 摄像头与安防系统 — 型号待确认。"
     },
     "officialAgent": false,
-    "confirmationStatus": "pending",
-    "productIds": [
-      "p39"
-    ]
+    "confirmationStatus": "pending"
   }
 ];
+
+/** productIds are derived from products.ts by brand — never hand-written. */
+export const agencies: Agency[] = rawAgencies.map((a) => ({
+  ...a,
+  productIds: products.filter((p) => p.brand === AGENCY_BRANDS[a.id]).map((p) => p.id),
+}));
+
 ;

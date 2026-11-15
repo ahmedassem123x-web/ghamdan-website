@@ -135,46 +135,6 @@ export function ZhNotice({ locale }: { locale: Locale }) {
   );
 }
 
-/** Icon + title + text feature block (§2.11). */
-export function IconFeature({
-  icon,
-  title,
-  text,
-}: {
-  icon: ReactNode;
-  title: string;
-  text?: string;
-}) {
-  return (
-    <div className="flex gap-4">
-      <div className="flex size-14 shrink-0 items-center justify-center rounded-full bg-sky text-primary-hover">{icon}</div>
-      <div>
-        <h3 className="text-h4 font-semibold text-navy">{title}</h3>
-        {text && <p className="mt-1.5 text-body-sm text-text-secondary">{text}</p>}
-      </div>
-    </div>
-  );
-}
-
-/** Feature card (§2.11). */
-export function FeatureCard({
-  icon,
-  title,
-  text,
-}: {
-  icon: ReactNode;
-  title: string;
-  text?: string;
-}) {
-  return (
-    <div className="rounded-card bg-surface p-6 shadow-card transition-shadow duration-200 hover:shadow-card-hover">
-      <div className="flex size-14 items-center justify-center rounded-full bg-sky text-primary-hover">{icon}</div>
-      <h3 className="mt-4 text-h4 font-semibold text-navy">{title}</h3>
-      {text && <p className="mt-2 text-body-sm text-text-secondary">{text}</p>}
-    </div>
-  );
-}
-
 /** Spec table (§2.11): renders only rows that exist — never "—" placeholders. */
 export function SpecTable({ rows }: { rows: { label: string; value: string }[] }) {
   if (rows.length === 0) return null;

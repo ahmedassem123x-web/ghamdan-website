@@ -21,7 +21,7 @@ export default async function DownloadsPage({ params }: { params: Promise<{ loca
   return (
     <>
       <Hero locale={l} variant="plain" title={d.k1} text={d.k2} primaryHref="/contact" primaryLabelKey="cta.contactUs" />
-      <section className="section">
+      <section data-reveal className="section">
         <div className="wrap">
           {/* Honest empty state — inlined (visible by default) instead of the
               shared EmptyState (Phase 6 removed the .reveal hiding from the

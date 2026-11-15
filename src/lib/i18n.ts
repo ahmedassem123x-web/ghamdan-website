@@ -33,9 +33,13 @@ export function localizedHref(locale: Locale, path: string): string {
   return `/${locale}${clean === "/" ? "" : clean}`;
 }
 
-/** Swap the locale segment of the current pathname, preserving the rest. */
+/** Swap the locale segment of the current pathname, preserving the rest.
+ * Works with clean paths ("/en/products/x") AND static ".html" paths
+ * ("/en.html", "/ar/products/x.html") — the ".html" suffix is stripped
+ * because Vercel serves clean URLs (cleanUrls) and links use clean paths. */
 export function switchLocalePath(pathname: string, nextLocale: Locale): string {
-  const parts = pathname.split("/").filter(Boolean);
+  const clean = pathname.replace(/\.html$/, "").replace(/\/$/, "");
+  const parts = clean.split("/").filter(Boolean);
   if (parts.length > 0 && isLocale(parts[0])) parts[0] = nextLocale;
   else parts.unshift(nextLocale);
   return `/${parts.join("/")}`;

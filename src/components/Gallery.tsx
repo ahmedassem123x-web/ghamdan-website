@@ -1,8 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { webp } from "@/lib/images";
+import { useFocusTrap } from "@/lib/use-focus-trap";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import type { Locale } from "@/data";
 
 export interface GalleryItem {
   src: string;
@@ -13,16 +15,30 @@ export interface GalleryItem {
 /**
  * Gallery + lightbox (§2.11): thumbnail grid, click to open, arrows + Escape
  * to close. Stand-in photos always carry an "illustrative" caption (honesty rule).
+ *
+ * Direction rules (fixed 2026-11-15 — icons and keyboard were written for
+ * Arabic only): "Previous" points backward and "Next" points forward per
+ * reading direction — in RTL ArrowLeft / swipe right move forward, in LTR
+ * ArrowRight / swipe left move forward. Lightbox images crossfade 300ms
+ * (`.carousel__img`, keyed by index) instead of swapping instantly.
  */
-export default function Gallery({ items, label }: { items: GalleryItem[]; label: string }) {
+export default function Gallery({ items, label, locale }: { items: GalleryItem[]; label: string; locale: Locale }) {
   const [open, setOpen] = useState<number | null>(null);
+  const rtl = locale === "ar";
+  const touchX = useRef<number | null>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(open !== null, dialogRef);
+
+  // Previous points backward, Next points forward — per reading direction.
+  const PrevIcon = rtl ? ChevronRight : ChevronLeft;
+  const NextIcon = rtl ? ChevronLeft : ChevronRight;
 
   useEffect(() => {
     if (open === null) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(null);
-      if (e.key === "ArrowLeft") setOpen((o) => (o === null ? null : (o + 1) % items.length));
-      if (e.key === "ArrowRight") setOpen((o) => (o === null ? null : (o - 1 + items.length) % items.length));
+      if (e.key === "ArrowLeft") setOpen((o) => (o === null ? null : (o + (rtl ? 1 : -1) + items.length) % items.length));
+      if (e.key === "ArrowRight") setOpen((o) => (o === null ? null : (o + (rtl ? -1 : 1) + items.length) % items.length));
     };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
@@ -30,7 +46,19 @@ export default function Gallery({ items, label }: { items: GalleryItem[]; label:
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
     };
-  }, [open, items.length]);
+  }, [open, items.length, rtl]);
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchX.current = e.touches[0].clientX;
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (open === null || touchX.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchX.current;
+    touchX.current = null;
+    if (Math.abs(dx) < 40) return;
+    const dir = dx < 0 ? (rtl ? -1 : 1) : (rtl ? 1 : -1);
+    setOpen((o) => (o === null ? null : (o + dir + items.length) % items.length));
+  };
 
   if (items.length === 0) return null;
 
@@ -47,7 +75,6 @@ export default function Gallery({ items, label }: { items: GalleryItem[]; label:
           onClick={() => setOpen(0)}
           className="group relative block w-full overflow-hidden rounded-image text-start focus-visible:outline-2 focus-visible:outline-primary-hover"
           aria-label={`${label} — ${single.alt}`}
-         
         >
           <img src={webp(single.src)} alt={single.alt} loading="lazy" className="aspect-[4/3] w-full object-cover transition-transform duration-300 group-hover:scale-105" />
           {/* D-7 fix 2026-11-15: caption was rendered twice — this overlay
@@ -74,16 +101,24 @@ export default function Gallery({ items, label }: { items: GalleryItem[]; label:
       )}
 
       {open !== null && (
-        <div role="dialog" aria-modal="true" aria-label={items[open].alt} className="fixed inset-0 z-[80] flex items-center justify-center bg-navy/90 p-4">
+        <div
+          ref={dialogRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label={items[open].alt}
+          className="fixed inset-0 z-[80] flex items-center justify-center bg-navy/90 p-4"
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
+        >
           <button type="button" className="absolute top-4 end-4 inline-flex size-11 items-center justify-center rounded-full bg-white/15 text-white" aria-label="Close" onClick={() => setOpen(null)}>
             <X className="size-6" aria-hidden="true" />
           </button>
           <button type="button" className="absolute start-4 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white" aria-label="Previous" onClick={() => setOpen((open - 1 + items.length) % items.length)}>
-            <ChevronLeft className="size-6" aria-hidden="true" />
+            <PrevIcon className="size-6" aria-hidden="true" />
           </button>
-          <img src={webp(items[open].src)} alt={items[open].alt} className="max-h-[80vh] max-w-full rounded-image object-contain" />
+          <img key={open} src={webp(items[open].src)} alt={items[open].alt} className="carousel__img max-h-[80vh] max-w-full rounded-image object-contain" />
           <button type="button" className="absolute end-4 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white" aria-label="Next" onClick={() => setOpen((open + 1) % items.length)}>
-            <ChevronRight className="size-6" aria-hidden="true" />
+            <NextIcon className="size-6" aria-hidden="true" />
           </button>
           {items[open].caption && (
             <p className="absolute bottom-4 inset-x-0 text-center text-sm font-bold text-white">{items[open].caption}</p>

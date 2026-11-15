@@ -17,9 +17,9 @@
      surface       #FFFFFF  cards, header
      surface-elevated #F6FAFC  cards on tinted backgrounds
      text          #131C1C  (17.35:1)   text-secondary #5A6470 (6.01:1)
-     text-muted    #6B7280  captions/meta only (4.83:1)
+     text-muted    #667085  captions/meta only (4.59:1 on page bg, 4.97:1 on white)
      border        #E5E7EB  border-strong #D5DEE8 (retained)
-     whatsapp      #1D9E44  (3.48:1 white-on-green — pre-existing, flagged)
+     whatsapp      #157A35  (5.43:1 white-on-green — AA; darkened 2026-11-15 from #1D9E44 3.48:1)
      logo-red #E31E24 / logo-tile-navy #124888 — LOGO ONLY, never UI.
 
    DEPRECATED ALIASES — DELETED 2026-11-15 (coordinator, after Phases 4+5
@@ -50,7 +50,7 @@
   --color-surface-muted: #eef3f7;
   --color-text: #131c1c;
   --color-text-secondary: #5a6470;
-  --color-text-muted: #6b7280;
+  --color-text-muted: #667085;
   --color-text-inverse: #ffffff;
   --color-text-inverse-muted: #c7d6e4;
   --color-border: #e5e7eb;
@@ -62,7 +62,7 @@
   --color-info: #3b82f6;
   --color-disabled-bg: #e5e7eb;
   --color-disabled-text: #6b7280;
-  --color-whatsapp: #1d9e44;
+  --color-whatsapp: #157a35;
   /* Logo-only tokens — never UI colours. */
   --color-logo-red: #e31e24;
   --color-logo-tile-navy: #124888;
@@ -208,8 +208,10 @@
 }
 
 /* ---------- Base ---------- */
+/* No `scroll-behavior: smooth` here: Lenis owns smooth scrolling (see
+   MotionProvider) and a second CSS smoothing pass makes anchor jumps
+   stutter/double-animate. Native instant jumps are the correct base. */
 html {
-  scroll-behavior: smooth;
   overflow-x: clip;
 }
 body {
@@ -257,10 +259,29 @@ img {
   }
 }
 .section {
-  padding-block: clamp(4rem, 7vw, 7.5rem);
+  padding-block: clamp(3.5rem, 6vw, 6rem);
 }
 .section-sm {
   padding-block: clamp(2.5rem, 4vw, 4rem);
+}
+
+/* ---------- Skip link (WCAG 2.4.1) ----------
+   Visually hidden until keyboard focus, then a visible bar at the top.
+   Target is <main id="main"> in [locale]/layout.tsx. */
+.skip-link {
+  position: fixed;
+  inset-inline-start: 1rem;
+  top: -4rem;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.625rem;
+  background: var(--color-navy);
+  color: #fff;
+  font-weight: 700;
+  transition: top 0.2s ease;
+}
+.skip-link:focus-visible {
+  top: 1rem;
 }
 
 /* ---------- Reveals (v15 §10.10: progressive enhancement only) ----------
@@ -285,6 +306,22 @@ img {
   display: flex;
   width: max-content;
   animation: marquee-x 60s linear infinite;
+}
+
+/* ---------- Carousel / lightbox crossfade ----------
+   Applied (via `key={src}`) to the image that changes when the user
+   navigates: a 300ms fade replaces the old instant swap. Reduced-motion
+   users get the global 0.01ms duration override below. */
+@keyframes carousel-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.carousel__img {
+  animation: carousel-fade 300ms ease-out;
 }
 
 /* ---------- Header states (C-1: opaque white from scroll 0) ---------- */

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { AlertTriangle, MessageCircle } from "lucide-react";
 import Hero from "@/components/Hero";
 import { ui } from "@/lib/ui-copy";
-import { WA_MESSAGES, waLink, recordWaClick } from "@/lib/whatsapp";
+import { WA_MESSAGES, waLink } from "@/lib/whatsapp";
 import { pages } from "@/data";
 import { t } from "@/lib/i18n";
 import type { Locale } from "@/data";
@@ -92,7 +92,7 @@ export default function GuidanceClient({ locale }: { locale: Locale }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-disabled={!ready}
-              className={`mt-6 inline-flex items-center gap-2 rounded-[0.625rem] px-6 py-3 font-bold text-button text-white transition-all ${
+              className={`mt-6 inline-flex items-center gap-2 rounded-[0.625rem] px-6 py-3 font-bold text-button text-white transition-transform ${
                 ready ? "bg-whatsapp hover:-translate-y-0.5" : "cursor-not-allowed bg-text-muted opacity-60"
               }`}
               onClick={(e) => {
@@ -101,7 +101,6 @@ export default function GuidanceClient({ locale }: { locale: Locale }) {
                   setError(ui("form.required", locale));
                   return;
                 }
-                recordWaClick({ source: "guidance", sourceId: "", pageUrl: window.location.href, locale, ctaId: "guidance-send" });
               }}
             >
               <MessageCircle className="size-5" aria-hidden="true" />

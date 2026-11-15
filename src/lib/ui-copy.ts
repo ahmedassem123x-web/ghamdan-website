@@ -89,6 +89,8 @@ const U: Record<string, LocalizedString> = {
   "catalog.type": { ar: "نوع المنتج", en: "Product type", zh: "产品类型" },
   "catalog.relatedCategories": { ar: "فئات ذات صلة", en: "Related categories", zh: "相关分类" },
   "catalog.illustrative": { ar: "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام", en: "Illustrative photo of the product type — the real product photo is pending", zh: "产品类型示意图 — 真实产品照片待提供" },
+  "catalog.comingSoon": { ar: "قريبًا", en: "Coming soon", zh: "即将推出" },
+  "agency.pendingConfirmation": { ar: "قيد التأكيد", en: "Confirmation pending", zh: "待确认" },
   "catalog.noProducts": { ar: "لا توجد منتجات منشورة في هذه الفئة بعد", en: "No published products in this category yet", zh: "该分类暂无已发布产品" },
   "catalog.backToProducts": { ar: "العودة إلى المنتجات", en: "Back to products", zh: "返回产品" },
   // --- Product detail ---
@@ -147,8 +149,6 @@ const U: Record<string, LocalizedString> = {
   // --- 404 ---
   "notFound.title": { ar: "الصفحة غير موجودة", en: "Page not found", zh: "页面不存在" },
   "notFound.copy": { ar: "يبدو أن الرابط غير صحيح أو أن الصفحة نُقلت.", en: "The link seems incorrect or the page was moved.", zh: "链接似乎不正确或页面已移动。" },
-  // --- Admin demo ---
-  "admin.demo": { ar: "واجهة عرض تجريبية", en: "Demo interface", zh: "演示界面" },
 };
 
 export function ui(key: string, locale: Locale): string {

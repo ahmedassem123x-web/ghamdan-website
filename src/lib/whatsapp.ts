@@ -45,32 +45,3 @@ export const WA_MESSAGES = {
     zh: `您好 — 来自 ${name}（${email}）的消息 — ${type}：${message}`,
   }),
 } as const;
-
-export interface WaClick {
-  source: string;
-  sourceId: string;
-  pageUrl: string;
-  locale: Locale;
-  ctaId: string;
-  timestamp: string;
-}
-
-/** Record a WhatsApp click in localStorage (client-side analytics only — never delivery/read). */
-export function recordWaClick(click: Omit<WaClick, "timestamp">): void {
-  try {
-    const raw = localStorage.getItem("gts_wa_clicks") ?? "[]";
-    const log: WaClick[] = JSON.parse(raw);
-    log.push({ ...click, timestamp: new Date().toISOString() });
-    localStorage.setItem("gts_wa_clicks", JSON.stringify(log.slice(-500)));
-  } catch {
-    /* storage unavailable — analytics is best-effort only */
-  }
-}
-
-export function readWaClicks(): WaClick[] {
-  try {
-    return JSON.parse(localStorage.getItem("gts_wa_clicks") ?? "[]");
-  } catch {
-    return [];
-  }
-}

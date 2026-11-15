@@ -12,8 +12,9 @@
  * has only the pending p39.
  */
 import type { Category } from "./types";
+import { products } from "./products";
 
-export const categories: Category[] = [
+const rawCategories: Omit<Category, "publishedCount">[] = [
   {
     "id": "inverters",
     "name": {
@@ -35,8 +36,7 @@ export const categories: Category[] = [
     "brands": [
       "Deye",
       "MUST"
-    ],
-    "publishedCount": 13
+    ]
   },
   {
     "id": "batteries",
@@ -61,8 +61,7 @@ export const categories: Category[] = [
       "EFORE",
       "MUST",
       "Shenzhen Kexin"
-    ],
-    "publishedCount": 16
+    ]
   },
   {
     "id": "panels",
@@ -82,8 +81,7 @@ export const categories: Category[] = [
     ],
     "brands": [
       "Hanwha Q-Cells"
-    ],
-    "publishedCount": 0
+    ]
   },
   {
     "id": "pumps",
@@ -104,8 +102,7 @@ export const categories: Category[] = [
     ],
     "brands": [
       "Jntech"
-    ],
-    "publishedCount": 7
+    ]
   },
   {
     "id": "controllers",
@@ -126,8 +123,7 @@ export const categories: Category[] = [
     ],
     "brands": [
       "MUST"
-    ],
-    "publishedCount": 1
+    ]
   },
   {
     "id": "systems",
@@ -152,8 +148,7 @@ export const categories: Category[] = [
       "Deye",
       "EFORE",
       "MUST"
-    ],
-    "publishedCount": 0
+    ]
   },
   {
     "id": "storage-ci",
@@ -174,8 +169,7 @@ export const categories: Category[] = [
     "brands": [
       "EFORE",
       "Deye"
-    ],
-    "publishedCount": 0
+    ]
   },
   {
     "id": "cameras",
@@ -195,8 +189,14 @@ export const categories: Category[] = [
     ],
     "brands": [
       "Wisenet"
-    ],
-    "publishedCount": 0
+    ]
   }
 ];
+
+/** publishedCount is computed from products.ts — never hand-written. */
+export const categories: Category[] = rawCategories.map((c) => ({
+  ...c,
+  publishedCount: products.filter((p) => p.categoryId === c.id && p.status === "published").length,
+}));
+
 ;

@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 import { MessageCircle } from "lucide-react";
-import { recordWaClick, waLink } from "@/lib/whatsapp";
+import { waLink } from "@/lib/whatsapp";
 import type { Locale } from "@/data";
 
 export type WaButtonVariant =
@@ -30,13 +30,13 @@ export interface WaButtonProps {
  * under this component's historic API because callers across the site
  * use it. Tokens (docs/design-tokens.md):
  *  - navy-pill: navy #102B46 fill, white text; hover #0B70C9.
- *  - green-pill: WhatsApp #1D9E44 fill, white text (3.48:1 — flagged,
- *    pre-existing live value, no board HEX; always paired with the glyph).
+ *  - green-pill: WhatsApp #157A35 fill, white text (5.43:1, AA —
+ *    darkened 2026-11-15 from #1D9E44 3.48:1; always paired with the glyph).
+ *    Rule: green = WhatsApp always; navy = internal navigation only.
  *  - white-on-dark: white fill, navy text (on navy panels).
  *  - outlined-blue: 1.5px #0081FB border, #0B70C9 text (AA).
  *  - text-link: #0B70C9 text (AA), underline on hover.
- * Height 48px (md), radius 12px, semibold. Clicks recorded to
- * localStorage — never delivery/read.
+ * Height 48px (md), radius 12px, semibold.
  */
 export default function WhatsAppButton({
   locale,
@@ -49,7 +49,7 @@ export default function WhatsAppButton({
   icon,
 }: WaButtonProps) {
   const base =
-    "inline-flex h-12 items-center justify-center gap-2 rounded-button px-5 font-semibold text-button transition-[color,background-color,border-color,transform,box-shadow] duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus";
+    "inline-flex h-12 items-center justify-center gap-2 whitespace-nowrap rounded-button px-5 font-semibold text-button transition-[color,background-color,border-color,transform,box-shadow] duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus";
   const variants: Record<WaButtonVariant, string> = {
     "navy-pill": "bg-navy text-white hover:bg-primary-hover shadow-card",
     "green-pill": "bg-whatsapp text-white hover:brightness-95 shadow-card",
@@ -64,15 +64,6 @@ export default function WhatsAppButton({
       target="_blank"
       rel="noopener noreferrer"
       className={`${base} ${variants[variant]} ${className}`}
-      onClick={() =>
-        recordWaClick({
-          source,
-          sourceId,
-          pageUrl: window.location.href,
-          locale,
-          ctaId: `${source}-${variant}`,
-        })
-      }
     >
       {icon ?? <MessageCircle className="size-5" strokeWidth={2} aria-hidden="true" />}
       <span>{label}</span>

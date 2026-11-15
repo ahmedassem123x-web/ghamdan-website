@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { ArrowLeft, MessageCircle } from "lucide-react";
 import { ui } from "@/lib/ui-copy";
-import { WA_MESSAGES, waLink, recordWaClick } from "@/lib/whatsapp";
+import { WA_MESSAGES, waLink } from "@/lib/whatsapp";
 import { pages } from "@/data";
 import { t } from "@/lib/i18n";
 import type { Locale, LocalizedString } from "@/data";
@@ -11,9 +11,9 @@ import type { Locale, LocalizedString } from "@/data";
 /**
  * Contact form (§3.7 + §4.10, spec fields — NOT the data's 5-option form):
  * الاسم الكامل * / البريد الإلكتروني * (side by side) / نوع الاستفسار *
- * (SIX options) / رسالتك * — validates locally, records the inquiry in
- * localStorage `gts_inquiries` (shown in the admin demo), then hands the
- * message to WhatsApp. It does NOT send email and stores nothing externally.
+ * (SIX options) / رسالتك * — validates locally, then hands the
+ * message to WhatsApp. It does NOT send email and stores nothing
+ * anywhere (no localStorage, no server).
  */
 const TYPE_OPTIONS: LocalizedString[] = [
   { ar: "استفسار عن منتج", en: "Product enquiry" },
@@ -23,26 +23,6 @@ const TYPE_OPTIONS: LocalizedString[] = [
   { ar: "استشارة اختيار نظام", en: "System selection consultation" },
   { ar: "استفسار عام", en: "General enquiry" },
 ];
-
-export interface StoredInquiry {
-  name: string;
-  email: string;
-  type: string;
-  message: string;
-  at: string;
-  locale: Locale;
-}
-
-export function recordInquiry(inquiry: StoredInquiry) {
-  try {
-    const raw = localStorage.getItem("gts_inquiries");
-    const list: StoredInquiry[] = raw ? JSON.parse(raw) : [];
-    list.unshift(inquiry);
-    localStorage.setItem("gts_inquiries", JSON.stringify(list.slice(0, 50)));
-  } catch {
-    // localStorage unavailable (private mode) — the WhatsApp handoff still works.
-  }
-}
 
 export default function ContactForm({ locale }: { locale: Locale }) {
   const c = pages.contact;
@@ -61,14 +41,6 @@ export default function ContactForm({ locale }: { locale: Locale }) {
     if (message.trim().length < 10) errs.push(ui("form.shortMessage", locale));
     setErrors(errs);
     if (errs.length === 0) {
-      recordInquiry({
-        name: name.trim(),
-        email: email.trim(),
-        type: t(TYPE_OPTIONS[type], locale),
-        message: message.trim(),
-        at: new Date().toISOString(),
-        locale,
-      });
       setReady(true);
     }
   };
@@ -83,10 +55,7 @@ export default function ContactForm({ locale }: { locale: Locale }) {
           href={waLink(text)}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-5 inline-flex items-center gap-2 rounded-[0.625rem] bg-whatsapp px-5 py-2.5 font-bold text-button text-white transition-all hover:-translate-y-0.5"
-          onClick={() =>
-            recordWaClick({ source: "contact", sourceId: "form", pageUrl: window.location.href, locale, ctaId: "contact-form" })
-          }
+          className="mt-5 inline-flex items-center gap-2 rounded-[0.625rem] bg-whatsapp px-5 py-2.5 font-bold text-button text-white transition-transform hover:-translate-y-0.5"
         >
           <MessageCircle className="size-5" aria-hidden="true" />
           {ui("form.openWhatsapp", locale)}
@@ -150,7 +119,7 @@ export default function ContactForm({ locale }: { locale: Locale }) {
       </label>
       <button
         type="submit"
-        className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-[0.625rem] bg-navy px-6 py-3 font-bold text-button text-white transition-all hover:-translate-y-0.5 hover:bg-navy"
+        className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-[0.625rem] bg-navy px-6 py-3 font-bold text-button text-white transition-[transform,background-color] hover:-translate-y-0.5 hover:bg-navy"
       >
         {ui("cta.sendMessage", locale)}
         <ArrowLeft className="size-5 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />

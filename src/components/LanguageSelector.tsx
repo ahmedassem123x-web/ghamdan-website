@@ -17,19 +17,19 @@ const LABELS: Record<Locale, string> = { ar: "عربي", en: "EN", zh: "中文" 
 export default function LanguageSelector({ locale }: { locale: Locale }) {
   const pathname = usePathname();
   return (
-    <nav aria-label="Language" className="flex items-center gap-1 text-sm font-semibold">
+    <nav aria-label="Language" className="flex shrink-0 items-center gap-1 whitespace-nowrap text-sm font-semibold">
       {LOCALES.map((l, i) => (
-        <span key={l} className="flex items-center gap-1">
+        <span key={l} className="flex items-center gap-1 whitespace-nowrap">
           {i > 0 && <span className="text-text-muted" aria-hidden="true">|</span>}
           {l === locale ? (
-            <span aria-current="true" className="inline-flex min-h-11 items-center px-1.5 text-primary-hover">
+            <span aria-current="true" className="inline-flex min-h-11 items-center whitespace-nowrap px-1.5 text-primary-hover">
               {LABELS[l]}
             </span>
           ) : (
             <Link
               href={switchLocalePath(pathname, l)}
               hrefLang={l}
-              className="inline-flex min-h-11 items-center px-1.5 text-text-secondary transition-colors hover:text-primary-hover"
+              className="inline-flex min-h-11 items-center whitespace-nowrap px-1.5 text-text-secondary transition-colors hover:text-primary-hover"
               onClick={() => {
                 document.cookie = `NEXT_LOCALE=${l}; path=/; max-age=${60 * 60 * 24 * 365}`;
               }}
