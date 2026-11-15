@@ -7,7 +7,7 @@ import ProductCard from "@/components/ProductCard";
 import Gallery from "@/components/Gallery";
 import StickyWhatsAppBar from "@/components/StickyWhatsAppBar";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import { Breadcrumbs, EditorialBlock, Reveal, SpecTable } from "@/components/ui";
+import { Breadcrumbs, EditorialBlock, SpecTable } from "@/components/ui";
 import { pages, products, categories, siteSettings } from "@/data";
 import { localizedHref, t } from "@/lib/i18n";
 import { ui } from "@/lib/ui-copy";
@@ -61,42 +61,43 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           ]}
         />
         <div className="wrap grid gap-10 py-10 md:grid-cols-2 md:py-14">
-          {/* Gallery */}
-          <Reveal>
+          {/* Gallery — visible by default (was <Reveal>). M-1 preserved:
+              Gallery renders a single image large at 4:3. */}
+          <div>
             {galleryItems.length > 0 ? (
               <Gallery items={galleryItems} label={name} />
             ) : (
-              <div className="flex aspect-[4/3] items-center justify-center rounded-image bg-surface-blue">
-                <span className="font-latin text-6xl font-extrabold text-sky" dir="ltr">
+              <div className="flex aspect-[4/3] items-center justify-center rounded-image bg-sky">
+                <span className="font-latin text-6xl font-extrabold text-primary" dir="ltr">
                   {product.brand.slice(0, 2).toUpperCase()}
                 </span>
               </div>
             )}
             {copy && <p className="mt-3 text-caption text-text-muted">{t(copy.k3, l)}</p>}
-          </Reveal>
+          </div>
 
-          {/* Summary */}
-          <Reveal>
+          {/* Summary — visible by default (was <Reveal>). */}
+          <div>
             {cat && (
-              <p className="text-sm font-bold text-accent">
+              <p className="text-sm font-bold text-primary-hover">
                 <Link href={localizedHref(l, `/products/category/${cat.id}`)} className="hover:underline">
                   {t(cat.name, l)}
                 </Link>
               </p>
             )}
-            <h1 className="mt-2 text-h1 font-extrabold leading-[1.2] text-primary">{name}</h1>
+            <h1 className="mt-2 text-h1 font-bold leading-[1.2] text-navy">{name}</h1>
             {product.model && (
               <p className="mt-2 font-latin text-lg font-bold text-text-muted" dir="ltr">
                 {product.model}
               </p>
             )}
             {product.overview && <p className="mt-4 text-body text-text-muted">{t(product.overview, l)}</p>}
-            <p className="mt-4 rounded-[0.625rem] bg-accent-soft px-4 py-3 text-sm font-bold text-primary">
+            <p className="mt-4 rounded-[0.625rem] bg-sky px-4 py-3 text-sm font-bold text-navy">
               {copy ? t(copy.k5, l) : t(siteSettings.inquiryPolicy, l)}
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <WhatsAppButton locale={l} message={waMsg} label={ui("cta.enquire", l)} source="product" sourceId={product.id} variant="green-pill" />
-              <Link href={localizedHref(l, "/contact")} className="inline-flex items-center justify-center gap-2 rounded-[0.625rem] border-2 border-primary px-5 py-2.5 font-bold text-button text-primary transition-all hover:-translate-y-0.5 hover:bg-surface-muted">
+              <Link href={localizedHref(l, "/contact")} className="inline-flex items-center justify-center gap-2 rounded-[0.625rem] border-2 border-primary px-5 py-2.5 font-bold text-button text-navy transition-all hover:-translate-y-0.5 hover:bg-surface-muted">
                 {ui("cta.contactUs", l)}
               </Link>
             </div>
@@ -109,14 +110,14 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                   { icon: <MessageCircle className="size-6" aria-hidden="true" />, t1: t(copy.k10, l), t2: t(copy.k11, l) },
                 ].map((b, i) => (
                   <div key={i} className="rounded-card border border-border bg-surface p-4 text-center">
-                    <div className="mx-auto flex size-11 items-center justify-center rounded-full bg-accent-soft text-accent">{b.icon}</div>
-                    <p className="mt-2 text-sm font-extrabold text-primary">{b.t1}</p>
+                    <div className="mx-auto flex size-11 items-center justify-center rounded-full bg-sky text-primary-hover">{b.icon}</div>
+                    <p className="mt-2 text-sm font-extrabold text-navy">{b.t1}</p>
                     <p className="text-caption text-text-muted">{b.t2}</p>
                   </div>
                 ))}
               </div>
             )}
-          </Reveal>
+          </div>
         </div>
       </div>
 
@@ -130,7 +131,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             text={product.overview ? t(product.overview, l) : undefined}
             flip
             eyebrow={
-              <span className="inline-flex items-center gap-2 rounded-full bg-accent-soft px-4 py-1.5 text-sm font-bold text-accent">
+              <span className="inline-flex items-center gap-2 rounded-full bg-sky px-4 py-1.5 text-sm font-bold text-primary-hover">
                 {copy ? t(copy.k12, l) : ui("product.overview", l)}
               </span>
             }
@@ -142,14 +143,14 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       {product.benefits && product.benefits.length > 0 && (
         <section className="section-sm">
           <div className="wrap">
-            <h2 className="text-h2 font-extrabold text-primary">{copy ? t(copy.k2, l) : ui("product.features", l)}</h2>
-            <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" data-stagger>
+            <h2 className="text-h2 font-semibold text-navy">{copy ? t(copy.k2, l) : ui("product.features", l)}</h2>
+            <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {product.benefits.map((b, i) => (
                 <div key={i} className="rounded-card border border-border bg-surface p-6 shadow-card">
-                  <span className="flex size-12 items-center justify-center rounded-full bg-accent-soft text-accent">
+                  <span className="flex size-12 items-center justify-center rounded-full bg-sky text-primary-hover">
                     <Check className="size-6" aria-hidden="true" />
                   </span>
-                  <p className="mt-4 font-bold text-primary">{t(b, l)}</p>
+                  <p className="mt-4 font-bold text-navy">{t(b, l)}</p>
                 </div>
               ))}
             </div>
@@ -157,34 +158,35 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         </section>
       )}
 
-      {/* Specs — product image beside the table (§3.6) */}
+      {/* Specs — product image beside the table (§3.6). C-2 preserved: the
+          table renders the data's real spec labels/values, never "—". */}
       <section className="section">
         <div className="wrap grid gap-10 lg:grid-cols-2">
-          <Reveal>
+          <div>
             {galleryItems.length > 0 ? (
               <Gallery items={galleryItems} label={name} />
             ) : (
-              <div className="flex aspect-[4/3] items-center justify-center rounded-image bg-surface-blue">
-                <span className="font-latin text-6xl font-extrabold text-sky" dir="ltr">
+              <div className="flex aspect-[4/3] items-center justify-center rounded-image bg-sky">
+                <span className="font-latin text-6xl font-extrabold text-primary" dir="ltr">
                   {product.brand.slice(0, 2).toUpperCase()}
                 </span>
               </div>
             )}
-          </Reveal>
-          <Reveal>
-            <h2 className="text-h2 font-extrabold text-primary">{copy ? t(copy.k13, l) : ui("product.specs", l)}</h2>
+          </div>
+          <div>
+            <h2 className="text-h2 font-semibold text-navy">{copy ? t(copy.k13, l) : ui("product.specs", l)}</h2>
             <div className="mt-4">
               <SpecTable rows={specRows} />
             </div>
             <p className="mt-3 text-body-sm text-text-muted">{ui("product.specsNote", l)}</p>
             {/* Warranty line (CI-08: unified text pending approval — no duration) */}
-            <p className="mt-5 rounded-[0.625rem] bg-accent-soft px-4 py-3 text-sm font-bold text-primary">
+            <p className="mt-5 rounded-[0.625rem] bg-sky px-4 py-3 text-sm font-bold text-navy">
               {t(siteSettings.warranty.text, l)}{" "}
-              <Link href={localizedHref(l, "/support")} className="text-accent underline underline-offset-2 hover:text-accent-strong">
+              <Link href={localizedHref(l, "/support")} className="text-primary-hover underline underline-offset-2 hover:text-primary-hover">
                 {ui("nav.support", l)}
               </Link>
             </p>
-          </Reveal>
+          </div>
         </div>
       </section>
 
@@ -192,8 +194,8 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       {related.length > 0 && (
         <section className="section bg-surface">
           <div className="wrap">
-            <h2 className="text-h2 font-extrabold text-primary">{copy ? t(copy.k14, l) : ui("product.related", l)}</h2>
-            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" data-stagger>
+            <h2 className="text-h2 font-semibold text-navy">{copy ? t(copy.k14, l) : ui("product.related", l)}</h2>
+            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((p) => (
                 <ProductCard key={p.id} locale={l} product={p} />
               ))}
