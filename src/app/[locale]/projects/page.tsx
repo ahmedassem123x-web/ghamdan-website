@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { MessageCircle, Settings, Wrench } from "lucide-react";
+import { Info, MessageCircle, Settings, Wrench } from "lucide-react";
 import Hero from "@/components/Hero";
 import CTABand from "@/components/CTABand";
 import ProjectsClient from "@/components/ProjectsClient";
 import ProjectDetailTemplate from "@/components/ProjectDetailTemplate";
-import { EmptyState } from "@/components/ui";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { pages, approvedProjects } from "@/data";
 import { t } from "@/lib/i18n";
@@ -18,9 +17,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 
 /**
- * Projects (§3.5): side-left hero → intro → honest empty state + filter pills
- * + carousel shell (4 illustrative photos) → template preview → features CTA.
- * No approved projects yet (CI-07) — nothing is fabricated.
+ * Projects (§3.5, ref 05 / ADR-02): FULL-WIDTH hero (text top physical-left,
+ * ground-level solar farm + mountains in the ref) → intro → honest empty
+ * state + filter pills + carousel shell (4 illustrative photos) → template
+ * preview → features CTA. No approved projects yet (CI-07) — nothing is
+ * fabricated. KNOWN GAP: the implemented hero-solar-farm.jpg is AERIAL
+ * while ref 05 is GROUND-LEVEL — no ground-level hero asset exists; recorded
+ * in docs/visual-gap-analysis.md, needs a new asset, not a code fix.
  */
 export default async function ProjectsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -31,8 +34,8 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
     <>
       <Hero
         locale={l}
-        variant="side-left"
-        image="/images/heroes/hero-villa-mountains.jpg"
+        variant="full-left"
+        image="/images/heroes/hero-solar-farm.jpg"
         imageAlt={ui("projects.heroTitle", l)}
         title={{
           ar: ui("projects.heroTitle", "ar"),
@@ -48,19 +51,29 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
       {/* 5.2 Intro */}
       <section className="section-sm">
         <div className="wrap text-center">
-          <p className="text-sm font-bold text-accent">{ui("projects.areasLabel", l)}</p>
-          <h2 className="mt-3 text-h2 font-extrabold text-primary">{ui("projects.areasTitle", l)}</h2>
+          <p className="text-sm font-bold text-primary-hover">{ui("projects.areasLabel", l)}</p>
+          <h2 className="mt-3 text-h2 font-semibold text-navy">{ui("projects.areasTitle", l)}</h2>
         </div>
       </section>
 
       <section className="section" id="projects">
         <div className="wrap">
           {approvedProjects.length === 0 && (
-            <EmptyState title={t(p.k4, l)} copy={t(p.k5, l)}>
-              <WhatsAppButton locale={l} message={WA_MESSAGES.general[l]} label={ui("cta.whatsappStart", l)} source="projects" variant="green-pill" />
-            </EmptyState>
+            // Honest empty state — inlined (visible by default) instead of
+            // the shared EmptyState (Phase 6 removed the .reveal hiding from
+            // the shared primitives; this page keeps its inline state).
+            <div className="rounded-card border border-dashed border-border-strong bg-surface p-10 text-center">
+              <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-sky text-primary-hover">
+                <Info className="size-8" aria-hidden="true" />
+              </div>
+              <h3 className="mt-5 text-h3 font-semibold text-navy">{t(p.k4, l)}</h3>
+              <p className="mx-auto mt-3 max-w-xl text-body text-text-muted">{t(p.k5, l)}</p>
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+                <WhatsAppButton locale={l} message={WA_MESSAGES.general[l]} label={ui("cta.whatsappStart", l)} source="projects" variant="green-pill" />
+              </div>
+            </div>
           )}
-          <h2 className="mt-14 text-h2 font-extrabold text-primary">{t(p.k7, l)}</h2>
+          <h2 className="mt-14 text-h2 font-semibold text-navy">{t(p.k7, l)}</h2>
           <p className="mt-2 text-body text-text-muted">{t(p.k8, l)}</p>
           <div className="mt-8">
             <ProjectsClient
@@ -75,7 +88,7 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
           </div>
 
           {/* Template preview (k6) — clearly labelled, not a real project */}
-          <h2 className="mt-14 text-h2 font-extrabold text-primary">{t(p.k6, l)}</h2>
+          <h2 className="mt-14 text-h2 font-semibold text-navy">{t(p.k6, l)}</h2>
           <div className="mt-8">
             <ProjectDetailTemplate locale={l} />
           </div>
