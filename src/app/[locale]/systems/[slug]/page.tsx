@@ -7,7 +7,7 @@ import ProductCard from "@/components/ProductCard";
 import StickyWhatsAppBar from "@/components/StickyWhatsAppBar";
 import SystemDiagram from "@/components/SystemDiagram";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import { Breadcrumbs, Reveal } from "@/components/ui";
+import { Breadcrumbs } from "@/components/ui";
 import { pages, bundles, products, siteSettings } from "@/data";
 import { localizedHref, t } from "@/lib/i18n";
 import { ui } from "@/lib/ui-copy";
@@ -55,37 +55,37 @@ export default async function SystemDetailPage({ params }: { params: Promise<{ l
           ]}
         />
         <div className="wrap py-10 md:py-14">
-          <Reveal>
+          <div>
             <div className="flex items-center gap-3">
-              <div className="flex size-14 items-center justify-center rounded-full bg-accent-soft text-accent">
+              <div className="flex size-14 items-center justify-center rounded-full bg-sky text-primary-hover">
                 <Package className="size-7" aria-hidden="true" />
               </div>
-              <span className="rounded-full bg-accent-soft px-3 py-1 text-xs font-bold text-accent">{t(pages.systems.list.k3, l)}</span>
+              <span className="rounded-full bg-sky px-3 py-1 text-xs font-bold text-primary-hover">{t(pages.systems.list.k3, l)}</span>
             </div>
-            <h1 className="mt-4 text-h1 font-extrabold text-primary">{name}</h1>
+            <h1 className="mt-4 text-h1 font-bold text-navy">{name}</h1>
             <p className="mt-3 max-w-2xl text-body-lg text-text-muted">{t(bundle.use, l)}</p>
-            <p className="mt-4 rounded-[0.625rem] bg-accent-soft px-4 py-3 text-sm font-bold text-primary">
+            <p className="mt-4 rounded-[0.625rem] bg-sky px-4 py-3 text-sm font-bold text-navy">
               {copy ? t(copy.k7, l) : t(siteSettings.inquiryPolicy, l)}
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <WhatsAppButton locale={l} message={waMsg} label={copy ? t(copy.k6, l) : ui("cta.enquire", l)} source="system" sourceId={bundle.id} variant="green-pill" />
-              <Link href={localizedHref(l, "/contact")} className="inline-flex items-center justify-center gap-2 rounded-[0.625rem] border-2 border-primary px-5 py-2.5 font-bold text-button text-primary transition-all hover:-translate-y-0.5 hover:bg-surface-muted">
+              <Link href={localizedHref(l, "/contact")} className="inline-flex items-center justify-center gap-2 rounded-[0.625rem] border-2 border-primary px-5 py-2.5 font-bold text-button text-navy transition-all hover:-translate-y-0.5 hover:bg-surface-muted">
                 {ui("cta.contactUs", l)}
               </Link>
             </div>
-          </Reveal>
+          </div>
         </div>
       </div>
 
-      {/* Components */}
+      {/* Components — visible by default (was <Reveal>). */}
       <section className="section">
         <div className="wrap grid gap-10 lg:grid-cols-2">
-          <Reveal>
-            <h2 className="text-h2 font-extrabold text-primary">{copy ? t(copy.k3, l) : ui("nav.systems", l)}</h2>
+          <div>
+            <h2 className="text-h2 font-semibold text-navy">{copy ? t(copy.k3, l) : ui("nav.systems", l)}</h2>
             <p className="mt-4 text-body text-text-muted">{t(bundle.components, l)}</p>
-            {copy && <p className="mt-4 text-body-sm font-bold text-primary">{t(copy.k5, l)}</p>}
-          </Reveal>
-          <Reveal>
+            {copy && <p className="mt-4 text-body-sm font-bold text-navy">{t(copy.k5, l)}</p>}
+          </div>
+          <div>
             <SystemDiagram
               locale={l}
               nodes={[
@@ -96,10 +96,10 @@ export default async function SystemDetailPage({ params }: { params: Promise<{ l
               ]}
             />
             <p className="mt-3 flex items-center gap-2 text-caption text-text-muted">
-              <Check className="size-4 text-accent" aria-hidden="true" />
+              <Check className="size-4 text-primary-hover" aria-hidden="true" />
               {copy ? t(copy.k4, l) : ""}
             </p>
-          </Reveal>
+          </div>
         </div>
       </section>
 
@@ -107,8 +107,8 @@ export default async function SystemDetailPage({ params }: { params: Promise<{ l
       {linkedProducts.length > 0 && (
         <section className="section bg-surface">
           <div className="wrap">
-            <h2 className="text-h2 font-extrabold text-primary">{ui("product.related", l)}</h2>
-            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" data-stagger>
+            <h2 className="text-h2 font-semibold text-navy">{ui("product.related", l)}</h2>
+            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {linkedProducts.map((p) => (
                 <ProductCard key={p.id} locale={l} product={p} />
               ))}
