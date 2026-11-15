@@ -96,7 +96,7 @@ export interface Category {
   note: LocalizedString;           // Arabic-first note
   icon: string;                    // Lucide icon key, rendered by categoryIcon() in Cards.tsx
   priority: "high" | "medium" | "low";
-  subcategories: string[];         // Arabic subcategories, from xlsx sheet "ملخص الأقسام"
+  subcategories: LocalizedString[];  // Localised subcategories, from xlsx sheet "ملخص الأقسام"
   brands: string[];                // brands carried in this category
   publishedCount: number;          // COMPUTED from products.ts — never hand-edited
 }
