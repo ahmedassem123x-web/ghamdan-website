@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
+import { Info } from "lucide-react";
 import Hero from "@/components/Hero";
-import { EmptyState } from "@/components/ui";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { pages } from "@/data";
 import { t } from "@/lib/i18n";
@@ -23,9 +23,19 @@ export default async function DownloadsPage({ params }: { params: Promise<{ loca
       <Hero locale={l} variant="plain" title={d.k1} text={d.k2} primaryHref="/contact" primaryLabelKey="cta.contactUs" />
       <section className="section">
         <div className="wrap">
-          <EmptyState title={t(d.k3, l)} copy={t(d.k4, l)}>
-            <WhatsAppButton locale={l} message={WA_MESSAGES.general[l]} label={ui("cta.whatsappStart", l)} source="downloads" variant="green-pill" />
-          </EmptyState>
+          {/* Honest empty state — inlined (visible by default) instead of the
+              shared EmptyState (Phase 6 removed the .reveal hiding from the
+              shared primitives; this page keeps its inline state). */}
+          <div className="rounded-card border border-dashed border-border-strong bg-surface p-10 text-center">
+            <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-sky text-primary-hover">
+              <Info className="size-8" aria-hidden="true" />
+            </div>
+            <h3 className="mt-5 text-h3 font-semibold text-navy">{t(d.k3, l)}</h3>
+            <p className="mx-auto mt-3 max-w-xl text-body text-text-muted">{t(d.k4, l)}</p>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+              <WhatsAppButton locale={l} message={WA_MESSAGES.general[l]} label={ui("cta.whatsappStart", l)} source="downloads" variant="green-pill" />
+            </div>
+          </div>
         </div>
       </section>
     </>
