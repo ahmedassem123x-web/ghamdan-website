@@ -8,6 +8,16 @@
  * while 5 (p01, p06, p11, p14, p28) carry 16 — the extra k17 in the 17-key
  * pages duplicates the WhatsApp CTA copy.
  *
+ * CORRECTIONS after extraction (the "verbatim" note above describes the
+ * pre-fix source): the C-2 fix (2026-11-14) dropped the CI-02 specs note
+ * from productDetail blocks and renumbered them, so all 37 productDetail
+ * blocks now carry k1..k16 and the 17/16-key counts above no longer apply.
+ * Phase 5 (2026-11-15, ADR-06) removed catalog k1 («طاقة اليوم لمستقبل
+ * أفضل») entirely — no replacement slogan was supplied — so the 1,078
+ * total above is now 1,077 and /products has no hero eyebrow; the
+ * category-page breadcrumb that used catalog k1 now uses
+ * ui("category.allProducts").
+ *
  * zh: present only where the old build supplied it. A missing `zh` means
  * "fall back to `ar`" (see types.ts) — never machine-translate. Per
  * BUILD_SPEC §0.7, ZH strings are CI-09 PENDING and need a competent human
@@ -572,11 +582,6 @@ export const pages: PagesCopy = {
     }
   },
   "catalog": {
-    "k1": {
-      "ar": "طاقة اليوم لمستقبل أفضل",
-      "en": "Today's energy for a better future",
-      "zh": "今日能源，共创更美好的未来"
-    },
     "k2": {
       "ar": "دليل منتجات الطاقة الشمسية والمضخات والمعدات الزراعية",
       "en": "Guide to Solar Energy Products, Pumps and Agricultural Equipment",
@@ -694,8 +699,8 @@ export const pages: PagesCopy = {
       "en": "Our projects are being documented"
     },
     "k5": {
-      "ar": "لا ننشر أي مشروع قبل اعتماده وموافقة العميل على نشر اسمه وصوره. بيانات المشاريع المعتمدة قيد الاستلام من العميل (CI-07) — تواصل معنا لمعرفة المشاريع المنفذة.",
-      "en": "No project is published before approval and the client's consent to publish its name and photos. Approved project data is pending receipt from the client (CI-07) — contact us to learn about executed projects."
+      "ar": "لا ننشر أي مشروع قبل اعتماده وموافقة العميل على نشر اسمه وصوره. بيانات المشاريع المعتمدة قيد الاستلام من العميل — تواصل معنا لمعرفة المشاريع المنفذة.",
+      "en": "No project is published before approval and the client's consent to publish its name and photos. Approved project data is pending receipt from the client — contact us to learn about executed projects."
     },
     "k6": {
       "ar": "معاينة نموذج صفحة مشروع",
@@ -874,9 +879,9 @@ export const pages: PagesCopy = {
       "zh": "保修期是多久？"
     },
     "k33": {
-      "ar": "نص الضمان الموحد قيد الاعتماد من غمدان والمصنّع، وسيُنشر كاملاً هنا فور اعتماده (CI-08).",
-      "en": "The unified warranty text is pending approval by Ghamdan and the manufacturer, and will be published here in full once approved (CI-08).",
-      "zh": "统一保修文本正待 Ghamdan 与制造商批准，批准后将完整发布于此（CI-08）。"
+      "ar": "نص الضمان الموحد قيد الاعتماد من غمدان والمصنّع، وسيُنشر كاملاً هنا فور اعتماده.",
+      "en": "The unified warranty text is pending approval by Ghamdan and the manufacturer, and will be published here in full once approved.",
+      "zh": "统一保修文本正待 Ghamdan 与制造商批准，批准后将完整发布于此。"
     },
     "k34": {
       "ar": "هل توصلون إلى محافظتي؟",
@@ -1240,8 +1245,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -1308,8 +1313,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -1376,8 +1381,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -1444,8 +1449,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -1512,8 +1517,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -1580,8 +1585,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -1648,8 +1653,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -1716,8 +1721,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -1784,8 +1789,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -1852,8 +1857,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -1920,8 +1925,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -1988,8 +1993,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -2056,8 +2061,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -2124,8 +2129,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -2192,8 +2197,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -2260,8 +2265,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -2328,8 +2333,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -2396,8 +2401,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -2464,8 +2469,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -2532,8 +2537,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -2600,8 +2605,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -2668,8 +2673,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -2736,8 +2741,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -2804,8 +2809,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -2872,8 +2877,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -2940,8 +2945,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -3008,8 +3013,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -3076,8 +3081,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -3144,8 +3149,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -3212,8 +3217,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -3280,8 +3285,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -3348,8 +3353,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -3416,8 +3421,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -3484,8 +3489,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -3552,8 +3557,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -3620,8 +3625,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -3688,8 +3693,8 @@ export const pages: PagesCopy = {
         "en": "Key Benefits"
       },
       "k3": {
-        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام (CI-06).",
-        "en": "Illustrative photo of the product type — the real product photo is pending receipt (CI-06)."
+        "ar": "صورة توضيحية لنوع المنتج — صورة المنتج الحقيقية قيد الاستلام.",
+        "en": "Illustrative photo of the product type — the real product photo is pending receipt."
       },
       "k4": {
         "ar": "مواصفات المنتج",
@@ -4037,8 +4042,8 @@ export const pages: PagesCopy = {
         "en": "Illustrative example: solar pump (agricultural projects only)"
       },
       "k25": {
-        "ar": "نطاق الأعمال وأبرز النتائج يُعبَّآن هنا بعد الاعتماد والقياس — لا تُنشَر أرقام قبل توثيقها (CI-07).",
-        "en": "Scope of works and key outcomes are filled in here after approval and measurement — no figures are published before documentation (CI-07)."
+        "ar": "نطاق الأعمال وأبرز النتائج يُعبَّآن هنا بعد الاعتماد والقياس — لا تُنشَر أرقام قبل توثيقها.",
+        "en": "Scope of works and key outcomes are filled in here after approval and measurement — no figures are published before documentation."
       },
       "k26": {
         "ar": "معرض الصور",
@@ -4198,9 +4203,9 @@ export const pages: PagesCopy = {
       "zh": "保修期是多久？"
     },
     "k14": {
-      "ar": "نص الضمان الموحد قيد الاعتماد من غمدان والمصنّع، وسيُنشر كاملاً هنا فور اعتماده (CI-08).",
-      "en": "The unified warranty text is pending approval by Ghamdan and the manufacturer, and will be published here in full once approved (CI-08).",
-      "zh": "统一保修文本正待 Ghamdan 与制造商批准，批准后将完整发布于此（CI-08）。"
+      "ar": "نص الضمان الموحد قيد الاعتماد من غمدان والمصنّع، وسيُنشر كاملاً هنا فور اعتماده.",
+      "en": "The unified warranty text is pending approval by Ghamdan and the manufacturer, and will be published here in full once approved.",
+      "zh": "统一保修文本正待 Ghamdan 与制造商批准，批准后将完整发布于此。"
     },
     "k15": {
       "ar": "هل توصلون إلى محافظتي؟",
@@ -4282,8 +4287,8 @@ export const pages: PagesCopy = {
         "zh": "Wisenet 摄像头与安防系统 — 型号待确认。"
       },
       "k9": {
-        "ar": "وكالة Deye الرسمية في اليمن معتمدة من غمدان. صفة «وكيل» لغيرها من العلامات لم تُثبَت بعد — تُذكر كعلامات معروضة حتى الاعتماد (CI-04).",
-        "en": "Deye's official agency in Yemen is confirmed by Ghamdan. The «agent» status of the other brands is not yet established — they are listed as carried brands until approval (CI-04)."
+        "ar": "وكالة Deye الرسمية في اليمن معتمدة من غمدان. صفة «وكيل» لغيرها من العلامات لم تُثبَت بعد — تُذكر كعلامات معروضة حتى الاعتماد.",
+        "en": "Deye's official agency in Yemen is confirmed by Ghamdan. The «agent» status of the other brands is not yet established — they are listed as carried brands until approval."
       },
       "k10": {
         "ar": "لنبدأ مشروعك اليوم",
@@ -4428,8 +4433,8 @@ export const pages: PagesCopy = {
         "zh": "斋月套餐（往期）"
       },
       "k11": {
-        "ar": "الباقات المعروضة معتمدة من غمدان. مكونات الباقات التفصيلية قيد الاعتماد النهائي (CI-03) — للتفاصيل والتوفر تواصل معنا عبر واتساب.",
-        "en": "The bundles shown are approved by Ghamdan. Detailed bundle components are under final approval (CI-03) — for details and availability, contact us via WhatsApp."
+        "ar": "الباقات المعروضة معتمدة من غمدان. مكونات الباقات التفصيلية قيد الاعتماد النهائي — للتفاصيل والتوفر تواصل معنا عبر واتساب.",
+        "en": "The bundles shown are approved by Ghamdan. Detailed bundle components are under final approval — for details and availability, contact us via WhatsApp."
       },
       "k12": {
         "ar": "لنبدأ مشروعك اليوم",
@@ -4462,8 +4467,8 @@ export const pages: PagesCopy = {
           "en": "What the bundle includes"
         },
         "k5": {
-          "ar": "قائمة المكونات التفصيلية قيد الاعتماد النهائي من غمدان (CI-03).",
-          "en": "The detailed component list is under final approval by Ghamdan (CI-03)."
+          "ar": "قائمة المكونات التفصيلية قيد الاعتماد النهائي من غمدان.",
+          "en": "The detailed component list is under final approval by Ghamdan."
         },
         "k6": {
           "ar": "استفسر عن هذه الباقة",
@@ -4493,8 +4498,8 @@ export const pages: PagesCopy = {
           "en": "What the bundle includes"
         },
         "k5": {
-          "ar": "قائمة المكونات التفصيلية قيد الاعتماد النهائي من غمدان (CI-03).",
-          "en": "The detailed component list is under final approval by Ghamdan (CI-03)."
+          "ar": "قائمة المكونات التفصيلية قيد الاعتماد النهائي من غمدان.",
+          "en": "The detailed component list is under final approval by Ghamdan."
         },
         "k6": {
           "ar": "استفسر عن هذه الباقة",
@@ -4524,8 +4529,8 @@ export const pages: PagesCopy = {
           "en": "What the bundle includes"
         },
         "k5": {
-          "ar": "قائمة المكونات التفصيلية قيد الاعتماد النهائي من غمدان (CI-03).",
-          "en": "The detailed component list is under final approval by Ghamdan (CI-03)."
+          "ar": "قائمة المكونات التفصيلية قيد الاعتماد النهائي من غمدان.",
+          "en": "The detailed component list is under final approval by Ghamdan."
         },
         "k6": {
           "ar": "استفسر عن هذه الباقة",
@@ -4555,8 +4560,8 @@ export const pages: PagesCopy = {
           "en": "What the bundle includes"
         },
         "k5": {
-          "ar": "قائمة المكونات التفصيلية قيد الاعتماد النهائي من غمدان (CI-03).",
-          "en": "The detailed component list is under final approval by Ghamdan (CI-03)."
+          "ar": "قائمة المكونات التفصيلية قيد الاعتماد النهائي من غمدان.",
+          "en": "The detailed component list is under final approval by Ghamdan."
         },
         "k6": {
           "ar": "استفسر عن هذه الباقة",
@@ -4614,8 +4619,8 @@ export const pages: PagesCopy = {
         "en": "We do not sell your data to any third party"
       },
       "k7": {
-        "ar": "مسودة قيد الاعتماد (CI-10) — لا يُعتمَد أي بند قبل مراجعة غمدان ومستشارها القانوني.",
-        "en": "Draft pending approval (CI-10) — no clause is binding before review by Ghamdan and its legal counsel."
+        "ar": "مسودة قيد الاعتماد — لا يُعتمَد أي بند قبل مراجعة غمدان ومستشارها القانوني.",
+        "en": "Draft pending approval — no clause is binding before review by Ghamdan and its legal counsel."
       }
     },
     "terms": {
@@ -4640,12 +4645,12 @@ export const pages: PagesCopy = {
         "en": "Installation and delivery are agreed in writing with the client"
       },
       "k6": {
-        "ar": "الضمان يخضع للنص الموحد المعتمد (CI-08)",
-        "en": "Warranty is governed by the approved unified text (CI-08)"
+        "ar": "الضمان يخضع للنص الموحد المعتمد",
+        "en": "Warranty is governed by the approved unified text"
       },
       "k7": {
-        "ar": "مسودة قيد الاعتماد (CI-10) — لا يُعتمَد أي بند قبل مراجعة غمدان ومستشارها القانوني.",
-        "en": "Draft pending approval (CI-10) — no clause is binding before review by Ghamdan and its legal counsel."
+        "ar": "مسودة قيد الاعتماد — لا يُعتمَد أي بند قبل مراجعة غمدان ومستشارها القانوني.",
+        "en": "Draft pending approval — no clause is binding before review by Ghamdan and its legal counsel."
       }
     }
   },

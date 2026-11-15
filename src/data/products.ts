@@ -21,8 +21,11 @@
  *
  * Images: filenames under /images/photos/ are the old build's stand-in
  * photo filenames (assets/img/photos/*, 12 files per BUILD_SPEC §0.5).
- * public/images/photos/ in v2 is currently EMPTY — the files must be copied
- * in by the build/image track. Every product page carries the caption that
+ * public/images/photos/ in v2 holds those 12 stand-in photos (24 files:
+ * 12 .jpg + 12 .webp). The 37 published products use only 4 of them as
+ * their `image` (battery-storage ×16, inverter-unit ×13, pump-flow ×7,
+ * controller-unit ×1); the other 8 files serve other blocks (overview,
+ * heroes, guidance). Every product page carries the caption that
  * the photo is illustrative and the real product photo is pending (CI-06).
  * A spec value missing in the source is ABSENT — never guessed, never a dash.
  */
