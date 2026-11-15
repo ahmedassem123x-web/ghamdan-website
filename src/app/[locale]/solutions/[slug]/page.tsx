@@ -5,9 +5,9 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import Hero from "@/components/Hero";
 import CTABand from "@/components/CTABand";
-import SystemDiagram from "@/components/SystemDiagram";
+import EnergySystemScene from "@/components/three/EnergySystemScene";
 import { categoryIcon } from "@/components/Cards";
-import { Breadcrumbs, EditorialBlock, Reveal, SectionHeadingL } from "@/components/ui";
+import { Breadcrumbs, EditorialBlock } from "@/components/ui";
 import { pages, solutionAreas, pumping, workProcess, products } from "@/data";
 import { localizedHref, t } from "@/lib/i18n";
 import { ui } from "@/lib/ui-copy";
@@ -67,15 +67,15 @@ export default async function SolutionDetailPage({ params }: { params: Promise<{
               text={t(pumping.overviewCopy, l)}
               flip
               eyebrow={
-                <span className="inline-flex items-center gap-2 rounded-full bg-accent-soft px-4 py-1.5 text-sm font-bold text-accent">
+                <span className="inline-flex items-center gap-2 rounded-full bg-sky px-4 py-1.5 text-sm font-bold text-primary-hover">
                   {t(pumping.overviewTitle, l)}
                 </span>
               }
             >
               <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3">
                 {pumping.overviewFeatures.map((f) => (
-                  <span key={f.title.ar} className="inline-flex items-center gap-2 text-sm font-bold text-primary">
-                    <span className="flex size-8 items-center justify-center rounded-full bg-accent-soft text-accent">{categoryIcon(f.icon)}</span>
+                  <span key={f.title.ar} className="inline-flex items-center gap-2 text-sm font-bold text-navy">
+                    <span className="flex size-8 items-center justify-center rounded-full bg-sky text-primary-hover">{categoryIcon(f.icon)}</span>
                     {t(f.title, l)}
                   </span>
                 ))}
@@ -84,21 +84,21 @@ export default async function SolutionDetailPage({ params }: { params: Promise<{
           </div>
         </section>
 
-        {/* Challenges — surface-blue band + pill + white icon circles */}
-        <section className="section bg-surface-blue">
+        {/* Challenges — sky band + pill + white icon circles */}
+        <section className="section bg-sky">
           <div className="wrap">
             <div className="text-center">
-              <p className="mb-3 inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-bold text-accent">
+              <p className="mb-3 inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-bold text-primary-hover">
                 {ui("pumping.challengesPill", l)}
               </p>
-              <h2 className="text-h2 font-extrabold text-primary">{t(pumping.challengesTitle, l)}</h2>
+              <h2 className="text-h2 font-semibold text-navy">{t(pumping.challengesTitle, l)}</h2>
             </div>
-            <div className="mt-10 grid gap-6 sm:grid-cols-2" data-stagger>
+            <div className="mt-10 grid gap-6 sm:grid-cols-2">
               {pumping.challenges.map((ch) => (
                 <div key={ch.title.ar} className="flex gap-4 rounded-card bg-surface p-6 shadow-card">
-                  <div className="flex size-14 shrink-0 items-center justify-center rounded-full bg-white text-accent shadow-card">{categoryIcon(ch.icon)}</div>
+                  <div className="flex size-14 shrink-0 items-center justify-center rounded-full bg-white text-primary-hover shadow-card">{categoryIcon(ch.icon)}</div>
                   <div>
-                    <h3 className="text-h4 font-extrabold text-primary">{t(ch.title, l)}</h3>
+                    <h3 className="text-h4 font-semibold text-navy">{t(ch.title, l)}</h3>
                     <p className="mt-1.5 text-body-sm text-text-muted">{t(ch.text, l)}</p>
                   </div>
                 </div>
@@ -110,12 +110,12 @@ export default async function SolutionDetailPage({ params }: { params: Promise<{
         {/* Steps — product images + left-pointing arrows */}
         <section className="section">
           <div className="wrap">
-            <SectionHeadingL locale={l} title={t(pumping.stepsTitle, l)} />
-            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4" data-stagger>
+            <h2 className="text-h2 font-semibold text-navy">{t(pumping.stepsTitle, l)}</h2>
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {pumping.steps.map((step, i) => (
                 <div key={step.n} className="relative overflow-hidden rounded-card bg-surface shadow-card">
                   {i < pumping.steps.length - 1 && (
-                    <span className="absolute top-8 -end-3 z-10 hidden size-6 items-center justify-center rounded-full bg-accent text-white lg:flex" aria-hidden="true">
+                    <span className="absolute top-8 -end-3 z-10 hidden size-6 items-center justify-center rounded-full bg-primary-hover text-white lg:flex" aria-hidden="true">
                       ←
                     </span>
                   )}
@@ -126,8 +126,8 @@ export default async function SolutionDetailPage({ params }: { params: Promise<{
                     className="aspect-[16/10] w-full object-cover"
                   />
                   <div className="p-6">
-                    <span className="font-latin text-4xl font-extrabold text-sky" dir="ltr">{step.n}</span>
-                    <h3 className="mt-3 text-h4 font-extrabold text-primary">{t(step.title, l)}</h3>
+                    <span className="font-latin text-4xl font-extrabold text-primary" dir="ltr">{step.n}</span>
+                    <h3 className="mt-3 text-h4 font-semibold text-navy">{t(step.title, l)}</h3>
                     <p className="mt-2 text-body-sm text-text-muted">{t(step.text, l)}</p>
                   </div>
                 </div>
@@ -139,9 +139,12 @@ export default async function SolutionDetailPage({ params }: { params: Promise<{
         {/* Diagram (code-built SVG, not a reference screenshot) */}
         <section className="section bg-surface">
           <div className="wrap">
-            <SectionHeadingL locale={l} title={t(pumping.diagramTitle, l)} lead={t(pumping.diagramPill, l)} />
+            <div>
+              <h2 className="text-h2 font-semibold text-navy">{t(pumping.diagramTitle, l)}</h2>
+              <p className="mt-3 max-w-2xl text-body text-text-muted">{t(pumping.diagramPill, l)}</p>
+            </div>
             <div className="mt-8">
-              <SystemDiagram
+              <EnergySystemScene
                 locale={l}
                 nodes={[
                   { label: pumpCopy ? t(pumpCopy.k14, l) : "", icon: "☀" },
@@ -159,13 +162,13 @@ export default async function SolutionDetailPage({ params }: { params: Promise<{
         {/* Applications — dark overlay captions */}
         <section className="section">
           <div className="wrap">
-            <SectionHeadingL locale={l} title={t(pumping.applicationsTitle, l)} />
-            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" data-stagger>
+            <h2 className="text-h2 font-semibold text-navy">{t(pumping.applicationsTitle, l)}</h2>
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {pumping.applications.map((app) => (
                 <article key={app.title.ar} className="group relative overflow-hidden rounded-card shadow-card">
                   <img src={webp(app.image)} alt={t(app.title, l)} loading="lazy" className="aspect-[16/10] w-full object-cover transition-transform duration-300 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary-deep/85 via-primary-deep/25 to-transparent" />
-                  <h3 className="absolute bottom-0 start-0 p-5 text-h4 font-extrabold text-white">{t(app.title, l)}</h3>
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/25 to-transparent" />
+                  <h3 className="absolute bottom-0 start-0 p-5 text-h4 font-semibold text-white">{t(app.title, l)}</h3>
                 </article>
               ))}
             </div>
@@ -176,34 +179,34 @@ export default async function SolutionDetailPage({ params }: { params: Promise<{
         <section className="section bg-surface">
           <div className="wrap grid gap-10 lg:grid-cols-2">
             <div>
-              <h2 className="text-h2 font-extrabold text-primary">{ui("pumping.complementary", l)}</h2>
+              <h2 className="text-h2 font-semibold text-navy">{ui("pumping.complementary", l)}</h2>
               <div className="mt-6 space-y-4">
                 {pumpProducts.map((p) => (
-                  <Link key={p.id} href={localizedHref(l, `/products/${p.slug}`)} className="group flex items-center gap-4 rounded-card border border-border bg-bg p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card">
+                  <Link key={p.id} href={localizedHref(l, `/products/${p.slug}`)} className="group flex items-center gap-4 rounded-card border border-border bg-background p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card">
                     {p.image ? (
                       <img src={webp(p.image)} alt={t(p.name, l)} loading="lazy" className="size-20 shrink-0 rounded-[0.625rem] object-cover" />
                     ) : (
-                      <span className="flex size-20 shrink-0 items-center justify-center rounded-[0.625rem] bg-surface-blue font-latin text-xl font-extrabold text-sky" dir="ltr">
+                      <span className="flex size-20 shrink-0 items-center justify-center rounded-[0.625rem] bg-sky font-latin text-xl font-extrabold text-primary" dir="ltr">
                         {p.brand.slice(0, 2).toUpperCase()}
                       </span>
                     )}
                     <div className="min-w-0">
-                      <p className="truncate font-bold text-primary group-hover:text-accent">{t(p.name, l)}</p>
+                      <p className="truncate font-bold text-navy group-hover:text-primary-hover">{t(p.name, l)}</p>
                       <p className="text-body-sm text-text-muted">{p.brand}</p>
                     </div>
-                    <ArrowLeft className="ms-auto size-5 shrink-0 text-accent transition-transform duration-200 group-hover:-translate-x-1 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
+                    <ArrowLeft className="ms-auto size-5 shrink-0 text-primary-hover transition-transform duration-200 group-hover:-translate-x-1 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
                   </Link>
                 ))}
               </div>
             </div>
-            <div className="overflow-hidden rounded-card bg-primary text-white shadow-card">
+            <div className="overflow-hidden rounded-card bg-navy text-white shadow-card">
               <img src={webp("/images/photos/solar-farm.jpg")} alt={ui("pumping.stories", l)} loading="lazy" className="aspect-[16/9] w-full object-cover" />
               <div className="p-8">
-                <h2 className="text-h2 font-extrabold">{ui("pumping.stories", l)}</h2>
+                <h2 className="text-h2 font-semibold">{ui("pumping.stories", l)}</h2>
                 <p className="mt-3 text-body text-text-inverse-muted">{t(pages.projects.k2, l)}</p>
                 <Link
                   href={localizedHref(l, "/projects")}
-                  className="mt-6 inline-flex items-center gap-1.5 rounded-[0.625rem] bg-white px-5 py-2.5 font-bold text-button text-primary transition-all duration-200 hover:-translate-y-0.5"
+                  className="mt-6 inline-flex items-center gap-1.5 rounded-[0.625rem] bg-white px-5 py-2.5 font-bold text-button text-navy transition-all duration-200 hover:-translate-y-0.5"
                 >
                   {ui("cta.viewProjects", l)}
                   <ArrowLeft className="size-4 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
@@ -238,30 +241,30 @@ export default async function SolutionDetailPage({ params }: { params: Promise<{
           ]}
         />
         <div className="wrap py-12 md:py-16">
-          <Reveal>
-            <span className="inline-flex items-center gap-2 rounded-full bg-accent-soft px-4 py-1.5 text-sm font-bold text-accent">
+          <div>
+            <span className="inline-flex items-center gap-2 rounded-full bg-sky px-4 py-1.5 text-sm font-bold text-primary-hover">
               {t(area.pill, l)}
             </span>
-            <h1 className="mt-4 max-w-3xl text-h1 font-extrabold leading-[1.2] text-primary">{t(area.title, l)}</h1>
+            <h1 className="mt-4 max-w-3xl text-h1 font-bold leading-[1.2] text-navy">{t(area.title, l)}</h1>
             <p className="mt-4 max-w-2xl text-body-lg text-text-muted">{t(area.text, l)}</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href={localizedHref(l, "/contact")} className="inline-flex items-center justify-center gap-2 rounded-[0.625rem] bg-primary px-5 py-2.5 font-bold text-button text-white transition-all hover:-translate-y-0.5 hover:bg-primary-deep">
+              <Link href={localizedHref(l, "/contact")} className="inline-flex items-center justify-center gap-2 rounded-[0.625rem] bg-navy px-5 py-2.5 font-bold text-button text-white transition-all hover:-translate-y-0.5 hover:bg-navy">
                 {ui("cta.requestConsultation", l)}
               </Link>
             </div>
-          </Reveal>
+          </div>
         </div>
       </div>
       <section className="section">
         <div className="wrap">
-          <SectionHeadingL locale={l} title={t(pages.solutions.k27, l)} />
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4" data-stagger>
+          <h2 className="text-h2 font-semibold text-navy">{t(pages.solutions.k27, l)}</h2>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {workProcess.map((step, i) => (
               <div key={step.title.ar} className="relative rounded-card bg-surface p-6 shadow-card">
-                <span className="font-latin text-4xl font-extrabold text-sky" dir="ltr">
+                <span className="font-latin text-4xl font-extrabold text-primary" dir="ltr">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-3 text-h4 font-extrabold text-primary">{t(step.title, l)}</h3>
+                <h3 className="mt-3 text-h4 font-semibold text-navy">{t(step.title, l)}</h3>
                 <p className="mt-2 text-body-sm text-text-muted">{t(step.text, l)}</p>
               </div>
             ))}
