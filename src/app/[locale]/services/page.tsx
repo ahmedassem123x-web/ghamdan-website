@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Hero from "@/components/Hero";
 import CTABand from "@/components/CTABand";
 import { categoryIcon } from "@/components/Cards";
-import { SectionHeadingL } from "@/components/ui";
 import { pages, services } from "@/data";
 import { t } from "@/lib/i18n";
 import type { Locale } from "@/data";
@@ -28,11 +27,11 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
       />
       <section className="section">
         <div className="wrap">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" data-stagger>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((svc) => (
               <div key={svc.title.ar} className="rounded-card bg-surface p-6 shadow-card">
-                <div className="flex size-14 items-center justify-center rounded-full bg-accent-soft text-accent">{categoryIcon(svc.icon)}</div>
-                <h3 className="mt-4 text-h4 font-extrabold text-primary">{t(svc.title, l)}</h3>
+                <div className="flex size-14 items-center justify-center rounded-full bg-sky text-primary-hover">{categoryIcon(svc.icon)}</div>
+                <h3 className="mt-4 text-h4 font-semibold text-navy">{t(svc.title, l)}</h3>
                 <p className="mt-2 text-body-sm text-text-muted">{t(svc.text, l)}</p>
               </div>
             ))}
