@@ -10,7 +10,6 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import { Breadcrumbs } from "@/components/ui";
 import { pages, bundles, products, siteSettings } from "@/data";
 import { localizedHref, t } from "@/lib/i18n";
-import { detailMetadata } from "@/lib/metadata";
 import { ui } from "@/lib/ui-copy";
 import { WA_MESSAGES } from "@/lib/whatsapp";
 import type { Locale } from "@/data";
@@ -27,12 +26,8 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
   const { locale, slug } = await params;
-  const l = locale as Locale;
   const b = bundles.find((x) => x.slug === slug);
-  if (!b) return {};
-  const title = t(b.name, l);
-  const description = b.use ? t(b.use, l) : title;
-  return detailMetadata({ locale: l, path: `/systems/${b.slug}`, title, description });
+  return { title: b ? t(b.name, locale as Locale) : "" };
 }
 
 export default async function SystemDetailPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
@@ -74,7 +69,7 @@ export default async function SystemDetailPage({ params }: { params: Promise<{ l
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <WhatsAppButton locale={l} message={waMsg} label={copy ? t(copy.k6, l) : ui("cta.enquire", l)} source="system" sourceId={bundle.id} variant="green-pill" />
-              <Link href={localizedHref(l, "/contact")} className="inline-flex items-center justify-center gap-2 rounded-[0.625rem] border-2 border-primary px-5 py-2.5 font-bold text-button text-navy transition-[transform,background-color] hover:-translate-y-0.5 hover:bg-surface-muted">
+              <Link href={localizedHref(l, "/contact")} className="inline-flex items-center justify-center gap-2 rounded-[0.625rem] border-2 border-primary px-5 py-2.5 font-bold text-button text-navy transition-all hover:-translate-y-0.5 hover:bg-surface-muted">
                 {ui("cta.contactUs", l)}
               </Link>
             </div>
@@ -83,7 +78,7 @@ export default async function SystemDetailPage({ params }: { params: Promise<{ l
       </div>
 
       {/* Components — visible by default (was <Reveal>). */}
-      <section data-reveal className="section">
+      <section className="section">
         <div className="wrap grid gap-10 lg:grid-cols-2">
           <div>
             <h2 className="text-h2 font-semibold text-navy">{copy ? t(copy.k3, l) : ui("nav.systems", l)}</h2>
@@ -110,7 +105,7 @@ export default async function SystemDetailPage({ params }: { params: Promise<{ l
 
       {/* Linked products */}
       {linkedProducts.length > 0 && (
-        <section data-reveal className="section bg-surface">
+        <section className="section bg-surface">
           <div className="wrap">
             <h2 className="text-h2 font-semibold text-navy">{ui("product.related", l)}</h2>
             <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
