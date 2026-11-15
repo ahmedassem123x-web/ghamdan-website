@@ -68,20 +68,25 @@ export default async function CategoryPage({ params }: { params: Promise<{ local
         whatsappVariant="navy-pill"
         waMessage={WA_MESSAGES.category(t(cat.name, l), `https://ghamdan-website.vercel.app/${locale}/products/category/${cat.id}`)[l]}
         crumbs={[
-          { label: t(pages.home.k38, l), href: localizedHref(l, "/") },
-          { label: t(pages.catalog.k1, l), href: localizedHref(l, "/products") },
+          { label: ui("nav.home", l), href: localizedHref(l, "/") },
+          { label: ui("category.allProducts", l), href: localizedHref(l, "/products") },
           { label: t(cat.name, l) },
         ]}
       />
 
-      {/* 8.2 Category tabs */}
+      {/* 8.2 Category tabs (ADR-07, ref 08 pattern): All first, then the 8
+          real categories with published counts. Zero-count tabs stay visible
+          and link to their honest empty-state page. */}
       <div className="border-b border-border bg-surface">
         <div className="wrap flex gap-1 overflow-x-auto py-3">
           <Link
             href={localizedHref(l, "/products")}
-            className="flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 text-sm font-bold text-text-muted transition-colors hover:bg-surface-muted hover:text-primary"
+            className="flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 text-sm font-bold text-text-muted transition-colors hover:bg-surface-muted hover:text-navy"
           >
             {ui("category.allProducts", l)}
+            <span dir="ltr" className="text-xs font-bold text-text-muted">
+              ({products.filter((p) => p.status === "published").length})
+            </span>
           </Link>
           {categories.map((c) => (
             <Link
@@ -89,11 +94,14 @@ export default async function CategoryPage({ params }: { params: Promise<{ local
               href={localizedHref(l, `/products/category/${c.id}`)}
               aria-current={c.id === cat.id ? "page" : undefined}
               className={`flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 text-sm font-bold transition-colors ${
-                c.id === cat.id ? "bg-primary text-white" : "text-text-muted hover:bg-surface-muted hover:text-primary"
+                c.id === cat.id ? "bg-navy text-white" : "text-text-muted hover:bg-surface-muted hover:text-navy"
               }`}
             >
               {categoryIcon(c.icon)}
               {t(c.name, l)}
+              <span dir="ltr" className={`text-xs font-bold ${c.id === cat.id ? "text-white/80" : "text-text-muted"}`}>
+                ({c.publishedCount})
+              </span>
             </Link>
           ))}
         </div>
@@ -108,16 +116,16 @@ export default async function CategoryPage({ params }: { params: Promise<{ local
       {/* 8.6 Related categories */}
       <section className="section bg-surface">
         <div className="wrap">
-          <h2 className="text-h2 font-extrabold text-primary">{ui("related.categories", l)}</h2>
-          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" data-stagger>
+          <h2 className="text-h2 font-semibold text-navy">{ui("related.categories", l)}</h2>
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {related.map((r, i) => (
-              <Link key={i} href={localizedHref(l, r.href)} className="group overflow-hidden rounded-card bg-bg shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover">
+              <Link key={i} href={localizedHref(l, r.href)} className="group overflow-hidden rounded-card bg-background shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover">
                 <div className="overflow-hidden">
                   <img src={webp(r.image)} alt={t(r.title, l)} loading="lazy" className="aspect-[16/10] w-full object-cover transition-transform duration-300 group-hover:scale-105" />
                 </div>
                 <div className="flex items-center justify-between gap-2 p-5">
-                  <h3 className="text-h4 font-extrabold text-primary">{t(r.title, l)}</h3>
-                  <ArrowLeft className="size-5 shrink-0 text-accent transition-transform duration-200 group-hover:-translate-x-1 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
+                  <h3 className="text-h4 font-semibold text-navy">{t(r.title, l)}</h3>
+                  <ArrowLeft className="size-5 shrink-0 text-primary-hover transition-transform duration-200 group-hover:-translate-x-1 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
                 </div>
               </Link>
             ))}
