@@ -1,5 +1,5 @@
 {
-  "probedAt": "2026-11-14T14:19:44.241Z",
+  "probedAt": "2026-11-14T23:25:48.227Z",
   "base": "http://127.0.0.1:8321",
   "totalRoutes": 229,
   "non200": [],
@@ -8,22 +8,65 @@
   "desktopOverflow": [],
   "brokenImages": [
     [
+      "/ar/products",
+      [
+        "/images/photos/pump-flow.webp",
+        "/images/photos/pump-flow.webp",
+        "/images/photos/pump-flow.webp",
+        "/images/photos/pump-flow.webp",
+        "/images/photos/pump-flow.webp",
+        "/images/photos/pump-flow.webp",
+        "/images/photos/controller-unit.webp",
+        "/images/photos/pivot.webp"
+      ]
+    ],
+    [
       "/ar/solutions/pumping",
       [
         "/images/photos/pump-flow.webp",
+        "/images/photos/pump-flow.webp",
         "/images/photos/pump-flow.webp"
+      ]
+    ],
+    [
+      "/en/products",
+      [
+        "/images/photos/pump-flow.webp",
+        "/images/photos/pump-flow.webp",
+        "/images/photos/pump-flow.webp",
+        "/images/photos/pump-flow.webp",
+        "/images/photos/pump-flow.webp",
+        "/images/photos/pump-flow.webp",
+        "/images/photos/controller-unit.webp",
+        "/images/photos/pivot.webp"
       ]
     ],
     [
       "/en/solutions/pumping",
       [
         "/images/photos/pump-flow.webp",
+        "/images/photos/pump-flow.webp",
         "/images/photos/pump-flow.webp"
+      ]
+    ],
+    [
+      "/zh/products",
+      [
+        "/images/photos/pump-flow.webp",
+        "/images/photos/pump-flow.webp",
+        "/images/photos/pump-flow.webp",
+        "/images/photos/pump-flow.webp",
+        "/images/photos/pump-flow.webp",
+        "/images/photos/pump-flow.webp",
+        "/images/photos/controller-unit.webp",
+        "/images/photos/pivot.webp"
       ]
     ],
     [
       "/zh/solutions/pumping",
       [
+        "/images/photos/pump-flow.webp",
+        "/images/photos/pump-flow.webp",
         "/images/photos/pump-flow.webp"
       ]
     ]
@@ -34,16 +77,15 @@
     [
       "home",
       [
-        "/images/photos/solar-farm.webp",
-        "/images/photos/pivot.webp",
-        "/images/photos/panels-rows.webp",
-        "/images/photos/pump-flow.webp",
-        "/images/photos/greenhouse.webp"
+        "/images/photos/inverter-unit.webp",
+        "/images/photos/battery-storage.webp",
+        "/images/photos/pump-flow.webp"
       ]
     ],
     [
       "about",
       [
+        "/images/photos/pump-flow.webp",
         "/images/photos/greenhouse.webp",
         "/images/photos/solar-farm.webp"
       ]
@@ -58,6 +100,29 @@
     [
       "products",
       [
+        "/images/photos/inverter-unit.webp",
+        "/images/photos/inverter-unit.webp",
+        "/images/photos/inverter-unit.webp",
+        "/images/photos/battery-storage.webp",
+        "/images/photos/battery-storage.webp",
+        "/images/photos/battery-storage.webp",
+        "/images/photos/battery-storage.webp",
+        "/images/photos/battery-storage.webp",
+        "/images/photos/battery-storage.webp",
+        "/images/photos/battery-storage.webp",
+        "/images/photos/battery-storage.webp",
+        "/images/photos/battery-storage.webp",
+        "/images/photos/battery-storage.webp",
+        "/images/photos/battery-storage.webp",
+        "/images/photos/battery-storage.webp",
+        "/images/photos/battery-storage.webp",
+        "/images/photos/battery-storage.webp",
+        "/images/photos/battery-storage.webp",
+        "/images/photos/battery-storage.webp",
+        "/images/photos/pump-flow.webp",
+        "/images/photos/pump-flow.webp",
+        "/images/photos/pump-flow.webp",
+        "/images/photos/pump-flow.webp",
         "/images/photos/pump-flow.webp",
         "/images/photos/pump-flow.webp",
         "/images/photos/pump-flow.webp",
@@ -92,6 +157,7 @@
     [
       "pumping",
       [
+        "/images/photos/pivot.webp",
         "/images/photos/greenhouse.webp",
         "/images/photos/crops.webp",
         "/images/photos/pivot.webp",
@@ -106,23 +172,21 @@
       "home-en",
       [
         "/images/photos/solar-farm.webp",
-        "/images/photos/pivot.webp",
-        "/images/photos/panels-rows.webp",
-        "/images/photos/pump-flow.webp",
-        "/images/photos/greenhouse.webp"
+        "/images/photos/inverter-unit.webp",
+        "/images/photos/battery-storage.webp",
+        "/images/photos/pump-flow.webp"
       ]
     ],
     [
       "home-zh",
       [
-        "/images/photos/pivot.webp",
-        "/images/photos/panels-rows.webp",
-        "/images/photos/pump-flow.webp",
-        "/images/photos/greenhouse.webp"
+        "/images/photos/inverter-unit.webp",
+        "/images/photos/battery-storage.webp",
+        "/images/photos/pump-flow.webp"
       ]
     ]
   ],
   "mobileConsoleErrors": [],
-  "totalWaLinks": 1794,
-  "totalImages": 1334
+  "totalWaLinks": 1869,
+  "totalImages": 2068
 }

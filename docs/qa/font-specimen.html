@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>GTS — Font Specimen: IBM Plex Sans Arabic + Inter (target) vs Tajawal + Montserrat (current)</title>
+<style>
+  /* New target fonts (vendored 2026-11-15, public/fonts/) */
+  @font-face { font-family: "PlexAr"; font-style: normal; font-weight: 400; font-display: swap;
+    src: url("../../public/fonts/plex-sans-arabic-400-arabic.woff2") format("woff2");
+    unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
+  @font-face { font-family: "PlexAr"; font-style: normal; font-weight: 400; font-display: swap;
+    src: url("../../public/fonts/plex-sans-arabic-400-latin.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+2000-206F; }
+  @font-face { font-family: "PlexAr"; font-style: normal; font-weight: 500; font-display: swap;
+    src: url("../../public/fonts/plex-sans-arabic-500-arabic.woff2") format("woff2");
+    unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
+  @font-face { font-family: "PlexAr"; font-style: normal; font-weight: 500; font-display: swap;
+    src: url("../../public/fonts/plex-sans-arabic-500-latin.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+2000-206F; }
+  @font-face { font-family: "PlexAr"; font-style: normal; font-weight: 600; font-display: swap;
+    src: url("../../public/fonts/plex-sans-arabic-600-arabic.woff2") format("woff2");
+    unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
+  @font-face { font-family: "PlexAr"; font-style: normal; font-weight: 600; font-display: swap;
+    src: url("../../public/fonts/plex-sans-arabic-600-latin.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+2000-206F; }
+  @font-face { font-family: "PlexAr"; font-style: normal; font-weight: 700; font-display: swap;
+    src: url("../../public/fonts/plex-sans-arabic-700-arabic.woff2") format("woff2");
+    unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
+  @font-face { font-family: "PlexAr"; font-style: normal; font-weight: 700; font-display: swap;
+    src: url("../../public/fonts/plex-sans-arabic-700-latin.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+2000-206F; }
+  /* Inter is a variable font: one file covers wght 400-700 */
+  @font-face { font-family: "InterNew"; font-style: normal; font-weight: 400 700; font-display: swap;
+    src: url("../../public/fonts/inter-latin.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+2000-206F; }
+  /* Current site fonts (unchanged, public/fonts/) */
+  @font-face { font-family: "TajawalCur"; font-style: normal; font-weight: 400; font-display: swap;
+    src: url("../../public/fonts/tajawal-400-arabic.woff2") format("woff2");
+    unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
+  @font-face { font-family: "TajawalCur"; font-style: normal; font-weight: 400; font-display: swap;
+    src: url("../../public/fonts/tajawal-400-latin.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+2000-206F; }
+  @font-face { font-family: "TajawalCur"; font-style: normal; font-weight: 500; font-display: swap;
+    src: url("../../public/fonts/tajawal-500-arabic.woff2") format("woff2");
+    unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
+  @font-face { font-family: "TajawalCur"; font-style: normal; font-weight: 700; font-display: swap;
+    src: url("../../public/fonts/tajawal-700-arabic.woff2") format("woff2");
+    unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
+  @font-face { font-family: "TajawalCur"; font-style: normal; font-weight: 800; font-display: swap;
+    src: url("../../public/fonts/tajawal-800-arabic.woff2") format("woff2");
+    unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
+  @font-face { font-family: "MontCur"; font-style: normal; font-weight: 500; font-display: swap;
+    src: url("../../public/fonts/montserrat-500-latin.woff2") format("woff2"); }
+  @font-face { font-family: "MontCur"; font-style: normal; font-weight: 600; font-display: swap;
+    src: url("../../public/fonts/montserrat-600-latin.woff2") format("woff2"); }
+  @font-face { font-family: "MontCur"; font-style: normal; font-weight: 700; font-display: swap;
+    src: url("../../public/fonts/montserrat-700-latin.woff2") format("woff2"); }
+  @font-face { font-family: "MontCur"; font-style: normal; font-weight: 800; font-display: swap;
+    src: url("../../public/fonts/montserrat-800-latin.woff2") format("woff2"); }
+
+  :root { --navy:#102B46; --primary:#0081FB; --ink:#131C1C; --mut:#5A6470; --line:#E5E7EB; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#F4F6F8; color:var(--ink); font-family:"PlexAr","InterNew",system-ui,sans-serif; }
+  .wrap { max-width:1200px; margin:0 auto; padding:32px 24px 64px; }
+  header { background:#fff; border:1px solid var(--line); border-radius:16px; padding:24px 28px; margin-bottom:24px; }
+  header h1 { font-family:"PlexAr"; font-size:28px; margin:0 0 8px; color:var(--navy); }
+  header p { margin:6px 0; color:var(--mut); font-size:15px; line-height:1.7; }
+  .tag { display:inline-block; background:#DDF5FC; color:var(--navy); border-radius:999px; padding:4px 12px; font-size:13px; font-weight:600; }
+  section { background:#fff; border:1px solid var(--line); border-radius:16px; padding:24px 28px; margin-bottom:24px; }
+  section > h2 { font-size:18px; color:var(--navy); margin:0 0 4px; font-family:"InterNew"; }
+  section > .sub { color:var(--mut); font-size:13px; margin:0 0 20px; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media (max-width:820px){ .grid{ grid-template-columns:1fr; } }
+  .cell { border:1px solid var(--line); border-radius:12px; padding:20px; }
+  .cell h3 { font-size:12px; letter-spacing:.04em; text-transform:uppercase; color:var(--mut); margin:0 0 14px; font-family:"InterNew"; }
+  .new { font-family:"PlexAr","InterNew",system-ui,sans-serif; }
+  .cur { font-family:"TajawalCur","MontCur",system-ui,sans-serif; }
+  .h1 { font-size:48px; line-height:1.2; font-weight:700; color:var(--navy); margin:0; }
+  .h1en { font-size:48px; line-height:1.2; font-weight:700; color:var(--navy); margin:0; }
+  .body { font-size:16px; line-height:1.7; font-weight:400; }
+  .bodylg { font-size:18px; line-height:1.6; font-weight:400; }
+  .w400{font-weight:400}.w500{font-weight:500}.w600{font-weight:600}.w700{font-weight:700}.w800{font-weight:800}
+  table.spec { width:100%; border-collapse:collapse; font-size:15px; }
+  table.spec th, table.spec td { border-bottom:1px solid var(--line); padding:10px 8px; text-align:start; }
+  table.spec th { color:var(--mut); font-size:13px; font-weight:600; }
+  .navrow { display:flex; gap:22px; align-items:center; flex-wrap:wrap; font-size:15px; font-weight:600; color:var(--navy); }
+  .btn { display:inline-block; border-radius:10px; padding:12px 22px; font-size:15px; font-weight:600; text-decoration:none; }
+  .btn-p { background:var(--primary); color:#fff; }
+  .btn-s { background:#fff; color:var(--navy); border:1.5px solid var(--navy); }
+  .btn-wa { background:#1D9E44; color:#fff; }
+  .note { background:#FFF7E6; border:1px solid #F59E0B; border-radius:12px; padding:14px 18px; font-size:14px; line-height:1.7; margin-bottom:24px; }
+  .swatches { display:flex; gap:10px; flex-wrap:wrap; }
+  .sw { flex:1 1 120px; border-radius:10px; padding:12px; font-size:12px; font-weight:600; min-height:64px; }
+  code { background:#F4F6F8; padding:1px 6px; border-radius:6px; font-size:13px; }
+  .ltr { direction:ltr; text-align:left; }
+  footer { color:var(--mut); font-size:13px; line-height:1.7; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="tag">v15 · BRAND &amp; TOKENS · QA SPECIMEN — NOT A SITE CHANGE</span>
+    <h1>عيّنة الخطوط: Plex + Inter مقابل Tajawal + Montserrat</h1>
+    <p><strong>Target (boards):</strong> IBM Plex Sans Arabic for Arabic + Inter for Latin — Digital Design System boards 129542 / 129543.
+       <strong>Current (live site):</strong> Tajawal + Montserrat — <code>public/fonts/</code>, <code>globals.css</code>.</p>
+    <p>All font files below are vendored locally as WOFF2 (<code>font-display: swap</code>). No font has been swapped on the site — this page is for review only.
+       Sample lines use board-printed taglines and real product data (Deye SUN-SG04LP1-6kW); the Chinese lines are <em>specimen-only sample text, not approved site copy</em>.</p>
+    <p>Conflict note: the composite board image (129540) prints “Montserrat” as the typeface, while the two standalone Digital Design System boards print “IBM Plex Sans Arabic + Inter”. Per v15 §4 the standalone boards are followed as the target direction.</p>
+  </header>
+
+  <div class="note"><strong>Chinese coverage — read first:</strong> Neither IBM Plex Sans Arabic nor Inter covers CJK. Chinese text on this page renders through the fallback stack
+    (<code>"Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif</code>). The same fallback applies to the current Tajawal + Montserrat stack.
+    A CJK webfont is <strong>not</strong> vendored — the site should keep relying on system CJK fonts (they are present on the user's devices) rather than shipping a multi-MB CJK file.</div>
+
+  <section>
+    <h2>1 · Arabic Display / H1 — 48px / Bold</h2>
+    <p class="sub">Board tagline: «حلول ذكية لعالم مستدام» (Design DNA board, §12 Brand Essence).</p>
+    <div class="grid">
+      <div class="cell new"><h3>NEW — IBM Plex Sans Arabic 700</h3><p class="h1">حلول ذكية لعالمٍ مستدام</p></div>
+      <div class="cell cur"><h3>CURRENT — Tajawal 700</h3><p class="h1">حلول ذكية لعالمٍ مستدام</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>2 · Arabic body — 16px / 18px, Regular</h2>
+    <p class="sub">Board line: «ندمج الطاقة المتجددة والمياه والزراعة مع التكنولوجيا المبتكرة» (Design DNA §12). Mixed-direction line tests a Latin model code inside Arabic copy.</p>
+    <div class="grid">
+      <div class="cell new"><h3>NEW — Plex Sans Arabic 400</h3>
+        <p class="body">ندمج الطاقة المتجددة والمياه والزراعة مع التكنولوجيا المبتكرة، ونقدّم أنظمة طاقة شمسية وضخّ وريّ للمنازل والمزارع والمنشآت.</p>
+        <p class="body">العاكس <span dir="ltr">Deye SUN-SG04LP1-6kW</span> بقدرة 6kW وحماية <span dir="ltr">IP65</span> واتصال <span dir="ltr">WiFi</span> — الأرقام: 220 فولط، 50 هرتز، 10,000 دورة.</p>
+      </div>
+      <div class="cell cur"><h3>CURRENT — Tajawal 400</h3>
+        <p class="body">ندمج الطاقة المتجددة والمياه والزراعة مع التكنولوجيا المبتكرة، ونقدّم أنظمة طاقة شمسية وضخّ وريّ للمنازل والمزارع والمنشآت.</p>
+        <p class="body">العاكس <span dir="ltr">Deye SUN-SG04LP1-6kW</span> بقدرة 6kW وحماية <span dir="ltr">IP65</span> واتصال <span dir="ltr">WiFi</span> — الأرقام: 220 فولط، 50 هرتز، 10,000 دورة.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>3 · English Display / H1 — 48px / Bold</h2>
+    <p class="sub">Board headline: “Smart Solutions for a Sustainable World” (Design DNA §12).</p>
+    <div class="grid">
+      <div class="cell new ltr"><h3>NEW — Inter 700</h3><p class="h1en">Smart Solutions for a Sustainable World</p></div>
+      <div class="cell cur ltr"><h3>CURRENT — Montserrat 700</h3><p class="h1en">Smart Solutions for a Sustainable World</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>4 · English body — 16px, Regular</h2>
+    <p class="sub">Board line: “Integrating renewable energy, water and agriculture with innovative technology.”</p>
+    <div class="grid">
+      <div class="cell new ltr"><h3>NEW — Inter 400</h3>
+        <p class="body">Integrating renewable energy, water and agriculture with innovative technology. Ghamdan Trading &amp; Agencies supplies solar panels, inverters, batteries, water pumps and irrigation systems.</p></div>
+      <div class="cell cur ltr"><h3>CURRENT — Montserrat 500*</h3>
+        <p class="body">Integrating renewable energy, water and agriculture with innovative technology. Ghamdan Trading &amp; Agencies supplies solar panels, inverters, batteries, water pumps and irrigation systems.</p>
+        <p style="font-size:12px;color:var(--mut)">* <strong>Live-site defect (verified 2026-11-15):</strong> the four vendored Montserrat files are byte-identical (same SHA-256) and all report as <em>Montserrat Thin, weight 100</em> — so the live site's 500–800 Latin weights are browser-synthesised, not real. The swap to Inter fixes this as a side effect.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>5 · Chinese body — fallback demonstration</h2>
+    <p class="sub">Specimen-only sample text (not site copy). Both stacks fall back to system CJK fonts — verify the two columns render identically.</p>
+    <div class="grid">
+      <div class="cell new ltr"><h3>NEW STACK — fallback CJK</h3>
+        <p class="body" lang="zh">太阳能解决方案：为家庭、农场和企业提供清洁、可靠的电力。逆变器、电池与水泵系统，安装与售后支持。</p></div>
+      <div class="cell cur ltr"><h3>CURRENT STACK — fallback CJK</h3>
+        <p class="body" lang="zh">太阳能解决方案：为家庭、农场和企业提供清洁、可靠的电力。逆变器、电池与水泵系统，安装与售后支持。</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>6 · Numeric / specification data</h2>
+    <p class="sub">Real product data (Deye SUN-SG04LP1-6kW, live catalogue). Tests tabular figures, units and mixed Latin/Arabic.</p>
+    <div class="grid">
+      <div class="cell new ltr"><h3>NEW — Inter / Plex</h3>
+        <table class="spec"><tr><th>Model</th><th>Rated power</th><th>Protection</th><th>Connectivity</th></tr>
+        <tr><td>Deye SUN-SG04LP1-6kW</td><td>6,000 W</td><td>IP65</td><td>WiFi</td></tr>
+        <tr><td>6 kW + 5 kWh storage</td><td>6 kW</td><td>IP65</td><td>RS485</td></tr></table></div>
+      <div class="cell cur ltr"><h3>CURRENT — Montserrat / Tajawal</h3>
+        <table class="spec"><tr><th>Model</th><th>Rated power</th><th>Protection</th><th>Connectivity</th></tr>
+        <tr><td>Deye SUN-SG04LP1-6kW</td><td>6,000 W</td><td>IP65</td><td>WiFi</td></tr>
+        <tr><td>6 kW + 5 kWh storage</td><td>6 kW</td><td>IP65</td><td>RS485</td></tr></table></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>7 · Buttons &amp; navigation</h2>
+    <p class="sub">Board labels: “Request a Quote / اطلب استشارة”, “View Details / عرض التفاصيل”, “Chat on WhatsApp / تواصل عبر واتساب”.</p>
+    <div class="grid">
+      <div class="cell new"><h3>NEW — Plex / Inter</h3>
+        <p class="navrow"><span>الرئيسية</span><span>الحلول</span><span>المنتجات</span><span>المشاريع</span><span>تواصل</span></p>
+        <p><a class="btn btn-p">اطلب استشارة ←</a>&nbsp; <a class="btn btn-s">عرض التفاصيل ←</a>&nbsp; <a class="btn btn-wa">تواصل عبر واتساب</a></p>
+        <p class="navrow ltr"><span>Home</span><span>Solutions</span><span>Products</span><span>Projects</span><span>Contact</span></p>
+        <p class="ltr"><a class="btn btn-p">Request a Quote →</a>&nbsp; <a class="btn btn-s">View Details →</a>&nbsp; <a class="btn btn-wa">Chat on WhatsApp</a></p></div>
+      <div class="cell cur"><h3>CURRENT — Tajawal / Montserrat</h3>
+        <p class="navrow"><span>الرئيسية</span><span>الحلول</span><span>المنتجات</span><span>المشاريع</span><span>تواصل</span></p>
+        <p><a class="btn btn-p">اطلب استشارة ←</a>&nbsp; <a class="btn btn-s">عرض التفاصيل ←</a>&nbsp; <a class="btn btn-wa">تواصل عبر واتساب</a></p>
+        <p class="navrow ltr"><span>Home</span><span>Solutions</span><span>Products</span><span>Projects</span><span>Contact</span></p>
+        <p class="ltr"><a class="btn btn-p">Request a Quote →</a>&nbsp; <a class="btn btn-s">View Details →</a>&nbsp; <a class="btn btn-wa">Chat on WhatsApp</a></p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>8 · Weights 400 / 500 / 600 / 700</h2>
+    <p class="sub">Arabic (Plex vs Tajawal) and Latin (Inter vs Montserrat). Note: Tajawal has no 600 file vendored; Montserrat has no 400 file vendored — those rows fall back to the nearest available weight in the current stack.</p>
+    <div class="grid">
+      <div class="cell new"><h3>NEW</h3>
+        <p class="bodylg w400">الطاقة الشمسية للمنازل والمزارع — Solar energy 400</p>
+        <p class="bodylg w500">الطاقة الشمسية للمنازل والمزارع — Solar energy 500</p>
+        <p class="bodylg w600">الطاقة الشمسية للمنازل والمزارع — Solar energy 600</p>
+        <p class="bodylg w700">الطاقة الشمسية للمنازل والمزارع — Solar energy 700</p></div>
+      <div class="cell cur"><h3>CURRENT</h3>
+        <p class="bodylg w400">الطاقة الشمسية للمنازل والمزارع — Solar energy 400</p>
+        <p class="bodylg w500">الطاقة الشمسية للمنازل والمزارع — Solar energy 500</p>
+        <p class="bodylg w600">الطاقة الشمسية للمنازل والمزارع — Solar energy 600</p>
+        <p class="bodylg w700">الطاقة الشمسية للمنازل والمزارع — Solar energy 700</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>9 · Final token strip (reference — see docs/design-tokens.md)</h2>
+    <p class="sub">Contrast ratios computed 2026-11-15 (WCAG). Primary blue #0081FB on white is 3.80:1 — large text / UI only, not body text.</p>
+    <div class="swatches">
+      <div class="sw" style="background:#0081FB;color:#fff">Primary #0081FB<br>3.80:1 on white</div>
+      <div class="sw" style="background:#0B70C9;color:#fff">Hover #0B70C9<br>5.03:1 on white</div>
+      <div class="sw" style="background:#102B46;color:#fff">Navy #102B46<br>14.42:1 on white</div>
+      <div class="sw" style="background:#DDF5FC;color:#102B46">Sky #DDF5FC<br>12.73:1 navy text</div>
+      <div class="sw" style="background:#89E9F8;color:#102B46">Cyan #89E9F8</div>
+      <div class="sw" style="background:#F4F6F8;color:#131C1C;border:1px solid #E5E7EB">Background #F4F6F8</div>
+      <div class="sw" style="background:#108981;color:#fff">Success #108981<br>4.27:1</div>
+      <div class="sw" style="background:#F59E0B;color:#131C1C">Warning #F59E0B<br>2.15:1 — never text</div>
+      <div class="sw" style="background:#EF4444;color:#fff">Error #EF4444<br>3.76:1</div>
+    </div>
+  </section>
+
+  <footer>
+    <p><strong>Files:</strong> <code>public/fonts/inter-latin.woff2</code> (48,256 B, variable wght 400–700) ·
+    <code>plex-sans-arabic-{400,500,600,700}-{arabic,latin}.woff2</code> (8 files, 257,368 B total) · all verified <code>wOF2</code> magic, OFL licence (Google Fonts).
+    Current files untouched: Tajawal 400/500/700/800 (arabic+latin), Montserrat 500/600/700/800 (latin).</p>
+    <p><strong>Decision pending:</strong> swap the site to Plex + Inter only after this specimen is reviewed. Do not apply English letter-spacing to Arabic or Chinese text. Do not use primary blue for small body text (3.80:1).
+    <strong>Note:</strong> the current Montserrat files are all the same Thin (weight 100) file — see §4 — so the current Latin column is already rendering synthesised weights; the Inter column is the honest comparison.</p>
+  </footer>
+</div>
+</body>
+</html>
