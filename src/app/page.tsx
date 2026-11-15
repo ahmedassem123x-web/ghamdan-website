@@ -11,9 +11,9 @@ export default function RootPage() {
     window.location.replace("/ar");
   }, []);
   return (
-    <main className="flex min-h-screen items-center justify-center bg-bg">
+    <main className="flex min-h-screen items-center justify-center bg-background">
       <p className="text-body text-text-muted">
-        <a href="/ar" className="font-bold text-accent underline">
+        <a href="/ar" className="font-bold text-primary-hover underline">
           غمدان — GHAMDAN
         </a>
       </p>
