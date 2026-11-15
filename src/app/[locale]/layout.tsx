@@ -6,6 +6,7 @@ import WhatsAppFloat from "@/components/WhatsAppFloat";
 import { ZhNotice } from "@/components/ui";
 import LocaleHtmlAttrs from "@/components/LocaleHtmlAttrs";
 import MotionProvider from "@/lib/motion";
+import ViewTransitionProvider from "@/components/ViewTransitionProvider";
 import { LOCALES } from "@/lib/i18n";
 import { t } from "@/lib/i18n";
 import { detailMetadata } from "@/lib/metadata";
@@ -53,6 +54,7 @@ export default async function LocaleLayout({
       </a>
       <LocaleHtmlAttrs locale={l} />
       <MotionProvider />
+      <ViewTransitionProvider />
       <TopBar locale={l} />
       <Header locale={l} />
       <ZhNotice locale={l} />

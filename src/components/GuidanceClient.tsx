@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { AlertTriangle, MessageCircle } from "lucide-react";
+import { AlertIcon, WhatsAppIcon } from "@/components/icons";
 import Hero from "@/components/Hero";
 import { ui } from "@/lib/ui-copy";
 import { WA_MESSAGES, waLink } from "@/lib/whatsapp";
@@ -30,15 +30,15 @@ export default function GuidanceClient({ locale }: { locale: Locale }) {
   return (
     <>
       <Hero locale={locale} variant="plain" title={g.k1} text={g.k2} whatsapp={false} />
-      <section className="section">
+      <section className="section bg-mesh-navy">
         <div className="wrap max-w-3xl">
           {/* Mandatory safety copy */}
-          <div className="flex items-start gap-3 rounded-card border border-sky bg-sky p-5">
-            <AlertTriangle className="mt-0.5 size-6 shrink-0 text-primary-hover" aria-hidden="true" />
+          <div data-reveal="fade" className="flex items-start gap-3 rounded-card border border-sky bg-sky p-5">
+            <AlertIcon className="mt-0.5 size-6 shrink-0 text-primary-hover" aria-hidden="true" />
             <p className="font-bold text-navy">{ui("guidance.safety", locale)}</p>
           </div>
 
-          <div className="mt-8 rounded-card bg-surface p-6 shadow-card md:p-8">
+          <div data-stagger className="card-luxe mt-8 p-6 md:p-8">
             <div className="grid gap-5 sm:grid-cols-2">
               <label className="block">
                 <span className="mb-1.5 block text-sm font-bold text-navy">{ui("guidance.depth", locale)}</span>
@@ -103,7 +103,7 @@ export default function GuidanceClient({ locale }: { locale: Locale }) {
                 }
               }}
             >
-              <MessageCircle className="size-5" aria-hidden="true" />
+              <WhatsAppIcon className="size-5" aria-hidden="true" />
               {ui("guidance.send", locale)}
             </a>
           </div>

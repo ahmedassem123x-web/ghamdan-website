@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { Filter, Info } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { SlidersIcon, InfoIcon } from "@/components/icons";
 import ProductCard from "@/components/ProductCard";
 import { ResultMeta, SearchInput, SortSelect } from "@/components/ui";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -31,6 +31,12 @@ export default function CategoryClient({
   const [brand, setBrand] = useState("all");
   const [sort, setSort] = useState("newest");
   const [page, setPage] = useState(1);
+  // Pagination transitions: fade out 120ms -> swap page -> enter y 12->0
+  // 280ms + smooth scroll to the grid top + focus the grid heading
+  // (tabindex="-1"). Reduced motion: instant swap, no scroll animation.
+  const [phase, setPhase] = useState<"idle" | "exit" | "enter">("idle");
+  const gridTopRef = useRef<HTMLDivElement>(null);
+  const pageTimer = useRef<number | null>(null);
 
   // Read ?brand=&type=&q= on mount (static export: no server searchParams).
   useEffect(() => {
@@ -71,12 +77,29 @@ export default function CategoryClient({
   const pageItems = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
   const resetPage = () => setPage(1);
 
+  const goToPage = (n: number) => {
+    if (n === safePage || n < 1 || n > totalPages) return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) {
+      setPage(n);
+      return;
+    }
+    if (pageTimer.current !== null) window.clearTimeout(pageTimer.current);
+    setPhase("exit");
+    pageTimer.current = window.setTimeout(() => {
+      setPage(n);
+      setPhase("enter");
+      gridTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      gridTopRef.current?.focus({ preventScroll: true });
+    }, 120);
+  };
+
   return (
     <div>
-      {/* 8.3 Filter bar */}
-      <div className="flex flex-col gap-4 rounded-card bg-surface-muted p-5 lg:flex-row lg:items-center">
+      {/* 8.3 Filter bar — luxe card on the sand section */}
+      <div data-reveal="up" className="card-luxe flex flex-col gap-4 p-5 lg:flex-row lg:items-center">
         <p className="flex shrink-0 items-center gap-2 font-bold text-navy">
-          <Filter className="size-5 text-primary-hover" aria-hidden="true" />
+          <SlidersIcon className="size-5 text-primary-hover" aria-hidden="true" />
           {ui("catalog.filter", locale)}
         </p>
         <div className="flex-1">
@@ -142,20 +165,20 @@ export default function CategoryClient({
         </div>
       </div>
 
-      {/* 8.4 Result meta */}
-      <div className="mt-6">
+      {/* 8.4 Result meta — focus target after pagination (tabindex -1) */}
+      <div ref={gridTopRef} tabIndex={-1} data-reveal="fade" className="mt-6 outline-none">
         <ResultMeta shown={pageItems.length} total={filtered.length} label={ui("catalog.showing", locale)} />
       </div>
 
       {/* 8.5 Product grid (4-col, 12/page) */}
       {pageItems.length === 0 ? (
-        <div className="mt-8">
+        <div data-reveal="fade" className="empty-enter mt-8">
           {/* Honest empty state — inlined (visible by default) instead of the
               shared EmptyState (Phase 6 removed the .reveal hiding from the
               shared primitives; this page keeps its inline state). */}
-          <div className="rounded-card border border-dashed border-border-strong bg-surface p-10 text-center">
+          <div className="rounded-card border border-dashed border-border-strong bg-white p-10 text-center">
             <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-sky text-primary-hover">
-              <Info className="size-8" aria-hidden="true" />
+              <InfoIcon className="size-8" aria-hidden="true" />
             </div>
             <h3 className="mt-5 text-h3 font-semibold text-navy">{ui("catalog.noProducts", locale)}</h3>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
@@ -164,7 +187,10 @@ export default function CategoryClient({
           </div>
         </div>
       ) : (
-        <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div
+          data-stagger
+          className={`mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4 ${phase === "exit" ? "page-exit" : phase === "enter" ? "page-enter" : ""}`}
+        >
           {pageItems.map((p) => (
             <ProductCard key={p.id} locale={locale} product={p} />
           ))}
@@ -172,9 +198,9 @@ export default function CategoryClient({
       )}
 
       {totalPages > 1 && (
-        <div className="mt-8 flex justify-center gap-2" role="navigation" aria-label="Pagination">
+        <div data-stagger className="mt-8 flex justify-center gap-2" role="navigation" aria-label="Pagination">
           {page > 1 && (
-            <button type="button" onClick={() => setPage(page - 1)} className="rounded-[0.625rem] border border-border bg-surface px-4 py-2 text-sm font-bold text-navy transition-colors hover:border-primary-hover hover:text-primary-hover">
+            <button type="button" onClick={() => goToPage(page - 1)} className="rounded-[0.625rem] border border-border bg-surface px-4 py-2 text-sm font-bold text-navy transition-colors hover:border-primary-hover hover:text-primary-hover">
               {locale === "ar" ? "→" : "←"}
             </button>
           )}
@@ -182,7 +208,7 @@ export default function CategoryClient({
             <button
               key={n}
               type="button"
-              onClick={() => setPage(n)}
+              onClick={() => goToPage(n)}
               aria-current={n === safePage ? "page" : undefined}
               className={`inline-flex size-10 items-center justify-center rounded-[0.625rem] text-sm font-bold transition-colors ${
                 n === safePage ? "bg-navy text-white" : "border border-border bg-surface text-navy hover:border-primary-hover hover:text-primary-hover"
@@ -192,7 +218,7 @@ export default function CategoryClient({
             </button>
           ))}
           {page < totalPages && (
-            <button type="button" onClick={() => setPage(page + 1)} className="rounded-[0.625rem] border border-border bg-surface px-4 py-2 text-sm font-bold text-navy transition-colors hover:border-primary-hover hover:text-primary-hover">
+            <button type="button" onClick={() => goToPage(page + 1)} className="rounded-[0.625rem] border border-border bg-surface px-4 py-2 text-sm font-bold text-navy transition-colors hover:border-primary-hover hover:text-primary-hover">
               {locale === "ar" ? "←" : "→"}
             </button>
           )}

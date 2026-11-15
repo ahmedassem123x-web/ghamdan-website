@@ -40,10 +40,42 @@ export default function ProjectsClient({ locale, items }: { locale: Locale; item
   const [filter, setFilter] = useState<(typeof FILTERS)[number]["id"]>("all");
   const [index, setIndex] = useState(0);
   const [lightbox, setLightbox] = useState(false);
+  // Lightbox exit: 150ms closing class, then unmount.
+  const [closing, setClosing] = useState(false);
+  const closeTimer = useRef<number | null>(null);
+  // Click zoom (1 -> 1.6 around the click point) + pinch zoom (1..3) +
+  // swipe down to close (mobile, only when not zoomed).
+  const [zoomed, setZoomed] = useState(false);
+  const [zoomOrigin, setZoomOrigin] = useState("50% 50%");
+  const [zoomScale, setZoomScale] = useState(1);
+  const pinchRef = useRef<{ d0: number; scale0: number } | null>(null);
+  const swipeRef = useRef<{ x: number; y: number } | null>(null);
   const rtl = locale === "ar";
   const touchX = useRef<number | null>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   useFocusTrap(lightbox, dialogRef);
+
+  const closeLightbox = () => {
+    if (!lightbox || closing) return;
+    setClosing(true);
+    closeTimer.current = window.setTimeout(() => {
+      setLightbox(false);
+      setClosing(false);
+      closeTimer.current = null;
+    }, 150);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (closeTimer.current !== null) window.clearTimeout(closeTimer.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    setZoomed(false);
+    setZoomScale(1);
+    setZoomOrigin("50% 50%");
+  }, [lightbox, index]);
 
   const visible = useMemo(() => (filter === "all" ? items : items.filter((i) => i.category === filter)), [items, filter]);
   const current = visible[Math.min(index, Math.max(0, visible.length - 1))];
@@ -61,7 +93,7 @@ export default function ProjectsClient({ locale, items }: { locale: Locale; item
   useEffect(() => {
     if (!lightbox) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setLightbox(false);
+      if (e.key === "Escape") closeLightbox();
       if (e.key === "ArrowLeft") go(rtl ? 1 : -1);
       if (e.key === "ArrowRight") go(rtl ? -1 : 1);
     };
@@ -69,6 +101,51 @@ export default function ProjectsClient({ locale, items }: { locale: Locale; item
     return () => document.removeEventListener("keydown", onKey);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lightbox, rtl, visible]);
+
+  // Lightbox touch: pinch zoom + swipe down to close.
+  const onDialogTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 2) {
+      const d = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY,
+      );
+      pinchRef.current = { d0: d, scale0: zoomScale };
+      swipeRef.current = null;
+      return;
+    }
+    swipeRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  };
+  const onDialogTouchMove = (e: React.TouchEvent) => {
+    if (pinchRef.current && e.touches.length === 2) {
+      const d = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY,
+      );
+      setZoomScale(Math.max(1, Math.min(3, (pinchRef.current.scale0 * d) / pinchRef.current.d0)));
+    }
+  };
+  const onDialogTouchEnd = (e: React.TouchEvent) => {
+    if (pinchRef.current) {
+      pinchRef.current = null;
+      setZoomScale((s) => (s < 1.15 ? 1 : s));
+      return;
+    }
+    if (swipeRef.current && zoomScale === 1) {
+      const dy = e.changedTouches[0].clientY - swipeRef.current.y;
+      swipeRef.current = null;
+      if (dy > 80) closeLightbox();
+    }
+    swipeRef.current = null;
+  };
+
+  const onLightboxImageClick = (e: React.MouseEvent<HTMLImageElement>) => {
+    if (zoomScale !== 1) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setZoomOrigin(`${x}% ${y}%`);
+    setZoomed((z) => !z);
+  };
 
   const onTouchStart = (e: React.TouchEvent) => {
     touchX.current = e.touches[0].clientX;
@@ -86,7 +163,7 @@ export default function ProjectsClient({ locale, items }: { locale: Locale; item
   return (
     <div>
       {/* Filter pills */}
-      <div className="flex flex-wrap gap-2" role="tablist" aria-label={ui("projects.filterAll", locale)}>
+      <div data-stagger className="flex flex-wrap gap-2" role="tablist" aria-label={ui("projects.filterAll", locale)}>
         {FILTERS.map((f) => (
           <button
             key={f.id}
@@ -97,8 +174,8 @@ export default function ProjectsClient({ locale, items }: { locale: Locale; item
               setFilter(f.id);
               setIndex(0);
             }}
-            className={`rounded-full px-4 py-2 text-sm font-bold transition-colors ${
-              filter === f.id ? "bg-navy text-white" : "bg-surface text-text-muted hover:bg-surface-muted hover:text-navy"
+            className={`rounded-full border px-4 py-2 text-sm font-bold transition-colors ${
+              filter === f.id ? "border-navy bg-navy text-white" : "border-border bg-white text-text-muted hover:border-primary-hover hover:text-navy"
             }`}
           >
             {ui(f.labelKey, locale)}
@@ -108,7 +185,7 @@ export default function ProjectsClient({ locale, items }: { locale: Locale; item
 
       {/* Carousel shell */}
       <div
-        className="relative mt-6 overflow-hidden rounded-image shadow-card"
+        data-reveal="scale" className="relative mt-6 overflow-hidden rounded-image shadow-card"
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
       >
@@ -138,7 +215,7 @@ export default function ProjectsClient({ locale, items }: { locale: Locale; item
       </div>
 
       {/* Dot pagination — 24px hit area (WCAG 2.5.8) around a 10px dot. */}
-      <div className="mt-4 flex justify-center gap-1" role="tablist" aria-label="Gallery pages">
+      <div data-stagger className="mt-4 flex justify-center gap-1" role="tablist" aria-label="Gallery pages">
         {visible.map((_, i) => (
           <button
             key={i}
@@ -158,14 +235,41 @@ export default function ProjectsClient({ locale, items }: { locale: Locale; item
 
       {/* Lightbox */}
       {lightbox && (
-        <div ref={dialogRef} role="dialog" aria-modal="true" aria-label={current.alt} className="fixed inset-0 z-[80] flex items-center justify-center bg-navy/90 p-4">
-          <button type="button" className="absolute top-4 end-4 inline-flex size-11 items-center justify-center rounded-full bg-white/15 text-white" aria-label={closeLabel} onClick={() => setLightbox(false)}>
+        <div
+          ref={dialogRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label={current.alt}
+          className={`lightbox fixed inset-0 z-[80] flex items-center justify-center bg-navy/90 p-4 ${closing ? "lightbox--closing" : ""}`}
+          onTouchStart={onDialogTouchStart}
+          onTouchMove={onDialogTouchMove}
+          onTouchEnd={onDialogTouchEnd}
+        >
+          <button type="button" className="absolute top-4 end-4 inline-flex size-11 items-center justify-center rounded-full bg-white/15 text-white" aria-label={closeLabel} onClick={closeLightbox}>
             <X className="size-6" aria-hidden="true" />
           </button>
+          <p key={Math.min(index, visible.length - 1)} className="lightbox__counter absolute top-4 inset-x-0 text-center text-sm font-bold text-white" dir="ltr">
+            {Math.min(index, visible.length - 1) + 1} / {visible.length}
+          </p>
           <button type="button" className="absolute start-4 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white" aria-label={prevLabel} onClick={() => go(-1)}>
             <PrevIcon className="size-6" aria-hidden="true" />
           </button>
-          <img key={current.src} src={webp(current.src)} alt={current.alt} className="carousel__img max-h-[80vh] max-w-full rounded-image object-contain" />
+          <div
+            className="max-h-[80vh] max-w-full overflow-hidden"
+            style={{
+              transform: `scale(${zoomed ? 1.6 : zoomScale})`,
+              transformOrigin: zoomOrigin,
+              transition: "transform 200ms ease-out",
+            }}
+          >
+            <img
+              key={current.src}
+              src={webp(current.src)}
+              alt={current.alt}
+              onClick={onLightboxImageClick}
+              className={`carousel__img lightbox__img max-h-[80vh] max-w-full rounded-image object-contain ${zoomed || zoomScale !== 1 ? "cursor-zoom-out" : "cursor-zoom-in"}`}
+            />
+          </div>
           <button type="button" className="absolute end-4 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white" aria-label={nextLabel} onClick={() => go(1)}>
             <NextIcon className="size-6" aria-hidden="true" />
           </button>

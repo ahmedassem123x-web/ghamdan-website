@@ -1,4 +1,5 @@
-import { Facebook, Instagram, Mail, Phone, Clock } from "lucide-react";
+import { Clock, Facebook, Instagram } from "lucide-react";
+import { MailIcon, PhoneIcon } from "@/components/icons";
 import { siteSettings } from "@/data";
 import { t } from "@/lib/i18n";
 import type { Locale } from "@/data";
@@ -10,20 +11,25 @@ import type { Locale } from "@/data";
  * social links); it is retained, re-tokenised, not newly introduced.
  * Social links are the verified ones from src/data/settings.ts
  * (facebook.com/GTSYemen, instagram.com/gtsyemen1) — no other network
- * is linked anywhere in the shell.
+ * is linked anywhere in the shell. Finishing touch: a 2px dual-color
+ * blue→red hairline under the strip, echoing the logo ring.
+ *
+ * Icon note: Mail / Phone come from the shared icon library; Facebook /
+ * Instagram / Clock have no contract equivalent there, so they stay on
+ * lucide (same stroke family).
  */
 export default function TopBar({ locale }: { locale: Locale }) {
   const { contact, social } = siteSettings;
   return (
-    <div className="hidden bg-navy text-white lg:block">
+    <div data-reveal className="hidden bg-navy text-white lg:block">
       <div className="wrap flex h-10 items-center justify-between text-[0.8125rem]">
         <div className="flex items-center gap-5">
           <a href={`mailto:${contact.email}`} className="flex items-center gap-1.5 text-text-inverse-muted transition-colors hover:text-white">
-            <Mail className="size-3.5" aria-hidden="true" />
+            <MailIcon className="size-3.5" aria-hidden="true" />
             <span dir="ltr">{contact.email}</span>
           </a>
           <a href={`tel:${contact.whatsapp}`} className="flex items-center gap-1.5 text-text-inverse-muted transition-colors hover:text-white">
-            <Phone className="size-3.5" aria-hidden="true" />
+            <PhoneIcon className="size-3.5" aria-hidden="true" />
             <span dir="ltr">{contact.phoneDisplay}</span>
           </a>
           <span className="flex items-center gap-1.5 text-text-inverse-muted">
@@ -40,6 +46,7 @@ export default function TopBar({ locale }: { locale: Locale }) {
           </a>
         </div>
       </div>
+      <div aria-hidden="true" className="h-0.5 bg-gradient-to-r from-primary via-primary-hover to-brand-red" />
     </div>
   );
 }

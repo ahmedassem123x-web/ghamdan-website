@@ -5,23 +5,23 @@ import { siteSettings } from "@/data";
 
 /**
  * Brand lockup (v15, docs/brand-identity-lock.md §5–§7).
- * Official emblem `gts-emblem-transparent.png` — PREFERRED on every
- * surface — + HTML wordmark text beside it. The emblem at header size
- * (40–48px) is a symbol only: its embedded Arabic/English/partner lines
- * become texture, so the HTML text carries the company name — never rely
- * on the emblem alone for the name.
+ * Official transparent logo `gts-logo-transparent.png` (2048×2048,
+ * square) — PREFERRED on every surface — + HTML wordmark text beside
+ * it. The logo at header size (40–48px) is a symbol only: its embedded
+ * Arabic/English/partner lines become texture, so the HTML text carries
+ * the company name — never rely on the logo alone for the name.
  *
  * Rules kept: explicit width/height (no layout shift; intrinsic ratio
- * 1597:1621), no CSS filters, no drop shadow, no crop/recolour, clear
- * space ≈ 1/4 emblem diameter (the flex gap). NEVER the navy square tile
- * (`gts-official-logo.jpg`) on a white header — the tile is navy by
- * design. Dark navy footer: the same transparent emblem (it reproduces
- * the tile look on navy) — preferred for consistency.
+ * 1:1 — width = height), no CSS filters, no drop shadow, no crop/
+ * recolour, clear space ≈ 1/4 logo diameter (the flex gap). NEVER the
+ * navy square tile (`gts-official-logo.jpg`) on a white header — the tile
+ * is navy by design. Dark navy footer: the same transparent logo (it
+ * reproduces the tile look on navy) — preferred for consistency.
  * Alt text per brand lock §7. The old typographic wordmark
  * (GHAMDAN. + red dot #E10600, Montserrat) is RETIRED with the swap:
- * logo red #E31E24 lives inside the emblem only, never as UI text.
+ * logo red #E31E24 lives inside the logo only, never as UI text.
  */
-const EMBLEM_SRC = "/images/brand/gts-emblem-transparent.png";
+const LOGO_SRC = "/images/brand/gts-logo-transparent.png";
 
 /** Display size (px) per slot — brand lock §6: header 40–48, footer 120. */
 const SIZES = {
@@ -41,8 +41,8 @@ export default function Wordmark({
 }) {
   const brand = siteSettings.brand;
   const px = SIZES[size];
-  // Intrinsic emblem ratio 1597:1621 — width follows from the height.
-  const w = Math.round((px * 1597) / 1621);
+  // Intrinsic logo ratio 1:1 (2048×2048 square) — width = height.
+  const w = px;
   const name = t(brand.name, locale);
   const alt =
     locale === "ar"
@@ -63,7 +63,7 @@ export default function Wordmark({
       aria-label={alt}
     >
       <img
-        src={EMBLEM_SRC}
+        src={LOGO_SRC}
         alt=""
         width={w}
         height={px}

@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, MessageCircle, ShieldCheck, Zap } from "lucide-react";
+import { ArrowIcon, ZapIcon, WhatsAppIcon, ShieldIcon, categoryIcon } from "@/components/icons";
 import Hero from "@/components/Hero";
 import CTABand from "@/components/CTABand";
-import { categoryIcon } from "@/components/Cards";
 import CategoryClient from "@/components/CategoryClient";
 import { categories, pages, products } from "@/data";
 import { localizedHref, t } from "@/lib/i18n";
@@ -47,7 +46,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ local
   const related = [
     { href: "/products/category/inverters", image: "/images/photos/villa-roof.jpg", title: { ar: "الطاقة للمنازل", en: "Energy for homes", zh: "家庭能源" } },
     { href: "/products/category/storage-ci", image: "/images/photos/solar-farm.jpg", title: { ar: "الطاقة للمنشآت التجارية", en: "Energy for commercial facilities", zh: "商业设施能源" } },
-    { href: "/systems", image: "/images/photos/solar-farm.jpg", title: { ar: "الطاقة للمشاريع الكبرى", en: "Energy for large projects", zh: "大型项目能源" } },
+    { href: "/systems", image: "/images/photos/villa-sky.jpg", title: { ar: "الطاقة للمشاريع الكبرى", en: "Energy for large projects", zh: "大型项目能源" } },
     { href: "/products/category/batteries", image: "/images/photos/battery-storage.jpg", title: { ar: "حلول التخزين", en: "Storage solutions", zh: "储能解决方案" } },
   ];
 
@@ -76,12 +75,13 @@ export default async function CategoryPage({ params }: { params: Promise<{ local
 
       {/* 8.2 Category tabs (ADR-07, ref 08 pattern): All first, then the 8
           real categories with published counts. Zero-count tabs stay visible
-          and link to their honest empty-state page. */}
-      <div className="border-b border-border bg-surface">
-        <div className="wrap flex gap-1 overflow-x-auto py-3">
+          and link to their honest empty-state page. Bordered chips; the
+          active chip is navy. */}
+      <div data-reveal="fade" className="border-b border-border bg-white">
+        <div data-stagger className="tab-strip wrap flex gap-2 overflow-x-auto py-4">
           <Link
             href={localizedHref(l, "/products")}
-            className="flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 text-sm font-bold text-text-muted transition-colors hover:bg-surface-muted hover:text-navy"
+            className="flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-border bg-white px-4 py-2 text-sm font-bold text-text-muted transition-colors hover:border-primary-hover hover:text-navy"
           >
             {ui("category.allProducts", l)}
             <span dir="ltr" className="text-xs font-bold text-text-muted">
@@ -93,8 +93,8 @@ export default async function CategoryPage({ params }: { params: Promise<{ local
               key={c.id}
               href={localizedHref(l, `/products/category/${c.id}`)}
               aria-current={c.id === cat.id ? "page" : undefined}
-              className={`flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 text-sm font-bold transition-colors ${
-                c.id === cat.id ? "bg-navy text-white" : "text-text-muted hover:bg-surface-muted hover:text-navy"
+              className={`flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border px-4 py-2 text-sm font-bold transition-colors ${
+                c.id === cat.id ? "border-navy bg-navy text-white" : "border-border bg-white text-text-muted hover:border-primary-hover hover:text-navy"
               }`}
             >
               {categoryIcon(c.icon)}
@@ -107,25 +107,32 @@ export default async function CategoryPage({ params }: { params: Promise<{ local
         </div>
       </div>
 
-      <section data-reveal className="section">
+      <section data-reveal="left" className="section bg-sand">
         <div className="wrap">
           <CategoryClient locale={l} categoryId={cat.id} initial={items} />
         </div>
       </section>
 
-      {/* 8.6 Related categories */}
-      <section data-reveal className="section bg-surface">
+      {/* 8.6 Related categories — sky mesh (quiet) */}
+      <section data-reveal="right" className="section bg-mesh-sky">
         <div className="wrap">
-          <h2 className="text-h2 font-semibold text-navy">{ui("related.categories", l)}</h2>
-          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {related.map((r, i) => (
-              <Link key={i} href={localizedHref(l, r.href)} className="group overflow-hidden rounded-card bg-background shadow-card transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-card-hover">
+          <div data-reveal="fade">
+            <div className="mb-4">
+              <span className="section-marker" aria-hidden="true" />
+            </div>
+            <h2 className="text-h2 font-semibold text-navy">{ui("related.categories", l)}</h2>
+          </div>
+          <div data-stagger className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {related
+              .filter((r) => !r.href.endsWith(`/${slug}`))
+              .map((r, i) => (
+              <Link key={i} href={localizedHref(l, r.href)} className="group overflow-hidden rounded-card bg-white shadow-card transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-card-hover">
                 <div className="overflow-hidden">
                   <img src={webp(r.image)} alt={t(r.title, l)} loading="lazy" className="aspect-[16/10] w-full object-cover transition-transform duration-300 group-hover:scale-105" />
                 </div>
                 <div className="flex items-center justify-between gap-2 p-5">
                   <h3 className="text-h4 font-semibold text-navy">{t(r.title, l)}</h3>
-                  <ArrowLeft className="size-5 shrink-0 text-primary-hover transition-transform duration-200 group-hover:-translate-x-1 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
+                  <ArrowIcon className="size-5 shrink-0 text-primary-hover transition-transform duration-200 group-hover:-translate-x-1 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
                 </div>
               </Link>
             ))}
@@ -142,9 +149,9 @@ export default async function CategoryPage({ params }: { params: Promise<{ local
         title={pages.catalog.k19}
         text={pages.catalog.k20}
         features={[
-          { icon: <Zap className="size-4" aria-hidden="true" />, title: { ar: "إجابات سريعة", en: "Quick answers", zh: "快速答复" } },
-          { icon: <MessageCircle className="size-4" aria-hidden="true" />, title: { ar: "استشارات مخصصة", en: "Tailored advice", zh: "定制咨询" } },
-          { icon: <ShieldCheck className="size-4" aria-hidden="true" />, title: { ar: "بدون أي التزام", en: "No obligation", zh: "无任何义务" } },
+          { icon: <ZapIcon className="size-4" aria-hidden="true" />, title: { ar: "إجابات سريعة", en: "Quick answers", zh: "快速答复" } },
+          { icon: <WhatsAppIcon className="size-4" aria-hidden="true" />, title: { ar: "استشارات مخصصة", en: "Tailored advice", zh: "定制咨询" } },
+          { icon: <ShieldIcon className="size-4" aria-hidden="true" />, title: { ar: "بدون أي التزام", en: "No obligation", zh: "无任何义务" } },
         ]}
       />
     </>

@@ -11,5 +11,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function GuidancePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  return <GuidanceClient locale={locale as Locale} />;
+  return (
+    <div data-reveal="fade">
+      <GuidanceClient locale={locale as Locale} />
+    </div>
+  );
 }

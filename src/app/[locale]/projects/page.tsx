@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Info, MessageCircle, Settings, Wrench } from "lucide-react";
+import { InfoIcon, WhatsAppIcon, SettingsIcon, WrenchIcon } from "@/components/icons";
 import Hero from "@/components/Hero";
 import CTABand from "@/components/CTABand";
 import ProjectsClient from "@/components/ProjectsClient";
@@ -48,34 +48,36 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
         primaryLabelKey="cta.viewProjects"
       />
 
-      {/* 5.2 Intro */}
-      <section data-reveal className="section-sm">
+      {/* 5.2 Intro — sky mesh (quiet) with a section marker */}
+      <section data-reveal="fade" className="section-sm bg-mesh-sky">
         <div className="wrap text-center">
-          <p className="text-sm font-bold text-primary-hover">{ui("projects.areasLabel", l)}</p>
-          <h2 className="mt-3 text-h2 font-semibold text-navy">{ui("projects.areasTitle", l)}</h2>
+          <div data-reveal="fade" className="mb-4 flex justify-center">
+            <span className="section-marker" aria-hidden="true" />
+          </div>
+          <h2 data-reveal="up" className="text-h2 font-semibold text-navy">{ui("projects.areasTitle", l)}</h2>
         </div>
       </section>
 
-      <section data-reveal className="section" id="projects">
+      <section data-reveal="left" className="section bg-mesh-light" id="projects">
         <div className="wrap">
           {approvedProjects.length === 0 && (
             // Honest empty state — inlined (visible by default) instead of
             // the shared EmptyState (Phase 6 removed the .reveal hiding from
             // the shared primitives; this page keeps its inline state).
-            <div className="rounded-card border border-dashed border-border-strong bg-surface p-10 text-center">
+            <div data-reveal="scale" className="rounded-card border border-dashed border-border-strong bg-white p-10 text-center shadow-card">
               <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-sky text-primary-hover">
-                <Info className="size-8" aria-hidden="true" />
+                <InfoIcon className="size-8" aria-hidden="true" />
               </div>
-              <h3 className="mt-5 text-h3 font-semibold text-navy">{t(p.k4, l)}</h3>
-              <p className="mx-auto mt-3 max-w-xl text-body text-text-muted">{t(p.k5, l)}</p>
-              <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+              <h3 data-reveal="up" className="mt-5 text-h3 font-semibold text-navy">{t(p.k4, l)}</h3>
+              <p data-reveal="fade" className="mx-auto mt-3 max-w-xl text-body text-text-muted">{t(p.k5, l)}</p>
+              <div data-reveal="fade" className="mt-6 flex flex-wrap items-center justify-center gap-3">
                 <WhatsAppButton locale={l} message={WA_MESSAGES.general[l]} label={ui("cta.whatsappStart", l)} source="projects" variant="green-pill" />
               </div>
             </div>
           )}
-          <h2 className="mt-14 text-h2 font-semibold text-navy">{t(p.k7, l)}</h2>
-          <p className="mt-2 text-body text-text-muted">{t(p.k8, l)}</p>
-          <div className="mt-8">
+          <h2 data-reveal="fade" className="mt-14 text-h2 font-semibold text-navy">{t(p.k7, l)}</h2>
+          <p data-reveal="fade" className="mt-2 text-body text-text-muted">{t(p.k8, l)}</p>
+          <div data-reveal="right" className="mt-8">
             <ProjectsClient
               locale={l}
               items={[
@@ -88,8 +90,13 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
           </div>
 
           {/* Template preview (k6) — clearly labelled, not a real project */}
-          <h2 className="mt-14 text-h2 font-semibold text-navy">{t(p.k6, l)}</h2>
-          <div className="mt-8">
+          <div data-reveal="fade" className="mt-14">
+            <div className="mb-4">
+              <span className="section-marker" aria-hidden="true" />
+            </div>
+            <h2 className="text-h2 font-semibold text-navy">{t(p.k6, l)}</h2>
+          </div>
+          <div data-reveal="up" className="mt-8">
             <ProjectDetailTemplate locale={l} />
           </div>
         </div>
@@ -105,9 +112,9 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
         }}
         text={p.k10}
         features={[
-          { icon: <Settings className="size-4" aria-hidden="true" />, title: { ar: "خبرة متكاملة", en: "Integrated expertise", zh: "综合经验" } },
-          { icon: <Wrench className="size-4" aria-hidden="true" />, title: { ar: "حلول مخصصة", en: "Tailored solutions", zh: "定制解决方案" } },
-          { icon: <MessageCircle className="size-4" aria-hidden="true" />, title: { ar: "استشارة مجانية", en: "Free consultation", zh: "免费咨询" } },
+          { icon: <SettingsIcon className="size-4" aria-hidden="true" />, title: { ar: "خبرة متكاملة", en: "Integrated expertise", zh: "综合经验" } },
+          { icon: <WrenchIcon className="size-4" aria-hidden="true" />, title: { ar: "حلول مخصصة", en: "Tailored solutions", zh: "定制解决方案" } },
+          { icon: <WhatsAppIcon className="size-4" aria-hidden="true" />, title: { ar: "استشارة مجانية", en: "Free consultation", zh: "免费咨询" } },
         ]}
       />
     </>

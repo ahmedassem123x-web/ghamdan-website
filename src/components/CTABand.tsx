@@ -27,17 +27,20 @@ export interface CtaBandProps {
 }
 
 /**
- * CTA band (BUILD_SPEC §2.8). Six variants, all flat — no decorative
- * gradients, no glassmorphism, no glow (reference system wins over no-slop-ui).
+ * CTA band (BUILD_SPEC §2.8, Variant A "Navy Editorial" redesign).
+ * Dark variants: layered `.bg-mesh-navy` + grain + soft glows, white
+ * headline, `.section-marker` dual-color bar, WhatsApp as `.btn-white`
+ * (or `.btn-whatsapp` per variant). Light variants: white luxe card on
+ * a light mesh, navy headline + marker. Six variants:
  *
- * - split: navy panel, title + text + WhatsApp + optional primary; optional
- *   contactRows column (home §3.1.8).
+ * - split: navy mesh panel, title + text + WhatsApp + optional primary;
+ *   optional contactRows column (home §3.1.8).
  * - photo-left: image left, text right.
- * - photo-bg: full-bleed photo + navy overlay.
+ * - photo-bg: full-bleed photo + lightened navy scrim (was 70%).
  * - features: optional image left + title + text + mini-features row +
  *   WhatsApp button (spec CTA[features]).
- * - whatsapp: navy band + WhatsApp button; optional image on the side.
- * - flat: sky band with a white card inside.
+ * - whatsapp: navy mesh band + WhatsApp button; optional image on the side.
+ * - flat: light mesh band with a white luxe card inside.
  */
 export default function CTABand({
   locale,
@@ -64,16 +67,18 @@ export default function CTABand({
       variant={variant === "whatsapp" ? "white-on-dark" : whatsappVariant}
     />
   );
-  const primary = primaryHref ? (
-    <Link
-      href={localizedHref(locale, primaryHref)}
-      className="inline-flex items-center justify-center gap-2 rounded-[0.625rem] bg-navy px-5 py-2.5 font-bold text-button text-white transition-[transform,background-color] duration-200 hover:-translate-y-0.5 hover:bg-navy"
-    >
+  const primaryDark = primaryHref ? (
+    <Link href={localizedHref(locale, primaryHref)} className="btn btn-white">
+      {ui(primaryLabelKey, locale)}
+    </Link>
+  ) : null;
+  const primaryLight = primaryHref ? (
+    <Link href={localizedHref(locale, primaryHref)} className="btn btn-navy">
       {ui(primaryLabelKey, locale)}
     </Link>
   ) : null;
   const miniFeatures = features && features.length > 0 ? (
-    <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3">
+    <div data-stagger className="mt-6 flex flex-wrap gap-x-6 gap-y-3">
       {features.map((f, i) => (
         <span key={i} className="inline-flex items-center gap-2 text-sm font-bold">
           <span className="flex size-8 items-center justify-center rounded-full bg-sky text-primary-hover">{f.icon}</span>
@@ -85,15 +90,16 @@ export default function CTABand({
 
   if (variant === "photo-bg" && image) {
     return (
-      <section className="relative overflow-hidden">
+      <section data-reveal data-clip className="relative overflow-hidden">
         <img src={webp(image)} alt={imageAlt} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
-        <div className="absolute inset-0 bg-navy/70" />
+        <div className="absolute inset-0 bg-navy/55" aria-hidden="true" />
         <div className="wrap relative py-20 text-center text-white md:py-24">
-          <h2 className="text-h2 mx-auto max-w-3xl font-semibold">{titleText}</h2>
+          <span className="section-marker mx-auto" aria-hidden="true" />
+          <h2 className="text-h2 mx-auto mt-5 max-w-3xl font-semibold">{titleText}</h2>
           {textText && <p className="mx-auto mt-4 max-w-2xl text-body-lg text-text-inverse-muted">{textText}</p>}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             {wa}
-            {primary}
+            {primaryDark}
           </div>
         </div>
       </section>
@@ -102,14 +108,17 @@ export default function CTABand({
 
   if (variant === "whatsapp") {
     return (
-      <section className="bg-navy text-white">
-        <div className="wrap flex flex-col items-center gap-8 py-14 md:flex-row md:justify-between">
+      <section data-reveal data-clip className="bg-mesh-navy relative overflow-hidden text-white">
+        <span className="grain" aria-hidden="true" />
+        <div aria-hidden="true" className="pointer-events-none absolute -top-24 end-[10%] size-72 rounded-full bg-primary/20 blur-3xl" />
+        <div className="wrap relative flex flex-col items-center gap-8 py-14 md:flex-row md:justify-between">
           <div className="flex flex-col items-start gap-6 md:flex-row md:items-center">
             {image && (
-              <img src={webp(image)} alt={imageAlt} className="h-32 w-48 rounded-image object-cover" loading="lazy" />
+              <img src={webp(image)} alt={imageAlt} className="h-32 w-48 rounded-image object-cover shadow-card" loading="lazy" />
             )}
             <div>
-              <h2 className="text-h2 font-semibold">{titleText}</h2>
+              <span className="section-marker" aria-hidden="true" />
+              <h2 className="text-h2 mt-5 font-semibold">{titleText}</h2>
               {textText && <p className="mt-3 max-w-2xl text-body-lg text-text-inverse-muted">{textText}</p>}
               {miniFeatures}
             </div>
@@ -122,17 +131,20 @@ export default function CTABand({
 
   if (variant === "photo-left" && image) {
     return (
-      <section className="section-sm">
+      <section data-reveal className="section-sm bg-mesh-light">
         <div className="wrap">
-          <div className="grid items-center gap-8 overflow-hidden rounded-card bg-surface shadow-card md:grid-cols-2">
-            <img src={webp(image)} alt={imageAlt} className="h-full min-h-64 w-full object-cover" loading="lazy" />
+          <div className="card-luxe shine group relative grid items-center gap-8 overflow-hidden bg-surface md:grid-cols-2">
+            <div className="overflow-hidden">
+              <img src={webp(image)} alt={imageAlt} className="h-full min-h-64 w-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" />
+            </div>
             <div className="p-8 md:p-10">
-              <h2 className="text-h2 font-semibold text-navy">{titleText}</h2>
+              <span className="section-marker" aria-hidden="true" />
+              <h2 className="text-h2 mt-5 font-semibold text-navy">{titleText}</h2>
               {textText && <p className="mt-4 text-body text-text-muted">{textText}</p>}
               {miniFeatures}
               <div className="mt-6 flex flex-wrap gap-3">
                 {wa}
-                {primary}
+                {primaryLight}
               </div>
             </div>
           </div>
@@ -143,19 +155,22 @@ export default function CTABand({
 
   if (variant === "features") {
     return (
-      <section className="section-sm">
+      <section data-reveal className="section-sm bg-mesh-light">
         <div className="wrap">
-          <div className="grid items-center gap-8 overflow-hidden rounded-card bg-surface shadow-card md:grid-cols-2">
+          <div className="card-luxe shine group relative grid items-center gap-8 overflow-hidden bg-surface md:grid-cols-2">
             {image && (
-              <img src={webp(image)} alt={imageAlt} className="h-full min-h-64 w-full object-cover" loading="lazy" />
+              <div className="overflow-hidden">
+                <img src={webp(image)} alt={imageAlt} className="h-full min-h-64 w-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" />
+              </div>
             )}
             <div className={`p-8 md:p-10 ${image ? "" : "md:col-span-2"}`}>
-              <h2 className="text-h2 font-semibold text-navy">{titleText}</h2>
+              <span className="section-marker" aria-hidden="true" />
+              <h2 className="text-h2 mt-5 font-semibold text-navy">{titleText}</h2>
               {textText && <p className="mt-4 text-body text-text-muted">{textText}</p>}
               {miniFeatures}
               <div className="mt-6 flex flex-wrap gap-3">
                 {wa}
-                {primary}
+                {primaryLight}
               </div>
             </div>
           </div>
@@ -165,31 +180,66 @@ export default function CTABand({
   }
 
   // "split" (default) and "flat"
+  if (variant === "flat") {
+    return (
+      <section data-reveal className="section-sm bg-mesh-light">
+        <div className="wrap">
+          <div className="card-luxe shine relative flex flex-col items-start justify-between gap-6 bg-surface p-8 md:flex-row md:items-center md:p-10">
+            <div>
+              <span className="section-marker" aria-hidden="true" />
+              <h2 className="text-h2 mt-5 font-semibold text-navy">{titleText}</h2>
+              {textText && <p className="mt-3 max-w-2xl text-body-lg text-text-muted">{textText}</p>}
+              <div className="mt-6 flex flex-wrap gap-3">
+                <WhatsAppButton locale={locale} message={WA_MESSAGES.general[locale]} label={ui(whatsappLabelKey, locale)} source="cta" variant="green-pill" />
+                {primaryLight}
+              </div>
+            </div>
+            {contactRows && contactRows.length > 0 && (
+              <div className="w-full shrink-0 border-t border-border pt-6 md:w-auto md:border-s md:border-t-0 md:ps-8 md:pt-0">
+                <h3 className="text-h4 font-semibold text-navy">{ui("footer.otherWays", locale)}</h3>
+                <ul data-stagger className="mt-4 space-y-3">
+                  {contactRows.map((r, i) => (
+                    <li key={i} className="flex items-center gap-3 text-body-sm text-text-secondary">
+                      <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-sky text-primary-hover">{r.icon}</span>
+                      {r.href ? (
+                        <a href={r.href} className="transition-colors hover:text-primary-hover" dir="ltr">
+                          {r.value}
+                        </a>
+                      ) : (
+                        <span>{r.value}</span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // "split" (default): navy mesh panel.
   return (
-    <section className={`section-sm ${variant === "flat" ? "bg-sky" : ""}`}>
+    <section data-reveal data-clip className="section-sm">
       <div className="wrap">
-        <div className={`flex flex-col items-start justify-between gap-6 rounded-card p-8 md:flex-row md:items-center md:p-10 ${variant === "flat" ? "bg-surface shadow-card" : "bg-navy text-white"}`}>
-          <div>
-            <h2 className={`text-h2 font-semibold ${variant === "flat" ? "text-navy" : "text-white"}`}>{titleText}</h2>
-            {textText && <p className={`mt-3 max-w-2xl text-body-lg ${variant === "flat" ? "text-text-muted" : "text-text-inverse-muted"}`}>{textText}</p>}
+        <div className="bg-mesh-navy relative flex flex-col items-start justify-between gap-6 overflow-hidden rounded-card p-8 text-white shadow-card-hover md:flex-row md:items-center md:p-10">
+          <span className="grain" aria-hidden="true" />
+          <div aria-hidden="true" className="pointer-events-none absolute -top-20 end-[15%] size-64 rounded-full bg-primary/25 blur-3xl" />
+          <div aria-hidden="true" className="pointer-events-none absolute -bottom-24 start-[30%] size-56 rounded-full bg-brand-red/20 blur-3xl" />
+          <div className="relative">
+            <span className="section-marker" aria-hidden="true" />
+            <h2 className="text-h2 mt-5 font-semibold text-white">{titleText}</h2>
+            {textText && <p className="mt-3 max-w-2xl text-body-lg text-text-inverse-muted">{textText}</p>}
             <div className="mt-6 flex flex-wrap gap-3">
-              {variant === "flat" ? (
-                <>
-                  <WhatsAppButton locale={locale} message={WA_MESSAGES.general[locale]} label={ui(whatsappLabelKey, locale)} source="cta" variant="green-pill" />
-                  {primary}
-                </>
-              ) : (
-                <>
-                  <WhatsAppButton locale={locale} message={WA_MESSAGES.general[locale]} label={ui(whatsappLabelKey, locale)} source="cta" variant={whatsappVariant} />
-                  {primary}
-                </>
-              )}
+              <WhatsAppButton locale={locale} message={WA_MESSAGES.general[locale]} label={ui(whatsappLabelKey, locale)} source="cta" variant={whatsappVariant} />
+              {primaryDark}
             </div>
           </div>
           {contactRows && contactRows.length > 0 && (
-            <div className="w-full shrink-0 border-t border-white/20 pt-6 md:w-auto md:border-s md:border-t-0 md:ps-8 md:pt-0">
+            <div className="relative w-full shrink-0 border-t border-white/20 pt-6 md:w-auto md:border-s md:border-t-0 md:ps-8 md:pt-0">
               <h3 className="text-h4 font-semibold text-white">{ui("footer.otherWays", locale)}</h3>
-              <ul className="mt-4 space-y-3">
+              <ul data-stagger className="mt-4 space-y-3">
                 {contactRows.map((r, i) => (
                   <li key={i} className="flex items-center gap-3 text-body-sm text-text-inverse-muted">
                     <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white/15 text-white">{r.icon}</span>

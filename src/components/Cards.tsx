@@ -1,39 +1,34 @@
 import Link from "next/link";
 import { webp } from "@/lib/images";
-import { ArrowLeft, Zap, Battery, Sun, Droplet, Sliders, Package, Database, Camera, Leaf, Home, Users, Settings, Wrench, Headset, AlertTriangle, Gauge } from "lucide-react";
+import { ArrowIcon, categoryIcon } from "@/components/icons";
 import { localizedHref, t } from "@/lib/i18n";
 import { ui } from "@/lib/ui-copy";
 import type { Category, Locale, SolutionArea } from "@/data";
 
-const ICONS: Record<string, React.ReactNode> = {
-  zap: <Zap className="size-7" aria-hidden="true" />,
-  battery: <Battery className="size-7" aria-hidden="true" />,
-  sun: <Sun className="size-7" aria-hidden="true" />,
-  droplet: <Droplet className="size-7" aria-hidden="true" />,
-  sliders: <Sliders className="size-7" aria-hidden="true" />,
-  package: <Package className="size-7" aria-hidden="true" />,
-  database: <Database className="size-7" aria-hidden="true" />,
-  camera: <Camera className="size-7" aria-hidden="true" />,
-  leaf: <Leaf className="size-7" aria-hidden="true" />,
-  home: <Home className="size-7" aria-hidden="true" />,
-  users: <Users className="size-7" aria-hidden="true" />,
-  settings: <Settings className="size-7" aria-hidden="true" />,
-  wrench: <Wrench className="size-7" aria-hidden="true" />,
-  headset: <Headset className="size-7" aria-hidden="true" />,
-  alert: <AlertTriangle className="size-7" aria-hidden="true" />,
-  gauge: <Gauge className="size-7" aria-hidden="true" />,
-};
+/**
+ * Re-exported from the shared icon library so every existing call site
+ * (`@/components/Cards`, `./Cards`, MegaMenu, CatalogueClient, pages)
+ * keeps working unchanged. Same signature: `categoryIcon(name: string)`.
+ */
+export { categoryIcon };
 
-export function categoryIcon(name: string): React.ReactNode {
-  return ICONS[name] ?? ICONS.package;
+/** Dual-color hover strip (blue → red, echoing the logo ring). */
+function HoverStrip() {
+  return (
+    <span
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary via-primary-hover to-brand-red opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+    />
+  );
 }
 
 /** Solution card (§2.11): icon + pill + title + text + link. Only "pumping" has a full detail page; the others render their approved summary. */
 export function SolutionCard({ locale, solution }: { locale: Locale; solution: SolutionArea }) {
   return (
-    <article className="group flex flex-col rounded-card bg-surface p-6 shadow-card transition-[transform,box-shadow,background-color,color] duration-200 hover:-translate-y-1 hover:shadow-card-hover">
+    <article className="card-luxe shine group relative flex flex-col overflow-hidden bg-surface p-6 transition-[transform,box-shadow] duration-300 hover:-translate-y-1">
+      <HoverStrip />
       <div className="flex items-center justify-between">
-        <div className="flex size-14 items-center justify-center rounded-full bg-sky text-primary-hover transition-colors group-hover:bg-primary-hover group-hover:text-white">
+        <div data-draw-group className="flex size-14 items-center justify-center rounded-2xl bg-sky text-primary-hover transition-colors duration-300 group-hover:bg-primary-hover group-hover:text-white [&_svg]:size-7">
           {categoryIcon(solution.icon)}
         </div>
         <span className="rounded-full bg-sky px-3 py-1 text-xs font-bold text-navy">{t(solution.pill, locale)}</span>
@@ -46,7 +41,7 @@ export function SolutionCard({ locale, solution }: { locale: Locale; solution: S
       <p className="mt-2 flex-1 text-body-sm text-text-muted">{t(solution.text, locale)}</p>
       <Link href={localizedHref(locale, `/solutions/${solution.id}`)} className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-primary-hover transition-colors hover:text-primary-hover">
         {ui("cta.discoverMore", locale)}
-        <ArrowLeft className="size-4 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
+        <ArrowIcon className="size-4 transition-transform duration-200 group-hover:-translate-x-1 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
       </Link>
     </article>
   );
@@ -69,7 +64,8 @@ export function SolutionCardHorizontal({
   href: string;
 }) {
   return (
-    <article className="group grid grid-cols-[40%_1fr] overflow-hidden rounded-card bg-surface-muted transition-shadow duration-200 hover:shadow-card-hover">
+    <article className="card-luxe shine group relative grid grid-cols-[40%_1fr] overflow-hidden bg-surface transition-[transform,box-shadow] duration-300 hover:-translate-y-1">
+      <HoverStrip />
       <Link href={href} className="block overflow-hidden" aria-label={title}>
         <img
           src={webp(image)}
@@ -87,7 +83,7 @@ export function SolutionCardHorizontal({
         <p className="mt-2 flex-1 text-body-sm text-text-muted">{text}</p>
         <Link href={href} className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-primary-hover transition-colors hover:text-primary-hover">
           {ui("cta.discoverMore", locale)}
-          <ArrowLeft className="size-4 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
+          <ArrowIcon className="size-4 transition-transform duration-200 group-hover:-translate-x-1 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
         </Link>
       </div>
     </article>

@@ -11,5 +11,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function ProductsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  return <CatalogueClient locale={locale as Locale} />;
+  return (
+    <div data-reveal="fade">
+      <CatalogueClient locale={locale as Locale} />
+    </div>
+  );
 }

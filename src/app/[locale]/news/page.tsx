@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Info } from "lucide-react";
+import { InfoIcon } from "@/components/icons";
 import Hero from "@/components/Hero";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { pages } from "@/data";
@@ -21,18 +21,18 @@ export default async function NewsPage({ params }: { params: Promise<{ locale: s
   return (
     <>
       <Hero locale={l} variant="plain" title={n.k1} text={n.k2} primaryHref="/contact" primaryLabelKey="cta.contactUs" />
-      <section data-reveal className="section">
+      <section data-reveal="up" className="section bg-mesh-navy">
         <div className="wrap">
           {/* Honest empty state — inlined (visible by default) instead of the
               shared EmptyState (Phase 6 removed the .reveal hiding from the
               shared primitives; this page keeps its inline state). */}
-          <div className="rounded-card border border-dashed border-border-strong bg-surface p-10 text-center">
+          <div data-reveal="scale" className="rounded-card border border-dashed border-border-strong bg-white p-10 text-center shadow-card">
             <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-sky text-primary-hover">
-              <Info className="size-8" aria-hidden="true" />
+              <InfoIcon className="size-8" aria-hidden="true" />
             </div>
-            <h3 className="mt-5 text-h3 font-semibold text-navy">{t(n.k3, l)}</h3>
-            <p className="mx-auto mt-3 max-w-xl text-body text-text-muted">{t(n.k4, l)}</p>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+            <h3 data-reveal="up" className="mt-5 text-h3 font-semibold text-navy">{t(n.k3, l)}</h3>
+            <p data-reveal="fade" className="mx-auto mt-3 max-w-xl text-body text-text-muted">{t(n.k4, l)}</p>
+            <div data-reveal="fade" className="mt-6 flex flex-wrap items-center justify-center gap-3">
               <WhatsAppButton locale={l} message={WA_MESSAGES.general[l]} label={ui("cta.whatsappStart", l)} source="news" variant="green-pill" />
             </div>
           </div>

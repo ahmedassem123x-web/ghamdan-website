@@ -156,7 +156,7 @@ export default function SystemDiagram({
   const cx = (i: number) => PAD + i * (TILE_W + GAP) + TILE_W / 2;
 
   return (
-    <figure className="overflow-hidden rounded-card border border-border bg-surface p-4" dir={dir}>
+    <figure data-reveal className="overflow-hidden rounded-card border border-border bg-surface p-4 shadow-card" dir={dir}>
       {/* Horizontal scroll on narrow screens — same treatment as spec
           tables: the diagram keeps legible labels instead of shrinking. */}
       <div className="overflow-x-auto">
@@ -169,7 +169,7 @@ export default function SystemDiagram({
           <title>{nodes.map((n) => n.label).join(" → ")}</title>
           <defs>
             <marker id="flow-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-              <path d="M0 0 L10 5 L0 10 z" fill="#1E8FE8" />
+              <path d="M0 0 L10 5 L0 10 z" fill="#0081FB" />
             </marker>
           </defs>
 
@@ -182,7 +182,7 @@ export default function SystemDiagram({
               y1={MID_Y}
               x2={cx(i + 1) - TILE_HALF - 2}
               y2={MID_Y}
-              stroke="#1E8FE8"
+              stroke="#0081FB"
               strokeWidth="2.5"
               markerEnd="url(#flow-arrow)"
             />
@@ -198,26 +198,26 @@ export default function SystemDiagram({
                 {/* Left face */}
                 <polygon
                   points={`${x - TILE_HALF},${MID_Y} ${x},${BOTTOM_Y} ${x},${BOTTOM_Y + DEPTH} ${x - TILE_HALF},${MID_Y + DEPTH}`}
-                  fill="#C9E2F8"
-                  stroke="#1E8FE8"
+                  fill="#DDF5FC"
+                  stroke="#0081FB"
                   strokeWidth="1"
                 />
                 {/* Right face */}
                 <polygon
                   points={`${x},${BOTTOM_Y} ${x + TILE_HALF},${MID_Y} ${x + TILE_HALF},${MID_Y + DEPTH} ${x},${BOTTOM_Y + DEPTH}`}
-                  fill="#9CC8EF"
-                  stroke="#1E8FE8"
+                  fill="#BFE6FB"
+                  stroke="#0081FB"
                   strokeWidth="1"
                 />
                 {/* Top face */}
                 <polygon
                   points={`${x},${TOP_Y} ${x + TILE_HALF},${MID_Y} ${x},${BOTTOM_Y} ${x - TILE_HALF},${MID_Y}`}
-                  fill="#EAF3FC"
-                  stroke="#1E8FE8"
+                  fill="#F6FAFC"
+                  stroke="#0081FB"
                   strokeWidth="1.5"
                 />
                 {/* Icon badge */}
-                <circle cx={x} cy={MID_Y} r="27" fill="#FFFFFF" stroke="#1E8FE8" strokeWidth="1.5" />
+                <circle cx={x} cy={MID_Y} r="27" fill="#FFFFFF" stroke="#0081FB" strokeWidth="1.5" />
                 <Icon x={x - 12} y={MID_Y - 12} width={24} height={24} color="#0B70C9" strokeWidth={2} />
                 {/* Label */}
                 <text x={x} y={LABEL_Y} textAnchor="middle" fontSize="14.5" fontWeight="700" fill="#102B46">

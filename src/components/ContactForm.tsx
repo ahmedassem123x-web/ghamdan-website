@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { ArrowLeft, MessageCircle } from "lucide-react";
+import { useRef, useState } from "react";
+import { ArrowIcon, WhatsAppIcon } from "@/components/icons";
 import { ui } from "@/lib/ui-copy";
 import { WA_MESSAGES, waLink } from "@/lib/whatsapp";
 import { pages } from "@/data";
@@ -14,6 +14,19 @@ import type { Locale, LocalizedString } from "@/data";
  * (SIX options) / رسالتك * — validates locally, then hands the
  * message to WhatsApp. It does NOT send email and stores nothing
  * anywhere (no localStorage, no server).
+ *
+ * Motion (2026-11-15):
+ * - Per-field error: field shakes ±4px twice in 300ms (CSS `field-shake`
+ *   in globals.css) + red semantic.error border + error text fade+y
+ *   200ms + focus moves to the first invalid field + aria-describedby.
+ *   Reduced motion: no shake (border + text only).
+ * - Success: SVG circle draws 400ms then ✓ 300ms power2.inOut (CSS,
+ *   pathLength=100) + text fade-up 250ms + WhatsApp button 150ms later;
+ *   the button is in the DOM and clickable immediately — the delay is
+ *   visual only. No data-reveal here: the trigger builds at mount, so
+ *   a scroll trigger would never fire.
+ * - Floating labels: CSS only (:focus + :not(:placeholder-shown)),
+ *   180ms ease-out; the label stays a real <label> (htmlFor + id).
  */
 const TYPE_OPTIONS: LocalizedString[] = [
   { ar: "استفسار عن منتج", en: "Product enquiry" },
@@ -24,79 +37,148 @@ const TYPE_OPTIONS: LocalizedString[] = [
   { ar: "استفسار عام", en: "General enquiry" },
 ];
 
+type FieldErrors = { name?: string; email?: string; message?: string };
+
 export default function ContactForm({ locale }: { locale: Locale }) {
   const c = pages.contact;
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [type, setType] = useState(0);
   const [message, setMessage] = useState("");
-  const [errors, setErrors] = useState<string[]>([]);
+  const [errors, setErrors] = useState<FieldErrors>({});
+  const [submitCount, setSubmitCount] = useState(0);
   const [ready, setReady] = useState(false);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const messageRef = useRef<HTMLTextAreaElement>(null);
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    const errs: string[] = [];
-    if (name.trim().length < 2) errs.push(t(c.k12, locale));
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) errs.push(ui("form.invalidEmail", locale));
-    if (message.trim().length < 10) errs.push(ui("form.shortMessage", locale));
+    const errs: FieldErrors = {};
+    if (name.trim().length < 2) errs.name = t(c.k12, locale);
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) errs.email = ui("form.invalidEmail", locale);
+    if (message.trim().length < 10) errs.message = ui("form.shortMessage", locale);
     setErrors(errs);
-    if (errs.length === 0) {
+    setSubmitCount((n) => n + 1);
+    if (Object.keys(errs).length === 0) {
       setReady(true);
+      return;
     }
+    // Focus the first invalid field (name → email → message).
+    requestAnimationFrame(() => {
+      if (errs.name) nameRef.current?.focus();
+      else if (errs.email) emailRef.current?.focus();
+      else if (errs.message) messageRef.current?.focus();
+    });
   };
 
   if (ready) {
     const text = WA_MESSAGES.contact(name.trim(), email.trim(), t(TYPE_OPTIONS[type], locale), message.trim())[locale];
     return (
-      <div className="rounded-card border border-primary-hover bg-sky p-6">
-        <p className="font-bold text-navy">{t(c.k24, locale)}</p>
-        <p className="mt-2 text-body-sm text-text-muted">{t(c.k25, locale)}</p>
+      <div className="card-luxe p-6 md:p-8">
+        <svg
+          viewBox="0 0 52 52"
+          className="size-14 text-success"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <circle className="success-check__circle" cx="26" cy="26" r="24" pathLength={100} />
+          <path className="success-check__check" d="M14 27l8 8 16-16" pathLength={100} />
+        </svg>
+        <p className="success-fade-up mt-4 font-bold text-navy">{t(c.k24, locale)}</p>
+        <p className="success-fade-up mt-2 text-body-sm text-text-muted">{t(c.k25, locale)}</p>
         <a
           href={waLink(text)}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-5 inline-flex items-center gap-2 rounded-[0.625rem] bg-whatsapp px-5 py-2.5 font-bold text-button text-white transition-transform hover:-translate-y-0.5"
+          className="btn btn-navy success-fade-up--delayed mt-5"
         >
-          <MessageCircle className="size-5" aria-hidden="true" />
+          <WhatsAppIcon className="size-5" aria-hidden="true" />
           {ui("form.openWhatsapp", locale)}
         </a>
       </div>
     );
   }
 
-  const inputCls =
-    "w-full rounded-[0.625rem] border border-border bg-surface px-4 py-3 text-body text-text placeholder:text-text-muted focus:border-primary-hover focus:outline-none";
+  const emailLabel = locale === "ar" ? "البريد الإلكتروني" : locale === "en" ? "Email" : "电子邮箱";
+  const baseCls =
+    "w-full rounded-[0.625rem] border bg-surface px-4 text-body text-text placeholder:text-text-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40";
+  const fieldCls = (hasError: boolean) =>
+    `${baseCls} ${hasError ? "border-error focus:border-error" : "border-border focus:border-primary-hover"}`;
+  const errCls = "field-error-msg mt-1.5 text-caption font-semibold text-error";
+
   return (
-    <form onSubmit={submit} noValidate className="rounded-card bg-surface p-6 shadow-card md:p-8">
+    <form data-stagger onSubmit={submit} noValidate className="card-luxe p-6 md:p-8">
       <h2 className="text-h3 font-semibold text-navy">{t(c.k27, locale)}</h2>
-      {errors.length > 0 && (
-        <div role="alert" className="mt-4 rounded-[0.625rem] border border-error/40 bg-error/5 px-4 py-3 text-sm font-bold text-error">
-          <ul className="list-disc ps-5">
-            {errors.map((e, i) => (
-              <li key={i}>{e}</li>
-            ))}
-          </ul>
-        </div>
-      )}
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
-        <label className="block">
-          <span className="mb-1.5 block text-sm font-bold text-navy">
-            {t(c.k12, locale)} <span className="text-error">*</span>
+        {/* Name — floating label + per-field error + shake */}
+        <div key={`name-${submitCount}`} className={errors.name ? "field-error" : ""}>
+          <span className="field-float">
+            <input
+              ref={nameRef}
+              id="contact-name"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder=" "
+              autoComplete="name"
+              required
+              aria-invalid={Boolean(errors.name) || undefined}
+              aria-describedby={errors.name ? "contact-name-error" : undefined}
+              className={`${fieldCls(Boolean(errors.name))} h-14`}
+            />
+            <label htmlFor="contact-name">
+              {t(c.k12, locale)} <span className="text-error">*</span>
+            </label>
           </span>
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)} className={inputCls} autoComplete="name" required />
-        </label>
-        <label className="block">
-          <span className="mb-1.5 block text-sm font-bold text-navy">
-            {locale === "ar" ? "البريد الإلكتروني" : locale === "en" ? "Email" : "电子邮箱"} <span className="text-error">*</span>
+          {errors.name && (
+            <p id="contact-name-error" className={errCls}>
+              {errors.name}
+            </p>
+          )}
+        </div>
+        {/* Email — floating label + per-field error + shake */}
+        <div key={`email-${submitCount}`} className={errors.email ? "field-error" : ""}>
+          <span className="field-float">
+            <input
+              ref={emailRef}
+              id="contact-email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder=" "
+              dir="ltr"
+              autoComplete="email"
+              required
+              aria-invalid={Boolean(errors.email) || undefined}
+              aria-describedby={errors.email ? "contact-email-error" : undefined}
+              className={`${fieldCls(Boolean(errors.email))} h-14`}
+            />
+            <label htmlFor="contact-email">
+              {emailLabel} <span className="text-error">*</span>
+            </label>
           </span>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className={inputCls} dir="ltr" autoComplete="email" required />
-        </label>
+          {errors.email && (
+            <p id="contact-email-error" className={errCls}>
+              {errors.email}
+            </p>
+          )}
+        </div>
       </div>
       <label className="mt-5 block">
         <span className="mb-1.5 block text-sm font-bold text-navy">
           {t(c.k15, locale)} <span className="text-error">*</span>
         </span>
-        <select value={type} onChange={(e) => setType(Number(e.target.value))} className={inputCls}>
+        <select
+          id="contact-type"
+          value={type}
+          onChange={(e) => setType(Number(e.target.value))}
+          className={`${fieldCls(false)} h-14`}
+        >
           {TYPE_OPTIONS.map((o, i) => (
             <option key={i} value={i}>
               {t(o, locale)}
@@ -104,25 +186,34 @@ export default function ContactForm({ locale }: { locale: Locale }) {
           ))}
         </select>
       </label>
-      <label className="mt-5 block">
-        <span className="mb-1.5 block text-sm font-bold text-navy">
-          {t(c.k21, locale)} <span className="text-error">*</span>
+      {/* Message — floating label + per-field error + shake */}
+      <div key={`message-${submitCount}`} className={`mt-5 ${errors.message ? "field-error" : ""}`}>
+        <span className="field-float">
+          <textarea
+            ref={messageRef}
+            id="contact-message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            rows={5}
+            placeholder=" "
+            required
+            aria-invalid={Boolean(errors.message) || undefined}
+            aria-describedby={errors.message ? "contact-message-error" : undefined}
+            className={`${fieldCls(Boolean(errors.message))} min-h-[7.5rem] py-3`}
+          />
+          <label htmlFor="contact-message">
+            {t(c.k21, locale)} <span className="text-error">*</span>
+          </label>
         </span>
-        <textarea
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          rows={5}
-          className={inputCls}
-          placeholder={ui("form.messagePlaceholder", locale)}
-          required
-        />
-      </label>
-      <button
-        type="submit"
-        className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-[0.625rem] bg-navy px-6 py-3 font-bold text-button text-white transition-[transform,background-color] hover:-translate-y-0.5 hover:bg-navy"
-      >
+        {errors.message && (
+          <p id="contact-message-error" className={errCls}>
+            {errors.message}
+          </p>
+        )}
+      </div>
+      <button type="submit" className="btn btn-navy mt-6 min-h-12 w-full px-6 py-3">
         {ui("cta.sendMessage", locale)}
-        <ArrowLeft className="size-5 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
+        <ArrowIcon className="size-5 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
       </button>
       <p className="mt-4 text-caption text-text-muted">{t(c.k23, locale)}</p>
     </form>

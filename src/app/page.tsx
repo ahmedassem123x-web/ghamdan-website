@@ -12,7 +12,7 @@ export default function RootPage() {
   }, []);
   return (
     <main className="flex min-h-screen items-center justify-center bg-background">
-      <p className="text-body text-text-muted">
+      <p data-reveal className="text-body text-text-muted">
         <a href="/ar" className="font-bold text-primary-hover underline">
           غمدان — GHAMDAN
         </a>

@@ -19,19 +19,19 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
   return (
     <>
       <Hero locale={l} variant="plain" title={p.k1} text={p.k2} whatsapp={false} />
-      <section className="section">
+      <section data-reveal="fade" className="section bg-mesh-light">
         <div className="wrap max-w-3xl">
-          <div className="rounded-card border border-sky bg-sky p-5">
-            <p className="font-bold text-navy">{ui("notice.legal", l)}</p>
+          <div data-reveal="scale" className="rounded-card bg-mesh-navy p-5">
+            <p className="font-bold text-white">{ui("notice.legal", l)}</p>
           </div>
-          <ul className="mt-8 space-y-4">
+          <ul data-stagger className="mt-8 space-y-4">
             {items.map((item, i) => (
-              <li key={i} className="rounded-card bg-surface p-5 shadow-card">
+              <li key={i} className="card-luxe p-5">
                 <p className="font-bold text-navy">{t(item, l)}</p>
               </li>
             ))}
           </ul>
-          <p className="mt-6 text-caption text-text-muted">{t(p.k7, l)}</p>
+          <p data-reveal="fade" className="mt-6 text-caption text-text-muted">{t(p.k7, l)}</p>
         </div>
       </section>
     </>

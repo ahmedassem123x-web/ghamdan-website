@@ -1,9 +1,9 @@
 "use client";
 
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDownIcon, CloseIcon, MenuIcon } from "@/components/icons";
 import Wordmark from "./Wordmark";
 import LanguageSelector from "./LanguageSelector";
 import WhatsAppButton from "./WhatsAppButton";
@@ -50,9 +50,13 @@ export default function Header({ locale }: { locale: Locale }) {
   const pathname = usePathname();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
+  const [megaClosing, setMegaClosing] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
   const productsBtnRef = useRef<HTMLButtonElement>(null);
+  const menuBtnRef = useRef<HTMLButtonElement>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
+  const megaTimer = useRef<number | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -61,14 +65,69 @@ export default function Header({ locale }: { locale: Locale }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Scroll progress bar (3px, blue->red, reading-start origin): CSS
+  // scroll-driven animation first (globals.css); JS fallback below when
+  // animation-timeline is unsupported. Hidden under reduced motion.
+  useEffect(() => {
+    const el = progressRef.current;
+    if (!el) return;
+    if (typeof CSS !== "undefined" && CSS.supports("animation-timeline: scroll()")) return;
+    let raf = 0;
+    const update = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      el.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
+    };
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  // Mega menu close with a 150ms exit (faster than the 180ms enter):
+  // keep it mounted with .mega-menu--closing, then unmount.
+  const closeMega = useCallback(() => {
+    if (!megaOpen) return;
+    if (megaTimer.current !== null) window.clearTimeout(megaTimer.current);
+    setMegaClosing(true);
+    megaTimer.current = window.setTimeout(() => {
+      setMegaOpen(false);
+      setMegaClosing(false);
+      megaTimer.current = null;
+    }, 150);
+  }, [megaOpen]);
+
+  const openMega = useCallback(() => {
+    if (megaTimer.current !== null) {
+      window.clearTimeout(megaTimer.current);
+      megaTimer.current = null;
+    }
+    setMegaClosing(false);
+    setMegaOpen(true);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (megaTimer.current !== null) window.clearTimeout(megaTimer.current);
+    };
+  }, []);
+
   // Close the mega menu on route change.
   useEffect(() => {
     setMegaOpen(false);
+    setMegaClosing(false);
   }, [pathname]);
 
-  // Drawer: Escape to close + body scroll lock + focus trap
+  // Drawer: Escape to close + body scroll lock + focus trap + focus
+  // restore to the menu button on close (same pattern as useFocusTrap).
   useEffect(() => {
     if (!drawerOpen) return;
+    const opener = menuBtnRef.current;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setDrawerOpen(false);
       if (e.key === "Tab" && drawerRef.current) {
@@ -94,6 +153,7 @@ export default function Header({ locale }: { locale: Locale }) {
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
+      opener?.focus();
     };
   }, [drawerOpen]);
 
@@ -107,15 +167,22 @@ export default function Header({ locale }: { locale: Locale }) {
   };
 
   const closeMegaAndFocusTrigger = () => {
-    setMegaOpen(false);
+    closeMega();
     productsBtnRef.current?.focus();
   };
 
   return (
     <>
+      {/* Scroll progress bar: fixed top, no layout shift; indeterminate
+          while navigating (html[data-navigating]); hidden reduced-motion. */}
+      <div ref={progressRef} className="scroll-progress" aria-hidden="true" />
+      {/* site-header--intro: one-time load fade, animated once by
+          MotionProvider (GSAP fromTo opacity/y, module-guarded so it never
+          replays on route change). It owns no visual property that
+          .site-header--scrolled touches (background/shadow only). */}
       <header
-        className={`site-header sticky top-0 z-50 bg-surface ${scrolled ? "site-header--scrolled" : ""}`}
-        onMouseLeave={() => setMegaOpen(false)}
+        className={`site-header site-header--intro sticky top-0 z-50 border-b border-border bg-surface ${scrolled ? "site-header--scrolled" : ""}`}
+        onMouseLeave={() => closeMega()}
       >
         <div
           className={`wrap flex items-center justify-between gap-2 lg:gap-4 ${scrolled ? "h-16 lg:h-16" : "h-16 lg:h-[76px]"}`}
@@ -132,7 +199,7 @@ export default function Header({ locale }: { locale: Locale }) {
                   <div
                     key={item.key}
                     className="relative"
-                    onMouseEnter={() => setMegaOpen(true)}
+                    onMouseEnter={() => openMega()}
                   >
                     {/* Click always OPENS: hover (onMouseEnter above) already
                         opens the menu, so a toggling click would close what
@@ -146,25 +213,25 @@ export default function Header({ locale }: { locale: Locale }) {
                       aria-haspopup="true"
                       aria-controls="mega-menu"
                       aria-current={isActive(item.href) ? "page" : undefined}
-                      onClick={() => setMegaOpen(true)}
+                      onClick={() => openMega()}
                       onKeyDown={(e) => {
                         if (e.key === "ArrowDown") {
                           e.preventDefault();
-                          setMegaOpen(true);
+                          openMega();
                           document
                             .querySelector<HTMLElement>("#mega-menu a[href]")
                             ?.focus();
                         }
-                        if (e.key === "Escape") setMegaOpen(false);
+                        if (e.key === "Escape") closeMegaAndFocusTrigger();
                       }}
-                      className={`inline-flex min-h-11 items-center gap-1 whitespace-nowrap text-nav font-semibold transition-colors ${
+                      className={`relative inline-flex min-h-11 items-center gap-1 whitespace-nowrap border-b-2 text-nav font-semibold transition-colors ${
                         isActive(item.href) || megaOpen
-                          ? "text-primary-hover"
-                          : "text-navy hover:text-primary-hover"
+                          ? "border-primary text-primary-hover"
+                          : "border-transparent text-navy hover:border-primary/40 hover:text-primary-hover"
                       }`}
                     >
                       {ui(item.key, locale)}
-                      <ChevronDown
+                      <ChevronDownIcon
                         className={`size-4 transition-transform duration-200 ${megaOpen ? "rotate-180" : ""}`}
                         aria-hidden="true"
                       />
@@ -177,10 +244,10 @@ export default function Header({ locale }: { locale: Locale }) {
                   key={item.key}
                   href={localizedHref(locale, item.href)}
                   aria-current={isActive(item.href) ? "page" : undefined}
-                  className={`inline-flex min-h-11 items-center whitespace-nowrap text-nav font-semibold transition-colors ${
+                  className={`relative inline-flex min-h-11 items-center whitespace-nowrap border-b-2 text-nav font-semibold transition-colors ${
                     isActive(item.href)
-                      ? "text-primary-hover"
-                      : "text-navy hover:text-primary-hover"
+                      ? "border-primary text-primary-hover"
+                      : "border-transparent text-navy hover:border-primary/40 hover:text-primary-hover"
                   }`}
                 >
                   {ui(item.key, locale)}
@@ -203,13 +270,14 @@ export default function Header({ locale }: { locale: Locale }) {
               />
             </div>
             <button
+              ref={menuBtnRef}
               type="button"
               className="inline-flex size-11 items-center justify-center rounded-button text-navy transition-colors hover:bg-sky lg:hidden"
               aria-label={ui("nav.menu", locale)}
               aria-expanded={drawerOpen}
               onClick={() => setDrawerOpen(true)}
             >
-              <Menu className="size-6" aria-hidden="true" />
+              <MenuIcon className="size-6" aria-hidden="true" />
             </button>
           </div>
         </div>
@@ -219,6 +287,7 @@ export default function Header({ locale }: { locale: Locale }) {
         <MegaMenu
           locale={locale}
           open={megaOpen}
+          closing={megaClosing}
           onNavigate={() => setMegaOpen(false)}
           onClose={closeMegaAndFocusTrigger}
         />
@@ -250,12 +319,17 @@ export default function Header({ locale }: { locale: Locale }) {
               aria-label={ui("nav.close", locale)}
               onClick={() => setDrawerOpen(false)}
             >
-              <X className="size-6" aria-hidden="true" />
+              <CloseIcon className="size-6" aria-hidden="true" />
             </button>
           </div>
           <nav aria-label="Mobile" className="flex-1 overflow-y-auto px-5 py-4">
             <ul className="flex flex-col">
-              {DRAWER_LINKS.map((item) => {
+              {DRAWER_LINKS.map((item, liIndex) => {
+                // Drawer links enter fade + y 8->0, 250ms, stagger 40ms
+                // when the drawer opens (class applied only while open so
+                // the entrance replays on every open).
+                const linkCls = drawerOpen ? "drawer__link" : "";
+                const linkStyle = drawerOpen ? { animationDelay: `${liIndex * 40}ms` } : undefined;
                 if (item.key === "nav.solutions") {
                   // Products accordion sits between About and Solutions,
                   // preserving the desktop nav order.
@@ -264,8 +338,10 @@ export default function Header({ locale }: { locale: Locale }) {
                       <ProductsAccordion
                         locale={locale}
                         onNavigate={() => setDrawerOpen(false)}
+                        animate={drawerOpen}
+                        delayMs={liIndex * 40}
                       />
-                      <li key={item.key}>
+                      <li key={item.key} className={linkCls} style={linkStyle}>
                         <Link
                           href={localizedHref(locale, item.href)}
                           onClick={() => setDrawerOpen(false)}
@@ -280,7 +356,7 @@ export default function Header({ locale }: { locale: Locale }) {
                   );
                 }
                 return (
-                  <li key={item.key}>
+                  <li key={item.key} className={linkCls} style={linkStyle}>
                     <Link
                       href={localizedHref(locale, item.href)}
                       onClick={() => setDrawerOpen(false)}

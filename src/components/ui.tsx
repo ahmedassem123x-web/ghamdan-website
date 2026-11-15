@@ -1,7 +1,9 @@
 import type { InputHTMLAttributes, ReactNode, SelectHTMLAttributes, TextareaHTMLAttributes } from "react";
 import { webp } from "@/lib/images";
 import Link from "next/link";
-import { AlertCircle, Info, Search } from "lucide-react";
+import { AlertIcon, InfoIcon, SearchIcon } from "@/components/icons";
+/* Custom icon library (built by the icons worker under the same contract:
+   every icon accepts `className`). No lucide imports remain in this file. */
 import type { Locale, LocalizedString } from "@/data";
 import { t } from "@/lib/i18n";
 import { ui } from "@/lib/ui-copy";
@@ -26,10 +28,13 @@ export function Reveal({ children, className = "" }: { children: ReactNode; clas
   );
 }
 
-/** Section heading (§2.11): eyebrow pill + H2 + optional lead. */
+/** Section heading (§2.11): dual-colour marker + H2 + optional lead.
+ * Impeccable ban: NO eyebrow/kicker label above a heading — the heading
+ * speaks. The `eyebrow` prop is kept in the type for call-site
+ * compatibility but is never rendered; the `.section-marker` bar above
+ * the title is its visual replacement. */
 export function SectionHeading({
   locale,
-  eyebrow,
   title,
   lead,
   align = "start",
@@ -42,21 +47,18 @@ export function SectionHeading({
 }) {
   return (
     <div data-reveal className={align === "center" ? "text-center" : ""}>
-      {eyebrow && (
-        <p className="mb-3 inline-flex items-center gap-2 rounded-full bg-sky px-4 py-1.5 text-sm font-semibold text-primary-hover">
-          {t(eyebrow, locale)}
-        </p>
-      )}
-      <h2 className="text-h2 font-semibold text-navy">{t(title, locale)}</h2>
+      <span aria-hidden="true" className={`section-marker mb-4 ${align === "center" ? "mx-auto" : ""}`} />
+      <h2 className="text-h2 font-bold text-navy">{t(title, locale)}</h2>
       {lead && <p className={`mt-3 max-w-2xl text-body text-text-secondary ${align === "center" ? "mx-auto" : ""}`}>{t(lead, locale)}</p>}
     </div>
   );
 }
 
-/** Section heading with explicit locale (use when the caller already localised). */
+/** Section heading with explicit locale (use when the caller already localised).
+ * Same eyebrow rule as SectionHeading: the prop exists for compatibility
+ * only and is never rendered. */
 export function SectionHeadingL({
   locale,
-  eyebrow,
   title,
   lead,
   align = "start",
@@ -69,27 +71,25 @@ export function SectionHeadingL({
 }) {
   return (
     <div data-reveal className={align === "center" ? "text-center" : ""}>
-      {eyebrow && (
-        <p className="mb-3 inline-flex items-center gap-2 rounded-full bg-sky px-4 py-1.5 text-sm font-semibold text-primary-hover">
-          {eyebrow}
-        </p>
-      )}
-      <h2 className="text-h2 font-semibold text-navy">{title}</h2>
+      <span aria-hidden="true" className={`section-marker mb-4 ${align === "center" ? "mx-auto" : ""}`} />
+      <h2 className="text-h2 font-bold text-navy">{title}</h2>
       {lead && <p className={`mt-3 max-w-2xl text-body text-text-secondary ${align === "center" ? "mx-auto" : ""}`}>{lead}</p>}
     </div>
   );
 }
 
-/** Breadcrumbs (§2.11). */
-export function Breadcrumbs({ locale, items }: { locale: Locale; items: { label: string; href?: string }[] }) {
+/** Breadcrumbs (§2.11). Mobile: single scrollable row with an end fade
+ * and middle crumbs hidden (see .breadcrumbs in globals.css). The label
+ * may be a ReactNode so callers can swap in a short mobile label. */
+export function Breadcrumbs({ locale, items }: { locale: Locale; items: { label: ReactNode; href?: string }[] }) {
   return (
-    <nav aria-label="Breadcrumb" className="wrap pt-5">
+    <nav data-reveal aria-label="Breadcrumb" className="breadcrumbs wrap pt-5">
       <ol className="flex flex-wrap items-center gap-2 text-caption text-text-muted">
         {items.map((c, i) => (
           <li key={i} className="flex items-center gap-2">
             {i > 0 && <span aria-hidden="true">/</span>}
             {c.href ? (
-              <Link href={c.href} className="transition-colors hover:text-primary-hover">{c.label}</Link>
+              <Link href={c.href} className="transition-colors hover:text-primary-hover hover:underline hover:underline-offset-4">{c.label}</Link>
             ) : (
               <span aria-current="page" className="font-semibold text-navy">{c.label}</span>
             )}
@@ -113,7 +113,7 @@ export function EmptyState({
   return (
     <div data-reveal className="rounded-card border border-dashed border-border-strong bg-surface p-10 text-center">
       <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-sky text-primary-hover">
-        <Info className="size-8" aria-hidden="true" />
+        <InfoIcon className="size-8" aria-hidden="true" />
       </div>
       <h3 className="mt-5 text-h3 font-semibold text-navy">{title}</h3>
       <p className="mx-auto mt-3 max-w-xl text-body text-text-secondary">{copy}</p>
@@ -126,9 +126,9 @@ export function EmptyState({
 export function ZhNotice({ locale }: { locale: Locale }) {
   if (locale !== "zh") return null;
   return (
-    <div className="border-b border-sky bg-sky">
+    <div data-reveal className="border-b border-sky bg-sky">
       <div className="wrap flex items-center gap-2 py-2.5 text-caption font-semibold text-navy">
-        <Info className="size-4 shrink-0" aria-hidden="true" />
+        <InfoIcon className="size-4 shrink-0" aria-hidden="true" />
         <span>{ui("notice.zh", locale)}</span>
       </div>
     </div>
@@ -139,9 +139,12 @@ export function ZhNotice({ locale }: { locale: Locale }) {
 export function SpecTable({ rows }: { rows: { label: string; value: string }[] }) {
   if (rows.length === 0) return null;
   return (
-    <div className="overflow-hidden rounded-card border border-border bg-surface">
+    <div data-reveal className="overflow-hidden rounded-card border border-border-strong bg-surface shadow-card">
       <table className="w-full text-body-sm">
-        <tbody>
+        {/* Spec rows stagger in: opacity 0 + y 8 -> 1/0, 250ms ease-out,
+            stagger 30ms, capped at 10 animated rows (the rest appear
+            instantly) — see MotionProvider data-stagger overrides. */}
+        <tbody data-stagger data-stagger-step="30" data-stagger-duration="250" data-stagger-max="10" className="divide-y divide-border">
           {rows.map((r, i) => (
             <tr key={i} className={i % 2 === 1 ? "bg-surface-muted" : "bg-surface"}>
               <th scope="row" className="w-2/5 px-5 py-3 text-start font-semibold text-navy">
@@ -171,7 +174,7 @@ export function Pagination({
   if (totalPages <= 1) return null;
   const nums = Array.from({ length: totalPages }, (_, i) => i + 1);
   return (
-    <nav aria-label="Pagination" className="mt-10 flex items-center justify-center gap-2">
+    <nav data-stagger aria-label="Pagination" className="mt-10 flex items-center justify-center gap-2">
       {page > 1 && (
         <Link href={hrefFor(page - 1)} className="rounded-button border border-border bg-surface px-4 py-2 text-sm font-semibold text-navy transition-colors hover:border-primary-hover hover:text-primary-hover">
           {locale === "ar" ? "→" : "←"}
@@ -243,7 +246,7 @@ export function Field({
       {hint && !error && <p className="mt-2 text-caption text-text-muted">{hint}</p>}
       {error && (
         <p role="alert" className="mt-2 flex items-center gap-1.5 text-caption font-semibold text-text">
-          <AlertCircle className="size-4 shrink-0 text-error" aria-hidden="true" />
+          <AlertIcon className="size-4 shrink-0 text-error" aria-hidden="true" />
           {error}
         </p>
       )}
@@ -339,7 +342,7 @@ export function SearchInput({
   return (
     <label className="relative block w-full">
       <span className="sr-only">{label}</span>
-      <Search className="pointer-events-none absolute top-1/2 size-5 -translate-y-1/2 text-text-muted start-4" aria-hidden="true" />
+      <SearchIcon className="pointer-events-none absolute top-1/2 size-5 -translate-y-1/2 text-text-muted start-4" aria-hidden="true" />
       <input
         type="search"
         value={value}
@@ -384,7 +387,7 @@ export function SortSelect({
 /** Result meta line: "Showing X of Y products". */
 export function ResultMeta({ shown, total, label }: { shown: number; total: number; label: string }) {
   return (
-    <p className="text-body-sm text-text-secondary" aria-live="polite">
+    <p data-reveal className="text-body-sm text-text-secondary" aria-live="polite">
       {label}: {shown} / {total}
     </p>
   );
@@ -408,17 +411,17 @@ export function EditorialBlock({
   eyebrow?: ReactNode;
   children?: ReactNode;
 }) {
-  const img = <img src={webp(image)} alt={imageAlt} className="h-full min-h-72 w-full rounded-image object-cover shadow-card" loading="lazy" />;
+  const img = <img src={webp(image)} alt={imageAlt} className="h-full min-h-72 w-full rounded-[1.25rem] object-cover shadow-card" loading="lazy" />;
   const copy = (
     <div>
       {eyebrow && <div className="mb-4">{eyebrow}</div>}
-      <h3 className="text-h2 font-semibold text-navy">{title}</h3>
+      <h3 className="text-h2 font-bold text-navy">{title}</h3>
       {text && <p className="mt-4 text-body text-text-secondary">{text}</p>}
       {children}
     </div>
   );
   return (
-    <div className="grid items-center gap-10 md:grid-cols-2">
+    <div data-reveal className="grid items-center gap-10 md:grid-cols-2">
       {flip ? (
         <>
           {copy}

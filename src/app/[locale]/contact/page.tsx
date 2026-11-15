@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { MessageCircle, Mail, Headset, ChevronDown, ArrowLeft, Settings, Wrench } from "lucide-react";
+import { WhatsAppIcon, MailIcon, HeadsetIcon, ChevronDownIcon, ArrowIcon, SettingsIcon, WrenchIcon, MapPinIcon, InfoIcon } from "@/components/icons";
 import Hero from "@/components/Hero";
 import CTABand from "@/components/CTABand";
 import ContactForm from "@/components/ContactForm";
@@ -34,7 +34,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
   ];
   const methods = [
     {
-      icon: <MessageCircle className="size-6" aria-hidden="true" />,
+      icon: <WhatsAppIcon className="size-6" aria-hidden="true" />,
       title: t(c.k3, l),
       value: contact.phoneDisplay,
       valueHref: waLink(WA_MESSAGES.general[l]),
@@ -43,7 +43,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
       external: true,
     },
     {
-      icon: <Mail className="size-6" aria-hidden="true" />,
+      icon: <MailIcon className="size-6" aria-hidden="true" />,
       title: t(c.k6, l),
       value: contact.email,
       valueHref: `mailto:${contact.email}`,
@@ -52,10 +52,10 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
       external: false,
     },
     {
-      icon: <Headset className="size-6" aria-hidden="true" />,
+      icon: <HeadsetIcon className="size-6" aria-hidden="true" />,
       title: t(c.k9, l),
-      value: t(contact.hours, l),
-      valueHref: undefined,
+      value: contact.phoneDisplay,
+      valueHref: waLink(WA_MESSAGES.support(t(c.k9, l))[l]),
       linkLabel: t(c.k11, l),
       linkHref: waLink(WA_MESSAGES.support(t(c.k9, l))[l]),
       external: true,
@@ -75,13 +75,13 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
         whatsappVariant="green-pill"
       />
 
-      {/* 7.2 Method cards — 3 equal light-grey panels, text-links */}
-      <section data-reveal className="section-sm">
-        <div className="wrap grid gap-6 md:grid-cols-3">
+      {/* 7.2 Method cards — 3 white luxe cards on a light mesh */}
+      <section data-reveal="up" className="section-sm bg-mesh-light">
+        <div data-stagger className="wrap grid gap-6 md:grid-cols-3">
           {methods.map((m, i) => (
-            <div key={i} className="rounded-card bg-surface-muted p-6">
+            <div key={i} className="card-luxe p-6">
               <div className="flex size-12 items-center justify-center rounded-full bg-sky text-primary-hover">{m.icon}</div>
-              <h2 className="mt-4 text-h4 font-semibold text-navy">{m.title}</h2>
+              <h3 className="mt-4 text-h4 font-semibold text-navy">{m.title}</h3>
               {m.valueHref ? (
                 <a href={m.valueHref} dir="ltr" className="mt-1 block text-body-sm font-bold text-text-muted hover:text-primary-hover">
                   {m.value}
@@ -95,22 +95,46 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                 className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-primary-hover transition-colors hover:text-primary-hover"
               >
                 {m.linkLabel}
-                <ArrowLeft className="size-4 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
+                <ArrowIcon className="size-4 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
               </a>
             </div>
           ))}
         </div>
       </section>
 
-      {/* 7.3 Form block — sky-blue side panel (40%) + form (60%) */}
-      <section data-reveal className="section-sm">
-        <div className="wrap grid gap-6 lg:grid-cols-[40%_60%]">
-          <aside className="flex flex-col overflow-hidden rounded-card bg-sky shadow-card">
+      {/* 7.3 Form block — sky-mesh side panel (40%) + form (60%) */}
+      <section data-reveal="left" className="section-sm bg-white">
+        <div data-stagger className="wrap grid gap-6 lg:grid-cols-[40%_60%]">
+          <aside className="flex flex-col overflow-hidden rounded-card bg-mesh-sky shadow-card">
             <div className="p-8">
-              <h2 className="text-h2 font-semibold leading-[1.3] text-navy">{t(c.k26, l)}</h2>
-              <p className="mt-4 text-body text-text-muted">{t(c.k28, l)}</p>
+              <div data-reveal="fade" className="mb-4">
+                <span className="section-marker" aria-hidden="true" />
+              </div>
+              <h2 data-reveal="fade" className="text-h2 font-semibold leading-[1.3] text-navy">{t(c.k26, l)}</h2>
+              <p data-reveal="fade" className="mt-4 text-body text-text-muted">{t(c.k28, l)}</p>
+              {/* Info block (item 21): address + hours + Google Maps
+                  directions, beside the form — not buried in the footer. */}
+              <div className="mt-6 space-y-3 border-t border-border pt-6">
+                <p className="flex items-start gap-2.5 text-body-sm font-bold text-navy">
+                  <MapPinIcon className="mt-0.5 size-5 shrink-0 text-primary-hover" aria-hidden="true" />
+                  {t(contact.address, l)}
+                </p>
+                <p className="flex items-start gap-2.5 text-body-sm font-bold text-navy">
+                  <InfoIcon className="mt-0.5 size-5 shrink-0 text-primary-hover" aria-hidden="true" />
+                  {t(contact.hours, l)}
+                </p>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Sakhr%20St%2C%20Sana%27a%2C%20Yemen"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-outline mt-2"
+                >
+                  {l === "ar" ? "الاتجاهات عبر خرائط Google" : l === "en" ? "Directions on Google Maps" : "在 Google 地图上查看路线"}
+                  <ArrowIcon className="size-4 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
+                </a>
+              </div>
             </div>
-            <img src={webp("/images/photos/panels-rows.jpg")} alt={t(c.k26, l)} loading="lazy" className="mt-auto aspect-[16/10] w-full object-cover" />
+            <img data-parallax src={webp("/images/photos/panels-rows.jpg")} alt={t(c.k26, l)} loading="lazy" className="mt-auto aspect-[16/10] w-full object-cover" />
           </aside>
           <ContactForm locale={l} />
         </div>
@@ -118,15 +142,20 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
 
       {/* FAQ — heading inlined (visible by default); SectionHeadingL's shared
           wrapper no longer hides content (Phase 6 removed .reveal). */}
-      <section data-reveal className="section bg-surface">
+      <section data-reveal="right" className="section bg-sand">
         <div className="wrap max-w-4xl">
-          <h2 className="text-h2 font-semibold text-navy">{t(c.k29, l)}</h2>
-          <div className="mt-8 space-y-4">
+          <div data-reveal="fade">
+            <div className="mb-4">
+              <span className="section-marker" aria-hidden="true" />
+            </div>
+            <h2 className="text-h2 font-semibold text-navy">{t(c.k29, l)}</h2>
+          </div>
+          <div data-stagger className="mt-8 space-y-4">
             {faqs.map((f, i) => (
-              <details key={i} className="group rounded-card border border-border bg-background p-5">
+              <details key={i} className="group rounded-card border border-border bg-white p-5 shadow-card">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-navy">
                   {t(f.q, l)}
-                  <ChevronDown className="size-5 shrink-0 text-primary-hover transition-transform group-open:rotate-180" aria-hidden="true" />
+                  <ChevronDownIcon className="size-5 shrink-0 text-primary-hover transition-transform group-open:rotate-180" aria-hidden="true" />
                 </summary>
                 <p className="mt-3 text-body text-text-muted">{t(f.a, l)}</p>
               </details>
@@ -148,9 +177,9 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
         text={c.k2}
         whatsappVariant="green-pill"
         features={[
-          { icon: <Settings className="size-4" aria-hidden="true" />, title: { ar: "خبرة متكاملة", en: "Integrated expertise", zh: "综合经验" } },
-          { icon: <Wrench className="size-4" aria-hidden="true" />, title: { ar: "حلول مخصصة", en: "Tailored solutions", zh: "定制解决方案" } },
-          { icon: <MessageCircle className="size-4" aria-hidden="true" />, title: { ar: "استشارة مجانية", en: "Free consultation", zh: "免费咨询" } },
+          { icon: <SettingsIcon className="size-4" aria-hidden="true" />, title: { ar: "خبرة متكاملة", en: "Integrated expertise", zh: "综合经验" } },
+          { icon: <WrenchIcon className="size-4" aria-hidden="true" />, title: { ar: "حلول مخصصة", en: "Tailored solutions", zh: "定制解决方案" } },
+          { icon: <WhatsAppIcon className="size-4" aria-hidden="true" />, title: { ar: "استشارة مجانية", en: "Free consultation", zh: "免费咨询" } },
         ]}
       />
     </>
