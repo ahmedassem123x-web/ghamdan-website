@@ -20,12 +20,21 @@
  * tools/fix-html-lang.mjs`. Idempotent: re-running on already-correct
  * files changes nothing. Nothing else in the HTML is touched.
  *
+ * VERCEL NOTE (2026-11-15): on Vercel the @vercel/next builder copies
+ * out/ into .vercel/output/static/ DURING `next build` — i.e. BEFORE
+ * this script runs. Rewriting out/ alone therefore never reaches the
+ * served files (verified live: build log showed 76 EN + 76 ZH
+ * rewritten, yet production /en still served lang="ar"). So the script
+ * also rewrites .vercel/output/static/ when it exists (Vercel only);
+ * locally that directory does not exist and out/ alone is rewritten.
+ *
  * Usage: node tools/fix-html-lang.mjs [outDir]   (default: out)
  */
-import { readdir, readFile, writeFile } from "node:fs/promises";
+import { readdir, readFile, writeFile, access } from "node:fs/promises";
 import { join, relative, sep } from "node:path";
 
 const OUT_DIR = process.argv[2] ?? "out";
+const VERCEL_STATIC_DIR = ".vercel/output/static";
 
 const LOCALES = {
   ar: { lang: "ar", dir: "rtl" },
@@ -72,26 +81,38 @@ const changed = { ar: 0, en: 0, zh: 0 };
 let total = 0;
 let missingTag = [];
 
-for await (const file of walkHtml(OUT_DIR)) {
-  const rel = relative(OUT_DIR, file).split(sep).join("/");
-  const locale = localeFor(rel);
-  const { lang, dir } = LOCALES[locale];
-  const html = await readFile(file, "utf8");
-  const m = html.match(/<html\b[^>]*>/);
-  if (!m) {
-    missingTag.push(rel);
-    continue;
-  }
-  const fixed = rewriteHtmlTag(m[0], lang, dir);
-  counts[locale]++;
-  total++;
-  if (fixed !== m[0]) {
-    await writeFile(file, html.replace(m[0], fixed), "utf8");
-    changed[locale]++;
+// Targets: out/ always; .vercel/output/static/ too when it exists
+// (Vercel copies out/ there during `next build`, before this script runs).
+const targets = [OUT_DIR];
+try {
+  await access(VERCEL_STATIC_DIR);
+  targets.push(VERCEL_STATIC_DIR);
+} catch {
+  // local build — no Vercel output directory
+}
+
+for (const targetDir of targets) {
+  for await (const file of walkHtml(targetDir)) {
+    const rel = relative(targetDir, file).split(sep).join("/");
+    const locale = localeFor(rel);
+    const { lang, dir } = LOCALES[locale];
+    const html = await readFile(file, "utf8");
+    const m = html.match(/<html\b[^>]*>/);
+    if (!m) {
+      missingTag.push(`${targetDir}/${rel}`);
+      continue;
+    }
+    const fixed = rewriteHtmlTag(m[0], lang, dir);
+    counts[locale]++;
+    total++;
+    if (fixed !== m[0]) {
+      await writeFile(file, html.replace(m[0], fixed), "utf8");
+      changed[locale]++;
+    }
   }
 }
 
-console.log(`fix-html-lang: ${total} HTML files in ${OUT_DIR}/`);
+console.log(`fix-html-lang: ${total} HTML files in ${targets.join(" + ")}/`);
 for (const l of ["ar", "en", "zh"]) {
   console.log(`  ${l}: ${counts[l]} files, ${changed[l]} rewritten → lang="${LOCALES[l].lang}" dir="${LOCALES[l].dir}"`);
 }
