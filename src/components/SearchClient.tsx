@@ -5,17 +5,25 @@ import Link from "next/link";
 import { ArrowIcon, SearchIcon } from "@/components/icons";
 import Hero from "@/components/Hero";
 import ProductCard, { HighlightWords } from "@/components/ProductCard";
+import ProductCardTilt from "@/components/ProductCardTilt";
+import QuickView from "@/components/QuickView";
+import { ProductGridSkeleton } from "@/components/Skeleton";
 import CTABand from "@/components/CTABand";
 import { SearchInput } from "@/components/ui";
 import { pages, products, categories, solutionAreas, bundles } from "@/data";
 import { localizedHref, t } from "@/lib/i18n";
 import { ui } from "@/lib/ui-copy";
-import type { Locale } from "@/data";
+import type { Locale, Product } from "@/data";
 
 /** Search page: client-side search across products, categories, solutions and systems. Initial query comes from ?q= (catalogue search submit). */
 export default function SearchClient({ locale }: { locale: Locale }) {
   const s = pages.search;
   const [query, setQuery] = useState("");
+  const [quickView, setQuickView] = useState<Product | null>(null);
+  // Phase 3 §13: debounce the query ~200ms; while the debounced value
+  // lags behind what the user typed, the results area shows skeleton
+  // cards instead of stale results.
+  const [debouncedQuery, setDebouncedQuery] = useState("");
 
   // Read ?q= on mount (static export: no server searchParams at runtime).
   useEffect(() => {
@@ -23,8 +31,13 @@ export default function SearchClient({ locale }: { locale: Locale }) {
     if (q) setQuery(q);
   }, []);
 
+  useEffect(() => {
+    const t = window.setTimeout(() => setDebouncedQuery(query), 200);
+    return () => window.clearTimeout(t);
+  }, [query]);
+
   const results = useMemo(() => {
-    const q = query.trim().toLowerCase();
+    const q = debouncedQuery.trim().toLowerCase();
     if (q.length < 2) return { products: [], categories: [], solutions: [], systems: [] };
     const match = (hay: string) => hay.toLowerCase().includes(q);
     return {
@@ -37,10 +50,11 @@ export default function SearchClient({ locale }: { locale: Locale }) {
       solutions: solutionAreas.filter((a) => match(`${t(a.title, locale)} ${t(a.text, locale)}`)),
       systems: bundles.filter((b) => b.status === "confirmed" && match(`${t(b.name, locale)} ${t(b.use, locale)}`)),
     };
-  }, [query, locale]);
+  }, [debouncedQuery, locale]);
 
   const total = results.products.length + results.categories.length + results.solutions.length + results.systems.length;
-  const searched = query.trim().length >= 2;
+  const searched = debouncedQuery.trim().length >= 2;
+  const swapping = query.trim() !== debouncedQuery.trim();
 
   return (
     <>
@@ -66,28 +80,35 @@ export default function SearchClient({ locale }: { locale: Locale }) {
           {searched && (
             <p data-reveal="fade" className="mt-6 text-body-sm text-text-muted" aria-live="polite">
               {total === 0
-                ? `${t(s.k3, locale)} «${query.trim()}» — ${t(s.k4, locale)}`
+                ? `${t(s.k3, locale)} «${debouncedQuery.trim()}» — ${t(s.k4, locale)}`
                 : `${total} ${ui("search.results", locale)}`}
             </p>
           )}
 
           {searched && total > 0 && (
-            <div key={query.trim()} data-stagger className="mt-8 space-y-10">
-              {results.products.length > 0 && (
+            <div key={debouncedQuery.trim()} data-stagger className="mt-8 space-y-10">
+              {(results.products.length > 0 || swapping) && (
                 <section className="search-enter">
                   <div data-reveal="fade">
-                    <div className="mb-4">
-                      <span className="section-marker" aria-hidden="true" />
-                    </div>
                     <h2 className="text-h3 font-semibold text-navy">{ui("nav.products", locale)}</h2>
                   </div>
-                  <div data-stagger className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                    {results.products.map((p, i) => (
-                      <div key={p.id} className="search-enter" style={{ animationDelay: `${i * 25}ms` }}>
-                        <ProductCard locale={locale} product={p} highlight={query} />
-                      </div>
-                    ))}
-                  </div>
+                  {swapping ? (
+                    <ProductGridSkeleton
+                      count={6}
+                      label={locale === "ar" ? "جارٍ تحميل النتائج…" : locale === "en" ? "Loading results…" : "正在加载结果…"}
+                      className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+                    />
+                  ) : (
+                    <div data-stagger className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                      {results.products.map((p, i) => (
+                        <div key={p.id} className="search-enter" style={{ animationDelay: `${i * 25}ms` }}>
+                          <ProductCardTilt>
+                            <ProductCard locale={locale} product={p} highlight={debouncedQuery} onQuickView={setQuickView} />
+                          </ProductCardTilt>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </section>
               )}
               {results.categories.length > 0 && (
@@ -98,7 +119,7 @@ export default function SearchClient({ locale }: { locale: Locale }) {
                       <li key={c.id}>
                         <Link href={localizedHref(locale, `/products/category/${c.id}`)} className="flex items-center justify-between gap-3 px-5 py-4 transition-colors hover:bg-surface-muted">
                           <span className="font-bold text-navy">
-                            <HighlightWords text={t(c.name, locale)} query={query} />
+                            <HighlightWords text={t(c.name, locale)} query={debouncedQuery} />
                           </span>
                           <ArrowIcon className="size-4 shrink-0 text-primary-hover rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
                         </Link>
@@ -115,7 +136,7 @@ export default function SearchClient({ locale }: { locale: Locale }) {
                       <li key={a.id}>
                         <Link href={localizedHref(locale, `/solutions/${a.id}`)} className="flex items-center justify-between gap-3 px-5 py-4 transition-colors hover:bg-surface-muted">
                           <span className="font-bold text-navy">
-                            <HighlightWords text={t(a.title, locale)} query={query} />
+                            <HighlightWords text={t(a.title, locale)} query={debouncedQuery} />
                           </span>
                           <ArrowIcon className="size-4 shrink-0 text-primary-hover rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
                         </Link>
@@ -132,7 +153,7 @@ export default function SearchClient({ locale }: { locale: Locale }) {
                       <li key={b.id}>
                         <Link href={localizedHref(locale, `/systems/${b.slug}`)} className="flex items-center justify-between gap-3 px-5 py-4 transition-colors hover:bg-surface-muted">
                           <span className="font-bold text-navy">
-                            <HighlightWords text={t(b.name, locale)} query={query} />
+                            <HighlightWords text={t(b.name, locale)} query={debouncedQuery} />
                           </span>
                           <ArrowIcon className="size-4 shrink-0 text-primary-hover rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
                         </Link>
@@ -145,6 +166,8 @@ export default function SearchClient({ locale }: { locale: Locale }) {
           )}
         </div>
       </section>
+
+      <QuickView locale={locale} product={quickView} onClose={() => setQuickView(null)} />
 
       {/* LOUD navy closing band — reuses the search page's own copy */}
       <CTABand locale={locale} variant="split" title={s.k1} text={s.k2} primaryHref="/contact" primaryLabelKey="cta.contactUs" />

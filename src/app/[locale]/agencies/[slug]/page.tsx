@@ -49,9 +49,6 @@ export default async function AgencyDetailPage({ params }: { params: Promise<{ l
       <div data-reveal="up" className={agency.officialAgent ? "bg-mesh-navy" : "bg-mesh-light"}>
         <div className="wrap py-12 md:py-16">
           <div data-reveal="fade">
-            <div className="mb-4">
-              <span className="section-marker" aria-hidden="true" />
-            </div>
             {/* D-9 fix 2026-11-15: agency name was a <span> — agency pages
                 had no <h1>. Same classes, now the page's single <h1>. */}
             <h1 data-reveal="left" className={`font-latin text-5xl font-extrabold tracking-tight md:text-6xl ${agency.officialAgent ? "text-white" : "text-navy"}`} dir="ltr">
@@ -65,7 +62,6 @@ export default async function AgencyDetailPage({ params }: { params: Promise<{ l
                 </span>
               ) : (
                 <>
-                  <span className="section-marker" aria-hidden="true" />
                   <span className="text-sm font-bold text-navy">
                     {t(agency.status, l)}
                   </span>

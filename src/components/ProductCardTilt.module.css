@@ -1,0 +1,47 @@
+/* ProductCardTilt — 3D tilt + glow for featured product cards.
+   Transform/opacity only; standard ease, 160ms fast micro-interaction.
+   The tilt angles and glow position come from CSS custom properties set
+   by the component on pointermove. The glow is a radial highlight that
+   follows the cursor; it fades in on hover and never intercepts clicks. */
+
+.tilt {
+  position: relative;
+  height: 100%;
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.tiltActive {
+  transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+}
+
+.glow {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0;
+  background: radial-gradient(
+    15rem circle at var(--glow-x, 50%) var(--glow-y, 50%),
+    rgb(0 129 251 / 0.16),
+    transparent 70%
+  );
+  transition: opacity 160ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tiltActive .glow {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilt,
+  .tiltActive {
+    transform: none;
+    transition: none;
+  }
+
+  .glow {
+    display: none;
+  }
+}

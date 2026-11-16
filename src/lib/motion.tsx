@@ -2,6 +2,28 @@
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
+import {
+  MOTION_DISTANCE,
+  MOTION_EASE,
+  MOTION_EASE_GSAP,
+  MOTION_EASE_STANDARD,
+  MOTION_SECONDS,
+} from "./motion-tokens";
+import { spawnRipple } from "@/components/Ripple";
+
+/** Re-export the Phase 0 motion tokens so Phase 1/2 workers can import
+ * everything motion-related from this module (the sole GSAP/Lenis
+ * owner) or directly from `./motion-tokens`. */
+export {
+  MOTION_DISTANCE,
+  MOTION_EASE,
+  MOTION_EASE_GSAP,
+  MOTION_EASE_STANDARD,
+  MOTION_MS,
+  MOTION_SECONDS,
+  splitMotionWords,
+} from "./motion-tokens";
+export type { MotionDurationKey } from "./motion-tokens";
 
 /**
  * MotionProvider — the SOLE animation orchestrator (v15 §10, technology
@@ -48,6 +70,15 @@ import { usePathname } from "next/navigation";
  * - Marquee: CSS keyframes only (`globals.css .marquee__track`) — GSAP
  *   never animates it. An IntersectionObserver here pauses it while it
  *   is off-screen, so it never burns frames for nobody.
+ * - Ripple (Phase 6): a document-level pointerdown listener (separate
+ *   effect below, runs even under reduced motion — the handler itself
+ *   skips spawning then) spawns the shared ripple (Ripple.tsx) on
+ *   `.btn*` / `.whatsapp-float` presses. Transform/opacity only; the
+ *   span removes itself after its animation. Elements outside those
+ *   selectors use `attachRipple` from ui.tsx + `.ripple-host`.
+ * - Button press spring (Phase 6): `.btn*:active` uses
+ *   `MOTION_EASE.spring` (CSS `--ease-spring`); cards keep their own
+ *   easing and are never re-animated here.
  *
  * Lifecycle: setup re-runs on every route change (`pathname` dep) and the
  * previous run is fully reverted — `gsap.context().revert()` kills all
@@ -59,22 +90,27 @@ import { usePathname } from "next/navigation";
 /** Motion tokens — JS mirror of the --motion-* tokens in globals.css
  * (@theme). Durations in seconds for GSAP; the CSS mirror is the source
  * of truth for CSS animations. No hand-written duration/easing in new
- * components — use these constants. */
+ * components — use these constants (or `MOTION_MS` / `MOTION_EASE_*`
+ * from `./motion-tokens`, re-exported above). Values are derived from
+ * `motion-tokens.ts` so the two can never drift apart. */
 export const MOTION = {
-  instant: 0.1,
-  fast: 0.16,
-  normal: 0.24,
-  moderate: 0.36,
-  slow: 0.55,
-  cinematic: 0.9,
-  easeStandard: "cubic-bezier(0.16,1,0.3,1)",
-  easeExpoOut: "expo.out",
-  easePower2InOut: "power2.inOut",
-  easePower2Out: "power2.out",
-  revealDistance: 24,
-  revealDistanceMobile: 16,
-  staggerMin: 0.04,
-  staggerMax: 0.08,
+  instant: MOTION_SECONDS.instant,
+  fast: MOTION_SECONDS.fast,
+  normal: MOTION_SECONDS.normal,
+  moderate: MOTION_SECONDS.moderate,
+  slow: MOTION_SECONDS.slow,
+  cinematic: MOTION_SECONDS.cinematic,
+  easeStandard: MOTION_EASE_STANDARD,
+  easeExpoOut: MOTION_EASE_GSAP.standard,
+  easePower2InOut: MOTION_EASE_GSAP.inOut,
+  easePower2Out: MOTION_EASE_GSAP.out,
+  /** Phase 6 spring (press states only): CSS cubic-bezier overshoot. */
+  easeSpring: MOTION_EASE.spring,
+  easeSpringGsap: MOTION_EASE_GSAP.spring,
+  revealDistance: MOTION_DISTANCE.reveal,
+  revealDistanceMobile: MOTION_DISTANCE.revealMobile,
+  staggerMin: MOTION_SECONDS.staggerMin,
+  staggerMax: MOTION_SECONDS.staggerMax,
 } as const;
 
 /** Header intro runs exactly once per page session — the provider re-runs
@@ -187,12 +223,14 @@ export default function MotionProvider() {
         const ctx = gsap.context(() => {
           // Hero entrance (FIRST LOAD ONLY — heroIntroDone guard). Content
           // is visible without JS — no CSS hides `.hero__anim`; this only
-          // animates it. Sequence budget 900–1400ms total: 0.7s per
-          // element, 0.12s stagger — 5 elements finish at ~1.18s.
+          // animates it. Sequence budget ~2s total: 0.95s per element,
+          // 0.18s stagger — 5 elements finish at ~1.67s (Worker A
+          // motion-tuning round 2026-11-16: entrances must be clearly
+          // visible, not fast).
           // Masked-line titles: `[data-masked-title] .mask-line__inner`
           // (word-level masks in Hero.tsx — never char-level, Arabic
-          // shaping is preserved) rise 110% -> 0, 700ms expo.out,
-          // stagger 90ms between words.
+          // shaping is preserved) rise 110% -> 0, 900ms expo.out,
+          // stagger 140ms between words.
           if (!heroIntroDone) {
             heroIntroDone = true;
             const heroText = document.querySelectorAll(".hero__anim");
@@ -200,7 +238,7 @@ export default function MotionProvider() {
               gsap.fromTo(
                 heroText,
                 { opacity: 0, y: 16 },
-                { opacity: 1, y: 0, duration: 0.7, ease: "expo.out", stagger: 0.12 },
+                { opacity: 1, y: 0, duration: 0.95, ease: "expo.out", stagger: 0.18 },
               );
             }
             const masked = document.querySelectorAll("[data-masked-title] .mask-line__inner");
@@ -208,7 +246,7 @@ export default function MotionProvider() {
               gsap.fromTo(
                 masked,
                 { yPercent: 110, opacity: 0 },
-                { yPercent: 0, opacity: 1, duration: 0.7, ease: "expo.out", stagger: 0.09 },
+                { yPercent: 0, opacity: 1, duration: 0.9, ease: "expo.out", stagger: 0.14 },
               );
             }
           }
@@ -217,7 +255,9 @@ export default function MotionProvider() {
           // Variants (transform/opacity only, 60fps, CLS-safe):
           // plain / "up" = fade-up (default), "fade" = opacity only,
           // "left"/"right" = horizontal drift, "scale" = gentle zoom.
-          // Durations: text 450–750ms, cards/sections 550–900ms.
+          // Durations: 850ms for every variant — slow enough to SEE
+          // (Worker A motion-tuning round 2026-11-16: card/text reveals
+          // were 0.6–0.75s, too fast to notice).
           // Mobile (coarse pointer): shorter travel, slightly faster.
           // immediateRender: false — nothing is hidden before its trigger
           // fires, so full-page screenshots, print, crawlers and #anchor
@@ -235,8 +275,7 @@ export default function MotionProvider() {
                     : variant === "scale"
                       ? { opacity: 0, scale: 0.96 }
                       : { opacity: 0, y: travel };
-            const duration =
-              variant === "fade" ? 0.6 : variant === "scale" ? 0.75 : 0.7;
+            const duration = 0.85;
             gsap.fromTo(el, from, {
               opacity: 1,
               y: 0,
@@ -251,17 +290,19 @@ export default function MotionProvider() {
 
           // Staggered groups (children animate together on group entry).
           // No pinning, no scrub, no blank spacer regions.
-          // Optional overrides: data-stagger-step (ms, default 80),
-          // data-stagger-duration (ms, default 650), data-stagger-max
+          // Optional overrides: data-stagger-step (ms, default 130),
+          // data-stagger-duration (ms, default 850), data-stagger-max
           // (cap of animated children — the rest stay visible, e.g.
-          // SpecTable caps at 10 rows).
+          // SpecTable caps at 10 rows). Defaults slowed (Worker A
+          // 2026-11-16): an 8-card grid's last card finishes at
+          // 850 + 7×130 ≈ 1.76s after its trigger.
           document.querySelectorAll<HTMLElement>("[data-stagger]").forEach((group) => {
             const allItems = Array.from(group.querySelectorAll(":scope > *"));
             if (allItems.length === 0) return;
             const max = Number.parseInt(group.dataset.staggerMax ?? "", 10);
             const items = Number.isFinite(max) && max > 0 ? allItems.slice(0, max) : allItems;
-            const step = (Number.parseFloat(group.dataset.staggerStep ?? "") || 80) / 1000;
-            const duration = (Number.parseFloat(group.dataset.staggerDuration ?? "") || 650) / 1000;
+            const step = (Number.parseFloat(group.dataset.staggerStep ?? "") || 130) / 1000;
+            const duration = (Number.parseFloat(group.dataset.staggerDuration ?? "") || 850) / 1000;
             gsap.fromTo(
               items,
               { opacity: 0, y: coarse ? 14 : 20 },
@@ -327,22 +368,33 @@ export default function MotionProvider() {
           // is applied by the tween itself with immediateRender: false,
           // so without a scroll trigger the paths render fully drawn.
           // Optional: data-draw-duration (s, default 1.4),
-          // data-draw-delay (s, default 0).
+          // data-draw-delay (s, default 0). Paths inside a [data-scrub]
+          // band draw in sync with the band's scrub instead of completing
+          // on entry before the traversal starts (duration/delay are
+          // ignored in scrub mode — progress is scroll-driven).
           document.querySelectorAll<SVGGeometryElement>("[data-draw]").forEach((path) => {
             const len = path.getTotalLength();
             const duration = Number.parseFloat(path.dataset.drawDuration ?? "") || 1.4;
             const delay = Number.parseFloat(path.dataset.drawDelay ?? "") || 0;
+            const scrubBand = path.closest<HTMLElement>("[data-scrub]");
             gsap.fromTo(
               path,
               { strokeDasharray: len, strokeDashoffset: len },
-              {
-                strokeDashoffset: 0,
-                duration,
-                delay,
-                ease: "power2.inOut",
-                immediateRender: false,
-                scrollTrigger: { trigger: path, start: "top 92%", once: true },
-              },
+              scrubBand
+                ? {
+                    strokeDashoffset: 0,
+                    ease: "none",
+                    immediateRender: false,
+                    scrollTrigger: { trigger: scrubBand, start: "top bottom", end: "bottom top", scrub: true },
+                  }
+                : {
+                    strokeDashoffset: 0,
+                    duration,
+                    delay,
+                    ease: "power2.inOut",
+                    immediateRender: false,
+                    scrollTrigger: { trigger: path, start: "top 92%", once: true },
+                  },
             );
           });
 
@@ -452,7 +504,7 @@ export default function MotionProvider() {
             const state = { v: 0 };
             gsap.to(state, {
               v: target,
-              duration: 1.2,
+              duration: 1.8,
               delay,
               ease: "power2.out",
               immediateRender: false,
@@ -462,21 +514,27 @@ export default function MotionProvider() {
             });
           });
 
-          // Step progress — `[data-step-line]` (axis x|y, default x) draws
-          // 0 -> 100% in 800ms ease-in-out on entry; `[data-step-group]`
+          // Step progress — `[data-step-line]` (axis x|y, default x):
+          // scrub-linked drawing — the line draws in proportion to
+          // scrolling through the steps column (transform origin at the
+          // reading-start side / top for vertical), instead of flashing
+          // 0 -> 100% in 800ms the moment its top enters (the column is
+          // ~4 cards tall). Reversible on scroll-up. `[data-step-group]`
           // dots (`[data-step-dot]`) fill with 120ms stagger, 250ms
           // fade-up. Decorative only — steps are numbered in text.
           document.querySelectorAll<HTMLElement>("[data-step-line]").forEach((el) => {
             const axis = el.dataset.stepAxis === "y" ? "scaleY" : "scaleX";
+            const isRtl = getComputedStyle(el).direction === "rtl";
             gsap.fromTo(
               el,
               { [axis]: 0 },
               {
                 [axis]: 1,
-                duration: 0.8,
-                ease: "power2.inOut",
+                ease: "none",
                 immediateRender: false,
-                scrollTrigger: { trigger: el, start: "top 88%", once: true },
+                transformOrigin:
+                  axis === "scaleY" ? "top center" : isRtl ? "right center" : "left center",
+                scrollTrigger: { trigger: el, start: "top 85%", end: "bottom 40%", scrub: true },
               },
             );
           });
@@ -694,6 +752,28 @@ export default function MotionProvider() {
       document.documentElement.classList.remove("motion-ready");
     };
   }, [pathname]);
+
+  // --- Phase 6 ripple: one delegated pointerdown listener for every
+  // primary CTA / WhatsApp press target. Separate effect from the GSAP
+  // setup above on purpose: it must run even when reduced motion
+  // returns early there (the handler checks reduced motion itself and
+  // skips spawning — a pressed button means the same thing without the
+  // ripple). It also runs when GSAP fails to load: ripple is pure
+  // CSS + DOM, no library. One span per press, self-removing; the
+  // listener never calls preventDefault and never blocks the click.
+  useEffect(() => {
+    const RIPPLE_SELECTOR =
+      ".btn, .btn-navy, .btn-primary, .btn-red, .btn-whatsapp, .btn-white, .btn-outline, .btn-outline-white, .btn-outline-blue, .whatsapp-float";
+    const onPointerDown = (e: PointerEvent) => {
+      if (e.pointerType === "mouse" && e.button !== 0) return;
+      const target = (e.target as HTMLElement | null)?.closest?.(RIPPLE_SELECTOR) as HTMLElement | null;
+      if (!target) return;
+      if ((target as HTMLButtonElement).disabled) return;
+      spawnRipple(target, e.clientX, e.clientY);
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => document.removeEventListener("pointerdown", onPointerDown);
+  }, []);
 
   return null;
 }

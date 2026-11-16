@@ -51,9 +51,6 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
       {/* 5.2 Intro — sky mesh (quiet) with a section marker */}
       <section data-reveal="fade" className="section-sm bg-mesh-sky">
         <div className="wrap text-center">
-          <div data-reveal="fade" className="mb-4 flex justify-center">
-            <span className="section-marker" aria-hidden="true" />
-          </div>
           <h2 data-reveal="up" className="text-h2 font-semibold text-navy">{ui("projects.areasTitle", l)}</h2>
         </div>
       </section>
@@ -91,9 +88,6 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
 
           {/* Template preview (k6) — clearly labelled, not a real project */}
           <div data-reveal="fade" className="mt-14">
-            <div className="mb-4">
-              <span className="section-marker" aria-hidden="true" />
-            </div>
             <h2 className="text-h2 font-semibold text-navy">{t(p.k6, l)}</h2>
           </div>
           <div data-reveal="up" className="mt-8">

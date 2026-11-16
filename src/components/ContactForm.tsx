@@ -105,6 +105,17 @@ export default function ContactForm({ locale }: { locale: Locale }) {
   }
 
   const emailLabel = locale === "ar" ? "البريد الإلكتروني" : locale === "en" ? "Email" : "电子邮箱";
+  // Form-completion progress (micro-polish only — validation and the
+  // WhatsApp handoff are untouched). Four steps: name, email, enquiry
+  // type (always selected, so it counts as done), message. Subtle top
+  // bar in the form card, 200ms ease-out width.
+  const doneName = name.trim().length >= 2;
+  const doneEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+  const doneMessage = message.trim().length >= 10;
+  const doneSteps = [doneName, doneEmail, true, doneMessage].filter(Boolean).length;
+  const progressPct = Math.round((doneSteps / 4) * 100);
+  const progressLabel =
+    locale === "ar" ? "اكتمال النموذج" : locale === "en" ? "Form completion" : "表单完成度";
   const baseCls =
     "w-full rounded-[0.625rem] border bg-surface px-4 text-body text-text placeholder:text-text-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40";
   const fieldCls = (hasError: boolean) =>
@@ -113,7 +124,24 @@ export default function ContactForm({ locale }: { locale: Locale }) {
 
   return (
     <form data-stagger onSubmit={submit} noValidate className="card-luxe p-6 md:p-8">
-      <h2 className="text-h3 font-semibold text-navy">{t(c.k27, locale)}</h2>
+      {/* Completion progress — thin bar at the card's top edge. */}
+      <div
+        className="-mx-6 -mt-6 h-1 overflow-hidden rounded-t-card bg-sky md:-mx-8 md:-mt-8"
+        role="progressbar"
+        aria-valuenow={progressPct}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label={progressLabel}
+      >
+        <span
+          className="block h-full bg-brand-red transition-[width] duration-200 ease-out"
+          style={{ width: `${progressPct}%` }}
+        />
+      </div>
+      <span className="sr-only">
+        {progressLabel}: {progressPct}%
+      </span>
+      <h2 className="mt-6 text-h3 font-semibold text-navy md:mt-8">{t(c.k27, locale)}</h2>
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
         {/* Name — floating label + per-field error + shake */}
         <div key={`name-${submitCount}`} className={errors.name ? "field-error" : ""}>

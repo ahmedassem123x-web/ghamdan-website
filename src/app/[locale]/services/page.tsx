@@ -27,9 +27,6 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
       />
       <section data-reveal="up" className="section bg-mesh-light">
         <div className="wrap">
-          <div data-reveal="fade" className="mb-8">
-            <span className="section-marker" aria-hidden="true" />
-          </div>
           <div data-stagger className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((svc) => (
               <div key={svc.title.ar} className="card-luxe p-6">

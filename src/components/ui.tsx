@@ -7,6 +7,11 @@ import { AlertIcon, InfoIcon, SearchIcon } from "@/components/icons";
 import type { Locale, LocalizedString } from "@/data";
 import { t } from "@/lib/i18n";
 import { ui } from "@/lib/ui-copy";
+import ScrambleValue from "@/components/ScrambleValue";
+/* Phase 6: shared ripple helpers (src/components/Ripple.tsx) — re-exported
+   here so other workers' components can use them without editing their
+   files' imports: `onPointerDown={attachRipple}` + `.ripple-host`. */
+export { attachRipple, spawnRipple } from "@/components/Ripple";
 
 /**
  * Shared primitives (v15 design-system §2, §7). Re-tokenised to the final
@@ -28,27 +33,62 @@ export function Reveal({ children, className = "" }: { children: ReactNode; clas
   );
 }
 
-/** Section heading (§2.11): dual-colour marker + H2 + optional lead.
+/** Gradient word (Phase 6, plan §6): wraps ONE accent word in the
+ * animated brand gradient (red -> blue, `.text-gradient-brand`).
+ * Word-level only — the word is never split, so Arabic shaping is
+ * untouched. Use for a single highlighted word per heading, never for
+ * whole headings or running text. */
+export function GradientWord({ children }: { children: ReactNode }) {
+  return <span className="text-gradient-brand">{children}</span>;
+}
+
+/**
+ * Highlights the FIRST whole-word occurrence of `highlight` in `title`
+ * with <GradientWord>; every other word renders unchanged, and a title
+ * with no match renders unchanged. Word-boundary match only (the title
+ * is split on whitespace, never inside a word) — Arabic letters stay
+ * connected. At most one word per heading is ever highlighted.
+ */
+function renderTitleWithHighlight(title: string, highlight?: string): ReactNode {
+  if (!highlight) return title;
+  const parts = title.split(/(\s+)/);
+  let done = false;
+  return parts.map((part, i) => {
+    if (!done && part === highlight) {
+      done = true;
+      return (
+        <GradientWord key={i}>{part}</GradientWord>
+      );
+    }
+    return <span key={i}>{part}</span>;
+  });
+}
+
+/** Section heading (§2.11): H2 + optional lead.
  * Impeccable ban: NO eyebrow/kicker label above a heading — the heading
  * speaks. The `eyebrow` prop is kept in the type for call-site
- * compatibility but is never rendered; the `.section-marker` bar above
- * the title is its visual replacement. */
+ * compatibility but is never rendered. No marker bar above the title
+ * (removed 2026-11-16 at the user's request). */
 export function SectionHeading({
   locale,
   title,
   lead,
   align = "start",
+  highlight,
 }: {
   locale: Locale;
   eyebrow?: LocalizedString;
   title: LocalizedString;
   lead?: LocalizedString;
   align?: "start" | "center";
+  /** Optional single accent word to render with the brand gradient
+   * (Phase 6, plan §6) — the word in the CURRENT locale, e.g. "شمسية".
+   * First whole-word occurrence only; omit for a plain heading. */
+  highlight?: LocalizedString;
 }) {
   return (
     <div data-reveal className={align === "center" ? "text-center" : ""}>
-      <span aria-hidden="true" className={`section-marker mb-4 ${align === "center" ? "mx-auto" : ""}`} />
-      <h2 className="text-h2 font-bold text-navy">{t(title, locale)}</h2>
+      <h2 className="text-h2 font-bold text-navy">{renderTitleWithHighlight(t(title, locale), highlight ? t(highlight, locale) : undefined)}</h2>
       {lead && <p className={`mt-3 max-w-2xl text-body text-text-secondary ${align === "center" ? "mx-auto" : ""}`}>{t(lead, locale)}</p>}
     </div>
   );
@@ -62,17 +102,20 @@ export function SectionHeadingL({
   title,
   lead,
   align = "start",
+  highlight,
 }: {
   locale: Locale;
   eyebrow?: string;
   title: string;
   lead?: string;
   align?: "start" | "center";
+  /** Optional single accent word (current locale) for the brand gradient
+   * — first whole-word occurrence only; omit for a plain heading. */
+  highlight?: string;
 }) {
   return (
     <div data-reveal className={align === "center" ? "text-center" : ""}>
-      <span aria-hidden="true" className={`section-marker mb-4 ${align === "center" ? "mx-auto" : ""}`} />
-      <h2 className="text-h2 font-bold text-navy">{title}</h2>
+      <h2 className="text-h2 font-bold text-navy">{renderTitleWithHighlight(title, highlight)}</h2>
       {lead && <p className={`mt-3 max-w-2xl text-body text-text-secondary ${align === "center" ? "mx-auto" : ""}`}>{lead}</p>}
     </div>
   );
@@ -135,7 +178,12 @@ export function ZhNotice({ locale }: { locale: Locale }) {
   );
 }
 
-/** Spec table (§2.11): renders only rows that exist — never "—" placeholders. */
+/** Spec table (§2.11): renders only rows that exist — never "—" placeholders.
+ * Phase 2: every row carries a stable id (`spec-row-<index>`) so Gallery
+ * hotspots can scroll to and highlight it (`.rowHighlight` in
+ * SpecTable.module.css, added/removed from the DOM for ~2s). Values go
+ * through <ScrambleValue>: Latin digits scramble once on viewport entry
+ * and settle on the true value; digit-free values render as-is. */
 export function SpecTable({ rows }: { rows: { label: string; value: string }[] }) {
   if (rows.length === 0) return null;
   return (
@@ -146,11 +194,13 @@ export function SpecTable({ rows }: { rows: { label: string; value: string }[] }
             instantly) — see MotionProvider data-stagger overrides. */}
         <tbody data-stagger data-stagger-step="30" data-stagger-duration="250" data-stagger-max="10" className="divide-y divide-border">
           {rows.map((r, i) => (
-            <tr key={i} className={i % 2 === 1 ? "bg-surface-muted" : "bg-surface"}>
+            <tr key={i} id={`spec-row-${i}`} className={i % 2 === 1 ? "bg-surface-muted" : "bg-surface"}>
               <th scope="row" className="w-2/5 px-5 py-3 text-start font-semibold text-navy">
                 {r.label}
               </th>
-              <td className="px-5 py-3 text-text-secondary">{r.value}</td>
+              <td className="px-5 py-3 text-text-secondary">
+                <ScrambleValue value={r.value} />
+              </td>
             </tr>
           ))}
         </tbody>

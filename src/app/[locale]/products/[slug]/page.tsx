@@ -4,6 +4,8 @@ import Link from "next/link";
 import { CheckIcon, SettingsIcon, WhatsAppIcon, PackageIcon } from "@/components/icons";
 import CTABand from "@/components/CTABand";
 import ProductCard from "@/components/ProductCard";
+import ProductShare from "@/components/ProductShare";
+import ProductTabs from "@/components/ProductTabs";
 import Gallery from "@/components/Gallery";
 import StickyWhatsAppBar from "@/components/StickyWhatsAppBar";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -53,6 +55,17 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   const galleryItems = product.image
     ? [{ src: product.image, alt: name, caption: copy ? t(copy.k3, l) : undefined }]
     : [];
+  // Phase 2: sticky tabs for the sections that exist on this page
+  // (labels from ui-copy only) + hotspots for the first spec rows
+  // (labels from the product's own data, row ids match SpecTable).
+  const hasFeatures = !!(product.benefits && product.benefits.length >= 3);
+  const tabs = [
+    { id: "product-overview", label: ui("product.overview", l) },
+    ...(hasFeatures ? [{ id: "product-features", label: ui("product.features", l) }] : []),
+    { id: "product-specs", label: ui("product.specs", l) },
+    ...(related.length > 0 ? [{ id: "product-related", label: ui("product.related", l) }] : []),
+  ];
+  const hotspots = specRows.slice(0, 4).map((r, i) => ({ label: r.label, rowId: `spec-row-${i}` }));
 
   return (
     <>
@@ -77,7 +90,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               Gallery renders a single image large at 4:3. */}
           <div>
             {galleryItems.length > 0 ? (
-              <Gallery items={galleryItems} label={name} locale={l} vtName={`product-${product.id}`} />
+              <Gallery items={galleryItems} label={name} locale={l} vtName={`product-${product.id}`} hotspots={hotspots} />
             ) : (
               <div className="flex aspect-[4/3] items-center justify-center rounded-image bg-sky">
                 <span className="font-latin text-6xl font-extrabold text-primary" dir="ltr">
@@ -124,6 +137,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               <Link href={localizedHref(l, "/contact")} className="btn btn-outline">
                 {ui("cta.contactUs", l)}
               </Link>
+              <ProductShare locale={l} url={siteUrl} name={name} />
             </div>
             {/* Trust badges */}
             {copy && (
@@ -145,8 +159,11 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         </div>
       </div>
 
+      {/* Phase 2: sticky tabs with scroll-spy for the sections below. */}
+      <ProductTabs tabs={tabs} />
+
       {/* Overview — EditorialBlock, image left, on surface-muted panel (§3.6) */}
-      <section data-reveal="fade" className="section bg-white">
+      <section id="product-overview" data-reveal="fade" className="section scroll-mt-28 bg-white">
         <div className="wrap rounded-card bg-surface-muted p-6 md:p-10">
           <div data-reveal="left">
           <EditorialBlock
@@ -155,9 +172,6 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             title={name}
             text={product.overview ? t(product.overview, l) : undefined}
             flip
-            eyebrow={
-              <span className="section-marker" aria-hidden="true" />
-            }
           />
           </div>
         </div>
@@ -167,12 +181,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           them (§3.6, sky mesh); fewer benefits render as chips in the
           hero above (item 6). */}
       {product.benefits && product.benefits.length >= 3 && (
-        <section data-reveal="left" className="section-sm bg-mesh-sky">
+        <section id="product-features" data-reveal="left" className="section-sm scroll-mt-28 bg-mesh-sky">
           <div className="wrap">
             <div data-reveal="fade">
-              <div className="mb-4">
-                <span className="section-marker" aria-hidden="true" />
-              </div>
               <h2 className="text-h2 font-semibold text-navy">{copy ? t(copy.k2, l) : ui("product.features", l)}</h2>
             </div>
             <div data-stagger className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -193,12 +204,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           to sit beside the table repeated the hero photo with the same
           title/description, so it is gone (item 27c). C-2 preserved: the
           table renders the data's real spec labels/values, never "—". */}
-      <section data-reveal="right" className="section bg-white">
+      <section id="product-specs" data-reveal="right" className="section scroll-mt-28 bg-white">
         <div className="wrap">
           <div data-reveal="fade">
-            <div className="mb-4">
-              <span className="section-marker" aria-hidden="true" />
-            </div>
             <h2 className="text-h2 font-semibold text-navy">{copy ? t(copy.k13, l) : ui("product.specs", l)}</h2>
           </div>
           <div data-reveal="fade" className="mt-4 max-w-4xl">
@@ -219,12 +227,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
       {/* Related — sand band */}
       {related.length > 0 && (
-        <section data-reveal="up" className="section bg-sand">
+        <section id="product-related" data-reveal="up" className="section scroll-mt-28 bg-sand">
           <div className="wrap">
             <div data-reveal="fade">
-              <div className="mb-4">
-                <span className="section-marker" aria-hidden="true" />
-              </div>
               <h2 className="text-h2 font-semibold text-navy">{copy ? t(copy.k14, l) : ui("product.related", l)}</h2>
             </div>
             <div data-stagger className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

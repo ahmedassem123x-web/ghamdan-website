@@ -117,9 +117,6 @@ export default async function CategoryPage({ params }: { params: Promise<{ local
       <section data-reveal="right" className="section bg-mesh-sky">
         <div className="wrap">
           <div data-reveal="fade">
-            <div className="mb-4">
-              <span className="section-marker" aria-hidden="true" />
-            </div>
             <h2 className="text-h2 font-semibold text-navy">{ui("related.categories", l)}</h2>
           </div>
           <div data-stagger className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">

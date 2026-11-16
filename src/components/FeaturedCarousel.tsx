@@ -3,6 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
+import ProductCardTilt from "@/components/ProductCardTilt";
+import { usePrefersReducedMotion } from "@/lib/perf";
 import type { Locale, Product } from "@/data";
 
 /**
@@ -14,7 +16,12 @@ import type { Locale, Product } from "@/data";
  * RTL: dragging right moves forward (same scrollLeft formula works in
  * both Chrome-style (negative) and Firefox-style RTL scrolling).
  * Reduced motion: snap is instant (global 0.01ms override), no momentum.
- * No autoplay.
+ * Autoplay: advances the REAL index every 5s (wrapping to the first
+ * card; the wrap jump is instant, not a long glide back). Pauses on
+ * hover / focus-within / pointer-down / drag and resumes ~4s after the
+ * interaction ends; the pause button toggles it off until pressed again.
+ * Disabled entirely under prefers-reduced-motion (no timer at all).
+ * Probe: the root carries data-active-index + data-autoplay.
  */
 export default function FeaturedCarousel({ locale, products }: { locale: Locale; products: Product[] }) {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -31,6 +38,49 @@ export default function FeaturedCarousel({ locale, products }: { locale: Locale;
   const rtlNegativeRef = useRef(true);
   const total = products.length;
   const rtl = locale === "ar";
+
+  // --- Autoplay (5s/slide, plain setInterval, no new deps) ---
+  // `autoplayPaused` is the user's explicit toggle (sticky until pressed
+  // again); `held` is transient — true while hovered / focused / dragging
+  // / pointer-down, and cleared ~4s after the interaction ends.
+  const reduced = usePrefersReducedMotion();
+  // SSR renders reduced=false (the server value); until this mount effect
+  // runs, the preference is unresolved — report autoplay "off" so the
+  // attribute never transiently reads "playing" for reduced-motion users.
+  const [motionResolved, setMotionResolved] = useState(false);
+  useEffect(() => {
+    setMotionResolved(true);
+  }, []);
+  const [autoplayPaused, setAutoplayPaused] = useState(false);
+  const [held, setHeld] = useState(false);
+  const resumeTimer = useRef<number | null>(null);
+  const markInteraction = useCallback(() => {
+    setHeld(true);
+    if (resumeTimer.current !== null) window.clearTimeout(resumeTimer.current);
+    resumeTimer.current = null;
+  }, []);
+  const endInteraction = useCallback(() => {
+    if (resumeTimer.current !== null) window.clearTimeout(resumeTimer.current);
+    resumeTimer.current = window.setTimeout(() => {
+      setHeld(false);
+      resumeTimer.current = null;
+    }, 4000);
+  }, []);
+  useEffect(
+    () => () => {
+      if (resumeTimer.current !== null) window.clearTimeout(resumeTimer.current);
+    },
+    [],
+  );
+  // Dragging holds autoplay too (pointer-up already ends the hold; this
+  // covers a drag that ends without a pointer-up on the wrapper).
+  useEffect(() => {
+    if (dragging) markInteraction();
+    else endInteraction();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dragging]);
+  const autoplayState =
+    !motionResolved || reduced || total <= 1 ? "off" : autoplayPaused || held ? "paused" : "playing";
 
   const cardWidth = useCallback(() => {
     const track = trackRef.current;
@@ -71,6 +121,20 @@ export default function FeaturedCarousel({ locale, products }: { locale: Locale;
     },
     [index, scrollToIndex, total],
   );
+
+  // Autoplay tick: advances the SAME index state the arrows/dots use,
+  // wrapping to the first card (manual arrows stay clamped at the ends).
+  // `index` in the deps restarts the 5s countdown after every slide
+  // change, manual or automatic, so the user is never yanked mid-read.
+  // No timer at all under reduced motion.
+  useEffect(() => {
+    if (!motionResolved || reduced || autoplayPaused || held || total <= 1) return;
+    const id = window.setInterval(() => {
+      const next = (index + 1) % total;
+      scrollToIndex(next, next !== 0);
+    }, 5000);
+    return () => window.clearInterval(id);
+  }, [motionResolved, reduced, autoplayPaused, held, index, total, scrollToIndex]);
 
   // Detect the browser's RTL scrollLeft mode once (Chrome/Safari: 0 at
   // start and negative while scrolling; Firefox: maxScroll at start).
@@ -167,13 +231,33 @@ export default function FeaturedCarousel({ locale, products }: { locale: Locale;
     }
   };
 
+  // Focus-within pause: only release the hold when focus leaves the
+  // whole carousel (moving between its own controls keeps it held).
+  const onBlur = (e: React.FocusEvent) => {
+    if (!e.currentTarget.contains(e.relatedTarget as Node | null)) endInteraction();
+  };
+
   const prevLabel = locale === "ar" ? "السابق" : locale === "en" ? "Previous" : "上一张";
   const nextLabel = locale === "ar" ? "التالي" : locale === "en" ? "Next" : "下一张";
+  const pauseLabel =
+    locale === "ar" ? "إيقاف التشغيل التلقائي" : locale === "en" ? "Pause autoplay" : "暂停自动播放";
+  const playLabel =
+    locale === "ar" ? "استئناف التشغيل التلقائي" : locale === "en" ? "Resume autoplay" : "恢复自动播放";
   const PrevIcon = rtl ? ChevronRight : ChevronLeft;
   const NextIcon = rtl ? ChevronLeft : ChevronRight;
 
   return (
-    <div>
+    <div
+      data-active-index={index}
+      data-autoplay={autoplayState}
+      onMouseEnter={markInteraction}
+      onMouseLeave={endInteraction}
+      onFocus={markInteraction}
+      onBlur={onBlur}
+      onPointerDown={markInteraction}
+      onPointerUp={endInteraction}
+      onPointerCancel={endInteraction}
+    >
       <div
         ref={trackRef}
         role="region"
@@ -189,7 +273,9 @@ export default function FeaturedCarousel({ locale, products }: { locale: Locale;
       >
         {products.map((p) => (
           <div key={p.id} data-drag-slide className="drag-carousel__slide">
-            <ProductCard locale={locale} product={p} />
+            <ProductCardTilt>
+              <ProductCard locale={locale} product={p} />
+            </ProductCardTilt>
           </div>
         ))}
       </div>
@@ -212,6 +298,19 @@ export default function FeaturedCarousel({ locale, products }: { locale: Locale;
         >
           <NextIcon className="size-5" aria-hidden="true" />
         </button>
+        {motionResolved && !reduced && total > 1 && (
+          <button
+            type="button"
+            data-autoplay-toggle
+            aria-pressed={autoplayPaused}
+            aria-label={autoplayPaused ? playLabel : pauseLabel}
+            onClick={() => setAutoplayPaused((v) => !v)}
+            className="inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-border bg-surface text-navy shadow-card transition-colors hover:border-primary-hover hover:text-primary-hover"
+          >
+            <span aria-hidden="true">{autoplayPaused ? "▶" : "❚❚"}</span>
+            <span className="sr-only">{autoplayPaused ? playLabel : pauseLabel}</span>
+          </button>
+        )}
         <div className="drag-carousel__bar flex-1" aria-hidden="true">
           <div data-drag-progress className="drag-carousel__fill" />
         </div>

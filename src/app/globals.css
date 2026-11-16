@@ -152,15 +152,22 @@
   --motion-instant: 100ms;
   --motion-fast: 160ms;
   --motion-normal: 240ms;
-  --motion-moderate: 360ms;
-  --motion-slow: 550ms;
+  --motion-moderate: 600ms;
+  --motion-slow: 800ms;
   --motion-cinematic: 900ms;
   --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Alias under the --motion-* namespace so CSS and JS share one name. */
+  --motion-ease-standard: var(--ease-standard);
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-ease-out-soft: var(--ease-out-soft);
+  /* Spring/elastic easing (Phase 6): button press states ONLY — an
+     overshoot ease, never for entrances. JS mirror: MOTION_EASE.spring. */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --motion-ease-spring: var(--ease-spring);
   --motion-reveal-distance: 24px;
   --motion-reveal-distance-mobile: 16px;
-  --motion-stagger-min: 40ms;
-  --motion-stagger-max: 80ms;
+  --motion-stagger-min: 80ms;
+  --motion-stagger-max: 150ms;
 
   --breakpoint-sm: 640px;
   --breakpoint-md: 768px;
@@ -471,20 +478,6 @@ img {
   background-size: 10rem 10rem;
 }
 
-/* .section-marker — 40×4px dual-colour bar (blue 50% / red 50%) that
-   replaces the banned eyebrow/kicker pill above section headings.
-   In RTL the gradient mirrors so blue stays on the reading-start side. */
-.section-marker {
-  display: block;
-  width: 2.5rem;
-  height: 0.25rem;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--color-primary) 0 50%, var(--color-brand-red) 50% 100%);
-}
-html[dir="rtl"] .section-marker {
-  background: linear-gradient(270deg, var(--color-primary) 0 50%, var(--color-brand-red) 50% 100%);
-}
-
 /* .shine — light sweep across a card/element on hover (600ms). Works
    only with overflow hidden, which this class sets itself; do not use
    on elements that need visible overflow (menus, tooltips). */
@@ -568,6 +561,14 @@ html[dir="rtl"] .section-marker {
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
+  /* Ripple host (Phase 6): the shared pointerdown ripple
+     (src/components/Ripple.tsx, spawned by MotionProvider) appends a
+     span inside the button, so the host must position + clip it. The
+     focus outline and the button's own shadow are NOT clipped by
+     overflow. All .btn* usages are plain icon+text links/buttons
+     (verified 2026-11-16) — no overflowing children. */
+  position: relative;
+  overflow: hidden;
   transition:
     transform 200ms cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -598,6 +599,10 @@ html[dir="rtl"] .section-marker {
 .btn-outline-blue:active {
   transform: translateY(0) scale(0.97);
   box-shadow: var(--shadow-card);
+  /* Phase 6 spring press: the overshoot ease applies to the transition
+     INTO the pressed state (scale 0.97). Cards keep their own easing —
+     this rule is buttons only. */
+  transition-timing-function: var(--ease-spring);
 }
 .btn:focus-visible,
 .btn-navy:focus-visible,
@@ -808,6 +813,9 @@ html[dir="rtl"] .section-marker {
 }
 .whatsapp-float {
   animation: wa-enter 600ms var(--ease-standard) both;
+  /* Ripple host (Phase 6): clips the pointerdown ripple span to the
+     56px circle. The Lottie sun badge (inside the circle) is unaffected. */
+  overflow: hidden;
 }
 
 /* Scroll progress bar (Header): 3px desktop / 2px mobile, blue->red
@@ -855,9 +863,23 @@ html[data-navigating] .scroll-progress {
   transform-origin: left center;
 }
 
-/* View Transitions (all pages): cross-fade 200ms ease-out + new-title
-   fade-up 250ms; product image shared element 350ms standard easing.
-   Mobile (<768px): cross-fade only — shared element disabled. */
+/* View Transitions (all pages) + Phase 6 brand curtain wipe.
+   Route changes play a short curtain wipe instead of a bare cut:
+   the incoming page is revealed by a clip-path wipe from the
+   reading-start side (250ms, standard easing) with a navy band +
+   red leading edge riding the wipe front (the element's inline-start
+   edge IS the wipe front, so an inset box-shadow there travels with
+   it). Transform/clip-path only; navigation itself is never delayed
+   — the transition starts immediately on click and the old page stays
+   visible underneath until the wipe covers it.
+   The product-image shared element (`vt-product-img`) is a SEPARATE
+   view-transition group with its own 350ms animation, so the wipe
+   and the morph run concurrently and never fight: the wipe is the
+   curtain, the morph runs underneath it.
+   Mobile (<768px): cross-fade only — shared element disabled.
+   Reduced motion: no wipe at all (explicit rule in the reduced-motion
+   block below — the global 0.01ms rule does not cover
+   ::view-transition-* pseudos). */
 @view-transition {
   navigation: auto;
 }
@@ -865,24 +887,32 @@ html[data-navigating] .scroll-progress {
   animation-duration: 350ms;
   animation-timing-function: var(--ease-standard);
 }
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation-duration: 200ms;
-  animation-timing-function: ease-out;
-}
-::view-transition-new(root) {
-  animation-name: vt-fade-up;
-}
 ::view-transition-old(root) {
-  animation-name: vt-fade;
+  animation: vt-fade 200ms ease-out both;
+}
+::view-transition-new(root) {
+  animation: vt-wipe 250ms var(--ease-standard) both;
+  box-shadow:
+    inset 4px 0 0 var(--color-brand-red),
+    inset 28px 0 0 rgba(16, 43, 70, 0.9);
+}
+html[dir="rtl"] ::view-transition-new(root) {
+  animation-name: vt-wipe-rtl;
+  box-shadow:
+    inset -4px 0 0 var(--color-brand-red),
+    inset -28px 0 0 rgba(16, 43, 70, 0.9);
 }
 @keyframes vt-fade {
   from { opacity: 1; }
   to { opacity: 0; }
 }
-@keyframes vt-fade-up {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes vt-wipe {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes vt-wipe-rtl {
+  from { clip-path: inset(0 0 0 100%); }
+  to { clip-path: inset(0 0 0 0); }
 }
 @media (max-width: 767.5px) {
   .vt-product-img {
@@ -1139,6 +1169,60 @@ html[dir="rtl"] .step-line--h {
   transition: left 250ms var(--ease-standard), width 250ms var(--ease-standard);
 }
 
+/* ---------- Phase 6: ripple + gradient word ----------
+   Ripple (plan §13): spawned on pointerdown by the shared listener in
+   MotionProvider (all .btn* + .whatsapp-float) or by attachRipple()
+   (ui.tsx) for other elements. transform/opacity only, 550ms ease-out,
+   origin at the pointer position (left/top set inline by Ripple.tsx).
+   Reduced motion: the JS guard skips spawning entirely, and the global
+   0.01ms override below collapses any stray instance. */
+.ripple-host {
+  position: relative;
+  overflow: hidden;
+}
+.ripple-ink {
+  position: absolute;
+  border-radius: 9999px;
+  background: currentColor;
+  opacity: 0.18;
+  transform: translate(-50%, -50%) scale(0);
+  pointer-events: none;
+  animation: ripple-expand 550ms ease-out forwards;
+}
+@keyframes ripple-expand {
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}
+
+/* Gradient word (plan §6): ONE accent word per heading only, via
+   <GradientWord> (ui.tsx) or this utility class — never restyle whole
+   headings. Animated red -> blue brand gradient (symmetric, so no RTL
+   variant is needed). Under reduced motion the animation collapses and
+   the static gradient remains. */
+.text-gradient-brand {
+  background: linear-gradient(90deg, var(--color-brand-red), var(--color-primary) 55%, var(--color-brand-red));
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 6s ease-in-out infinite;
+}
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@supports not ((background-clip: text) or (-webkit-background-clip: text)) {
+  .text-gradient-brand {
+    background: none;
+    color: var(--color-brand-red-text);
+    -webkit-text-fill-color: currentColor;
+    animation: none;
+  }
+}
+
 /* ---------- Reduced motion (spec §5.4) ---------- */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -1168,6 +1252,24 @@ html[dir="rtl"] .step-line--h {
   .card-luxe:hover,
   .btn:hover {
     transform: none !important;
+  }
+  /* View Transitions: no curtain wipe — instant swap. The global
+     0.01ms rule above does NOT cover ::view-transition-* pseudos
+     (they are not ::before/::after), so this explicit rule is needed;
+     it also covers automatic transitions from `navigation: auto`
+     (back/forward), which bypass the JS reduced-motion guard. */
+  ::view-transition-group(*),
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+  /* Gradient word: static gradient, no shift. Ripple: no expansion. */
+  .text-gradient-brand {
+    animation: none !important;
+  }
+  .ripple-ink {
+    animation: none !important;
+    opacity: 0 !important;
   }
 }
 

@@ -6,6 +6,8 @@ import { ArrowIcon, categoryIcon } from "@/components/icons";
 import { SolarSystemIllustration, PumpIllustration, GridIllustration } from "@/components/illustrations";
 import Hero from "@/components/Hero";
 import CTABand from "@/components/CTABand";
+import { SizingStrip } from "@/components/SizingHelper";
+import { withGradientWord } from "@/components/headingHighlight";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import EnergySystemScene from "@/components/three/EnergySystemScene";
 import { Breadcrumbs, EditorialBlock } from "@/components/ui";
@@ -14,7 +16,18 @@ import { localizedHref, t } from "@/lib/i18n";
 import { detailMetadata } from "@/lib/metadata";
 import { ui } from "@/lib/ui-copy";
 import { WA_MESSAGES } from "@/lib/whatsapp";
-import type { Locale } from "@/data";
+import type { Locale, LocalizedString } from "@/data";
+
+/** Gradient highlight words (Phase 6) — one meaningful word per main
+ * section heading, current locale. ZH titles have no spaces, so they
+ * render plain (whole-word match only, Arabic-safe). */
+const HL: Record<string, LocalizedString> = {
+  challenges: { ar: "التحديات", en: "Challenges", zh: "挑战" },
+  steps: { ar: "متكامل", en: "Solution", zh: "方案" },
+  diagram: { ar: "متكامل", en: "System", zh: "系统" },
+  applications: { ar: "التطبيق", en: "Application", zh: "应用" },
+  process: { ar: "كيف", en: "Work", zh: "工作" },
+};
 
 export async function generateStaticParams() {
   const params: { locale: string; slug: string }[] = [];
@@ -73,9 +86,6 @@ export default async function SolutionDetailPage({ params }: { params: Promise<{
               title={t(pumping.overviewHead, l)}
               text={t(pumping.overviewCopy, l)}
               flip
-              eyebrow={
-                <span className="section-marker" aria-hidden="true" />
-              }
             >
               <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3">
                 {pumping.overviewFeatures.map((f) => (
@@ -97,10 +107,7 @@ export default async function SolutionDetailPage({ params }: { params: Promise<{
         <section data-reveal="left" className="section bg-mesh-sky">
           <div className="wrap">
             <div data-reveal="fade" className="text-center">
-              <div className="mb-4 flex justify-center">
-                <span className="section-marker" aria-hidden="true" />
-              </div>
-              <h2 className="text-h2 font-semibold text-navy">{t(pumping.challengesTitle, l)}</h2>
+              <h2 className="text-h2 font-semibold text-navy">{withGradientWord(t(pumping.challengesTitle, l), t(HL.challenges, l))}</h2>
             </div>
             <div data-stagger className="mt-10 grid gap-6 sm:grid-cols-2">
               {pumping.challenges.map((ch) => (
@@ -116,33 +123,44 @@ export default async function SolutionDetailPage({ params }: { params: Promise<{
           </div>
         </section>
 
-        {/* Steps — product images + left-pointing arrows.
-            Step progress (decorative; steps are numbered in text): the
-            horizontal line draws 0->100% in 800ms on desktop, the
-            vertical line does the same from the reading-start side on
-            mobile; step numbers fill with 120ms stagger; cards fade-up
-            250ms. NOTE: the plan named systems/[slug] for this pattern,
-            but that page has no step list — the only real steps list in
-            the repo is the pumping steps here. */}
+        {/* Steps — sticky scroll story (Phase 4, plan §3 Sticky Sections):
+            the title column stays pinned (CSS position: sticky, lg+ only)
+            while the four step cards scroll past it; mobile is a normal
+            stacked scroll. No GSAP pin here: MotionProvider's pin is the
+            carousel-specific [data-pinned-scrub] pattern (one pin per page)
+            and motion.tsx is owned by another worker — CSS sticky gives
+            the same story with zero pin-spacer risk, and reduced-motion /
+            no-JS users get the identical stacked content. The vertical
+            step line ([data-step-line], axis y) and the per-card step
+            numbers ([data-step-dot]) use the same hooks, new layout. The sticky element itself carries no [data-reveal]
+            (GSAP inline transforms on a sticky element are a known
+            hazard); the section-level reveal owns the entrance.
+            Scroll fix (Worker C): the step cards used to share ONE
+            [data-stagger] group + ONE [data-step-group] on the grid, so
+            all four cards revealed and all four numbers filled within
+            ~0.4s of the grid top entering — cards 3–4 animated while
+            still below the fold. Each card now carries its own
+            [data-reveal] + [data-step-group], so a card reveals and its
+            number fills when THAT card scrolls into view. The vertical
+            step line carries an inline top transform-origin (GSAP's
+            scaleY default origin is the centre, so the line used to grow
+            from the middle outward); the scrub-linked draw itself is a
+            motion.tsx patch (see coordinator report) — the line still
+            draws once on entry until that patch lands. */}
         <section data-reveal="right" className="section bg-white">
-          <div className="wrap">
-            <div data-reveal="fade">
-              <div className="mb-4">
-                <span className="section-marker" aria-hidden="true" />
+          <div className="wrap lg:grid lg:grid-cols-12 lg:gap-10">
+            <div className="lg:col-span-4">
+              <div className="lg:sticky lg:top-24">
+                <div data-reveal="fade">
+                  <h2 className="text-h2 font-semibold text-navy">{withGradientWord(t(pumping.stepsTitle, l), t(HL.steps, l))}</h2>
+                </div>
               </div>
-              <h2 className="text-h2 font-semibold text-navy">{t(pumping.stepsTitle, l)}</h2>
             </div>
-            <div data-step-line data-step-axis="x" className="step-line--h mt-8 hidden md:block" aria-hidden="true" />
-            <div className="relative mt-10">
-              <div data-step-line data-step-axis="y" className="step-line--v absolute inset-y-0 start-0 h-full md:hidden" aria-hidden="true" />
-              <div data-stagger data-stagger-duration="250" data-stagger-step="60" data-step-group className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="relative mt-10 lg:col-span-8 lg:mt-0">
+              <div data-step-line data-step-axis="y" style={{ transformOrigin: "top center" }} className="step-line--v absolute inset-y-0 start-0 h-full" aria-hidden="true" />
+              <div className="grid gap-6 ps-6 sm:grid-cols-2 lg:grid-cols-1">
                 {pumping.steps.map((step, i) => (
-                  <div key={step.n} className="relative overflow-hidden rounded-card bg-surface shadow-card">
-                    {i < pumping.steps.length - 1 && (
-                      <span className="absolute top-8 -end-3 z-10 hidden size-6 items-center justify-center rounded-full bg-primary-hover text-white lg:flex" aria-hidden="true">
-                        ←
-                      </span>
-                    )}
+                  <div key={step.n} data-reveal="up" data-step-group className="relative overflow-hidden rounded-card bg-surface shadow-card">
                     <img
                       src={webp(["/images/photos/panels-rows.jpg", "/images/photos/controller-unit.jpg", "/images/photos/pump-flow.jpg", "/images/photos/pivot.jpg"][i])}
                       alt={t(step.title, l)}
@@ -165,10 +183,7 @@ export default async function SolutionDetailPage({ params }: { params: Promise<{
         <section data-reveal="scale" className="section bg-mesh-sky">
           <div className="wrap">
             <div data-reveal="fade">
-              <div className="mb-4">
-                <span className="section-marker" aria-hidden="true" />
-              </div>
-              <h2 className="text-h2 font-semibold text-navy">{t(pumping.diagramTitle, l)}</h2>
+              <h2 className="text-h2 font-semibold text-navy">{withGradientWord(t(pumping.diagramTitle, l), t(HL.diagram, l))}</h2>
               <p className="mt-3 max-w-2xl text-body text-text-muted">{t(pumping.diagramPill, l)}</p>
             </div>
             <div data-reveal="fade" className="mt-8">
@@ -191,10 +206,7 @@ export default async function SolutionDetailPage({ params }: { params: Promise<{
         <section data-reveal="up" className="section bg-white">
           <div className="wrap">
             <div data-reveal="fade">
-              <div className="mb-4">
-                <span className="section-marker" aria-hidden="true" />
-              </div>
-              <h2 className="text-h2 font-semibold text-navy">{t(pumping.applicationsTitle, l)}</h2>
+              <h2 className="text-h2 font-semibold text-navy">{withGradientWord(t(pumping.applicationsTitle, l), t(HL.applications, l))}</h2>
             </div>
             <div data-stagger className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {pumping.applications.map((app) => (
@@ -250,6 +262,7 @@ export default async function SolutionDetailPage({ params }: { params: Promise<{
           </div>
         </section>
 
+        <SizingStrip locale={l} />
         <CTABand
           locale={l}
           variant="whatsapp"
@@ -276,9 +289,6 @@ export default async function SolutionDetailPage({ params }: { params: Promise<{
         />
         <div className="wrap py-12 md:py-16">
           <div data-reveal="fade">
-            <div className="mb-4">
-              <span className="section-marker" aria-hidden="true" />
-            </div>
             <h1 className="mt-4 max-w-3xl text-h1 font-bold leading-[1.2] text-navy">{t(area.title, l)}</h1>
             <p data-reveal="fade" className="mt-4 max-w-2xl text-body-lg text-text-muted">{t(area.text, l)}</p>
             <p data-reveal="fade" className="mt-4 flex items-center gap-2 text-sm font-bold text-primary-hover">
@@ -306,27 +316,43 @@ export default async function SolutionDetailPage({ params }: { params: Promise<{
           )}
         </div>
       </section>
+      {/* How we work — same sticky scroll story as the pumping steps:
+          the heading column stays pinned (CSS sticky, lg+ only) while the
+          four process steps scroll past it; mobile is a normal stack.
+          Scroll fix (Worker C): the grid used to be one [data-stagger]
+          group, so all four steps revealed together on group entry while
+          steps 3–4 were still below the fold, and the step numbers had no
+          scroll-linked fill at all (unlike the pumping steps). Each card
+          now reveals on its own entry ([data-reveal]) and its number
+          fills via its own [data-step-group]/[data-step-dot], mirroring
+          the pumping story. No vertical line here (dark band, no gutter
+          in the card layout) — the per-card reveal is the progression. */}
       <section data-reveal="scale" className="section bg-mesh-navy">
-        <div className="wrap">
-          <div data-reveal="fade">
-            <div className="mb-4">
-              <span className="section-marker" aria-hidden="true" />
+        <div className="wrap lg:grid lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-4">
+            <div className="lg:sticky lg:top-24">
+              <div data-reveal="fade" className="text-center lg:text-start">
+                <h2 className="text-h2 font-semibold text-white">{withGradientWord(t(pages.solutions.k27, l), t(HL.process, l))}</h2>
+              </div>
             </div>
-            <h2 className="text-h2 font-semibold text-white">{t(pages.solutions.k27, l)}</h2>
           </div>
-          <div data-stagger className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid gap-6 lg:col-span-8 lg:mt-0">
             {workProcess.map((step, i) => (
-              <div key={step.title.ar} className="relative rounded-card border border-white/15 bg-[#16324F] p-6">
-                <span className="font-latin text-4xl font-extrabold text-white" dir="ltr">
+              <div key={step.title.ar} data-reveal="up" data-step-group className="relative flex gap-5 rounded-card border border-white/15 bg-[#16324F] p-6">
+                <span data-step-dot className="shrink-0 font-latin text-4xl font-extrabold text-white" dir="ltr">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-3 text-h4 font-semibold text-white">{t(step.title, l)}</h3>
-                <p className="mt-2 text-body-sm text-sky-100">{t(step.text, l)}</p>
+                <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-white/10 text-white">{categoryIcon(step.icon)}</div>
+                <div className="min-w-0">
+                  <h3 className="text-h4 font-semibold text-white">{t(step.title, l)}</h3>
+                  <p className="mt-2 text-body-sm text-sky-100">{t(step.text, l)}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
+      <SizingStrip locale={l} />
       <CTABand locale={l} variant="split" title={copy ? copy.k1 : pages.solutions.k28} text={copy ? copy.k2 : pages.solutions.k29} primaryHref="/contact" primaryLabelKey="cta.contactUs" />
     </>
   );

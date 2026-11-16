@@ -1,0 +1,84 @@
+/* EnergyFlowStory orbit — sun at the centre, icons circling it.
+   Transform/opacity only; one slow 26s revolution (decorative, so slow
+   and subtle). The ring rotates; each orbiting icon counter-rotates by
+   its own angle plus the ring angle, so the icons stay upright while
+   they travel. Paused entirely under prefers-reduced-motion. */
+
+.orbit {
+  position: relative;
+  width: 19rem;
+  height: 19rem;
+  margin: 3rem auto 0;
+}
+
+.orbitCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 9999px;
+  background: #ddf5fc;
+  box-shadow: 0 0 0 0.5rem rgb(0 129 251 / 0.08);
+}
+
+.orbitRing {
+  position: absolute;
+  inset: 0;
+  border: 1px dashed rgb(11 112 201 / 0.3);
+  border-radius: 9999px;
+  animation: orbitSpin 26s linear infinite;
+}
+
+.orbitItem {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: rotate(var(--a)) translateX(8.5rem) translate(-50%, -50%);
+}
+
+.orbitIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 9999px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 14px rgb(16 43 70 / 0.12);
+  animation: orbitCounter 26s linear infinite;
+}
+
+@keyframes orbitSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbitCounter {
+  from {
+    transform: rotate(calc(var(--a) * -1));
+  }
+  to {
+    transform: rotate(calc(var(--a) * -1 - 360deg));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbitRing,
+  .orbitIcon {
+    animation: none;
+  }
+}
+
+/* Paused while off-screen (toggled by IntersectionObserver in the
+   component): the infinite spin costs nothing when nobody sees it. */
+.orbitPaused .orbitRing,
+.orbitPaused .orbitIcon {
+  animation-play-state: paused;
+}

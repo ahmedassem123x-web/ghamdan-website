@@ -62,24 +62,51 @@ const IMG_TINTS = ["", "bg-primary/10", "bg-brand-red/10", "bg-navy/10"];
 function imgVariant(id: string) {
   return [...id].reduce((a, c) => a + c.charCodeAt(0), 0) % 4;
 }
-export default function ProductCard({ locale, product, highlight }: { locale: Locale; product: Product; highlight?: string }) {
+/** Top confirmed specs for a card / quick view (identity labels excluded, §3.4.4). */
+export function topSpecs(product: Product) {
+  return product.specs.filter((s) => !IDENTITY_LABELS.has(s.label.ar)).slice(0, 3);
+}
+
+export default function ProductCard({
+  locale,
+  product,
+  highlight,
+  onQuickView,
+  layout = "grid",
+}: {
+  locale: Locale;
+  product: Product;
+  highlight?: string;
+  /** Phase 3: opens the QuickView modal; when absent no button renders. */
+  onQuickView?: (product: Product) => void;
+  /** Phase 3 catalogue toggle: "list" renders a horizontal row card. */
+  layout?: "grid" | "list";
+}) {
   const name = t(product.name, locale);
   const model = typeof product.model === "string" ? (product.model ?? "") : t(product.model, locale);
   const img = product.image ?? "";
   const illustrative = !product.image;
   const benefit = product.benefits?.[0] ? t(product.benefits[0], locale) : "";
-  const cardSpecs = product.specs
-    .filter((s) => !IDENTITY_LABELS.has(s.label.ar))
-    .slice(0, 3);
+  const cardSpecs = topSpecs(product);
+  const extraSpecs = cardSpecs.slice(1);
   const siteUrl = `https://ghamdan-website.vercel.app/${locale}/products/${product.slug}`;
   const waMsg = WA_MESSAGES.product(name, model, siteUrl)[locale];
   const variant = imgVariant(product.id);
 
   return (
-    <article className="card-luxe shine group relative flex flex-col overflow-hidden bg-surface transition-[transform,box-shadow] duration-300 hover:-translate-y-1">
+    <article
+      className={`card-luxe shine group relative flex h-full flex-col overflow-hidden bg-surface transition-[transform,box-shadow] duration-300 hover:-translate-y-1 ${
+        layout === "list" ? "sm:flex-row" : ""
+      }`}
+    >
       <span aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-10 h-1 bg-gradient-to-r from-primary via-primary-hover to-brand-red opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-      <Link href={localizedHref(locale, `/products/${product.slug}`)} className="block" aria-label={name}>
-        <div className="relative aspect-[4/3] overflow-hidden bg-surface-muted">
+      <div
+        className={`relative overflow-hidden bg-surface-muted ${
+          layout === "list" ? "aspect-[4/3] sm:aspect-auto sm:w-60 sm:shrink-0" : "aspect-[4/3]"
+        }`}
+      >
+        <Link href={localizedHref(locale, `/products/${product.slug}`)} className="block h-full" aria-label={name}>
+          <div className="relative h-full w-full">
           {img ? (
             <img
               src={webp(img)}
@@ -110,8 +137,27 @@ export default function ProductCard({ locale, product, highlight }: { locale: Lo
               {ui("catalog.illustrative", locale)}
             </span>
           )}
-        </div>
-      </Link>
+          </div>
+        </Link>
+        {/* Card Reveal on Hover (Phase 3 §4): specs 2–3 slide up over the
+            image on hover/focus-within (transform + opacity only, 300ms).
+            The first spec stays visible in the list below, so essential
+            info is never hover-only; touch/keyboard users reach the full
+            specs on the product page. pointer-events-none keeps the image
+            link clickable under the overlay. */}
+        {extraSpecs.length > 0 && (
+          <div className="pointer-events-none invisible absolute inset-x-0 bottom-0 translate-y-full bg-navy/90 px-4 py-3 opacity-0 backdrop-blur-sm transition-[transform,opacity,visibility] duration-300 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+            <ul className="space-y-1">
+              {extraSpecs.map((s, i) => (
+                <li key={i} className="flex items-baseline justify-between gap-3 text-caption">
+                  <span className="font-bold text-white">{t(s.label, locale)}</span>
+                  <span className="text-white/80">{typeof s.value === "string" ? s.value : t(s.value, locale)}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
       <div className="flex flex-1 flex-col p-5">
         <h3 className="text-balance text-h4 font-semibold leading-snug text-navy">
           <Link href={localizedHref(locale, `/products/${product.slug}`)} className="transition-colors hover:text-primary-hover">
@@ -120,8 +166,8 @@ export default function ProductCard({ locale, product, highlight }: { locale: Lo
         </h3>
         {benefit && <p className="mt-2 text-body-sm text-text-muted">{benefit}</p>}
         {cardSpecs.length > 0 && (
-          <ul className="mt-3 min-h-[3.75rem] space-y-1 border-t border-border pt-3">
-            {cardSpecs.map((s, i) => (
+          <ul className="mt-3 min-h-[1.25rem] space-y-1 border-t border-border pt-3">
+            {cardSpecs.slice(0, 1).map((s, i) => (
               <li key={i} className="flex items-baseline justify-between gap-3 text-caption">
                 <span className="font-bold text-navy">{t(s.label, locale)}</span>
                 <span className="text-text-muted">{typeof s.value === "string" ? s.value : t(s.value, locale)}</span>
@@ -138,6 +184,19 @@ export default function ProductCard({ locale, product, highlight }: { locale: Lo
             <ArrowIcon className="size-4 transition-transform duration-200 group-hover:-translate-x-1 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
           </Link>
           <span className="flex-1" />
+          {onQuickView && (
+            <button
+              type="button"
+              onClick={() => onQuickView(product)}
+              className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-2 text-sm font-bold text-navy transition-colors duration-200 hover:border-primary-hover hover:text-primary-hover focus-visible:outline-2 focus-visible:outline-primary-hover"
+            >
+              <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+                <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+              {locale === "ar" ? "عرض سريع" : locale === "en" ? "Quick view" : "快速查看"}
+            </button>
+          )}
           <WhatsAppButton
             locale={locale}
             message={waMsg}

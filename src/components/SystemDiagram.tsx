@@ -1,4 +1,6 @@
-import type { ComponentType } from "react";
+"use client";
+
+import { useEffect, useId, useRef, type ComponentType } from "react";
 import {
   BatteryCharging,
   CircleDot,
@@ -28,7 +30,16 @@ import type { Locale } from "@/data";
  * Flow: connectors between tiles carry `data-flow`; MotionProvider draws
  * them with GSAP stroke-dashoffset after successful init (JS-only — the
  * connectors render fully drawn without JS) and then runs a slow dashed
- * drift while the figure is in view.
+ * drift while the figure is in view. Red SMIL pulses travel each connector
+ * so the energy flow is visible even before the draw runs — but only
+ * while the diagram is in view: the pulses used to run from page load
+ * (begin="0.7s" offsets ticking from load) even when the diagram sat
+ * below the fold, burning frames unseen and arriving mid-flight when
+ * the user finally scrolled to it. An IntersectionObserver now pauses
+ * the SVG timeline (pauseAnimations) off-screen and resumes it in view,
+ * same convention as the EnergyFlowStory orbit and the marquee pause.
+ * The marker id is per-instance (useId): two diagrams on one page used
+ * to share the id "flow-arrow".
  *
  * The diagram is explicitly ILLUSTRATIVE: a conceptual chain, not a scaled
  * engineering drawing and not the internal design of any real branded
@@ -154,6 +165,35 @@ export default function SystemDiagram({
   const totalW = nodes.length * TILE_W + (nodes.length - 1) * GAP;
   const viewW = Math.max(totalW + PAD * 2, 400);
   const cx = (i: number) => PAD + i * (TILE_W + GAP) + TILE_W / 2;
+  // Per-instance marker id (sanitised useId — raw useId contains ":",
+  // which breaks url(#...) references).
+  const markerId = `flow-arrow-${useId().replace(/[^a-zA-Z0-9_-]/g, "")}`;
+
+  // SMIL pulses: freeze the SVG timeline while the diagram is off-screen
+  // so the pulses never run (or start) before the user scrolls to them.
+  // Paused from mount, so on first entry they begin from their staggered
+  // begin offsets instead of arriving mid-flight. GSAP's [data-flow]
+  // draw/drift is unaffected (it is not SMIL). Reduced-motion users get
+  // no pulses at all (motion-reduce:hidden on the pulse group).
+  const svgRef = useRef<SVGSVGElement>(null);
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (!svg || typeof svg.pauseAnimations !== "function") return;
+    svg.pauseAnimations();
+    if (typeof IntersectionObserver === "undefined") {
+      svg.unpauseAnimations();
+      return;
+    }
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) svg.unpauseAnimations();
+        else svg.pauseAnimations();
+      },
+      { rootMargin: "100px" },
+    );
+    io.observe(svg);
+    return () => io.disconnect();
+  }, []);
 
   return (
     <figure data-reveal className="overflow-hidden rounded-card border border-border bg-surface p-4 shadow-card" dir={dir}>
@@ -161,6 +201,7 @@ export default function SystemDiagram({
           tables: the diagram keeps legible labels instead of shrinking. */}
       <div className="overflow-x-auto">
         <svg
+          ref={svgRef}
           viewBox={`0 0 ${viewW} ${VIEW_H}`}
           role="img"
           aria-label={nodes.map((n) => n.label).join(" → ")}
@@ -168,7 +209,7 @@ export default function SystemDiagram({
         >
           <title>{nodes.map((n) => n.label).join(" → ")}</title>
           <defs>
-            <marker id="flow-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <marker id={markerId} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
               <path d="M0 0 L10 5 L0 10 z" fill="#0081FB" />
             </marker>
           </defs>
@@ -184,9 +225,34 @@ export default function SystemDiagram({
               y2={MID_Y}
               stroke="#0081FB"
               strokeWidth="2.5"
-              markerEnd="url(#flow-arrow)"
+              markerEnd={`url(#${markerId})`}
             />
           ))}
+
+          {/* Energy pulses — one red dot per connector travelling the flow
+              path (SMIL animateMotion, no JS; hidden under reduced motion
+              via the motion-reduce variant). The connectors themselves are
+              drawn by MotionProvider ([data-flow]: draw-on-entry + dashed
+              drift); the pulses are separate elements, so the two never
+              fight over one property. Geometry unchanged. */}
+          <g aria-hidden="true">
+            {nodes.slice(0, -1).map((_, i) => (
+              <circle
+                key={`pulse-${i}`}
+                r="4.5"
+                fill="#E31E24"
+                opacity="0.9"
+                className="motion-reduce:hidden"
+              >
+                <animateMotion
+                  dur="2.2s"
+                  begin={`${i * 0.7}s`}
+                  repeatCount="indefinite"
+                  path={`M ${cx(i) + TILE_HALF} ${MID_Y} L ${cx(i + 1) - TILE_HALF - 2} ${MID_Y}`}
+                />
+              </circle>
+            ))}
+          </g>
 
           {nodes.map((b, i) => {
             const x = cx(i);

@@ -18,9 +18,6 @@ export default function NotFound() {
       {/* LOUD navy mesh: title + copy + way home */}
       <div className="bg-mesh-navy">
         <div className="mx-auto flex max-w-2xl flex-col items-center px-4 pb-16 pt-10 text-center">
-          <div data-reveal="fade" className="mb-4 flex justify-center">
-            <span className="section-marker" aria-hidden="true" />
-          </div>
           <h1 data-reveal="up" className="text-h2 font-extrabold text-white">
             <span lang="ar">{ui("notFound.title", "ar")}</span>
             {" · "}

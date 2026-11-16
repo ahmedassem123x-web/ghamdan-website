@@ -2,6 +2,8 @@ import type { ReactNode } from "react";
 import { webp } from "@/lib/images";
 import Link from "next/link";
 import WhatsAppButton from "./WhatsAppButton";
+import HeroAmbient from "./HeroAmbient";
+import WordSwap from "./WordSwap";
 import { localizedHref, t } from "@/lib/i18n";
 import { ui } from "@/lib/ui-copy";
 import { WA_MESSAGES } from "@/lib/whatsapp";
@@ -13,7 +15,7 @@ export type HeroVariant = "center" | "side-left" | "side-right" | "split" | "pho
  * MaskedHeading — word-level masked-line reveal for hero titles.
  * Each WORD (never a single letter — Arabic shaping must survive) sits
  * in an overflow-hidden mask; MotionProvider animates .mask-line__inner
- * y 110% -> 0, 700ms expo.out, stagger 90ms, first load only. The text
+ * y 110% -> 0, 900ms expo.out, stagger 140ms, first load only. The text
  * stays real DOM text; without JS / reduced motion it is simply visible.
  */
 function MaskedHeading({ text, className }: { text: string; className: string }) {
@@ -32,13 +34,30 @@ function MaskedHeading({ text, className }: { text: string; className: string })
   );
 }
 
+/**
+ * PillLabel — renders a stat-pill label with its leading number wrapped
+ * in a `[data-countup]` span, so MotionProvider animates the number
+ * once on entry (Phase 1 count-up stats). The final value is already in
+ * the HTML, so without JS / under reduced motion the correct number is
+ * simply shown. Labels without a leading number render unchanged.
+ */
+function PillLabel({ label }: { label: string }) {
+  const m = label.match(/^(\d+)\s*(.*)$/);
+  if (!m) return <>{label}</>;
+  return (
+    <>
+      <span data-countup={m[1]}>{m[1]}</span>
+      {m[2] ? ` ${m[2]}` : ""}
+    </>
+  );
+}
+
 export interface HeroProps {
   locale: Locale;
   variant?: HeroVariant;
   /**
    * Kept for call-site compatibility only — no longer rendered. Craft-floor
-   * ban: no eyebrow/kicker label above a heading; the `.section-marker`
-   * dual-color bar is the signature element instead.
+   * ban: no eyebrow/kicker label and no marker bar above a heading.
    */
   eyebrow?: LocalizedString;
   title: LocalizedString;
@@ -47,6 +66,13 @@ export interface HeroProps {
   imageAlt?: string;
   /** Pill labels under the copy (home: 3 pillars). Rendered as glass chips on the navy center hero. */
   pills?: { icon: ReactNode; label: LocalizedString }[];
+  /**
+   * Rotating words under the hero title (Phase 1 WordSwap, center
+   * variant only). Existing data only — the home page passes the
+   * solution-area pills, localised. Word-level swap; the data-driven
+   * title itself is never altered.
+   */
+  rotatingWords?: LocalizedString[];
   primaryHref?: string;
   primaryLabelKey?: string;
   whatsapp?: boolean;
@@ -88,10 +114,10 @@ export interface HeroProps {
  *   "طاقة ومياه من أجل مستقبل أفضل" line (the home page passes no
  *   eyebrow, and none is rendered here).
  * - photo-bg / full-left: photo + WHITE gradient scrim only (no heavy
- *   navy overlay) + navy H1 + `.section-marker`.
+ *   navy overlay) + navy H1.
  * - side-left / side-right / split: light mesh background
- *   (`.bg-mesh-light`) + framed image + navy H1 + `.section-marker`.
- * - plain: light mesh background + navy H1 + `.section-marker`.
+ *   (`.bg-mesh-light`) + framed image + navy H1.
+ * - plain: light mesh background + navy H1.
  * Split heroes: in RTL the first grid column renders on the right, so
  * "side-left" (image first) puts the text on the physical left and
  * "side-right"/"split" (copy first) puts the text on the physical right.
@@ -107,6 +133,7 @@ export default function Hero({
   image,
   imageAlt = "",
   pills,
+  rotatingWords,
   primaryHref,
   primaryLabelKey = "cta.discoverMore",
   whatsapp = true,
@@ -133,7 +160,6 @@ export default function Hero({
 
   const copy = (
     <>
-      <span className="section-marker hero__anim" aria-hidden="true" />
       <MaskedHeading text={titleText} className="mt-5 text-h1 font-bold leading-[1.2] text-navy" />
       {textText && <p className="hero__anim mt-4 max-w-2xl text-body-lg text-text-secondary">{textText}</p>}
       <div className="hero__anim mt-8 flex flex-wrap items-center gap-3">
@@ -153,7 +179,7 @@ export default function Hero({
           {pills.map((p, i) => (
             <span key={i} className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-2 text-sm font-bold text-navy shadow-card">
               <span className="text-primary-hover">{p.icon}</span>
-              {t(p.label, locale)}
+              <PillLabel label={t(p.label, locale)} />
             </span>
           ))}
         </div>
@@ -193,14 +219,21 @@ export default function Hero({
         {/* Grain is a CHILD overlay span (globals.css .grain is absolute +
             0.05 opacity) — never a class on the section itself. */}
         <span className="grain" aria-hidden="true" />
+        {/* Phase 1 ambient layer: 2D particles + gated procedural 3D
+            scene, pointer-events-none, behind the glows and the copy.
+            The villa photo panel, copy, CTAs and stat pills are
+            untouched. */}
+        <HeroAmbient />
         {/* Soft glows: blue upper corner, red lower corner (restrained). */}
         <div aria-hidden="true" className="pointer-events-none absolute -top-32 end-[-8%] size-[26rem] rounded-full bg-primary/25 blur-3xl" />
         <div aria-hidden="true" className="pointer-events-none absolute -bottom-40 start-[-6%] size-[22rem] rounded-full bg-brand-red/20 blur-3xl" />
         <div className="wrap relative py-16 md:py-24">
           <div className={hasPanel ? "grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14" : "mx-auto max-w-4xl text-center"}>
             <div className={hasPanel ? "" : "flex flex-col items-center"}>
-              <span className="section-marker hero__anim" aria-hidden="true" />
               <MaskedHeading text={titleText} className="mt-5 text-display font-bold leading-[1.1] text-white" />
+              {rotatingWords && rotatingWords.length > 0 && (
+                <WordSwap words={rotatingWords.map((w) => t(w, locale))} />
+              )}
               {textText && <p className="hero__anim mt-5 max-w-2xl text-body-lg text-text-inverse-muted">{textText}</p>}
               <div className={`hero__anim mt-8 flex flex-wrap items-center gap-3 ${hasPanel ? "" : "justify-center"}`}>
                 {whatsapp && waButton}
@@ -215,7 +248,7 @@ export default function Hero({
                   {pills.map((p, i) => (
                     <span key={i} className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-[#16324F] px-4 py-2 text-sm font-bold text-white shadow-card">
                       <span className="text-accent">{p.icon}</span>
-                      {t(p.label, locale)}
+                      <PillLabel label={t(p.label, locale)} />
                     </span>
                   ))}
                 </div>
@@ -254,7 +287,6 @@ export default function Hero({
         {breadcrumbBar}
         <div className="wrap relative py-16 md:py-20">
           <div className="max-w-3xl text-left mr-auto">
-            <span className="section-marker hero__anim" aria-hidden="true" />
             <MaskedHeading text={titleText} className="mt-5 text-h1 font-bold leading-[1.2] text-navy" />
             {textText && <p className="hero__anim mt-4 max-w-2xl text-body-lg text-text">{textText}</p>}
             <div className="hero__anim mt-8 flex flex-wrap items-center gap-3">
@@ -281,7 +313,6 @@ export default function Hero({
         <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/60 to-white/0" aria-hidden="true" />
         {breadcrumbBar}
         <div className="wrap relative py-16 text-navy md:py-24">
-          <span className="section-marker hero__anim" aria-hidden="true" />
           <MaskedHeading text={titleText} className="mt-5 max-w-3xl text-h1 font-bold leading-[1.2]" />
           {textText && <p className="hero__anim mt-4 max-w-2xl text-body-lg text-text">{textText}</p>}
           <div className="hero__anim mt-8 flex flex-wrap items-center gap-3">

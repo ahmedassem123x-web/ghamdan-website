@@ -3,11 +3,22 @@ import Link from "next/link";
 import { ArrowIcon, categoryIcon } from "@/components/icons";
 import Hero from "@/components/Hero";
 import CTABand from "@/components/CTABand";
+import { SizingStrip } from "@/components/SizingHelper";
+import { withGradientWord } from "@/components/headingHighlight";
 import { EditorialBlock } from "@/components/ui";
 import { pages, solutionAreas, workProcess, categories } from "@/data";
 import { localizedHref, t } from "@/lib/i18n";
 import { ui } from "@/lib/ui-copy";
-import type { Locale } from "@/data";
+import type { Locale, LocalizedString } from "@/data";
+
+/** Gradient highlight words (Phase 6) — one meaningful word per main
+ * section heading, current locale. ZH titles have no spaces, so they
+ * render plain (whole-word match only, Arabic-safe). */
+const HL: Record<string, LocalizedString> = {
+  intro: { ar: "مستقبل", en: "Future", zh: "未来" },
+  solutions: { ar: "للطاقة", en: "Energy", zh: "能源" },
+  process: { ar: "كيف", en: "Work", zh: "工作" },
+};
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -55,10 +66,7 @@ export default async function SolutionsPage({ params }: { params: Promise<{ loca
       {/* 3.2 Intro — sky mesh (quiet) with a section marker */}
       <section data-reveal="fade" className="section bg-mesh-sky">
         <div className="wrap text-center">
-          <div className="mb-4 flex justify-center">
-            <span className="section-marker" aria-hidden="true" />
-          </div>
-          <h2 data-reveal="up" className="text-h2 font-semibold text-navy">{t(s.k26, l)}</h2>
+          <h2 data-reveal="up" className="text-h2 font-semibold text-navy">{withGradientWord(t(s.k26, l), t(HL.intro, l))}</h2>
           <p data-reveal="fade" className="mx-auto mt-5 max-w-2xl text-body text-text-muted">
             {l === "ar"
               ? "من المنزل إلى المزرعة إلى المصنع — نظام واحد متكامل."
@@ -85,10 +93,7 @@ export default async function SolutionsPage({ params }: { params: Promise<{ loca
         <div className="wrap">
           <div className="flex items-end justify-between gap-4">
             <div>
-              <div className="mb-4">
-                <span className="section-marker" aria-hidden="true" />
-              </div>
-              <h2 className="text-h2 font-semibold text-navy">{t(s.k1, l)}</h2>
+              <h2 className="text-h2 font-semibold text-navy">{withGradientWord(t(s.k1, l), t(HL.solutions, l))}</h2>
               <p className="mt-3 max-w-2xl text-body text-text-muted">{t(s.k2, l)}</p>
             </div>
             <div className="hidden shrink-0 gap-2 md:flex">
@@ -112,7 +117,12 @@ export default async function SolutionsPage({ params }: { params: Promise<{ loca
           </div>
         </div>
         <div className="pinned-scrub__viewport mt-8">
-          <div data-pinned-track className="pinned-scrub__track px-4 md:px-8">
+          {/* Slide In Up (plan §1) — the solution cards stagger up on entry
+              via the existing [data-stagger] system (fade + y 20→0, 80ms
+              steps). Different element from the pin tween (which moves the
+              track's x), so the two never fight; the section-level pin
+              still owns the scrub. */}
+          <div data-pinned-track data-stagger className="pinned-scrub__track px-4 md:px-8">
             {solutionAreas.map((area) => (
               <article key={area.id} data-pinned-slide className="pinned-scrub__slide card-luxe group relative flex flex-col overflow-hidden bg-surface">
                 <Link href={localizedHref(l, `/solutions/${area.id}`)} className="block overflow-hidden" aria-label={t(area.title, l)}>
@@ -166,9 +176,6 @@ export default async function SolutionsPage({ params }: { params: Promise<{ loca
               title={t(area.title, l)}
               text={t(area.text, l)}
               flip={i % 2 === 0}
-              eyebrow={
-                <span className="section-marker" aria-hidden="true" />
-              }
             >
               <p className="mt-5 flex items-center gap-2 text-sm font-bold text-primary-hover">
                 <span className="text-primary-hover">{categoryIcon(area.icon)}</span>
@@ -221,16 +228,16 @@ export default async function SolutionsPage({ params }: { params: Promise<{ loca
         </section>
       ))}
 
+      {/* Sizing helper — one tap from the solutions index. */}
+      <SizingStrip locale={l} />
+
       {/* 3.4 How we work — LOUD navy mesh band, glass step cards */}
       <section data-reveal="scale" className="section bg-mesh-navy">
         <div className="wrap">
           {/* Heading inlined (visible by default) — SectionHeadingL's shared
               wrapper no longer hides content (Phase 6 removed .reveal). */}
           <div data-reveal="fade" className="text-center">
-            <div className="mb-4 flex justify-center">
-              <span className="section-marker" aria-hidden="true" />
-            </div>
-            <h2 className="text-h2 font-semibold text-white">{t(s.k27, l)}</h2>
+            <h2 className="text-h2 font-semibold text-white">{withGradientWord(t(s.k27, l), t(HL.process, l))}</h2>
           </div>
           <div data-stagger className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {workProcess.map((step, i) => (

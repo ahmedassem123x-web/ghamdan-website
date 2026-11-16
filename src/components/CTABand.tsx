@@ -29,7 +29,7 @@ export interface CtaBandProps {
 /**
  * CTA band (BUILD_SPEC §2.8, Variant A "Navy Editorial" redesign).
  * Dark variants: layered `.bg-mesh-navy` + grain + soft glows, white
- * headline, `.section-marker` dual-color bar, WhatsApp as `.btn-white`
+ * headline, WhatsApp as `.btn-white`
  * (or `.btn-whatsapp` per variant). Light variants: white luxe card on
  * a light mesh, navy headline + marker. Six variants:
  *
@@ -94,7 +94,6 @@ export default function CTABand({
         <img src={webp(image)} alt={imageAlt} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
         <div className="absolute inset-0 bg-navy/55" aria-hidden="true" />
         <div className="wrap relative py-20 text-center text-white md:py-24">
-          <span className="section-marker mx-auto" aria-hidden="true" />
           <h2 className="text-h2 mx-auto mt-5 max-w-3xl font-semibold">{titleText}</h2>
           {textText && <p className="mx-auto mt-4 max-w-2xl text-body-lg text-text-inverse-muted">{textText}</p>}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
@@ -117,7 +116,6 @@ export default function CTABand({
               <img src={webp(image)} alt={imageAlt} className="h-32 w-48 rounded-image object-cover shadow-card" loading="lazy" />
             )}
             <div>
-              <span className="section-marker" aria-hidden="true" />
               <h2 className="text-h2 mt-5 font-semibold">{titleText}</h2>
               {textText && <p className="mt-3 max-w-2xl text-body-lg text-text-inverse-muted">{textText}</p>}
               {miniFeatures}
@@ -138,7 +136,6 @@ export default function CTABand({
               <img src={webp(image)} alt={imageAlt} className="h-full min-h-64 w-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" />
             </div>
             <div className="p-8 md:p-10">
-              <span className="section-marker" aria-hidden="true" />
               <h2 className="text-h2 mt-5 font-semibold text-navy">{titleText}</h2>
               {textText && <p className="mt-4 text-body text-text-muted">{textText}</p>}
               {miniFeatures}
@@ -164,7 +161,6 @@ export default function CTABand({
               </div>
             )}
             <div className={`p-8 md:p-10 ${image ? "" : "md:col-span-2"}`}>
-              <span className="section-marker" aria-hidden="true" />
               <h2 className="text-h2 mt-5 font-semibold text-navy">{titleText}</h2>
               {textText && <p className="mt-4 text-body text-text-muted">{textText}</p>}
               {miniFeatures}
@@ -186,7 +182,6 @@ export default function CTABand({
         <div className="wrap">
           <div className="card-luxe shine relative flex flex-col items-start justify-between gap-6 bg-surface p-8 md:flex-row md:items-center md:p-10">
             <div>
-              <span className="section-marker" aria-hidden="true" />
               <h2 className="text-h2 mt-5 font-semibold text-navy">{titleText}</h2>
               {textText && <p className="mt-3 max-w-2xl text-body-lg text-text-muted">{textText}</p>}
               <div className="mt-6 flex flex-wrap gap-3">
@@ -228,7 +223,6 @@ export default function CTABand({
           <div aria-hidden="true" className="pointer-events-none absolute -top-20 end-[15%] size-64 rounded-full bg-primary/25 blur-3xl" />
           <div aria-hidden="true" className="pointer-events-none absolute -bottom-24 start-[30%] size-56 rounded-full bg-brand-red/20 blur-3xl" />
           <div className="relative">
-            <span className="section-marker" aria-hidden="true" />
             <h2 className="text-h2 mt-5 font-semibold text-white">{titleText}</h2>
             {textText && <p className="mt-3 max-w-2xl text-body-lg text-text-inverse-muted">{textText}</p>}
             <div className="mt-6 flex flex-wrap gap-3">

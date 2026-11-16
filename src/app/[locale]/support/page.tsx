@@ -43,9 +43,6 @@ export default async function SupportPage({ params }: { params: Promise<{ locale
             {/* Heading inlined (visible by default) — SectionHeadingL's shared
                 wrapper no longer hides content (Phase 6 removed .reveal). */}
             <div data-reveal="fade">
-              <div className="mb-4">
-                <span className="section-marker" aria-hidden="true" />
-              </div>
               <h2 className="text-h2 font-semibold text-navy">{t(s.k3, l)}</h2>
             </div>
             <p data-reveal="fade" className="mt-3 max-w-2xl text-body text-text-muted">{t(s.k4, l)}</p>
@@ -81,9 +78,6 @@ export default async function SupportPage({ params }: { params: Promise<{ locale
       <section data-reveal="right" className="section bg-sand">
         <div className="wrap max-w-4xl">
           <div data-reveal="fade">
-            <div className="mb-4">
-              <span className="section-marker" aria-hidden="true" />
-            </div>
             <h2 className="text-h2 font-semibold text-navy">{t(s.k10, l)}</h2>
           </div>
           <div data-stagger className="mt-8 space-y-4">

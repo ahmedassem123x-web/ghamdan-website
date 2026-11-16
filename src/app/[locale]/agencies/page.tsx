@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowIcon, CheckIcon } from "@/components/icons";
 import Hero from "@/components/Hero";
 import CTABand from "@/components/CTABand";
-import { pages, agencies } from "@/data";
+import AgencyCoverflow, { type CoverflowAgency } from "@/components/AgencyCoverflow";
+import AgencyFlipCard from "@/components/AgencyFlipCard";
+import { withGradientWord } from "@/components/headingHighlight";
+import { pages, agencies, products } from "@/data";
 import { localizedHref, t } from "@/lib/i18n";
 import { ui } from "@/lib/ui-copy";
 import type { Locale } from "@/data";
@@ -18,6 +19,10 @@ export default async function AgenciesPage({ params }: { params: Promise<{ local
   const { locale } = await params;
   const l = locale as Locale;
   const a = pages.agencies.list;
+  /** Gradient highlight words (Phase 6): one word per main heading. */
+  const HL = {
+    agencies: { ar: "والعلامات", en: "Brands", zh: "品牌" },
+  };
   /** Distinct wordmark treatment per brand (weight / tracking / case) —
    * a unified typographic system, not a plain Inter string and not an
    * invented logo. */
@@ -29,6 +34,37 @@ export default async function AgenciesPage({ params }: { params: Promise<{ local
     qcells: "font-semibold tracking-tight",
     wisenet: "font-extrabold tracking-[0.12em]",
   };
+  /** Published-product count per agency, computed from the data (same
+   * filter as the detail page — status === "published"). */
+  const publishedCount = (agencyId: string) => {
+    const agency = agencies.find((x) => x.id === agencyId);
+    if (!agency) return 0;
+    return products.filter((p) => agency.productIds.includes(p.id) && p.status === "published").length;
+  };
+  const labels = {
+    carousel: { ar: "وكالاتنا", en: "Our agencies", zh: "我们的代理品牌" } as Record<string, string>,
+    prev: { ar: "السابق", en: "Previous", zh: "上一个" } as Record<string, string>,
+    next: { ar: "التالي", en: "Next", zh: "下一个" } as Record<string, string>,
+    goTo: { ar: "عرض", en: "Show", zh: "查看" } as Record<string, string>,
+    flip: { ar: "اقلب البطاقة لعرض التفاصيل", en: "Flip the card to see details", zh: "翻转卡片查看详情" } as Record<string, string>,
+    flipBack: { ar: "أعد البطاقة", en: "Flip the card back", zh: "翻回卡片" } as Record<string, string>,
+  };
+  const pick = (rec: Record<string, string>) => rec[l] ?? rec.ar;
+  const coverflowItems: CoverflowAgency[] = agencies.map((ag) => ({
+    id: ag.id,
+    name: ag.name,
+    wordmarkClass: wordmarkStyle[ag.id] ?? "font-extrabold tracking-tight",
+    status: t(ag.status, l),
+    text: t(ag.text, l),
+    href: localizedHref(l, `/agencies/${ag.id}`),
+    officialAgent: ag.officialAgent,
+    pending: ag.confirmationStatus === "pending",
+    pendingLabel: ui("agency.pendingConfirmation", l),
+    productCount: publishedCount(ag.id),
+    productLabel: ui("catalog.product", l),
+    comingSoonLabel: ui("catalog.comingSoon", l),
+  }));
+
   return (
     <>
       <Hero
@@ -41,52 +77,52 @@ export default async function AgenciesPage({ params }: { params: Promise<{ local
         primaryHref="/contact"
         primaryLabelKey="cta.contactUs"
       />
+
+      {/* Coverflow carousel (plan §5) — the 6 agencies in perspective,
+          centre card full, sides angled/faded. No autoplay. */}
       <section data-reveal="up" className="section bg-mesh-light">
         <div className="wrap">
-          <div data-reveal="fade" className="mb-8">
-            <span className="section-marker" aria-hidden="true" />
+          <div data-reveal="fade" className="mb-8 text-center">
+            <h2 className="text-h2 font-semibold text-navy">{withGradientWord(t(a.k1, l), t(HL.agencies, l))}</h2>
           </div>
+          <AgencyCoverflow
+            agencies={coverflowItems}
+            locale={l}
+            labels={{
+              carouselLabel: pick(labels.carousel),
+              prevLabel: pick(labels.prev),
+              nextLabel: pick(labels.next),
+              goToLabel: pick(labels.goTo),
+              detailsLabel: ui("cta.details", l),
+            }}
+          />
+        </div>
+      </section>
+
+      {/* Flip-card grid (plan §4) — every agency as a two-sided card:
+          front (wordmark + status + count), back (description + link).
+          Flip on hover (desktop) and on tap/keyboard via the card button. */}
+      <section data-reveal="up" className="section bg-white">
+        <div className="wrap">
           <div data-stagger className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {agencies.map((ag) => (
-              <Link
+            {coverflowItems.map((ag) => (
+              <AgencyFlipCard
                 key={ag.id}
-                href={localizedHref(l, `/agencies/${ag.id}`)}
-                className={`group flex h-full flex-col rounded-card p-6 shadow-card transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-card-hover ${
-                  ag.officialAgent
-                    ? "bg-mesh-navy"
-                    : "border border-border bg-white"
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  <span className={`font-latin text-3xl ${wordmarkStyle[ag.id] ?? "font-extrabold tracking-tight"} ${ag.officialAgent ? "text-white" : "text-navy"}`} dir="ltr">
-                    {ag.name}
-                  </span>
-                  {ag.officialAgent && (
-                    <span className="inline-flex items-center gap-1 rounded-full bg-brand-red-deep px-3 py-1 text-xs font-bold text-white">
-                      <CheckIcon className="size-3.5" aria-hidden="true" />
-                      {t(ag.status, l)}
-                    </span>
-                  )}
-                </div>
-                {!ag.officialAgent && (
-                  <span className="mt-3 flex flex-wrap items-center gap-2">
-                    <span className="section-marker" aria-hidden="true" />
-                    <span className="text-xs font-bold text-navy">
-                      {t(ag.status, l)}
-                    </span>
-                    {ag.confirmationStatus === "pending" && (
-                      <span className="inline-flex w-fit rounded-full border border-warning/60 bg-warning/25 px-3 py-1 text-xs font-bold text-navy">
-                        {ui("agency.pendingConfirmation", l)}
-                      </span>
-                    )}
-                  </span>
-                )}
-                <p className={`mt-3 flex-1 text-body-sm ${ag.officialAgent ? "text-sky-100" : "text-text-muted"}`}>{t(ag.text, l)}</p>
-                <span className={`mt-4 inline-flex items-center gap-1.5 text-sm font-bold ${ag.officialAgent ? "text-white" : "text-primary-hover"}`}>
-                  {ui("cta.details", l)}
-                  <ArrowIcon className="size-4 rtl:rotate-0 ltr:rotate-180" aria-hidden="true" />
-                </span>
-              </Link>
+                name={ag.name}
+                wordmarkClass={ag.wordmarkClass}
+                status={ag.status}
+                text={ag.text}
+                href={ag.href}
+                officialAgent={ag.officialAgent}
+                pending={ag.pending}
+                pendingLabel={ag.pendingLabel}
+                productCount={ag.productCount}
+                productLabel={ag.productLabel}
+                comingSoonLabel={ag.comingSoonLabel}
+                detailsLabel={ui("cta.details", l)}
+                flipLabel={pick(labels.flip)}
+                flipBackLabel={pick(labels.flipBack)}
+              />
             ))}
           </div>
           <p data-reveal="fade" className="mt-8 max-w-3xl text-body-sm text-text-muted">{t(a.k9, l)}</p>

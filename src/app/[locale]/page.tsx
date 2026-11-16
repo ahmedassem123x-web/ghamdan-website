@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SunIcon, DropletIcon, LeafIcon, UsersIcon, LayersIcon, SettingsIcon, MailIcon, PhoneIcon, MapPinIcon, CheckIcon, ArrowIcon, PanelIcon, InverterIcon, ShieldIcon } from "@/components/icons";
+import { SunIcon, DropletIcon, LeafIcon, UsersIcon, LayersIcon, SettingsIcon, MailIcon, PhoneIcon, MapPinIcon, CheckIcon, ArrowIcon } from "@/components/icons";
 import Hero from "@/components/Hero";
 import CTABand from "@/components/CTABand";
 import CurveDivider from "@/components/CurveDivider";
 import SolarLineArt from "@/components/SolarLineArt";
 import FeaturedCarousel from "@/components/FeaturedCarousel";
+import EnergyFlowStory from "@/components/EnergyFlowStory";
 import Marquee from "@/components/Marquee";
 import { SolutionCardHorizontal } from "@/components/Cards";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -34,17 +35,38 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const irrigation = solutionAreas.find((a) => a.id === "irrigation")!;
   const agriculture = solutionAreas.find((a) => a.id === "agriculture")!;
   const { contact } = siteSettings;
-  // Real stat chips for the hero (computed from the data — never invented):
-  // published products (37), agencies (6), published inverters (13).
-  const publishedCount = products.filter((p) => p.status === "published").length;
-  const inverterCount = products.filter((p) => p.status === "published" && p.categoryId === "inverters").length;
-  // Featured products: real approved data only (data's round-robin featured
-  // selection, 12) — one per category, so the three tiles do not repeat the
-  // same stand-in photo (M-4: only 4 stand-in images serve 37 products;
-  // first-3-by-order would be three identical inverter photos).
-  const featuredProducts = ["inverters", "batteries", "pumps"]
-    .map((catId) => products.find((p) => p.featured && p.status === "published" && p.categoryId === catId))
-    .filter((p): p is NonNullable<typeof p> => Boolean(p));
+  // Featured products: real approved data only — ALL 12 products the data
+  // marks featured (inverters ×4, batteries ×4, pumps ×3, controllers ×1),
+  // interleaved round-robin by category so consecutive tiles never repeat
+  // the same stand-in photo (M-4: only 4 stand-in images serve 37 products).
+  // 12 slides / 3 visible on desktop = a real scrollable carousel: autoplay,
+  // arrows and dots change the VISIBLE cards (before this fix only 3 slides
+  // were passed, all fitting the track, so the counter moved but nothing did).
+  const featuredProducts = (() => {
+    const byCategory = new Map<string, (typeof products)[number][]>();
+    for (const p of products) {
+      if (!p.featured || p.status !== "published") continue;
+      const list = byCategory.get(p.categoryId) ?? [];
+      list.push(p);
+      byCategory.set(p.categoryId, list);
+    }
+    const categories = [...byCategory.keys()];
+    const out: (typeof products)[number][] = [];
+    let round = 0;
+    let added = true;
+    while (added) {
+      added = false;
+      for (const cat of categories) {
+        const item = byCategory.get(cat)?.[round];
+        if (item) {
+          out.push(item);
+          added = true;
+        }
+      }
+      round += 1;
+    }
+    return out;
+  })();
   const deye = agencies.find((a) => a.id === "deye")!;
   const carriedBrands = agencies.filter((a) => !a.officialAgent);
 
@@ -52,9 +74,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     <>
       {/* 1.1 Hero center (§3.1.1, ref 01 / ADR-03): navy mesh hero with the
           REAL photo (hero-villa-mountains.jpg) in the panel — the
-          illustration no longer replaces the photo — plus 3 real stat
-          chips (37 products, 6 agencies, 13 inverters, computed from
-          the data). No eyebrow, no badge pill, no pillar pills. */}
+          illustration no longer replaces the photo. No eyebrow, no badge
+          pill, no stat chips (removed 2026-11-16 at the user's request). */}
       <Hero
         locale={l}
         variant="center"
@@ -66,11 +87,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         text={h.k3}
         whatsapp
         whatsappVariant="green-pill"
-        pills={[
-          { icon: <PanelIcon className="size-5" aria-hidden="true" />, label: { ar: `${publishedCount} منتجًا`, en: `${publishedCount} products`, zh: `${publishedCount} 个产品` } },
-          { icon: <ShieldIcon className="size-5" aria-hidden="true" />, label: { ar: `${agencies.length} وكالات`, en: `${agencies.length} agencies`, zh: `${agencies.length} 个品牌` } },
-          { icon: <InverterIcon className="size-5" aria-hidden="true" />, label: { ar: `${inverterCount} عاكسًا`, en: `${inverterCount} inverters`, zh: `${inverterCount} 台逆变器` } },
-        ]}
+        rotatingWords={[residential.pill, commercial.pill, pumping.pill, irrigation.pill, agriculture.pill]}
       />
 
       <CurveDivider />
@@ -101,9 +118,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <section data-reveal="up" className="section bg-mesh-sky">
         <div className="wrap">
           <div data-reveal="fade" className="text-center">
-            <div className="mb-4 flex justify-center">
-              <span className="section-marker" aria-hidden="true" />
-            </div>
             <h2 className="text-h2 font-semibold text-navy">{t(h.k37, l)}</h2>
             <p className="mx-auto mt-4 max-w-2xl text-body text-text-muted">{t(h.k36, l)}</p>
           </div>
@@ -122,15 +136,18 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
       </section>
 
+      {/* Phase 1 — Energy-flow scroll story (sun → panel → inverter →
+          battery → home): GSAP scrub + SVG path drawing via the existing
+          MotionProvider data attributes, plus the CSS sun orbit. Labels
+          from existing data only (see EnergyFlowStory). */}
+      <EnergyFlowStory locale={l} />
+
       {/* 1.5 Solutions grid — 5 real solutions, 3+2 grid (§3.1.5). Commercial
           and agriculture were missing from the home page; the generic
           fourth card (repeating the solutions intro copy) is gone. */}
       <section data-reveal="left" className="section bg-white">
         <div className="wrap">
           <div data-reveal="fade">
-            <div className="mb-4">
-              <span className="section-marker" aria-hidden="true" />
-            </div>
             <h2 className="text-h2 font-semibold text-navy">{t(h.k40, l)}</h2>
             <p className="mt-3 max-w-2xl text-body text-text-muted">{t(h.k38, l)}</p>
           </div>
@@ -149,9 +166,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <section data-reveal="scale" className="section relative overflow-hidden bg-mesh-navy">
         <div className="wrap relative">
           <div data-reveal="fade" className="text-center">
-            <div className="mb-4 flex justify-center">
-              <span className="section-marker" aria-hidden="true" />
-            </div>
             <h2 className="text-h2 font-semibold text-white">{t(h.k41, l)}</h2>
           </div>
           <div data-stagger className="mt-10 grid gap-6 md:grid-cols-3">
@@ -186,9 +200,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <div className="wrap">
           <div data-reveal="fade" className="flex items-end justify-between gap-4">
             <div>
-              <div className="mb-4">
-                <span className="section-marker" aria-hidden="true" />
-              </div>
               <h2 className="text-h2 font-semibold text-navy">{t(h.k45, l)}</h2>
             </div>
             <Link href={localizedHref(l, "/products")} className="inline-flex shrink-0 items-center gap-1.5 text-sm font-bold text-primary-hover transition-colors hover:text-primary-hover">
@@ -211,9 +222,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <div className="wrap">
           <div data-reveal="left" className="flex items-end justify-between gap-4">
             <div>
-              <div className="mb-4">
-                <span className="section-marker" aria-hidden="true" />
-              </div>
               <h2 className="text-h2 font-semibold text-navy">{t(pages.agencies.list.k1, l)}</h2>
               <p className="mt-3 max-w-2xl text-body text-text-muted">{t(pages.agencies.list.k2, l)}</p>
             </div>

@@ -1,17 +1,21 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
-import { LeafIcon, SettingsIcon, ShieldIcon, PanelIcon, InverterIcon, BatteryIcon, categoryIcon } from "@/components/icons";
+import { LeafIcon, SettingsIcon, ShieldIcon, PanelIcon, InverterIcon, BatteryIcon, SlidersIcon, CloseIcon, categoryIcon } from "@/components/icons";
 import Hero from "@/components/Hero";
 import ProductCard from "@/components/ProductCard";
+import ProductCardTilt from "@/components/ProductCardTilt";
+import QuickView from "@/components/QuickView";
+import { ProductGridSkeleton } from "@/components/Skeleton";
+import { useFocusTrap } from "@/lib/use-focus-trap";
 import { SearchInput } from "@/components/ui";
 import { pages, products, categories, siteSettings } from "@/data";
 import { localizedHref, t } from "@/lib/i18n";
 import { ui } from "@/lib/ui-copy";
 import { WA_MESSAGES, waLink } from "@/lib/whatsapp";
 import { webp } from "@/lib/images";
-import type { Locale } from "@/data";
+import type { Locale, Product } from "@/data";
 
 /**
  * Catalogue (§3.4, ADR-07): split hero (ref 04: text left, photo right) +
@@ -38,6 +42,13 @@ export default function CatalogueClient({ locale }: { locale: Locale }) {
   const [displayed, setDisplayed] = useState(() => products.filter((p) => p.status === "published"));
   const [phase, setPhase] = useState<"idle" | "exit" | "enter">("idle");
   const firstFilterRender = useRef(true);
+  // Phase 3: quick view + grid/list view (persisted) + mobile filter drawer.
+  const [quickView, setQuickView] = useState<Product | null>(null);
+  const [view, setView] = useState<"grid" | "list">("grid");
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const viewTimer = useRef<number | null>(null);
+  useFocusTrap(drawerOpen, drawerRef);
   // Sliding tab indicator: one element sliding to the active tab (250ms
   // standard easing); position measured physically so RTL just works.
   const tabsRef = useRef<HTMLDivElement>(null);
@@ -120,6 +131,61 @@ export default function CatalogueClient({ locale }: { locale: Locale }) {
     return () => window.removeEventListener("resize", update);
   }, [activeTab]);
 
+  // Grid/list view (Phase 3 §13 Toggle): persisted in localStorage; the
+  // swap reuses the filter choreography (exit 150ms -> enter 300ms +
+  // stagger) so the layout change reads as a morph, not a jump.
+  // Reduced motion: instant swap.
+  useEffect(() => {
+    try {
+      const saved = window.localStorage.getItem("ghamdan-catalog-view");
+      if (saved === "grid" || saved === "list") setView(saved);
+    } catch {
+      /* storage unavailable: keep grid */
+    }
+  }, []);
+  useEffect(() => {
+    try {
+      window.localStorage.setItem("ghamdan-catalog-view", view);
+    } catch {
+      /* ignore */
+    }
+  }, [view]);
+  useEffect(() => {
+    return () => {
+      if (viewTimer.current !== null) window.clearTimeout(viewTimer.current);
+    };
+  }, []);
+  const changeView = (next: "grid" | "list") => {
+    if (next === view) return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) {
+      setView(next);
+      return;
+    }
+    if (viewTimer.current !== null) window.clearTimeout(viewTimer.current);
+    setPhase("exit");
+    viewTimer.current = window.setTimeout(() => {
+      setView(next);
+      setPhase("enter");
+    }, 150);
+  };
+
+  // Mobile filter drawer (Phase 3 §9): Escape + scroll lock (focus trap
+  // via useFocusTrap above, same pattern as the Header drawer).
+  useEffect(() => {
+    if (!drawerOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setDrawerOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [drawerOpen]);
+  const closeDrawer = () => setDrawerOpen(false);
+
   const trustItems = [
     { icon: <LeafIcon className="size-6" aria-hidden="true" />, label: t(c.k4, locale) },
     { icon: <SettingsIcon className="size-6" aria-hidden="true" />, label: t(c.k5, locale) },
@@ -143,6 +209,50 @@ export default function CatalogueClient({ locale }: { locale: Locale }) {
     "storage-ci": "/images/photos/battery-storage.jpg",
     cameras: "/images/photos/controller-unit.jpg",
   };
+
+  /** One category tab button, shared by the desktop strip and the mobile
+   * filter drawer — same tabs, same counts, same selection. The sliding
+   * indicator only measures the desktop copy (refs registered there).
+   * Picking a tab in the drawer closes it and scrolls to the grid. */
+  const tabButton = (id: string, label: ReactNode, count: number, icon?: ReactNode, inDrawer = false) => (
+    <button
+      key={id}
+      type="button"
+      role="tab"
+      ref={(el) => {
+        if (inDrawer) return;
+        if (el) tabBtnRefs.current.set(id, el);
+        else tabBtnRefs.current.delete(id);
+      }}
+      aria-selected={activeTab === id}
+      onClick={() => {
+        setActiveTab(id);
+        if (inDrawer) {
+          closeDrawer();
+          document
+            .getElementById("grid")
+            ?.scrollIntoView({
+              behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+            });
+        }
+      }}
+      className={
+        inDrawer
+          ? `flex w-full items-center gap-2 rounded-[0.625rem] border px-4 py-3 text-sm font-bold transition-colors ${
+              activeTab === id ? "border-navy bg-navy text-white" : "border-border bg-white text-navy hover:border-primary-hover hover:text-primary-hover"
+            }`
+          : `flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border px-4 py-2 text-sm font-bold transition-colors ${
+              activeTab === id ? "border-navy bg-navy text-white" : "border-border bg-white text-text-muted hover:border-primary-hover hover:text-navy"
+            }`
+      }
+    >
+      {icon}
+      {label}
+      <span dir="ltr" className={`text-xs font-bold ${activeTab === id ? "text-white/80" : "text-text-muted"}`}>
+        (<span data-countup={String(count)}>{count}</span>)
+      </span>
+    </button>
+  );
 
   return (
     <>
@@ -200,53 +310,15 @@ export default function CatalogueClient({ locale }: { locale: Locale }) {
       {/* 4.3 All-Products tab strip (ADR-07, ref 08 pattern): All first/active,
           then the 8 real GTS categories with published counts. Bordered chips;
           the active chip is navy. */}
-      <div className="border-b border-border bg-white">
+      <div className="hidden border-b border-border bg-white md:block">
         <div ref={tabsRef} data-stagger className="tab-strip wrap relative flex gap-2 overflow-x-auto py-4" role="tablist" aria-label={ui("catalog.allProducts", locale)}>
           <span
             className="tab-indicator"
             aria-hidden="true"
             style={{ left: indicator.left, width: indicator.width, opacity: indicator.visible ? 1 : 0 }}
           />
-          <button
-            type="button"
-            role="tab"
-            ref={(el) => {
-              if (el) tabBtnRefs.current.set("all", el);
-              else tabBtnRefs.current.delete("all");
-            }}
-            aria-selected={activeTab === "all"}
-            onClick={() => setActiveTab("all")}
-            className={`flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border px-4 py-2 text-sm font-bold transition-colors ${
-              activeTab === "all" ? "border-navy bg-navy text-white" : "border-border bg-white text-text-muted hover:border-primary-hover hover:text-navy"
-            }`}
-          >
-            {ui("catalog.allProducts", locale)}
-            <span dir="ltr" className={`text-xs font-bold ${activeTab === "all" ? "text-white/80" : "text-text-muted"}`}>
-              (<span data-countup={String(published.length)}>{published.length}</span>)
-            </span>
-          </button>
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              type="button"
-              role="tab"
-              ref={(el) => {
-                if (el) tabBtnRefs.current.set(cat.id, el);
-                else tabBtnRefs.current.delete(cat.id);
-              }}
-              aria-selected={activeTab === cat.id}
-              onClick={() => setActiveTab(cat.id)}
-              className={`flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border px-4 py-2 text-sm font-bold transition-colors ${
-                activeTab === cat.id ? "border-navy bg-navy text-white" : "border-border bg-white text-text-muted hover:border-primary-hover hover:text-navy"
-              }`}
-            >
-              {categoryIcon(cat.icon)}
-              {t(cat.name, locale)}
-              <span dir="ltr" className={`text-xs font-bold ${activeTab === cat.id ? "text-white/80" : "text-text-muted"}`}>
-                (<span data-countup={String(cat.publishedCount)}>{cat.publishedCount}</span>)
-              </span>
-            </button>
-          ))}
+          {tabButton("all", ui("catalog.allProducts", locale), published.length)}
+          {categories.map((cat) => tabButton(cat.id, t(cat.name, locale), cat.publishedCount, categoryIcon(cat.icon)))}
         </div>
       </div>
 
@@ -286,11 +358,62 @@ export default function CatalogueClient({ locale }: { locale: Locale }) {
               </button>
             ))}
           </div>
+          {/* View toggle + mobile filter button (Phase 3 §13 Toggle, §9 drawer):
+              the filter button only exists <768px; the toggle is always visible. */}
+          <div className="mb-5 flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setDrawerOpen(true)}
+              aria-expanded={drawerOpen}
+              aria-controls="catalog-filter-drawer"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-4 py-2 text-sm font-bold text-navy transition-colors hover:border-primary-hover hover:text-primary-hover md:hidden"
+            >
+              <SlidersIcon className="size-4 text-primary-hover" aria-hidden="true" />
+              {locale === "ar" ? "الفلاتر" : locale === "en" ? "Filters" : "筛选"}
+              <span className="font-bold text-text-muted">
+                · {activeCategory ? t(activeCategory.name, locale) : ui("catalog.allProducts", locale)}
+              </span>
+            </button>
+            <div
+              className="ms-auto inline-flex rounded-full border border-border bg-white p-1"
+              role="group"
+              aria-label={locale === "ar" ? "طريقة العرض" : locale === "en" ? "View" : "视图"}
+            >
+              <button
+                type="button"
+                aria-pressed={view === "grid"}
+                onClick={() => changeView("grid")}
+                className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-bold transition-colors ${
+                  view === "grid" ? "bg-navy text-white" : "text-text-muted hover:text-navy"
+                }`}
+              >
+                <svg className="size-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <rect x="3" y="3" width="8" height="8" rx="1.5" />
+                  <rect x="13" y="3" width="8" height="8" rx="1.5" />
+                  <rect x="3" y="13" width="8" height="8" rx="1.5" />
+                  <rect x="13" y="13" width="8" height="8" rx="1.5" />
+                </svg>
+                {locale === "ar" ? "شبكة" : locale === "en" ? "Grid" : "网格"}
+              </button>
+              <button
+                type="button"
+                aria-pressed={view === "list"}
+                onClick={() => changeView("list")}
+                className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-bold transition-colors ${
+                  view === "list" ? "bg-navy text-white" : "text-text-muted hover:text-navy"
+                }`}
+              >
+                <svg className="size-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <rect x="3" y="4" width="18" height="3" rx="1.5" />
+                  <rect x="3" y="10.5" width="18" height="3" rx="1.5" />
+                  <rect x="3" y="17" width="18" height="3" rx="1.5" />
+                </svg>
+                {locale === "ar" ? "قائمة" : locale === "en" ? "List" : "列表"}
+              </button>
+            </div>
+          </div>
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <div className="mb-4">
-                <span className="section-marker" aria-hidden="true" />
-              </div>
               <h2 className="text-h2 font-semibold text-navy"
                 >{activeCategory ? t(activeCategory.name, locale) : ui("catalog.allProducts", locale)}
               </h2>
@@ -301,15 +424,32 @@ export default function CatalogueClient({ locale }: { locale: Locale }) {
               ? `${results.length} ${ui("search.results", locale)}`
               : `${ui("catalog.showing", locale)}: ${results.length} / ${published.length}`}
           </p>
-          {displayed.length === 0 ? (
+          {displayed.length === 0 && phase !== "exit" ? (
             <div className={`mt-8 rounded-card border border-dashed border-border-strong bg-white p-10 text-center ${phase === "enter" ? "filter-enter" : ""}`}>
               <h3 className="text-h3 font-semibold text-navy">{t(c.k17, locale)}</h3>
               <p className="mt-2 text-body text-text-muted">{t(c.k18, locale)}</p>
             </div>
+          ) : phase === "exit" ? (
+            /* Skeleton swap (Phase 3 §13): shimmer cards while the filter /
+               view change resolves, same silhouette as the real cards. */
+            <ProductGridSkeleton
+              count={Math.min(displayed.length || 8, 8)}
+              layout={view}
+              label={locale === "ar" ? "جارٍ تحميل المنتجات…" : locale === "en" ? "Loading products…" : "正在加载产品…"}
+              className={
+                view === "list"
+                  ? "mt-8 flex flex-col gap-4"
+                  : "mt-8 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-5"
+              }
+            />
           ) : (
             <div
               data-stagger
-              className={`mt-8 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-5 ${phase === "exit" ? "filter-exit" : ""}`}
+              className={
+                view === "list"
+                  ? "mt-8 flex flex-col gap-4"
+                  : "mt-8 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-5"
+              }
             >
               {displayed.map((p, i) => (
                 <div
@@ -317,7 +457,9 @@ export default function CatalogueClient({ locale }: { locale: Locale }) {
                   className={phase === "enter" ? "filter-enter" : ""}
                   style={phase === "enter" ? { animationDelay: `${i * 40}ms` } : undefined}
                 >
-                  <ProductCard locale={locale} product={p} />
+                  <ProductCardTilt>
+                    <ProductCard locale={locale} product={p} layout={view} onQuickView={setQuickView} />
+                  </ProductCardTilt>
                 </div>
               ))}
             </div>
@@ -359,9 +501,6 @@ export default function CatalogueClient({ locale }: { locale: Locale }) {
       <section data-reveal="right" className="section bg-mesh-navy">
         <div className="wrap">
           <div data-reveal="fade" className="text-center">
-            <div className="mb-4 flex justify-center">
-              <span className="section-marker" aria-hidden="true" />
-            </div>
             <h2 className="text-h2 font-semibold text-white">{t(c.k21, locale)}</h2>
           </div>
           <div data-stagger className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -375,6 +514,47 @@ export default function CatalogueClient({ locale }: { locale: Locale }) {
           </div>
         </div>
       </section>
+      {/* Mobile filter drawer (Phase 3 §9): slide-up sheet <768px with the
+          same tabs as the desktop strip; desktop keeps the strip. Reuses
+          the Header drawer pattern (.drawer / .drawer__backdrop /
+          .drawer__panel, 350ms standard easing). */}
+      <div
+        ref={drawerRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label={ui("catalog.filter", locale)}
+        id="catalog-filter-drawer"
+        aria-hidden={!drawerOpen}
+        className={`drawer fixed inset-0 z-[70] md:hidden ${drawerOpen ? "drawer--open" : "pointer-events-none"}`}
+      >
+        <div className="drawer__backdrop absolute inset-0 bg-navy/60" onClick={closeDrawer} />
+        <div
+          className={`drawer__panel absolute inset-x-0 bottom-0 max-h-[80vh] overflow-y-auto rounded-t-[1.25rem] bg-surface p-5 shadow-float ${
+            drawerOpen ? "translate-y-0" : "translate-y-full"
+          }`}
+        >
+          <div className="flex items-center justify-between gap-3">
+            <p className="flex items-center gap-2 font-bold text-navy">
+              <SlidersIcon className="size-5 text-primary-hover" aria-hidden="true" />
+              {ui("catalog.filter", locale)}
+            </p>
+            <button
+              type="button"
+              onClick={closeDrawer}
+              aria-label={ui("nav.close", locale)}
+              className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-white text-navy transition-colors hover:border-primary-hover hover:text-primary-hover focus-visible:outline-2 focus-visible:outline-primary-hover"
+            >
+              <CloseIcon className="size-5" aria-hidden="true" />
+            </button>
+          </div>
+          <div role="tablist" aria-label={ui("catalog.allProducts", locale)} className="mt-4 flex flex-col gap-2">
+            {tabButton("all", ui("catalog.allProducts", locale), published.length, undefined, true)}
+            {categories.map((cat) => tabButton(cat.id, t(cat.name, locale), cat.publishedCount, categoryIcon(cat.icon), true))}
+          </div>
+        </div>
+      </div>
+
+      <QuickView locale={locale} product={quickView} onClose={() => setQuickView(null)} />
     </>
   );
 }

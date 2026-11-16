@@ -1,0 +1,88 @@
+/* Gallery — Phase 2 hotspots. Small dots positioned over the product
+   image; each maps to a real spec row. Dots stay small on mobile
+   (18px) and never cover the product. Transform/opacity only. */
+
+.hotspotLayer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hotspot {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  margin: -11px 0 0 -11px;
+  padding: 0;
+  border-radius: 9999px;
+  border: 2px solid #e31e24;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 0 0 3px rgba(227, 30, 36, 0.22);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hotspot::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 9999px;
+  border: 2px solid rgba(227, 30, 36, 0.55);
+  animation: hotspot-ping 2.4s ease-out infinite;
+}
+
+@keyframes hotspot-ping {
+  0% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(1.9);
+  }
+}
+
+.hotspot:hover,
+.hotspot:focus-visible {
+  transform: scale(1.18);
+}
+
+.hotspot:focus-visible {
+  outline: 2px solid #0081fb;
+  outline-offset: 2px;
+}
+
+.hotspotDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: #e31e24;
+}
+
+@media (max-width: 640px) {
+  .hotspot {
+    width: 18px;
+    height: 18px;
+    margin: -9px 0 0 -9px;
+  }
+
+  .hotspotDot {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hotspot {
+    transition: none;
+  }
+
+  .hotspot::after {
+    animation: none;
+  }
+}

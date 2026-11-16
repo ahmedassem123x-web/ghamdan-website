@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { webp } from "@/lib/images";
 import { useFocusTrap } from "@/lib/use-focus-trap";
+import { usePrefersReducedMotion } from "@/lib/perf";
 import { ui } from "@/lib/ui-copy";
 import type { Locale } from "@/data";
 
@@ -35,6 +36,13 @@ const FILTERS = [
  *   right move forward; in LTR ArrowRight / swipe left move forward.
  * - Image changes crossfade 300ms (`.carousel__img`, keyed by src) instead
  *   of swapping instantly; touch swipe (40px threshold) is supported.
+ * Autoplay: advances the REAL index every 5s (wrapping, same go(1) as
+ * the Next button). Pauses on hover / focus-within / pointer-down /
+ * swipe and while the lightbox is open; resumes ~4s after the interaction
+ * ends. The pause button toggles it off until pressed again. Disabled
+ * entirely under prefers-reduced-motion (no timer). Probe: the root
+ * carries data-active-index + data-autoplay; the active dot has
+ * aria-selected.
  */
 export default function ProjectsClient({ locale, items }: { locale: Locale; items: CarouselItem[] }) {
   const [filter, setFilter] = useState<(typeof FILTERS)[number]["id"]>("all");
@@ -80,10 +88,72 @@ export default function ProjectsClient({ locale, items }: { locale: Locale; item
   const visible = useMemo(() => (filter === "all" ? items : items.filter((i) => i.category === filter)), [items, filter]);
   const current = visible[Math.min(index, Math.max(0, visible.length - 1))];
 
+  // --- Autoplay (5s/slide, plain setInterval, no new deps) ---
+  // `autoplayPaused` is the user's explicit toggle (sticky until pressed
+  // again); `held` is transient — true while hovered / focused /
+  // pointer-down / swiping / lightbox open, cleared ~4s after the
+  // interaction ends.
+  const reduced = usePrefersReducedMotion();
+  // SSR renders reduced=false (the server value); until this mount effect
+  // runs, the preference is unresolved — report autoplay "off" so the
+  // attribute never transiently reads "playing" for reduced-motion users.
+  const [motionResolved, setMotionResolved] = useState(false);
+  useEffect(() => {
+    setMotionResolved(true);
+  }, []);
+  const [autoplayPaused, setAutoplayPaused] = useState(false);
+  const [held, setHeld] = useState(false);
+  const resumeTimer = useRef<number | null>(null);
+  const markInteraction = useCallback(() => {
+    setHeld(true);
+    if (resumeTimer.current !== null) window.clearTimeout(resumeTimer.current);
+    resumeTimer.current = null;
+  }, []);
+  const endInteraction = useCallback(() => {
+    if (resumeTimer.current !== null) window.clearTimeout(resumeTimer.current);
+    resumeTimer.current = window.setTimeout(() => {
+      setHeld(false);
+      resumeTimer.current = null;
+    }, 4000);
+  }, []);
+  useEffect(
+    () => () => {
+      if (resumeTimer.current !== null) window.clearTimeout(resumeTimer.current);
+    },
+    [],
+  );
+  // The lightbox owns the same index — never auto-advance under it.
+  useEffect(() => {
+    if (lightbox) markInteraction();
+    else endInteraction();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lightbox]);
+  const autoplayState =
+    !motionResolved || reduced || visible.length <= 1
+      ? "off"
+      : autoplayPaused || held
+        ? "paused"
+        : "playing";
+
+  // Autoplay tick: advances the SAME index state the arrows/dots use.
+  // `index` in the deps restarts the 5s countdown after every change,
+  // manual or automatic. No timer at all under reduced motion.
+  useEffect(() => {
+    if (!motionResolved || reduced || autoplayPaused || held || lightbox || visible.length <= 1) return;
+    const id = window.setInterval(() => {
+      setIndex((i) => (i + 1) % visible.length);
+    }, 5000);
+    return () => window.clearInterval(id);
+  }, [motionResolved, reduced, autoplayPaused, held, lightbox, index, visible.length]);
+
   const go = (dir: 1 | -1) => setIndex((i) => (i + dir + visible.length) % visible.length);
 
   const prevLabel = locale === "ar" ? "السابق" : locale === "en" ? "Previous" : "上一张";
   const nextLabel = locale === "ar" ? "التالي" : locale === "en" ? "Next" : "下一张";
+  const pauseLabel =
+    locale === "ar" ? "إيقاف التشغيل التلقائي" : locale === "en" ? "Pause autoplay" : "暂停自动播放";
+  const playLabel =
+    locale === "ar" ? "استئناف التشغيل التلقائي" : locale === "en" ? "Resume autoplay" : "恢复自动播放";
   const closeLabel = locale === "ar" ? "إغلاق" : locale === "en" ? "Close" : "关闭";
   // Previous points backward, Next points forward — per reading direction.
   const PrevIcon = rtl ? ChevronRight : ChevronLeft;
@@ -158,10 +228,26 @@ export default function ProjectsClient({ locale, items }: { locale: Locale; item
     go(dx < 0 ? (rtl ? -1 : 1) : (rtl ? 1 : -1));
   };
 
+  // Focus-within pause: only release the hold when focus leaves the
+  // whole carousel (moving between its own controls keeps it held).
+  const onBlur = (e: React.FocusEvent) => {
+    if (!e.currentTarget.contains(e.relatedTarget as Node | null)) endInteraction();
+  };
+
   if (!current) return null;
 
   return (
-    <div>
+    <div
+      data-active-index={Math.min(index, visible.length - 1)}
+      data-autoplay={autoplayState}
+      onMouseEnter={markInteraction}
+      onMouseLeave={endInteraction}
+      onFocus={markInteraction}
+      onBlur={onBlur}
+      onPointerDown={markInteraction}
+      onPointerUp={endInteraction}
+      onPointerCancel={endInteraction}
+    >
       {/* Filter pills */}
       <div data-stagger className="flex flex-wrap gap-2" role="tablist" aria-label={ui("projects.filterAll", locale)}>
         {FILTERS.map((f) => (
@@ -215,22 +301,37 @@ export default function ProjectsClient({ locale, items }: { locale: Locale; item
       </div>
 
       {/* Dot pagination — 24px hit area (WCAG 2.5.8) around a 10px dot. */}
-      <div data-stagger className="mt-4 flex justify-center gap-1" role="tablist" aria-label="Gallery pages">
-        {visible.map((_, i) => (
+      <div data-stagger className="mt-4 flex items-center justify-center gap-3">
+        <div className="flex gap-1" role="tablist" aria-label="Gallery pages">
+          {visible.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              role="tab"
+              aria-selected={i === Math.min(index, visible.length - 1)}
+              aria-label={`${i + 1}`}
+              onClick={() => setIndex(i)}
+              className="flex size-6 items-center justify-center rounded-full"
+            >
+              <span
+                className={`size-2.5 rounded-full transition-colors ${i === Math.min(index, visible.length - 1) ? "bg-primary-hover" : "bg-border-strong hover:bg-primary"}`}
+              />
+            </button>
+          ))}
+        </div>
+        {motionResolved && !reduced && visible.length > 1 && (
           <button
-            key={i}
             type="button"
-            role="tab"
-            aria-selected={i === Math.min(index, visible.length - 1)}
-            aria-label={`${i + 1}`}
-            onClick={() => setIndex(i)}
-            className="flex size-6 items-center justify-center rounded-full"
+            data-autoplay-toggle
+            aria-pressed={autoplayPaused}
+            aria-label={autoplayPaused ? playLabel : pauseLabel}
+            onClick={() => setAutoplayPaused((v) => !v)}
+            className="inline-flex size-9 shrink-0 items-center justify-center rounded-full border border-border bg-white text-navy shadow-card transition-colors hover:border-primary-hover hover:text-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
-            <span
-              className={`size-2.5 rounded-full transition-colors ${i === Math.min(index, visible.length - 1) ? "bg-primary-hover" : "bg-border-strong hover:bg-primary"}`}
-            />
+            <span aria-hidden="true">{autoplayPaused ? "▶" : "❚❚"}</span>
+            <span className="sr-only">{autoplayPaused ? playLabel : pauseLabel}</span>
           </button>
-        ))}
+        )}
       </div>
 
       {/* Lightbox */}

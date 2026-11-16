@@ -7,12 +7,22 @@ import { usePathname, useRouter } from "next/navigation";
  * ViewTransitionProvider — route-change transitions for every page.
  *
  * Intercepts same-origin internal link clicks and wraps router.push in
- * document.startViewTransition (cross-fade 200ms ease-out + new-title
- * fade-up 250ms; product images are shared elements via the
- * `vt-product` transition name — see globals.css). Silent fallback when
- * the API is unsupported or reduced motion is set: plain router.push,
- * no navigation delay. Back/forward and deep links keep working
- * (they bypass the click interceptor and navigate normally).
+ * document.startViewTransition. The transition itself is CSS-owned
+ * (globals.css, Phase 6): a brand curtain wipe — the incoming page is
+ * revealed by a 250ms clip-path wipe from the reading-start side with a
+ * navy band + red leading edge riding the wipe front — INSTEAD of a
+ * bare cut. The wipe and the product-image morph never fight: the
+ * morph (`vt-product-img`) is a SEPARATE view-transition group with its
+ * own 350ms animation, so it runs concurrently underneath the wipe
+ * while the wipe is the curtain over the page swap. Navigation is
+ * never delayed: the transition starts immediately on click, the old
+ * page stays visible underneath, and the whole swap finishes in
+ * ~350ms max. Silent fallback when the API is unsupported or reduced
+ * motion is set: plain router.push, no navigation delay (and the
+ * reduced-motion CSS rule kills the wipe for automatic transitions
+ * from `navigation: auto` too, e.g. back/forward). Back/forward and
+ * deep links keep working (they bypass the click interceptor and
+ * navigate normally).
  * html[data-navigating] drives the Header's indeterminate progress
  * state; it clears on every pathname change.
  */

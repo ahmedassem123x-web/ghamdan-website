@@ -3,14 +3,39 @@
 import { useEffect, useRef, useState } from "react";
 import { webp } from "@/lib/images";
 import { useFocusTrap } from "@/lib/use-focus-trap";
+import { usePrefersReducedMotion } from "@/lib/perf";
+import { MOTION_EASE_STANDARD } from "@/lib/motion-tokens";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import type { Locale } from "@/data";
+import styles from "./Gallery.module.css";
+import specStyles from "./SpecTable.module.css";
 
 export interface GalleryItem {
   src: string;
   alt: string;
   caption?: string;
 }
+
+/** A hotspot dot on the gallery image, mapped to a real spec row by id.
+ * `label` is the spec row's own label (never invented) and becomes the
+ * dot's accessible name. Positions are assigned by index inside Gallery
+ * (see HOTSPOT_POSITIONS) — callers only pass labels + row ids. */
+export interface GalleryHotspot {
+  label: string;
+  rowId: string;
+}
+
+/** Fixed dot positions (% of the image), spread so no dot covers the
+ * centre of the product. At most 4 hotspots are rendered. */
+const HOTSPOT_POSITIONS = [
+  { x: 26, y: 28 },
+  { x: 70, y: 26 },
+  { x: 66, y: 64 },
+  { x: 30, y: 66 },
+] as const;
+
+/** Max tilt in degrees (small — the illustration leans, it never spins). */
+const TILT_MAX_DEG = 4;
 
 /**
  * Gallery + lightbox (§2.11): thumbnail grid, click to open, arrows + Escape
@@ -22,7 +47,7 @@ export interface GalleryItem {
  * ArrowRight / swipe left move forward. Lightbox images crossfade 300ms
  * (`.carousel__img`, keyed by index) instead of swapping instantly.
  */
-export default function Gallery({ items, label, locale, vtName }: { items: GalleryItem[]; label: string; locale: Locale; vtName?: string }) {
+export default function Gallery({ items, label, locale, vtName, hotspots }: { items: GalleryItem[]; label: string; locale: Locale; vtName?: string; hotspots?: GalleryHotspot[] }) {
   const [open, setOpen] = useState<number | null>(null);
   // Lightbox exit: 150ms closing class, then unmount (focus restore is
   // owned by useFocusTrap, which fires when open becomes null).
@@ -39,6 +64,64 @@ export default function Gallery({ items, label, locale, vtName }: { items: Galle
   const touchX = useRef<number | null>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   useFocusTrap(open !== null, dialogRef);
+
+  // --- Phase 2: drag-to-tilt (pointer-fine only, springs back) + hotspots.
+  // Tilt lives on the outer wrapper — NOT on the image button, which owns
+  // the GSAP `data-reveal` transform; two owners of one transform would
+  // fight. Transform only; disabled under reduced motion and on coarse
+  // pointers (touch users get the existing zoom/lightbox instead).
+  const reduced = usePrefersReducedMotion();
+  const [tilt, setTilt] = useState({ rx: 0, ry: 0 });
+  const [tilting, setTilting] = useState(false);
+  const [pointerFine, setPointerFine] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined" || typeof window.matchMedia !== "function") return;
+    const mq = window.matchMedia("(pointer: fine)");
+    setPointerFine(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setPointerFine(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+  const tiltEnabled = pointerFine && !reduced;
+  const onTiltMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!tiltEnabled) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return;
+    const px = (e.clientX - rect.left) / rect.width - 0.5;
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+    setTilting(true);
+    setTilt({ rx: -py * 2 * TILT_MAX_DEG, ry: px * 2 * TILT_MAX_DEG });
+  };
+  const onTiltLeave = () => {
+    if (!tiltEnabled) return;
+    setTilting(false);
+    setTilt({ rx: 0, ry: 0 });
+  };
+
+  // Hotspot activation: scroll the matching SpecTable row into view,
+  // highlight it briefly (~2s) and move keyboard focus to it (the row
+  // gets tabindex="-1" so focus is programmatic only, never in tab order).
+  const highlightTimer = useRef<number | null>(null);
+  useEffect(() => {
+    return () => {
+      if (highlightTimer.current !== null) window.clearTimeout(highlightTimer.current);
+    };
+  }, []);
+  const activateHotspot = (rowId: string) => {
+    const row = document.getElementById(rowId);
+    if (!row) return;
+    row.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "center" });
+    row.classList.remove(specStyles.rowHighlight);
+    // Force a reflow so a re-click restarts the highlight visibly.
+    void row.offsetWidth;
+    row.classList.add(specStyles.rowHighlight);
+    row.setAttribute("tabindex", "-1");
+    row.focus({ preventScroll: true });
+    if (highlightTimer.current !== null) window.clearTimeout(highlightTimer.current);
+    highlightTimer.current = window.setTimeout(() => {
+      row.classList.remove(specStyles.rowHighlight);
+    }, 2000);
+  };
 
   const close = () => {
     if (open === null || closing) return;
@@ -149,20 +232,59 @@ export default function Gallery({ items, label, locale, vtName }: { items: Galle
   return (
     <div>
       {single ? (
-        <button
-          data-reveal
-          type="button"
-          onClick={() => setOpen(0)}
-          className="group relative block w-full overflow-hidden rounded-image text-start shadow-card transition-shadow duration-300 hover:shadow-card-hover focus-visible:outline-2 focus-visible:outline-primary-hover"
-          aria-label={`${label} — ${single.alt}`}
+        <div
+          className="relative"
+          onPointerMove={onTiltMove}
+          onPointerLeave={onTiltLeave}
+          style={
+            tiltEnabled
+              ? {
+                  transform: `perspective(900px) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg)`,
+                  transition: tilting ? "transform 80ms ease-out" : `transform 300ms ${MOTION_EASE_STANDARD}`,
+                }
+              : undefined
+          }
         >
-          <img src={webp(single.src)} alt={single.alt} loading="lazy" style={vtName ? { viewTransitionName: vtName } : undefined} className={`aspect-[4/3] w-full object-cover transition-transform duration-300 group-hover:scale-105 ${vtName ? "vt-product-img" : ""}`} />
-          {/* D-7 fix 2026-11-15: caption was rendered twice — this overlay
-              AND the line below the image (product page renders copy.k3
-              under the Gallery). Ref 06 shows a single caption, so the
-              overlay is removed here; the line below is kept. The lightbox
-              caption (inside the dialog) is unchanged. */}
-        </button>
+          <button
+            data-reveal
+            type="button"
+            onClick={() => setOpen(0)}
+            className="group relative block w-full overflow-hidden rounded-image text-start shadow-card transition-shadow duration-300 hover:shadow-card-hover focus-visible:outline-2 focus-visible:outline-primary-hover"
+            aria-label={`${label} — ${single.alt}`}
+          >
+            <img src={webp(single.src)} alt={single.alt} loading="lazy" style={vtName ? { viewTransitionName: vtName } : undefined} className={`aspect-[4/3] w-full object-cover transition-transform duration-300 group-hover:scale-105 ${vtName ? "vt-product-img" : ""}`} />
+            {/* D-7 fix 2026-11-15: caption was rendered twice — this overlay
+                AND the line below the image (product page renders copy.k3
+                under the Gallery). Ref 06 shows a single caption, so the
+                overlay is removed here; the line below is kept. The lightbox
+                caption (inside the dialog) is unchanged. */}
+          </button>
+          {/* Phase 2 hotspots: real <button>s layered OVER the image button
+              (siblings, never nested — nested buttons would be invalid HTML
+              and a hotspot click would open the lightbox). The layer is
+              pointer-events-none so the image stays clickable everywhere
+              except on the small dots themselves. */}
+          {hotspots && hotspots.length > 0 && (
+            <div className={styles.hotspotLayer}>
+              {hotspots.slice(0, HOTSPOT_POSITIONS.length).map((h, i) => {
+                const pos = HOTSPOT_POSITIONS[i];
+                return (
+                  <button
+                    key={h.rowId}
+                    type="button"
+                    data-hotspot
+                    className={styles.hotspot}
+                    style={{ left: `${pos.x}%`, top: `${pos.y}%` }}
+                    aria-label={h.label}
+                    onClick={() => activateHotspot(h.rowId)}
+                  >
+                    <span aria-hidden="true" className={styles.hotspotDot} />
+                  </button>
+                );
+              })}
+            </div>
+          )}
+        </div>
       ) : (
         <div data-stagger className="grid grid-cols-2 gap-4 md:grid-cols-4">
           {items.map((item, i) => (

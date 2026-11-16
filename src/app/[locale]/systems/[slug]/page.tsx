@@ -7,13 +7,25 @@ import ProductCard from "@/components/ProductCard";
 import StickyWhatsAppBar from "@/components/StickyWhatsAppBar";
 import SystemDiagram from "@/components/SystemDiagram";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import BundleStack, { BundleCard } from "@/components/BundleStack";
+import { SizingStrip } from "@/components/SizingHelper";
+import { withGradientWord } from "@/components/headingHighlight";
 import { Breadcrumbs } from "@/components/ui";
 import { pages, bundles, products, siteSettings } from "@/data";
 import { localizedHref, t } from "@/lib/i18n";
 import { detailMetadata } from "@/lib/metadata";
 import { ui } from "@/lib/ui-copy";
 import { WA_MESSAGES } from "@/lib/whatsapp";
-import type { Locale } from "@/data";
+import type { Locale, LocalizedString } from "@/data";
+
+/** Gradient highlight words (Phase 6) — one meaningful word per main
+ * section heading, current locale. ZH falls back to the Arabic title
+ * here (no native ZH string), so the Arabic word still matches. */
+const HL: Record<string, LocalizedString> = {
+  components: { ar: "الباقة", en: "Bundle", zh: "الباقة" },
+  related: { ar: "منتجات", en: "Related" },
+  bundles: { ar: "الجاهزة", en: "Systems", zh: "الجاهزة" },
+};
 
 export async function generateStaticParams() {
   const params: { locale: string; slug: string }[] = [];
@@ -65,7 +77,6 @@ export default async function SystemDetailPage({ params }: { params: Promise<{ l
               <div className="flex size-14 items-center justify-center rounded-full bg-sky text-primary-hover">
                 <PackageIcon className="size-7" aria-hidden="true" />
               </div>
-              <span className="section-marker" aria-hidden="true" />
               <span className="text-xs font-bold text-primary-hover">{t(pages.systems.list.k3, l)}</span>
             </div>
             <h1 data-reveal="up" className="mt-4 text-h1 font-bold text-navy">{name}</h1>
@@ -88,10 +99,7 @@ export default async function SystemDetailPage({ params }: { params: Promise<{ l
         <div data-stagger className="wrap grid gap-10 lg:grid-cols-2">
           <div>
             <div data-reveal="fade">
-              <div className="mb-4">
-                <span className="section-marker" aria-hidden="true" />
-              </div>
-              <h2 className="text-h2 font-semibold text-navy">{copy ? t(copy.k3, l) : ui("nav.systems", l)}</h2>
+              <h2 className="text-h2 font-semibold text-navy">{withGradientWord(copy ? t(copy.k3, l) : ui("nav.systems", l), t(HL.components, l))}</h2>
             </div>
             <p data-reveal="fade" className="mt-4 text-body text-text-muted">{t(bundle.components, l)}</p>
             {copy && <p data-reveal="fade" className="mt-4 text-body-sm font-bold text-navy">{t(copy.k5, l)}</p>}
@@ -119,10 +127,7 @@ export default async function SystemDetailPage({ params }: { params: Promise<{ l
         <section data-reveal="right" className="section bg-sand">
           <div className="wrap">
             <div data-reveal="fade">
-              <div className="mb-4">
-                <span className="section-marker" aria-hidden="true" />
-              </div>
-              <h2 className="text-h2 font-semibold text-navy">{ui("product.related", l)}</h2>
+              <h2 className="text-h2 font-semibold text-navy">{withGradientWord(ui("product.related", l), t(HL.related, l))}</h2>
             </div>
             <div data-stagger className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {linkedProducts.map((p) => (
@@ -133,6 +138,24 @@ export default async function SystemDetailPage({ params }: { params: Promise<{ l
         </section>
       )}
 
+      {/* All confirmed bundles as a fanned deck (Phase 4, plan §4) — the
+          current bundle is flagged; bundle-4 is archived, never shown. */}
+      <section data-reveal="up" className="section bg-white">
+        <div className="wrap">
+          <div data-reveal="fade" className="mb-8">
+            <h2 className="text-h2 font-semibold text-navy">{withGradientWord(t(pages.systems.list.k1, l), t(HL.bundles, l))}</h2>
+          </div>
+          <BundleStack locale={l}>
+            {bundles
+              .filter((x) => x.status === "confirmed")
+              .map((b) => (
+                <BundleCard key={b.id} locale={l} bundle={b} current={b.id === bundle.id} />
+              ))}
+          </BundleStack>
+        </div>
+      </section>
+
+      <SizingStrip locale={l} />
       <CTABand locale={l} variant="split" title={pages.systems.list.k12} text={pages.systems.list.k13} primaryHref="/contact" primaryLabelKey="cta.contactUs" />
       <StickyWhatsAppBar locale={l} message={waMsg} name={name} />
     </>

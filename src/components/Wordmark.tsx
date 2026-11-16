@@ -1,25 +1,20 @@
 import Link from "next/link";
 import type { Locale } from "@/data";
-import { localizedHref, t } from "@/lib/i18n";
-import { siteSettings } from "@/data";
+import { localizedHref } from "@/lib/i18n";
 
 /**
- * Brand lockup (v15, docs/brand-identity-lock.md §5–§7).
- * Official transparent logo `gts-logo-transparent.png` (2048×2048,
- * square) — PREFERRED on every surface — + HTML wordmark text beside
- * it. The logo at header size (40–48px) is a symbol only: its embedded
- * Arabic/English/partner lines become texture, so the HTML text carries
- * the company name — never rely on the logo alone for the name.
+ * Brand lockup — logo image ONLY (user request 2026-11-16, from a phone
+ * screenshot of the mobile hero): the "غمدان" name text and the small
+ * "GHAMDAN — GTS" line beside the logo were removed from the header,
+ * the mobile drawer and the footer. The official transparent logo
+ * `gts-logo-transparent.png` (2048×2048, square) is the whole lockup.
  *
  * Rules kept: explicit width/height (no layout shift; intrinsic ratio
  * 1:1 — width = height), no CSS filters, no drop shadow, no crop/
- * recolour, clear space ≈ 1/4 logo diameter (the flex gap). NEVER the
- * navy square tile (`gts-official-logo.jpg`) on a white header — the tile
- * is navy by design. Dark navy footer: the same transparent logo (it
- * reproduces the tile look on navy) — preferred for consistency.
- * Alt text per brand lock §7. The old typographic wordmark
- * (GHAMDAN. + red dot #E10600, Montserrat) is RETIRED with the swap:
- * logo red #E31E24 lives inside the logo only, never as UI text.
+ * recolour. NEVER the navy square tile (`gts-official-logo.jpg`) on a
+ * white header — the tile is navy by design. Dark navy footer: the same
+ * transparent logo (it reproduces the tile look on navy).
+ * Alt text per brand lock §7 (as the link's aria-label).
  */
 const LOGO_SRC = "/images/brand/gts-logo-transparent.png";
 
@@ -32,30 +27,21 @@ const SIZES = {
 
 export default function Wordmark({
   locale,
-  variant = "light",
   size = "md",
 }: {
   locale: Locale;
+  /** Kept for call-site compatibility only — the variant no longer
+   * changes the rendering (logo image only, on light and dark). */
   variant?: "light" | "dark" | "overlay";
   size?: "sm" | "md" | "lg";
 }) {
-  const brand = siteSettings.brand;
   const px = SIZES[size];
   // Intrinsic logo ratio 1:1 (2048×2048 square) — width = height.
   const w = px;
-  const name = t(brand.name, locale);
   const alt =
     locale === "ar"
       ? "غمدان للتجارة والتوكيلات"
       : "Ghamdan Trading & Agencies — GTS";
-  const onDark = variant !== "light";
-  const nameColor = onDark ? "text-white" : "text-navy";
-  const subColor = onDark ? "text-white/70" : "text-text-secondary";
-  const nameSize =
-    size === "lg" ? "text-2xl" : size === "sm" ? "text-base" : "text-xl";
-  const nameFont = locale === "ar" ? "font-arabic" : "font-latin";
-  const subLine =
-    locale === "ar" ? "GHAMDAN — GTS" : "TRADING & AGENCIES — GTS";
   return (
     <Link
       href={localizedHref(locale, "/")}
@@ -70,17 +56,6 @@ export default function Wordmark({
         className="shrink-0"
         style={{ width: w, height: px }}
       />
-      <span className="flex flex-col leading-none">
-        <span className={`${nameFont} font-bold ${nameSize} ${nameColor}`}>
-          {name}
-        </span>
-        <span
-          className={`mt-1 font-latin text-[0.625rem] font-semibold tracking-[0.18em] ${subColor}`}
-          dir="ltr"
-        >
-          {subLine}
-        </span>
-      </span>
     </Link>
   );
 }

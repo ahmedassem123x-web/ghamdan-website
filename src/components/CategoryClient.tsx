@@ -3,6 +3,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { SlidersIcon, InfoIcon } from "@/components/icons";
 import ProductCard from "@/components/ProductCard";
+import ProductCardTilt from "@/components/ProductCardTilt";
+import QuickView from "@/components/QuickView";
+import { ProductGridSkeleton } from "@/components/Skeleton";
 import { ResultMeta, SearchInput, SortSelect } from "@/components/ui";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { t } from "@/lib/i18n";
@@ -31,12 +34,17 @@ export default function CategoryClient({
   const [brand, setBrand] = useState("all");
   const [sort, setSort] = useState("newest");
   const [page, setPage] = useState(1);
-  // Pagination transitions: fade out 120ms -> swap page -> enter y 12->0
-  // 280ms + smooth scroll to the grid top + focus the grid heading
-  // (tabindex="-1"). Reduced motion: instant swap, no scroll animation.
+  // Phase 3: filter + pagination share ONE morph choreography, matching
+  // the catalogue (exit 150ms -> swap -> enter 300ms ease-out + 40ms
+  // stagger per card). `displayed` is what the grid renders; during the
+  // exit phase skeletons stand in. Reduced motion: instant swap.
   const [phase, setPhase] = useState<"idle" | "exit" | "enter">("idle");
+  const [displayed, setDisplayed] = useState<Product[]>(() => initial.slice(0, PAGE_SIZE));
+  const [quickView, setQuickView] = useState<Product | null>(null);
   const gridTopRef = useRef<HTMLDivElement>(null);
-  const pageTimer = useRef<number | null>(null);
+  const swapTimer = useRef<number | null>(null);
+  const firstSwap = useRef(true);
+  const scrollOnSwap = useRef(false);
 
   // Read ?brand=&type=&q= on mount (static export: no server searchParams).
   useEffect(() => {
@@ -74,24 +82,54 @@ export default function CategoryClient({
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const safePage = Math.min(page, totalPages);
-  const pageItems = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
   const resetPage = () => setPage(1);
+
+  // Unified swap: runs on every filter or page change (first render sets
+  // the grid directly, no animation). Pagination additionally scrolls to
+  // the grid top and focuses its heading (tabindex="-1").
+  useEffect(() => {
+    const items = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
+    if (firstSwap.current) {
+      firstSwap.current = false;
+      setDisplayed(items);
+      setPhase("idle");
+      return;
+    }
+    const scroll = scrollOnSwap.current;
+    scrollOnSwap.current = false;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) {
+      setDisplayed(items);
+      setPhase("idle");
+      if (scroll) {
+        gridTopRef.current?.scrollIntoView({ behavior: "auto", block: "start" });
+        gridTopRef.current?.focus({ preventScroll: true });
+      }
+      return;
+    }
+    if (swapTimer.current !== null) window.clearTimeout(swapTimer.current);
+    setPhase("exit");
+    swapTimer.current = window.setTimeout(() => {
+      setDisplayed(items);
+      setPhase("enter");
+      if (scroll) {
+        gridTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        gridTopRef.current?.focus({ preventScroll: true });
+      }
+    }, 150);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filtered, safePage]);
+
+  useEffect(() => {
+    return () => {
+      if (swapTimer.current !== null) window.clearTimeout(swapTimer.current);
+    };
+  }, []);
 
   const goToPage = (n: number) => {
     if (n === safePage || n < 1 || n > totalPages) return;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) {
-      setPage(n);
-      return;
-    }
-    if (pageTimer.current !== null) window.clearTimeout(pageTimer.current);
-    setPhase("exit");
-    pageTimer.current = window.setTimeout(() => {
-      setPage(n);
-      setPhase("enter");
-      gridTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-      gridTopRef.current?.focus({ preventScroll: true });
-    }, 120);
+    scrollOnSwap.current = true;
+    setPage(n);
   };
 
   return (
@@ -167,11 +205,12 @@ export default function CategoryClient({
 
       {/* 8.4 Result meta — focus target after pagination (tabindex -1) */}
       <div ref={gridTopRef} tabIndex={-1} data-reveal="fade" className="mt-6 outline-none">
-        <ResultMeta shown={pageItems.length} total={filtered.length} label={ui("catalog.showing", locale)} />
+        <ResultMeta shown={displayed.length} total={filtered.length} label={ui("catalog.showing", locale)} />
       </div>
 
-      {/* 8.5 Product grid (4-col, 12/page) */}
-      {pageItems.length === 0 ? (
+      {/* 8.5 Product grid (4-col, 12/page) — Phase 3: tilt + glow cards,
+          skeleton swap during exit, 40ms stagger on enter. */}
+      {displayed.length === 0 && phase !== "exit" ? (
         <div data-reveal="fade" className="empty-enter mt-8">
           {/* Honest empty state — inlined (visible by default) instead of the
               shared EmptyState (Phase 6 removed the .reveal hiding from the
@@ -186,13 +225,24 @@ export default function CategoryClient({
             </div>
           </div>
         </div>
+      ) : phase === "exit" ? (
+        <ProductGridSkeleton
+          count={Math.min(displayed.length || PAGE_SIZE, 8)}
+          label={locale === "ar" ? "جارٍ تحميل المنتجات…" : locale === "en" ? "Loading products…" : "正在加载产品…"}
+          className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
+        />
       ) : (
-        <div
-          data-stagger
-          className={`mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4 ${phase === "exit" ? "page-exit" : phase === "enter" ? "page-enter" : ""}`}
-        >
-          {pageItems.map((p) => (
-            <ProductCard key={p.id} locale={locale} product={p} />
+        <div data-stagger className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {displayed.map((p, i) => (
+            <div
+              key={p.id}
+              className={phase === "enter" ? "filter-enter" : ""}
+              style={phase === "enter" ? { animationDelay: `${i * 40}ms` } : undefined}
+            >
+              <ProductCardTilt>
+                <ProductCard locale={locale} product={p} onQuickView={setQuickView} />
+              </ProductCardTilt>
+            </div>
           ))}
         </div>
       )}
@@ -224,6 +274,8 @@ export default function CategoryClient({
           )}
         </div>
       )}
+
+      <QuickView locale={locale} product={quickView} onClose={() => setQuickView(null)} />
     </div>
   );
 }

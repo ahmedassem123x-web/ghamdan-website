@@ -3,6 +3,7 @@ import { WhatsAppIcon, MailIcon, HeadsetIcon, ChevronDownIcon, ArrowIcon, Settin
 import Hero from "@/components/Hero";
 import CTABand from "@/components/CTABand";
 import ContactForm from "@/components/ContactForm";
+import { withGradientWord } from "@/components/headingHighlight";
 import { pages, siteSettings } from "@/data";
 import { t } from "@/lib/i18n";
 import { ui } from "@/lib/ui-copy";
@@ -25,6 +26,11 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
   const { locale } = await params;
   const l = locale as Locale;
   const c = pages.contact;
+  /** Gradient highlight words (Phase 6): one word per main heading. */
+  const HL = {
+    together: { ar: "استدامة", en: "Sustainable", zh: "可持续" },
+    faq: { ar: "الشائعة", en: "Frequently", zh: "常见" },
+  };
   const { contact } = siteSettings;
   const faqs = [
     { q: c.k30, a: c.k31 },
@@ -107,10 +113,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
         <div data-stagger className="wrap grid gap-6 lg:grid-cols-[40%_60%]">
           <aside className="flex flex-col overflow-hidden rounded-card bg-mesh-sky shadow-card">
             <div className="p-8">
-              <div data-reveal="fade" className="mb-4">
-                <span className="section-marker" aria-hidden="true" />
-              </div>
-              <h2 data-reveal="fade" className="text-h2 font-semibold leading-[1.3] text-navy">{t(c.k26, l)}</h2>
+              <h2 data-reveal="fade" className="text-h2 font-semibold leading-[1.3] text-navy">{withGradientWord(t(c.k26, l), t(HL.together, l))}</h2>
               <p data-reveal="fade" className="mt-4 text-body text-text-muted">{t(c.k28, l)}</p>
               {/* Info block (item 21): address + hours + Google Maps
                   directions, beside the form — not buried in the footer. */}
@@ -145,10 +148,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
       <section data-reveal="right" className="section bg-sand">
         <div className="wrap max-w-4xl">
           <div data-reveal="fade">
-            <div className="mb-4">
-              <span className="section-marker" aria-hidden="true" />
-            </div>
-            <h2 className="text-h2 font-semibold text-navy">{t(c.k29, l)}</h2>
+            <h2 className="text-h2 font-semibold text-navy">{withGradientWord(t(c.k29, l), t(HL.faq, l))}</h2>
           </div>
           <div data-stagger className="mt-8 space-y-4">
             {faqs.map((f, i) => (
